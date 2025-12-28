@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-cd www || exit 1
-for dir in * ; do
-    npm --silent v "./${dir}" && echo "tools.push(\"${dir}\");"
-done
