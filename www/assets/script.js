@@ -1,25 +1,29 @@
 console.log('Loaded!');
 
-class Tool {
-    #path;
-    #name;
-    #desc;
-    #color;
-    constructor(path = '', name = '', desc = '', color = '') {
-        this.#path = path;
-        this.#name = name;
-        this.#desc = desc;
-        this.#color = color;
-    }
-    getElement() {
-        const anchor = document.createElement('a');
-        anchor.setAttribute('href', this.#path);
-        const container = document.createElement('div');
-        container.style.background = this.#color;
-        anchor.appendChild(container);
-        const title = document.createElement('strong');
-        title.textContent = this.#name;
-        const descr = document.createElement('i');
-        descr.textContent = ` - ${this.#desc}`;
-    }
+const allTools = document.getElementById('tools');
+console.log(allTools);
+
+function addGroup(heading = '') {
+    const head = document.createElement('h3');
+    head.textContent = heading;
+    allTools.appendChild(head);
 }
+
+function addTool(path = '', name = '', desc = '', color = '') {
+    const anchor = document.createElement('a');
+    anchor.setAttribute('href', path);
+    anchor.className = 'tool';
+    allTools.appendChild(anchor);
+    const container = document.createElement('div');
+    container.style.background = color;
+    container.className = 'tool';
+    anchor.appendChild(container);
+    const title = document.createElement('strong');
+    title.textContent = name;
+    const descr = document.createElement('i');
+    descr.textContent = ` - ${desc}`;
+    container.append(title, descr);
+}
+
+addGroup('Finance');
+addTool('data-url', 'Data URL', 'Convert any file into its corresponding data URL', 'skyblue');
