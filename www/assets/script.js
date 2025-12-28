@@ -5,17 +5,21 @@ console.log(allTools);
 
 function addGroup(heading = '') {
     const head = document.createElement('h3');
+    head.setAttribute('title', `Below is a group of tools relating to: ${heading}`)
     head.textContent = heading;
     allTools.appendChild(head);
 }
 
-function addTool(path = '', name = '', desc = '', color = '') {
+function addTool(path = '', name = '', desc = '') {
+    const hues = 36;
+    const hue = ((name.charCodeAt(0) + name.length) % hues) * (360 / hues);
     const anchor = document.createElement('a');
     anchor.setAttribute('href', path);
+    anchor.setAttribute('title', `${name}: ${desc}`);
     anchor.className = 'tool';
     allTools.appendChild(anchor);
     const container = document.createElement('div');
-    container.style.background = color;
+    container.style.background = `hsl(${hue},100%,75%)`;
     container.className = 'tool';
     anchor.appendChild(container);
     const title = document.createElement('strong');
@@ -26,4 +30,4 @@ function addTool(path = '', name = '', desc = '', color = '') {
 }
 
 addGroup('Finance');
-addTool('data-url', 'Data URL', 'Convert any file into its corresponding data URL', 'skyblue');
+addTool('data-url', 'Data URL', 'Convert any file into its corresponding data URL');
