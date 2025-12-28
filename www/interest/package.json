@@ -4,6 +4,6 @@
     "dev": "../../.github/workflows/dev"
   },
   "dependencies": {
-    "smath": "1.13.2"
+    "smath": "1.13.3"
   }
 }

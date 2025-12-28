@@ -9,6 +9,7 @@ body {
 }
 
 body {
+    font-family: sans-serif;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -46,4 +47,19 @@ pre#log {
     background: #111;
     color: white;
     padding: 0.25rem;
+}
+
+a,
+a:link,
+a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
 }
