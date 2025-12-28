@@ -1,6 +1,7 @@
 console.log('Loaded!');
 
 const allTools = document.getElementById('tools');
+let hue = 0;
 
 function addGroup(heading = '') {
     const head = document.createElement('h3');
@@ -10,8 +11,7 @@ function addGroup(heading = '') {
 }
 
 function addTool(path = '', name = '', desc = '') {
-    const hues = 36;
-    const hue = ((name.charCodeAt(0) + name.length) % hues) * (360 / hues);
+    hue += 10;
     const anchor = document.createElement('a');
     anchor.setAttribute('href', path);
     anchor.setAttribute('title', `${name}: ${desc}`);
@@ -34,7 +34,7 @@ addTool('interest', 'Interest Calculator', 'A collection of formulas that calcul
 
 addGroup('Science');
 addTool('https://psychart.nicfv.com/', 'Psychart', 'Plot thermodynamic conditions of air on a psychrometric chart, optionally displaying comfort zones.');
-addTool('dimensional', 'Dimensional Analysis', 'Convert anything to anything! Build complex units and analyze dimensions.');
+addTool('dimensional', 'Unit Converter', 'Convert anything to anything! Build complex units and analyze dimensions.');
 addTool('dimensional-playground', 'Dimensional Playground', 'Presents a live editor with the `dimensional` package ready to use.');
 addTool('data-url', 'File To Data URL', 'Encode any file as a data URL that can be directly embedded into a source code file.');
 
