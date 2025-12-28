@@ -19,6 +19,7 @@ body {
 
 main {
     padding: 1rem;
+    max-width: 40rem;
 }
 
 footer {
