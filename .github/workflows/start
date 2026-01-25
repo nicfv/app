@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-bun build --minify --outfile=dist/main.js src/index.ts
+pwd && bunx eslint src && bun build --minify --outfile=dist/main.js src/index.ts
