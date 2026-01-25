@@ -25,13 +25,14 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
+      - name: Build Project
+        run: bun start && bun clean prod
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          # Upload entire repository
-          path: '.'
+          path: 'www'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
