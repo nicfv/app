@@ -5,7 +5,8 @@
     "stop": "rm -rf node_modules package-lock.json www/*/dist"
   },
   "workspaces": [
-    "www/*"
+    "games/*",
+    "tools/*"
   ],
   "devDependencies": {
     "@eslint/js": "9.39.2",
