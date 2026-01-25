@@ -12,11 +12,11 @@ declare const MathJax: any;
 /**
  * Variables passed into the user's code
  */
-const argumentVars: Array<string> = ['LaTeX', 'log', 'Dimension', 'Prefix', 'Quantity', 'Unit', 'config', 'dimensions', 'prefixes', 'units'];
+const argumentVars: string[] = ['LaTeX', 'log', 'Dimension', 'Prefix', 'Quantity', 'Unit', 'config', 'dimensions', 'prefixes', 'units'];
 /**
  * Initial sample program
  */
-const initExample: string = `// Available variables & methods:
+const initExample = `// Available variables & methods:
 // ${argumentVars.join(', ')}
 const distance = new Quantity(5, units.meter);
 LaTeX(distance, '=', distance.as(units.foot));
