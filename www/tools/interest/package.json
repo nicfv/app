@@ -1,8 +1,7 @@
 {
   "name": "interest",
   "scripts": {
-    "start": "../../.github/workflows/start",
-    "dev": "../../.github/workflows/dev"
+    "start": "../../../.github/workflows/start"
   },
   "dependencies": {
     "smath": "1.13.3"

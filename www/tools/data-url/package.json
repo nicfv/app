@@ -1,7 +1,6 @@
 {
   "name": "data-url",
   "scripts": {
-    "start": "../../.github/workflows/start",
-    "dev": "../../.github/workflows/dev"
+    "start": "../../../.github/workflows/start"
   }
 }

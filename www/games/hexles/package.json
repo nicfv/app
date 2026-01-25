@@ -1,8 +1,7 @@
 {
   "name": "hexles",
   "scripts": {
-    "start": "../../.github/workflows/start",
-    "dev": "../../.github/workflows/dev"
+    "start": "../../../.github/workflows/start"
   },
   "dependencies": {
     "graphico": "1.1.0",
