@@ -3,13 +3,13 @@ import { Range } from './range';
 import { Ring } from './ring';
 
 console.log('Loaded!');
-const form = document.getElementById('form')!;
-const output = document.getElementById('output')!;
-const throwType = document.getElementById('throwtype')!;
+const form: HTMLElement = document.getElementById('form') as HTMLElement;
+const output: HTMLElement = document.getElementById('output') as HTMLElement;
+const throwType: HTMLElement = document.getElementById('throwtype') as HTMLElement;
 const color = new Range(form, 'Ring Color', { min: 0, max: 100, step: 1, val: 50 });
 const size = new Range(form, 'Ring Size', { min: 0, max: 100, step: 1, val: 50 });
 const curve = new Range(form, 'Throw was a curveball?', { min: 1, max: 2, step: 1, val: 1 });
-const ring = new Ring(100, 5, document.getElementById('ring')!);
+const ring = new Ring(100, 5, document.getElementById('ring') as HTMLElement);
 color.onChange(calculate);
 size.onChange(calculate);
 curve.onChange(calculate);
