@@ -5,7 +5,7 @@ import { lib } from './lib';
 
 window.addEventListener('load', main);
 
-const calculationTypes: Array<DropdownItem> = [
+const calculationTypes: DropdownItem[] = [
     { key: 'Final value (How much will I have?)', value: 'F' },
     { key: 'Initial value (How much do I need right now?)', value: 'P' },
     { key: 'Annual interest rate (What\'s my average growth?)', value: 'i' },

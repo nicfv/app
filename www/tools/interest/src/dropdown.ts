@@ -17,12 +17,12 @@ export interface DropdownItem {
  */
 export class Dropdown {
     private static readonly className = 'dropdown';
-    private static id: number = 0;
+    private static id = 0;
     private readonly element: HTMLSelectElement;
     /**
      * Create a new dropdown.
      */
-    constructor(parent: Element, title: string, items: Array<DropdownItem>) {
+    constructor(parent: Element, title: string, items: DropdownItem[]) {
         Dropdown.id++;
         this.element = document.createElement('select');
         const container = document.createElement('div'),
