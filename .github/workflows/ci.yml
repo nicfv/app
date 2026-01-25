@@ -1,7 +1,14 @@
-name: Build
+name: CI
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  pages: write
+  id-token: write
 
 jobs:
   build:
@@ -19,3 +26,14 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: 'www'
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/head/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
