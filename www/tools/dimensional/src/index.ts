@@ -1,12 +1,11 @@
 import { config, Quantity, Unit, units } from 'dimensional';
-import * as SMath from 'smath';
 import { Pair } from './types';
 import * as Program from './program';
 
 /**
  * https://www.mathjax.org/
  */
-declare const MathJax: any;
+declare const MathJax: { typesetPromise(): unknown };
 
 window.addEventListener('load', main);
 
@@ -54,7 +53,7 @@ function formatConversion(conv: number): string {
     }
     const convQuant: Quantity = new Quantity(conv, units.Unitless);
     config.showUnitless = false;
-    const convStr: string = `$$${operator} ${convQuant.toString()} =$$`;
+    const convStr = `$$${operator} ${convQuant.toString()} =$$`;
     config.showUnitless = true;
     return convStr;
 }
