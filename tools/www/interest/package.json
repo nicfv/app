@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "start": "../../.github/workflows/start",
+    "dev": "../../.github/workflows/dev"
+  },
+  "dependencies": {
+    "smath": "1.13.3"
+  }
+}

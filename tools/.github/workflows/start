@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pwd && npx webpack --config ../../webpack.config.js --mode production

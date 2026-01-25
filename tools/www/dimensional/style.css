@@ -1,0 +1,76 @@
+* {
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+    max-width: 30rem;
+    background: whitesmoke;
+    font-size: 120%;
+    font-family: sans-serif;
+}
+
+div.heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    border-color: black;
+    border-width: 1px 0;
+    border-style: solid;
+}
+
+div#controls button {
+    height: 100%;
+}
+
+div#units,
+div#quantities {
+    width: max-content;
+    margin: auto;
+}
+
+div#units select,
+div#units input,
+div#quantities input {
+    width: 8rem;
+    font-size: 100%;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid gray;
+    background: white;
+}
+
+div#quantities {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+button {
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: #33a;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    background: #44c;
+    transform: scale(1.1);
+}
+
+button:active {
+    background: #229;
+    transform: scale(0.9);
+}
+
+button:disabled {
+    background-color: #555;
+}

@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+div#js,
+div#row {
+    height: 50%;
+}
+
+div#js,
+pre#log {
+    border: 2px inset;
+    overflow-y: scroll;
+}
+
+div#row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin: 1rem 0;
+}
+
+h1#out,
+pre#log {
+    width: 50%;
+    margin: 0;
+}
+
+h1#out {
+    overflow-y: auto;
+}
+
+pre#log {
+    background: #111;
+    color: white;
+    padding: 0.25rem;
+}
+
+a,
+a:link,
+a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
+}
