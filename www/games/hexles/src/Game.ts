@@ -392,7 +392,7 @@ class TurnOrder implements Drawable {
 class Text implements Drawable {
     private static readonly font: string = 'Sono';
     private progress = 0;
-    private startTime = Hexles?.time ?? 0;
+    private startTime = 0;
     private static readonly charsPerSec = 20;
     constructor(private value: string, private readonly size = 12, private readonly normalizedCenter: Vec2 = { x: 0, y: 0 }, private readonly writing = false, private readonly style: { align: CanvasTextAlign, base: CanvasTextBaseline } = { align: 'left', base: 'top' }) { }
     /**
@@ -580,7 +580,8 @@ class Game implements Drawable {
                 winnerText = 'Tie for ' + highScore + ' tiles!\n' + winners.join(', ');
             }
             winnerText += '\n\nPress space to close this message\nor ESC to quit.';
-            this.gameOverText = new Text(winnerText, 22, { x: 0.1, y: 0.1 }, true);
+            this.gameOverText = new Text('', 22, { x: 0.1, y: 0.1 }, true);
+            this.gameOverText.setText(winnerText);
         } else {
             this.turnText.setText(this.turnOrder.getTurnText());
             this.aiInput();

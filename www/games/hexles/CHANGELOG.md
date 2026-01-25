@@ -1,5 +1,10 @@
 # Changes
 
+## 1.1.1
+
+- Fix a bug where text wouldn't scroll due to an `undefined` error
+- Migrate to `app` repository
+
 ## 1.1.0
 
 - Force good code style with `eslint`
