@@ -56,7 +56,9 @@ HAM.setOnclick(() => el('help').style.right = (HAM.isOpen() ? '0' : ''));
 
 // Add control panel user input actions
 el('clear').addEventListener('click', () => {
-    WG instanceof WordGen && WG.clearInput();
+    if (WG instanceof WordGen) {
+        WG.clearInput();
+    }
     el('words').textContent = '';
     el('numwords').textContent = '';
     el('copy').disabled = true;

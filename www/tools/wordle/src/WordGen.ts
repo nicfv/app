@@ -20,6 +20,8 @@ export class WordGen {
         switch (alphType) {
             case (ALPH_TYPES.WORD_DICT): {
                 this.checkDict = true;
+                this.alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                break;
             }
             case (ALPH_TYPES.ALPH_ONLY): {
                 this.alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';

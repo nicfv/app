@@ -1,3 +1,5 @@
+import { Callback } from './types';
+
 /**
  * Represents a responsive hamburger style menu button.
  */
@@ -6,7 +8,7 @@ export class Hamburger {
     private readonly el: SVGSVGElement;
     private readonly ham: SVGPathElement;
     private open: boolean;
-    private onclick: Function = () => { };
+    private onclick: Callback = () => { return };
     /**
      * Initialize a new hamburger control element.
      */
@@ -101,7 +103,7 @@ export class Hamburger {
     /**
      * Set the onclick event handler.
      */
-    public setOnclick(onclick: Function): void {
+    public setOnclick(onclick: Callback): void {
         this.onclick = onclick;
     }
 }

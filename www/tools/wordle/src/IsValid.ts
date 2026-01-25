@@ -11,7 +11,7 @@ export function isValid(eq: string) {
         const i: number = +iStr;
         try {
             evals[i] = eval(parts[i]);
-        } catch (e) {
+        } catch {
             return false;
         }
         if (i > 0 && evals[i] !== evals[i - 1]) {

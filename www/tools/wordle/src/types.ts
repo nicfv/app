@@ -1,4 +1,8 @@
 /**
+ * Represents the type for a callback function.
+ */
+export type Callback = () => void;
+/**
  * Represents the types of allowable characters in an alphabet.
  */
 export enum ALPH_TYPES {

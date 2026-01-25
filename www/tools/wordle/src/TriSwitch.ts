@@ -1,3 +1,5 @@
+import { Callback } from "./types";
+
 /**
  * Represents a visual switch with any number of states.
  */
@@ -29,7 +31,7 @@ export class TriSwitch {
     /**
      * The onclick event listener
      */
-    private onclick: Function = () => { };
+    private onclick: Callback = () => { return };
     /**
      * Create a new instance of a `TriSwitch`
      */
@@ -97,7 +99,7 @@ export class TriSwitch {
     /**
      * Set the onclick event listener.
      */
-    public setOnclick(onclick: Function): void {
+    public setOnclick(onclick: Callback): void {
         this.onclick = onclick;
     }
 }
