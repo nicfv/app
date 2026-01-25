@@ -1,6 +1,6 @@
 {
   "name": "wordle",
   "scripts": {
-    "start": "../../../.github/workflows/start"
+    "start": "../../../cmd/start"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "dimensional-playground",
   "scripts": {
-    "start": "../../../.github/workflows/start"
+    "start": "../../../cmd/start"
   },
   "dependencies": {
     "@codemirror/lang-javascript": "6.2.4",

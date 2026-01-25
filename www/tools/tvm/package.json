@@ -1,6 +1,6 @@
 {
   "name": "tvm",
   "scripts": {
-    "start": "../../../.github/workflows/start"
+    "start": "../../../cmd/start"
   }
 }

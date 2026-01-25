@@ -1,6 +1,6 @@
 {
   "name": "hearts",
   "scripts": {
-    "start": "../../../.github/workflows/start"
+    "start": "../../../cmd/start"
   }
 }

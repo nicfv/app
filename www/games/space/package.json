@@ -1,7 +1,7 @@
 {
   "name": "space",
   "scripts": {
-    "start": "../../../.github/workflows/start"
+    "start": "../../../cmd/start"
   },
   "dependencies": {
     "graphico": "1.0.0",

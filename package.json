@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "start": "bun i && bun --filter='*' start prod",
-    "clean": ".github/workflows/clean"
+    "clean": "./cmd/clean"
   },
   "workspaces": [
     "www/**/*"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Make sure this script is being run from the project root
-if [[ ! -f '.github/workflows/clean' ]] ; then
+if [[ ! -f 'cmd/clean' ]] ; then
     echo 'Can only be run from the project root directory.'
     exit 1
 fi
