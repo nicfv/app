@@ -13,9 +13,9 @@ if [[ "${#}" -ne 1 ]] ; then
 fi
 
 # Select files to delete
-if [ "${1}" = 'dev' ] ; then
+if [[ "${1}" == 'dev' ]] ; then
     files=('node_modules' 'dist' 'bun.lock')
-elif [ "${1}" = 'prod' ] ; then
+elif [[ "${1}" == 'prod' ]] ; then
     files=('src' 'package.json' '*.md')
 else
     echo "Unknown argument ${1}."
@@ -24,5 +24,5 @@ fi
 # Delete corresponding files
 for file in "${files[@]}" ; do
     echo "Deleting ${file}..."
-    find . -name "${file}"
+    find . -name "${file}" -prune -exec rm -rf {} +
 done
