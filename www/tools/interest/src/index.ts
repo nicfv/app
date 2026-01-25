@@ -16,7 +16,7 @@ let calculationType: Dropdown;
 
 function main(): void {
     console.log('Loaded!');
-    const selectorContainer = document.getElementById('selector')!;
+    const selectorContainer: HTMLElement = document.getElementById('selector') as HTMLElement;
     calculationType = new Dropdown(selectorContainer, 'Calculation Type', calculationTypes);
     calculationType.onChange(() => setupForm());
     setupForm();
@@ -30,8 +30,8 @@ function removeChildren(element: Element): void {
 
 function setupForm(): void {
     console.log('Setting up form.');
-    const form = document.getElementById('form')!,
-        output = document.getElementById('output')!;
+    const form: HTMLElement = document.getElementById('form') as HTMLElement,
+        output: HTMLElement = document.getElementById('output') as HTMLElement;
     removeChildren(form);
     removeChildren(output);
     const F = new Input(calculationType.getValue() === 'F' ? output : form, 'Final Value [$]', calculationType.getValue() !== 'F', { min: 0, step: 0.01 }),
