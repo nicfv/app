@@ -2,13 +2,14 @@
   "type": "module",
   "scripts": {
     "start": "bun i && bun run --filter '*' start",
-    "stop": "rm -rf node_modules bun.lock"
+    "clean": "rm -rf node_modules bun.lock"
   },
   "workspaces": [
     "games/*",
     "tools/*"
   ],
   "devDependencies": {
+    "eslint": "9.39.2",
     "@eslint/js": "9.39.2",
     "typescript-eslint": "8.53.1"
   }
