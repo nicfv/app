@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "start": "bun i && bun x eslint **/src/*.ts && bun --filter='*' start",
-    "clean": ".github/workflows/clean dev"
+    "clean": ".github/workflows/clean"
   },
   "workspaces": [
     "www/games/*",
