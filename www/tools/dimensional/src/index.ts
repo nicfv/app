@@ -7,13 +7,8 @@ import * as Program from './program';
  */
 declare const MathJax: { typesetPromise(): unknown };
 
-window.addEventListener('load', main);
-
-function main(): void {
-    console.log('Loaded!');
-    setUnitOptions('unit-select');
-    setupListeners();
-}
+setUnitOptions('unit-select');
+setupListeners();
 
 /**
  * Shorthand for document.getElementById(...)
