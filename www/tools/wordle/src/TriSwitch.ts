@@ -33,7 +33,7 @@ export class TriSwitch {
     /**
      * Create a new instance of a `TriSwitch`
      */
-    constructor(private readonly width: number, private readonly height: number, private readonly stateColorScheme = [new StateColors('#666', '#000', '#f00'), new StateColors('#666', '#000', '#0f0'), new StateColors('#666', '#000', '#00f')], borderWidth: number, switchPadding: number, transition: number, canClickSlot: boolean = false, parent: HTMLElement = document.body) {
+    constructor(private readonly width: number, private readonly height: number, private readonly stateColorScheme = [new StateColors('#666', '#000', '#f00'), new StateColors('#666', '#000', '#0f0'), new StateColors('#666', '#000', '#00f')], borderWidth: number, switchPadding: number, transition: number, canClickSlot = false, parent: HTMLElement = document.body) {
         const NS = 'http://www.w3.org/2000/svg';
         this.r = (width < height ? width : height) / 2;
         this.el = document.createElementNS(NS, 'svg');
@@ -106,7 +106,7 @@ export class TriSwitch {
  * Represents a group of colors that represent a state of a `TriSwitch`
  */
 export class StateColors {
-    constructor(public readonly borderColor: string, public readonly backgroundColor: string, public readonly switchColor: string, public readonly optionalDescription: string = '') {
+    constructor(public readonly borderColor: string, public readonly backgroundColor: string, public readonly switchColor: string, public readonly optionalDescription = '') {
         this.borderColor = borderColor;
         this.backgroundColor = backgroundColor;
         this.switchColor = switchColor;

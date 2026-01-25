@@ -1,7 +1,7 @@
 /**
  * Contains the entire wordle dictionary.
  */
-export const DICT: Array<string> = [
+export const DICT: string[] = [
     "AAHED",
     "AALII",
     "AAPAS",

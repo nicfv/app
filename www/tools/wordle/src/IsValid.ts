@@ -6,7 +6,7 @@ export function isValid(eq: string) {
         return false;
     }
     const parts = eq.replace('^', '**').split('=');
-    const evals: Array<number> = [];
+    const evals: number[] = [];
     for (const iStr in parts) {
         const i: number = +iStr;
         try {

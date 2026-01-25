@@ -66,9 +66,9 @@ el('clear').addEventListener('click', () => {
 el('copy').addEventListener('click', () => navigator.clipboard.writeText(el('words').textContent));
 
 el('gen').addEventListener('click', () => {
-    const list: Array<string> = WG.generate();
+    const list: string[] = WG.generate();
     let wordString = '';
-    for (let i: number = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
         if (i % 5) {
             wordString += ' ';
         } else if (i > 0) {

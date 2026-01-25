@@ -7,10 +7,10 @@ import { ALPH_TYPES, CHAR_INPUT_STATUS } from './types';
  * Represents a class that manages the character input elements and can generate a list of possible words.
  */
 export class WordGen {
-    private readonly charInputs: Array<Array<CharInput>> = [];
+    private readonly charInputs: CharInput[][] = [];
     private readonly alph: string = '';
     private prefiltered: string;
-    private words: Array<string> = [];
+    private words: string[] = [];
     private readonly checkDict: boolean = false;
     private readonly solve: boolean = false;
     /**
@@ -39,11 +39,11 @@ export class WordGen {
             }
         }
         this.prefiltered = this.alph;
-        for (let w: number = 0; w < words; w++) {
+        for (let w = 0; w < words; w++) {
             const WORD_DIV = document.createElement('div');
             WORD_DIV.setAttribute('class', 'word');
             this.charInputs[w] = [];
-            for (let c: number = 0; c < chars; c++) {
+            for (let c = 0; c < chars; c++) {
                 this.charInputs[w][c] = new CharInput(this.alph, WORD_DIV);
             }
             parent.appendChild(WORD_DIV);
@@ -66,7 +66,7 @@ export class WordGen {
      */
     private generateValidCharsForPosition(c: number): string {
         let alph = this.prefiltered;
-        for (let w in this.charInputs) {
+        for (const w in this.charInputs) {
             const input = this.charInputs[w][c];
             if (input instanceof CharInput) {
                 if (input.hasValue()) {
@@ -87,8 +87,8 @@ export class WordGen {
      */
     private prefilter(): void {
         this.prefiltered = this.alph;
-        for (let w in this.charInputs) {
-            for (let c in this.charInputs[w]) {
+        for (const w in this.charInputs) {
+            for (const c in this.charInputs[w]) {
                 const input = this.charInputs[w][c];
                 if (input instanceof CharInput && input.hasValue() && input.getStatus() === CHAR_INPUT_STATUS.INCORRECT) {
                     this.prefiltered = this.prefiltered.replace(input.getChar(), '');
@@ -99,10 +99,10 @@ export class WordGen {
     /**
      * Generate an array of characters that are required in the word but are not in the correct position.
      */
-    private getRequiredCharacters(): Array<string> {
+    private getRequiredCharacters(): string[] {
         const req = [];
-        for (let w in this.charInputs) {
-            for (let c in this.charInputs[w]) {
+        for (const w in this.charInputs) {
+            for (const c in this.charInputs[w]) {
                 const input = this.charInputs[w][c];
                 if (input instanceof CharInput && input.hasValue() && input.getStatus() === CHAR_INPUT_STATUS.INCORRECT_PLACEMENT) {
                     req.push(input.getChar());
@@ -115,8 +115,8 @@ export class WordGen {
      * Clear all user input.
      */
     public clearInput(): void {
-        for (let w in this.charInputs) {
-            for (let c in this.charInputs[w]) {
+        for (const w in this.charInputs) {
+            for (const c in this.charInputs[w]) {
                 this.charInputs[w][c].clear();
             }
         }
@@ -124,12 +124,12 @@ export class WordGen {
     /**
      * Return a list of all possible character combinations for the input specified.
      */
-    public generate(): Array<string> {
+    public generate(): string[] {
         this.words = [];
         this.prefilter();
         if (this.checkDict) {
             DICT.forEach(word => {
-                for (let i: number = 0; i < word.length; i++) {
+                for (let i = 0; i < word.length; i++) {
                     if (!this.generateValidCharsForPosition(+i).includes(word[i])) {
                         return;
                     }
@@ -148,7 +148,7 @@ export class WordGen {
     /**
      * Generate the complete list of possible character combinations.
      */
-    private buildWords(word: string = '', char: number = 0): void {
+    private buildWords(word = '', char = 0): void {
         const chars = this.generateValidCharsForPosition(char);
         if (!chars.length) {
             if (word) {
@@ -162,7 +162,7 @@ export class WordGen {
             }
             return;
         }
-        for (let c of chars) {
+        for (const c of chars) {
             this.buildWords(word + c, char + 1);
         }
     }
