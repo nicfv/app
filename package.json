@@ -1,12 +1,12 @@
 {
   "type": "module",
   "scripts": {
-    "start": "bun i && bun run --filter '*' start",
+    "start": "bun i && bun run --filter='*' start",
     "clean": "rm -rf node_modules bun.lock"
   },
   "workspaces": [
-    "games/*",
-    "tools/*"
+    "www/games/*",
+    "www/tools/*"
   ],
   "devDependencies": {
     "eslint": "9.39.2",
