@@ -5,8 +5,7 @@
     "clean": ".github/workflows/clean"
   },
   "workspaces": [
-    "www/games/*",
-    "www/tools/*"
+    "www/**/*"
   ],
   "devDependencies": {
     "eslint": "9.39.2",
