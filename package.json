@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "start": "bun i && bun start --workspaces",
+    "start": "bun i && bun run --filter '*' start",
     "stop": "rm -rf node_modules bun.lock"
   },
   "workspaces": [
