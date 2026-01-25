@@ -12,10 +12,17 @@ if [[ "${#}" -ne 1 ]] ; then
     exit 1
 fi
 
+# Select files to delete
 if [ "${1}" = 'dev' ] ; then
-    rm -rf node_modules bun.lock
+    files=('node_modules' 'dist' 'bun.lock')
 elif [ "${1}" = 'prod' ] ; then
-    echo cleaning in prod mode
+    files=('src' 'package.json' '*.md')
 else
     echo "Unknown argument ${1}."
 fi
+
+# Delete corresponding files
+for file in "${files[@]}" ; do
+    echo "Deleting ${file}..."
+    find . -name "${file}"
+done
