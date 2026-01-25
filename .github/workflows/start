@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-pwd && bunx eslint src && bun build --minify --format=iife --outfile=dist/main.js src/index.ts
+bunx eslint src && bun build --minify --format=iife --outfile=dist/main.js src/index.ts
