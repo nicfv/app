@@ -4,7 +4,7 @@ import { NamedUnit, Pair, ProgramSettings } from './types';
 /**
  * Available units to select from
  */
-const allUnits: Array<NamedUnit> = [];
+const allUnits: NamedUnit[] = [];
 /**
  * The current program settings
  */
@@ -29,14 +29,14 @@ export const quantities: Pair<Quantity> = {
 /**
  * Get all available unit names to select from
  */
-export function getUnitNames(): Array<string> {
+export function getUnitNames(): string[] {
     return allUnits.map(nu => nu[0]).sort();
 }
 /**
  * Find the unit matching the selected name
  */
 export function getUnitByName(name: string): Unit {
-    return allUnits.find(nu => nu[0] === name)![1];
+    return allUnits.find(nu => nu[0] === name)?.[1];
 }
 /**
  * Swap the input and output of a pair
@@ -50,7 +50,7 @@ export function swapPair<T>(pair: Pair<T>): void {
  * Get the name of a dimension
  */
 export function getDimensionName(dimension: Dimension): string {
-    const dim2: { [name: string]: Dimension } = { ...dimensions };
+    const dim2: Record<string, Dimension> = { ...dimensions };
     for (const name in dim2) {
         if (dim2[name].is(dimension)) {
             return name;
