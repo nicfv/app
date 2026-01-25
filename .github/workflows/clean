@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ "${1}" = 'dev' ] ; then
+    echo cleaning in dev mode
+elif [ "${1}" = 'prod' ] ; then
+    echo cleaning in prod mode
+fi
+
