@@ -1,7 +1,7 @@
 import { Input } from './input';
 import { Button } from './button';
 import { Dropdown, DropdownItem } from './dropdown';
-import { lib } from './lib';
+import * as lib from './lib';
 
 window.addEventListener('load', main);
 
