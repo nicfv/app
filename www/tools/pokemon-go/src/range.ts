@@ -27,7 +27,7 @@ export interface Bounds {
  */
 export class Range {
     private static readonly className = 'input';
-    private static id: number = 0;
+    private static id = 0;
     private readonly element: HTMLInputElement;
     /**
      * Create a new input element and append onto the parent element.
