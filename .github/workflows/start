@@ -1,3 +1,11 @@
 #!/usr/bin/env bash
 
-bunx eslint src && bun build --minify --format=iife --outfile=dist/main.js src/index.ts
+# Check if building in dev mode or prod mode
+if [[ "${1}" == 'dev' ]] ; then
+    args=('--watch')
+elif [[ "${1}" == 'prod' ]] ; then
+    args=('--minify' '--format=iife')
+fi
+
+# Lint and build project
+bun x eslint src && bun build "${args[@]}" --outfile=dist/main.js src/index.ts
