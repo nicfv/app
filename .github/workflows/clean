@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ "${1}" = 'dev' ] ; then
-    echo cleaning in dev mode
+    rm -rf node_modules bun.lock
 elif [ "${1}" = 'prod' ] ; then
     echo cleaning in prod mode
 fi
