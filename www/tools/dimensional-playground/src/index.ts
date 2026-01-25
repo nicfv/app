@@ -8,7 +8,7 @@ interface Stringable { toString(): string };
 /**
  * The MathJax object
  */
-declare const MathJax: any;
+declare const MathJax: { typesetPromise(): unknown };
 /**
  * Variables passed into the user's code
  */
@@ -25,7 +25,7 @@ log('Input quantity =', distance.quantity);`;
  * The codemirror editor
  */
 const view: cm.EditorView = new cm.EditorView({
-    parent: document.getElementById('js')!,
+    parent: document.getElementById('js') as HTMLElement,
     doc: initExample,
     extensions: [cm.basicSetup, cmjs.javascript()],
 });
@@ -37,15 +37,15 @@ executeJSFunction();
 function executeJSFunction(): void {
     console.log('Running...');
     const input = view.state.doc.toString();
-    const output = document.getElementById('out')!;
-    const debug = document.getElementById('log')!;
+    const output: HTMLElement = document.getElementById('out') as HTMLElement;
+    const debug: HTMLElement = document.getElementById('log') as HTMLElement;
     output.textContent = '';
     debug.textContent = '';
     try {
         const result = new Function(...argumentVars, input);
         result(LaTeX, log, dim.Dimension, dim.Prefix, dim.Quantity, dim.Unit, dim.config, dim.dimensions, dim.prefixes, dim.units);
-    } catch (e: any) {
-        log(e);
+    } catch (e: unknown) {
+        log(e as Stringable);
     }
     MathJax.typesetPromise();
 }
@@ -54,14 +54,14 @@ function executeJSFunction(): void {
  */
 function LaTeX(...LaTeX: Stringable[]): void {
     console.log('Printing...');
-    const output = document.getElementById('out')!;
-    output.textContent += `\$\$${LaTeX.map(line => line.toString()).join(' ')}\$\$`;
+    const output: HTMLElement = document.getElementById('out') as HTMLElement;
+    output.textContent += `$$${LaTeX.map(line => line.toString()).join(' ')}$$`;
 }
 /**
  * Log a message to the visible console
  */
 function log(...text: Stringable[]): void {
     console.log('Logging...');
-    const output = document.getElementById('log')!;
+    const output: HTMLElement = document.getElementById('log') as HTMLElement;
     output.textContent += `${text.map(line => line.toString()).join(' ')}\r\n`;
 }
