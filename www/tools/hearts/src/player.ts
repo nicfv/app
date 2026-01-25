@@ -8,8 +8,8 @@ export class Player {
     /**
      * The player's score for the current round.
      */
-    public score: number = 0;
-    public hasTakenPoints: boolean = false;
+    public score = 0;
+    public hasTakenPoints = false;
     /**
      * Create a new player.
      */
@@ -21,7 +21,7 @@ export class Player {
         card.play();
         if (card.suit !== leadSuit) {
             deck.playerOutOfSuit(this.id, leadSuit);
-            const myPossibleHand: Array<Card> = deck.hand(this.id);
+            const myPossibleHand: Card[] = deck.hand(this.id);
             if (myPossibleHand.length <= roundsLeft) {
                 myPossibleHand.forEach(card => card.mustBeOwnedBy(this.id));
             }
@@ -30,7 +30,7 @@ export class Player {
     /**
      * This player takes the trick.
      */
-    public take(trick: Array<Card>): void {
+    public take(trick: Card[]): void {
         trick.forEach(card => {
             this.score += card.pointValue;
             if (card.pointValue > 0) {

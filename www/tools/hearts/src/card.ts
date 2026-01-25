@@ -5,7 +5,7 @@ export class Card {
     /**
      * Determines where this card could be.
      */
-    public readonly hand: Array<boolean> = [false, true, true, true];
+    public readonly hand: boolean[] = [false, true, true, true];
     /**
      * Whether or not this is the 2 of Clubs.
      */

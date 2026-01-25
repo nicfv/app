@@ -10,14 +10,14 @@ export class Game {
     private playerData: HTMLDivElement;
     private table: HTMLDivElement;
     private hand: HTMLDivElement;
-    private passTo: number = 0;
-    private twoClubsPassed: boolean = false;
+    private passTo = 0;
+    private twoClubsPassed = false;
     private deck: Deck = new Deck();
-    private trickNum: number = 1;
-    private playerId: number = 0;
-    private suitLead: number = 0;
-    private onTable: Array<Card> = [];
-    private players: Array<Player> = [];
+    private trickNum = 1;
+    private playerId = 0;
+    private suitLead = 0;
+    private onTable: Card[] = [];
+    private players: Player[] = [];
     constructor(parent: HTMLElement) {
         this.instruction = document.createElement('div');
         this.instruction.title = 'Current instructions';
@@ -156,7 +156,7 @@ export class Game {
         this.onTable[this.playerId] = card;
         this.table.append(card.getDiv());
         // Count the number of cards that have been played
-        let cardsPlayed: number = 0;
+        let cardsPlayed = 0;
         for (const card of this.onTable) {
             if (card) { cardsPlayed++; }
         }
@@ -189,7 +189,7 @@ export class Game {
         }
     }
     private endGame(): void {
-        const takenPoints: Array<Player> = this.players.filter(player => player.hasTakenPoints);
+        const takenPoints: Player[] = this.players.filter(player => player.hasTakenPoints);
         if (takenPoints.length === 1) {
             if (takenPoints[0].id === 0) {
                 this.setInstruction('Congratulations, you shot the moon!');
@@ -199,7 +199,7 @@ export class Game {
             return;
         }
         const winningScore: number = Math.min(...this.players.map(player => player.score)),
-            winners: Array<string> = this.players.filter(player => player.score <= winningScore).map(player => {
+            winners: string[] = this.players.filter(player => player.score <= winningScore).map(player => {
                 if (player.id === 0) {
                     return 'You'
                 } else {

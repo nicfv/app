@@ -4,7 +4,7 @@ import { Card } from './card';
  * Represents a standard deck of 52 cards.
  */
 export class Deck {
-    private readonly cards: Array<Card>;
+    private readonly cards: Card[];
     /**
      * Re-deal the deck.
      */
@@ -19,9 +19,9 @@ export class Deck {
     /**
      * Get the possible cards currently in a player's hand, optionally filtering by suit.
      */
-    public hand(playerID: number = 0, suit: number = 0): Array<Card> {
-        const allMyCards: Array<Card> = this.cards.filter(card => card.hand[playerID]),
-            filteredBySuit: Array<Card> = allMyCards.filter(card => card.suit === suit);
+    public hand(playerID = 0, suit = 0): Card[] {
+        const allMyCards: Card[] = this.cards.filter(card => card.hand[playerID]),
+            filteredBySuit: Card[] = allMyCards.filter(card => card.suit === suit);
         if (filteredBySuit.length) {
             return filteredBySuit;
         } else {
@@ -31,7 +31,7 @@ export class Deck {
     /**
      * Get the cards that you could be passed.
      */
-    public couldReceive(): Array<Card> {
+    public couldReceive(): Card[] {
         return this.cards.filter(card => !card.hand[0] && card.hand[1] && card.hand[2] && card.hand[3]);
     }
     /**
@@ -44,6 +44,6 @@ export class Deck {
      * Get the two of clubs.
      */
     public getTwoClubs(): Card {
-        return this.cards.find(card => card.twoClubs)!;
+        return this.cards.find(card => card.twoClubs) || this.cards[0];
     }
 }
