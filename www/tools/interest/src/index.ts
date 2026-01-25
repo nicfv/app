@@ -3,8 +3,6 @@ import { Button } from './button';
 import { Dropdown, DropdownItem } from './dropdown';
 import * as lib from './lib';
 
-window.addEventListener('load', main);
-
 const calculationTypes: DropdownItem[] = [
     { key: 'Final value (How much will I have?)', value: 'F' },
     { key: 'Initial value (How much do I need right now?)', value: 'P' },
@@ -12,15 +10,9 @@ const calculationTypes: DropdownItem[] = [
     { key: 'Duration (How long do I need to wait?)', value: 'n' },
 ];
 
-let calculationType: Dropdown;
-
-function main(): void {
-    console.log('Loaded!');
-    const selectorContainer: HTMLElement = document.getElementById('selector') as HTMLElement;
-    calculationType = new Dropdown(selectorContainer, 'Calculation Type', calculationTypes);
-    calculationType.onChange(() => setupForm());
-    setupForm();
-}
+const calculationType: Dropdown = new Dropdown(document.getElementById('selector') as HTMLElement, 'Calculation Type', calculationTypes);
+calculationType.onChange(() => setupForm());
+setupForm();
 
 function removeChildren(element: Element): void {
     while (element.firstChild) {
