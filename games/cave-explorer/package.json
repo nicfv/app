@@ -1,4 +1,5 @@
 {
+  "name": "cave-explorer",
   "scripts": {
     "start": "../../.github/workflows/start",
     "dev": "../../.github/workflows/dev"
