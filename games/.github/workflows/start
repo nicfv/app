@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-pwd && npx eslint src && npx webpack --mode production -c ../../webpack.config.js

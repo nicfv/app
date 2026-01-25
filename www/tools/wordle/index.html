@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Wordle Helper</title>
+    <link rel="icon" type="image/svg+xml" href="./favico.svg" />
+    <link rel="stylesheet" type="text/css" href="./index.css" />
+    <script type="text/javascript" src="./dist/main.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Generate all possible combinations of letters for your guesses in Wordle.">
+    <meta name="keywords" content="Wordle">
+    <meta name="author" content="Nicolas Ventura">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div id="setup">
+        <div>
+            <input type="number" id="num_guesses" placeholder="5" min="1" max="10" step="1" />
+            <label for="num_guesses">Total number of guesses</label>
+        </div>
+        <div>
+            <input type="number" id="num_chars" placeholder="5" min="1" max="20" step="1" />
+            <label for="num_chars">Letters in each word</label>
+        </div>
+        <div>
+            <span id="alphtype"></span>
+            <span id="p_alphtype">Default</span>
+        </div>
+        <input type="text" id="txt_cust" placeholder="Custom Charset" />
+        <button id="go">Go</button>
+    </div>
+
+    <div id="main">
+        <div id="input"></div>
+
+        <div>
+            <button id="gen">Generate List</button>
+            <button id="copy" disabled>Copy</button>
+            <button id="clear" disabled>Clear</button>
+        </div>
+
+        <div>
+            <p id="numwords"></p>
+        </div>
+
+        <div id="out">
+            <pre id="words"></pre>
+        </div>
+    </div>
+
+    <div id="help">
+        <b><u>Wordle Helper</u></b> v5.0<br />
+        Created by Nicolas Ventura<br />
+        Last updated January 25, 2026<br />
+        <hr /><b><u>Motivation</u></b>
+        This tool should help you think of your next Wordle guess by generating a list of all possible valid
+        combinations of letters based on your prior guesses. This is not affiliated with Wordle whatsoever and cannot
+        determine the daily answer, so no spoilers here! This tool also works for other games similar to Wordle by
+        allowing you to change the number of guesses, number of letters, and changing the available character set.
+        <hr /><b><u>Setup</u></b> Before using the tool, follow these steps in the setup wizard.
+        <ol>
+            <li><b>Classic Wordle</b> : This will force 5 characters and will compare each combination of characters to
+                the Wordle dictionary.</li>
+            <li><b>Math Wordle</b> : Input the total number of guesses and characters per equation. The allowable
+                characters are <code>1234567890-+*/=</code>. Instead of a dictionary, valid character combinations are
+                mathematically solved for accuracy.</li>
+            <li><b>Alphabet (A-Z) Only</b> : This can be used for any generic Wordle-like game for any number of guesses
+                and characters per word. This mode does not compare words against a dictionary.</li>
+            <li><b>Custom Charset</b> : Similar to the previous option, except you will be prompted with a text box to
+                enter all allowed characters in your Wordle game. For instance, your alphabet may require the use of
+                <code>é</code> or <code>ñ</code>. Be sure to include <i>all</i> characters in your custom alphabet.
+                <code>AÁBCDEÉFGHIÍJKLMNÑOÓPQRSTUÚVWXYZ</code>
+            </li>
+            </li>
+            <li>Click <button small>Go</button> to generate a very similar interface to the game you are playing</li>
+        </ol>
+        <hr /><b><u>Instructions</u></b>
+        Type in your daily Wordle guesses here. The tab key allows you to automatically move to the next character
+        without using the mouse. Click on the switch below each input to cycle its color and corresponding status:
+        <ul>
+            <li><b style="color: #333">Gray</b> The letter is not anywhere in the word</li>
+            <li><b style="color: #393">Green</b> The letter is in the correct spot in the word</li>
+            <li><b style="color: #993">Yellow</b> The letter is in a different spot in the word</li>
+        </ul>
+        Press <button small>Generate List</button> to generate a complete list of every possible combination of letters.
+        This could take a while. After it loads, one text box shows the count of valid 5 letter combinations, and
+        another shows all of those combinations. Press <button small>Copy</button> to copy the list of words to the
+        clipboard. Press <button small>Clear</button> to clear the text, all user input, and character colors.
+        <hr /><b><u>Allowed Characters</u></b>
+        <p id="charset">None yet. Press <button small>Go</button> to start.</p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "bun i && bun --filter='*' start prod",
+    "clean": "./cmd/clean"
+  },
+  "workspaces": [
+    "www/**/*"
+  ],
+  "devDependencies": {
+    "eslint": "9.39.2",
+    "@eslint/js": "9.39.2",
+    "typescript-eslint": "8.53.1"
+  }
+}

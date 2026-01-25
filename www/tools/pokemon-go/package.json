@@ -1,0 +1,10 @@
+{
+  "name": "pokemon-go",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "smath": "1.13.3",
+    "viridis": "1.4.2"
+  }
+}

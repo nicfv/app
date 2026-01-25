@@ -1,0 +1,10 @@
+{
+  "name": "hexles",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "graphico": "1.1.0",
+    "smath": "1.14.0"
+  }
+}
