@@ -1,8 +1,8 @@
 {
   "type": "module",
   "scripts": {
-    "start": "npm i && npm start --workspaces",
-    "stop": "rm -rf node_modules package-lock.json www/*/dist"
+    "start": "bun i && bun start --workspaces",
+    "stop": "rm -rf node_modules bun.lock"
   },
   "workspaces": [
     "games/*",
