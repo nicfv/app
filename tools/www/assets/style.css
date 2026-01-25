@@ -1,0 +1,52 @@
+* {
+    outline: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+main {
+    padding: 1rem;
+    max-width: 40rem;
+}
+
+footer {
+    width: 100%;
+    background: lightgray;
+    border-top: 1px solid gray;
+    padding: 0.5rem;
+}
+
+a,
+a:link,
+a:visited {
+    color: navy;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
+}
+
+div.tool {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}

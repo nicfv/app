@@ -1,0 +1,159 @@
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
+
+* {
+    outline: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    background: #eee;
+    color: black;
+}
+
+pre {
+    font-family: monospace;
+    font-size: 2em;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+div {
+    width: max-content;
+    margin: 0 auto;
+}
+
+button {
+    border: none;
+    background: #369;
+    cursor: pointer;
+    color: white;
+    padding: 0.25em 0.5em;
+    margin: 0.25em;
+}
+
+button:hover {
+    background: #47a;
+}
+
+button:active {
+    background: #258;
+}
+
+button:disabled {
+    background: #666;
+    cursor: default;
+}
+
+button[small] {
+    font-size: 0.75em;
+    margin: 0;
+}
+
+#input {
+    display: flex;
+    flex-direction: column;
+}
+
+.word {
+    display: flex;
+    flex-direction: row;
+}
+
+.CharInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.CharInput input {
+    font-size: 2em;
+    text-align: center;
+    width: 1.5em;
+    color: white;
+    font-weight: bold;
+    padding: 0.25em;
+    margin: 0.25em;
+    border: 0;
+    transition: background 0.5s;
+}
+
+#setup {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#setup>div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+#setup input {
+    font-weight: bold;
+    color: white;
+    background: #333;
+    padding: 0.25em;
+    margin: 0.25em;
+    border: 0;
+}
+
+#setup input[type=number] {
+    width: 3em;
+}
+
+#setup button {
+    margin: 0 auto;
+}
+
+#setup svg {
+    margin: 0.25em;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#out {
+    height: 100%;
+    overflow-y: auto;
+    margin-bottom: 1em;
+    min-height: 4em;
+    padding: 0 0.5em;
+}
+
+#help {
+    display: block;
+    position: fixed;
+    right: max(calc(5em - 100%), -40em);
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    color: black;
+    background: #dda;
+    padding: 0.25em;
+    width: min(calc(100% - 5em), 40em);
+    transition: right 1s;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        background: #111;
+        color: white;
+    }
+
+}

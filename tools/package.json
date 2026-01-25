@@ -1,0 +1,13 @@
+{
+  "workspaces": [
+    "www/*"
+  ],
+  "scripts": {
+    "start": "npm i && npm start --workspaces",
+    "stop": ".github/workflows/clean"
+  },
+  "devDependencies": {
+    "ts-loader": "9.5.4",
+    "webpack-cli": "6.0.1"
+  }
+}
