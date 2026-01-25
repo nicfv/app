@@ -1,16 +1,14 @@
 import { Input } from './input';
 import { Button } from './button';
-import { Dropdown, DropdownItem } from './dropdown';
+import { Dropdown } from './dropdown';
 import * as lib from './lib';
 
-const calculationTypes: DropdownItem[] = [
+const calculationType: Dropdown = new Dropdown(document.getElementById('selector') as HTMLElement, 'Calculation Type', [
     { key: 'Final value (How much will I have?)', value: 'F' },
     { key: 'Initial value (How much do I need right now?)', value: 'P' },
     { key: 'Annual interest rate (What\'s my average growth?)', value: 'i' },
     { key: 'Duration (How long do I need to wait?)', value: 'n' },
-];
-
-const calculationType: Dropdown = new Dropdown(document.getElementById('selector') as HTMLElement, 'Calculation Type', calculationTypes);
+]);
 calculationType.onChange(() => setupForm());
 setupForm();
 
