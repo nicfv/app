@@ -1,26 +1,3 @@
-import { rint } from 'smath';
-export { clamp } from 'smath';
-/**
- * Select a random element from `arr` of type `T`
- */
-export function selectRandom<T>(arr: T[]): T {
-    return arr[rint(0, arr.length - 1)];
-}
-/**
- * Return a weighted random bucket 0-indexed ID from an array of buckets.
- */
-export function selectRandomBucket(bucketSizes: number[]): number {
-    const startVal: number[] = [];
-    let accumulation = 0;
-    for (const s of bucketSizes) {
-        accumulation += s;
-        startVal.push(accumulation);
-    }
-    const size = accumulation,
-        ran = rint(0, size - 1);
-    return startVal.findIndex(s => ran < s);
-}
-
 /**
  * Represents an `(x,y)` coordinate pair.
  */
