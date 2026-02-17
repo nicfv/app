@@ -20,6 +20,8 @@ const canv: Canvas = new Canvas({
     background: 'dimgray',
     border: 'black',
     borderBlur: 'gray',
+    keepFocused: true,
+    showMouse: false,
     loop(dt) {
         input_dt += dt;
         if (input_dt > max_input_dt) {
