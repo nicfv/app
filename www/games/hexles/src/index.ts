@@ -6,6 +6,7 @@ const CANV: Canvas = new Canvas({
     height: 400,
     background: 'cornflowerblue',
     showMouse: false,
+    keepFocused: true,
     keydown(key) { onkeydown(key) },
     loop(dt) { tick(dt) },
 });
