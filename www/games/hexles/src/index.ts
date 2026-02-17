@@ -8,7 +8,7 @@ const CANV: Canvas = new Canvas({
     showMouse: false,
     keepFocused: true,
     keydown(key) {
-        switch (key.toLowerCase()) {
+        switch (key) {
             case ('arrowup'):
             case ('w'): {
                 Hexles.receiveInput('up');
