@@ -13,7 +13,7 @@ const minimap: Minimap = new Minimap({ x: 40, y: 40 }, { x: 8, y: 8 }, map, play
 const max_input_dt = 100;
 let input_dt = 0;
 
-export const canv: Canvas = new Canvas({
+const canv: Canvas = new Canvas({
     width: 50,
     height: 50,
     scale: 10,
