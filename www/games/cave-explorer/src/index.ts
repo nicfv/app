@@ -31,7 +31,7 @@ const canv: Canvas = new Canvas({
     borderBlur: 'gray',
     keepFocused: true,
     showMouse: false,
-    keydown(key) {
+    keydown() {
         titleScreen = false;
     },
     loop(dt) {
