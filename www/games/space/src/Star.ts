@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { Color, Gradient } from 'viridis';
 import * as SMath from 'smath';
-import { game } from '.';
+import { game } from './game';
 
 export class Star implements Drawable {
     private static readonly temp_gradient: Gradient = new Gradient([

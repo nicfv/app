@@ -1,5 +1,6 @@
+import { clamp, selectRandom, selectRandomWeighted } from 'smath';
 import { Drawable } from 'graphico';
-import { clamp, Hexagon, selectRandom, selectRandomBucket, Vec2 } from './Geometry';
+import { Hexagon, Vec2 } from './Geometry';
 import { VERSION } from './version';
 
 type Direction = 'North' | 'NorthWest' | 'SouthWest' | 'South' | 'SouthEast' | 'NorthEast';
@@ -534,7 +535,7 @@ class Game implements Drawable {
         if (this.turnOrder.getCurrentPlayer().isAI) {
             const bucketNames: Direction[] = ['North', 'NorthEast', 'NorthWest', 'South', 'SouthEast', 'SouthWest'],
                 buckets: number[] = bucketNames.map(name => this.board.captureWeight(this.turnOrder.getCurrentPlayer(), name)),
-                selectedDirection = bucketNames[selectRandomBucket(buckets)]; // Note: is `undefined` when there are no legal moves
+                selectedDirection = bucketNames[selectRandomWeighted(buckets)]; // Note: is `undefined` when there are no legal moves
             let startThinkTime: number = this.time + 500; // Wait 0.5 sec before "thinking"
             const aiTick = setInterval(() => {
                 const elapsedTime: number = this.time - startThinkTime;
