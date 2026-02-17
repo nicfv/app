@@ -1,5 +1,12 @@
 # Changes
 
+## 1.1.2
+
+- Update dependency versions
+- Clean up imports and exports
+- Keep game focused, even if user clicks out of the window
+- User interaction functions loaded immediately
+
 ## 1.1.1
 
 - Fix a bug where text wouldn't scroll due to an `undefined` error
