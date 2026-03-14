@@ -13,7 +13,8 @@ const canv = new Canvas({
     height: 600,
     width: 400,
     loop(dt) {
-        // console.log(canv.isMouseButtonDown(1), dt);
+        canv.clear();
+        ball.move(dt, rod);
         canv.draw(ball);
         canv.draw(rod);
     },
