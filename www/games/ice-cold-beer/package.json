@@ -1,0 +1,9 @@
+{
+  "name": "ice-cold-beer",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "graphico": "1.1.1"
+  }
+}
