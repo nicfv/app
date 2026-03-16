@@ -2,23 +2,26 @@ import { Drawable } from 'graphico';
 import { Rod } from './rod';
 
 export class Ball implements Drawable {
-    private freeFall = true;
+    private x = 0;
+    private y = 0;
     private vx = 0;
-    private vy = 0;
-    private readonly g: number = 9.81 * 100;
-    constructor(private x: number, private y: number, private r: number) { }
+    private readonly g: number = 9.81;
+    constructor(private r: number, private gameWidth: number) { }
     public move(dt: number, rod: Rod): void {
-        const maxY: number = rod.getY(this.x) - (this.r / Math.cos(rod.getAngle())) - rod.width / 2;
-        if (this.freeFall) {
-            this.vy += this.g * dt / 1e3;
-            this.y += this.vy * dt / 1e3;
-            if (this.y > maxY) {
-                this.y = maxY;
-                this.freeFall = false;
-            }
-        } else {
-            this.y = maxY;
+        // Calculate the acceleration and position of the marble
+        this.vx += Math.sin(rod.getAngle()) * this.g * dt / 1e3;
+        this.x += this.vx * dt;
+        if (this.x <= this.r) {
+            // Hit left side
+            this.x = this.r;
+            this.vx = 0;
+        } else if (this.x >= this.gameWidth - this.r) {
+            // Hit right side
+            this.x = this.gameWidth - this.r;
+            this.vx = 0;
         }
+        // Assume ball is "stuck" to the rod
+        this.y = rod.getY(this.x) - (this.r / Math.cos(rod.getAngle())) - rod.width / 2;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Marble

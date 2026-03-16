@@ -2,7 +2,7 @@ import { Canvas } from 'graphico';
 import { Ball } from './ball';
 import { Rod } from './rod';
 
-const ball = new Ball(100, 100, 20);
+const ball = new Ball(20, 400);
 const rod = new Rod(0, 550, 400, 550);
 
 const canv = new Canvas({
