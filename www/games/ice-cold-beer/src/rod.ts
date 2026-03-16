@@ -17,6 +17,7 @@ export class Rod implements Drawable {
         return translate(x, this.lx, this.rx, this.ly, this.ry);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        graphics.lineCap = 'round';
         graphics.beginPath();
         graphics.moveTo(this.lx, this.ly);
         graphics.lineTo(this.rx, this.ry);
