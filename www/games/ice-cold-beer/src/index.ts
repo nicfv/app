@@ -14,6 +14,9 @@ const canv = new Canvas({
     width: 400,
     loop(dt) {
         canv.clear();
+        rod.move(dt,
+            canv.isKeyDown('w') ? 'Up' : canv.isKeyDown('s') ? 'Down' : 'None',
+            canv.isKeyDown('i') ? 'Up' : canv.isKeyDown('k') ? 'Down' : 'None');
         ball.move(dt, rod);
         canv.draw(ball);
         canv.draw(rod);
