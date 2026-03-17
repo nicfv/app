@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { translate } from 'smath';
+import { translate, clamp } from 'smath';
 
 type Control = 'Up' | 'Down' | 'None';
 
@@ -11,10 +11,11 @@ export class Rod implements Drawable {
      * @param ly The elevation of the left side of the rod
      * @param ry The elevation of the right side of the rod
      * @param gameWidth The width of the game window
+     * @param gameHeight The height of the game window
      * @param px_per_sec The speed at which the rod can be moved
      * @param width The thickness of the rod
      */
-    constructor(private ly: number, private ry: number, gameWidth: number, private readonly px_per_sec = 100, public readonly width = 10) {
+    constructor(private ly: number, private ry: number, gameWidth: number, private readonly gameHeight: number, private readonly px_per_sec = 100, public readonly width = 10) {
         this.lx = 0;
         this.rx = gameWidth;
     }
@@ -40,11 +41,13 @@ export class Rod implements Drawable {
         } else if (left === 'Down') {
             this.ly += speed;
         }
+        this.ly = clamp(this.ly, this.width, this.gameHeight - this.width);
         if (right === 'Up') {
             this.ry -= speed;
         } else if (right === 'Down') {
             this.ry += speed;
         }
+        this.ry = clamp(this.ry, this.width, this.gameHeight - this.width);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.lineCap = 'round';

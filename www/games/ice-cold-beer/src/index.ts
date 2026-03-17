@@ -3,7 +3,7 @@ import { Ball } from './ball';
 import { Rod } from './rod';
 
 const ball = new Ball(0, 0, 20, 400);
-const rod = new Rod(550, 550, 400);
+const rod = new Rod(550, 550, 400, 600);
 
 const canv = new Canvas({
     background: 'sandybrown',
