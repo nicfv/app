@@ -7,8 +7,9 @@ export class Hole implements Drawable {
      * @param x The x-coordinate of the hole, in pixels
      * @param y The y-coordinate of the hole, in pixels
      * @param r The radius of the hole, in pixels
+     * @param padding The distance factor in between holes
      */
-    constructor(public readonly x: number, public readonly y: number, public readonly r: number) { }
+    constructor(public readonly x: number, public readonly y: number, public readonly r: number, private readonly padding: number) { }
     /**
      * Set this hole as the goal.
      */
@@ -20,6 +21,12 @@ export class Hole implements Drawable {
      */
     public deselect(): void {
         this.selected = false;
+    }
+    /**
+     * Determine if this hole intersects with another.
+     */
+    public intersects(other: Hole): boolean {
+        return Math.sqrt((this.x - other.x) ** 2 + (this.y - other.y) ** 2) < (this.r + other.r) * this.padding;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         if (this.selected) {
