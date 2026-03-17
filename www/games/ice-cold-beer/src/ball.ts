@@ -2,11 +2,19 @@ import { Drawable } from 'graphico';
 import { Rod } from './rod';
 
 export class Ball implements Drawable {
-    private x = 0;
-    private y = 0;
     private vx = 0;
-    private readonly g: number = 9.81;
-    constructor(private r: number, private gameWidth: number) { }
+    /**
+     * Create a new ball.
+     * @param x The initial x-position of the ball
+     * @param y The initial y-position of the ball
+     * @param r The radius of the ball
+     * @param gameWidth The width of the game window
+     * @param g The gravitation constant
+     */
+    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 9.81) { }
+    /**
+     * Move the ball.
+     */
     public move(dt: number, rod: Rod): void {
         // Calculate the acceleration and position of the marble
         this.vx += Math.sin(rod.getAngle()) * this.g * dt / 1e3;

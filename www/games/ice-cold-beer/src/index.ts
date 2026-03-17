@@ -2,8 +2,8 @@ import { Canvas } from 'graphico';
 import { Ball } from './ball';
 import { Rod } from './rod';
 
-const ball = new Ball(20, 400);
-const rod = new Rod(0, 550, 400, 550);
+const ball = new Ball(0, 0, 20, 400);
+const rod = new Rod(550, 550, 400);
 
 const canv = new Canvas({
     background: 'sandybrown',

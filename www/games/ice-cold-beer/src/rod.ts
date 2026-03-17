@@ -4,12 +4,20 @@ import { translate } from 'smath';
 type Control = 'Up' | 'Down' | 'None';
 
 export class Rod implements Drawable {
-    public readonly width = 10;
+    private readonly lx: number;
+    private readonly rx: number;
     /**
-     * Defines the speed of the rod in pixels per second
+     * Create a new rod.
+     * @param ly The elevation of the left side of the rod
+     * @param ry The elevation of the right side of the rod
+     * @param gameWidth The width of the game window
+     * @param px_per_sec The speed at which the rod can be moved
+     * @param width The thickness of the rod
      */
-    private readonly px_per_sec = 100;
-    constructor(private readonly lx: number, private ly: number, private readonly rx: number, private ry: number) { }
+    constructor(private ly: number, private ry: number, gameWidth: number, private readonly px_per_sec = 100, public readonly width = 10) {
+        this.lx = 0;
+        this.rx = gameWidth;
+    }
     /**
      * Get the angle in radians of the rod.
      */
@@ -22,6 +30,9 @@ export class Rod implements Drawable {
     public getY(x: number): number {
         return translate(x, this.lx, this.rx, this.ly, this.ry);
     }
+    /**
+     * Move the rod based on user input.
+     */
     public move(dt: number, left: Control, right: Control): void {
         const speed: number = this.px_per_sec * dt / 1000;
         if (left === 'Up') {
