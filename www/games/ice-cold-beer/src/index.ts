@@ -11,7 +11,7 @@ const gameWidth = 400,
 
 const ball = new Ball(0, 0, ballSize, gameWidth);
 const rod = new Rod(gameHeight - 50, gameHeight - 50, gameWidth, gameHeight);
-const holes: Array<Hole> = [];
+const holes: Hole[] = [];
 
 const holeR = ballSize * 1.1;
 for (let y = gameHeight - 100; y > holeR * 2; y -= rint(1, holeR)) {
