@@ -19,7 +19,6 @@ for (let y = gameHeight - 100; y > holeR * 2; y -= rint(1, holeR)) {
     let intersects = false;
     for (const existingHole of holes) {
         if (hole.intersects(existingHole)) {
-            console.log('!');
             intersects = true;
             break;
         }
@@ -35,8 +34,8 @@ const canv = new Canvas({
     border: 'black',
     borderBlur: 'white',
     showMouse: false,
-    height: 600,
-    width: 400,
+    height: gameHeight,
+    width: gameWidth,
     loop(dt) {
         canv.clear();
         rod.move(dt,
