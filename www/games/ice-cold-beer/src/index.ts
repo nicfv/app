@@ -1,9 +1,12 @@
 import { Canvas } from 'graphico';
 import { Ball } from './ball';
 import { Rod } from './rod';
+import { Hole } from './hole';
 
 const ball = new Ball(0, 0, 20, 400);
 const rod = new Rod(550, 550, 400, 600);
+const hole = new Hole(50, 50, 20);
+hole.select();
 
 const canv = new Canvas({
     background: 'sandybrown',
@@ -18,6 +21,7 @@ const canv = new Canvas({
             canv.isKeyDown('w') ? 'Up' : canv.isKeyDown('s') ? 'Down' : 'None',
             canv.isKeyDown('i') ? 'Up' : canv.isKeyDown('k') ? 'Down' : 'None');
         ball.move(dt, rod);
+        canv.draw(hole);
         canv.draw(ball);
         canv.draw(rod);
     },
