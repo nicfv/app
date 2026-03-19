@@ -41,7 +41,7 @@ const canv = new Canvas({
         rod.move(dt,
             canv.isKeyDown('w') ? 'Up' : canv.isKeyDown('s') ? 'Down' : 'None',
             canv.isKeyDown('i') ? 'Up' : canv.isKeyDown('k') ? 'Down' : 'None');
-        ball.move(dt, rod);
+        ball.move(dt, rod, holes);
         for (const hole of holes) {
             canv.draw(hole);
         }

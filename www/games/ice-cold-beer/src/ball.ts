@@ -1,8 +1,12 @@
 import { Drawable } from 'graphico';
 import { Rod } from './rod';
+import { Hole } from './hole';
 
 export class Ball implements Drawable {
     private vx = 0;
+    private near = false; // near to a hole?
+    private readonly maxvx = 0.1; // max vx to fall into hole
+    private readonly maxdf = 0.5; // max distance factor
     /**
      * Create a new ball.
      * @param x The initial x-position of the ball
@@ -11,14 +15,14 @@ export class Ball implements Drawable {
      * @param gameWidth The width of the game window
      * @param g The gravitation constant
      */
-    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 9.81) { }
+    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 9.81 * 600) { }
     /**
      * Move the ball.
      */
-    public move(dt: number, rod: Rod): void {
+    public move(dt: number, rod: Rod, holes: Hole[]): void {
         // Calculate the acceleration and position of the marble
         this.vx += Math.sin(rod.getAngle()) * this.g * dt / 1e3;
-        this.x += this.vx * dt;
+        this.x += this.vx * dt / 1e3;
         if (this.x <= this.r) {
             // Hit left side
             this.x = this.r;
@@ -30,6 +34,19 @@ export class Ball implements Drawable {
         }
         // Assume ball is "stuck" to the rod
         this.y = rod.getY(this.x) - (this.r / Math.cos(rod.getAngle())) - rod.width / 2;
+        if (!this.near) {
+            for (const hole of holes) {
+                if (hole.distanceFrom(this.x, this.y) < this.r * this.maxdf) {
+                    if (Math.abs(this.vx) < this.maxvx) {
+                        console.log('you win!');
+                    } else {
+                        console.log('not yet buster');
+                        this.near = true;
+                        this.vx /= 2;
+                    }
+                }
+            }
+        }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Marble
