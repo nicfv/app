@@ -6,10 +6,7 @@ export class Ball implements Drawable {
     private rolling = true;
     private vx = 0;
     private vy = 0;
-    private airResistance = 0.99;
     private near = false; // near to a hole?
-    private readonly maxvx = 10; // max vx to fall into hole
-    private readonly maxdf = 0.5; // max distance factor
     /**
      * Create a new ball.
      * @param x The initial x-position of the ball
@@ -17,8 +14,18 @@ export class Ball implements Drawable {
      * @param r The radius of the ball
      * @param gameWidth The width of the game window
      * @param g The gravitation constant
+     * @param airResistance The decaying factor of horizontal speed due to air resistance
+     * @param maxSpeed The maximum speed at which a ball can fall into a hole
+     * @param maxDistanceFactor The maximum distance factor (of radius) away at which a ball can fall into a hole
+     * @param showSpeed Show the speedometer
      */
-    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 9.81 * 600) { }
+    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 5000, private readonly airResistance = 0.99, private readonly maxSpeed = 100, private readonly maxDistanceFactor = 0.25, private readonly showSpeed = false) { }
+    /**
+     * Check if the ball is moving too fast to fall in a hole.
+     */
+    private tooFast(): boolean {
+        return Math.abs(this.vx) > this.maxSpeed;
+    }
     /**
      * Move the ball.
      */
@@ -60,10 +67,10 @@ export class Ball implements Drawable {
         // Check to see if this ball would fall into any holes
         let latch = false;
         for (const hole of holes) {
-            if (hole.distanceFrom(this.x, this.y) < this.r * this.maxdf) {
+            if (hole.distanceFrom(this.x, this.y) < this.r * this.maxDistanceFactor) {
                 latch = true;
                 if (!this.near && this.rolling) {
-                    if (Math.abs(this.vx) < this.maxvx) {
+                    if (!this.tooFast()) {
                         console.log('you win!');
                         this.near = true;
                     } else {
@@ -101,5 +108,13 @@ export class Ball implements Drawable {
         graphics.arc(this.x - this.r / 3, this.y - this.r / 3, this.r / 3, 0, 2 * Math.PI);
         graphics.fillStyle = 'lightgray';
         graphics.fill();
+        if (this.showSpeed) {
+            if (this.tooFast()) {
+                graphics.fillStyle = 'red';
+            } else {
+                graphics.fillStyle = 'green';
+            }
+            graphics.fillRect(0, 0, 10, 10);
+        }
     }
 }
