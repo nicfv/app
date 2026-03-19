@@ -5,7 +5,7 @@ import { Hole } from './hole';
 export class Ball implements Drawable {
     private vx = 0;
     private near = false; // near to a hole?
-    private readonly maxvx = 0.1; // max vx to fall into hole
+    private readonly maxvx = 100; // max vx to fall into hole
     private readonly maxdf = 0.5; // max distance factor
     /**
      * Create a new ball.
@@ -34,11 +34,14 @@ export class Ball implements Drawable {
         }
         // Assume ball is "stuck" to the rod
         this.y = rod.getY(this.x) - (this.r / Math.cos(rod.getAngle())) - rod.width / 2;
-        if (!this.near) {
-            for (const hole of holes) {
-                if (hole.distanceFrom(this.x, this.y) < this.r * this.maxdf) {
+        let latch = false;
+        for (const hole of holes) {
+            if (hole.distanceFrom(this.x, this.y) < this.r * this.maxdf) {
+                latch = true;
+                if (!this.near) {
                     if (Math.abs(this.vx) < this.maxvx) {
                         console.log('you win!');
+                        this.near = true;
                     } else {
                         console.log('not yet buster');
                         this.near = true;
@@ -46,6 +49,9 @@ export class Ball implements Drawable {
                     }
                 }
             }
+        }
+        if (!latch) {
+            this.near = false;
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
