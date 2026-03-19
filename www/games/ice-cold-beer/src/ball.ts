@@ -1,12 +1,16 @@
 import { Drawable } from 'graphico';
 import { Rod } from './rod';
 import { Hole } from './hole';
+import { clamp, translate } from 'smath';
 
 export class Ball implements Drawable {
     private rolling = true;
     private vx = 0;
     private vy = 0;
-    private near = false; // near to a hole?
+    private angle = 0;
+    private near = false;
+    private fallInto?: Hole;
+    private fallDuration = 0;
     /**
      * Create a new ball.
      * @param x The initial x-position of the ball
@@ -19,7 +23,7 @@ export class Ball implements Drawable {
      * @param maxDistanceFactor The maximum distance factor (of radius) away at which a ball can fall into a hole
      * @param showSpeed Show the speedometer
      */
-    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 5000, private readonly airResistance = 0.99, private readonly maxSpeed = 100, private readonly maxDistanceFactor = 0.25, private readonly showSpeed = false) { }
+    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 5000, private readonly airResistance = 0.99, private readonly maxSpeed = 100, private readonly maxDistanceFactor = 0.25, private readonly fallAnimDurationSec = 0.5, private readonly showSpeed = false) { }
     /**
      * Check if the ball is moving too fast to fall in a hole.
      */
@@ -27,9 +31,37 @@ export class Ball implements Drawable {
         return Math.abs(this.vx) > this.maxSpeed;
     }
     /**
+     * Determine if the fall animation has completed.
+     */
+    private fallAnimComplete(): boolean {
+        return this.fallDuration > this.fallAnimDurationSec;
+    }
+    /**
+     * Determine if the game is won.
+     */
+    public won(): boolean {
+        if (this.fallInto && this.fallAnimComplete()) {
+            return this.fallInto.isGoal();
+        }
+        return false;
+    }
+    /**
+     * Determine if the game is lost.
+     */
+    public lost(): boolean {
+        if (this.fallInto && this.fallAnimComplete()) {
+            return !this.fallInto.isGoal();
+        }
+        return false;
+    }
+    /**
      * Move the ball.
      */
     public move(dt: number, rod: Rod, holes: Hole[]): void {
+        if (this.fallInto) {
+            this.fallDuration += dt / 1e3;
+            return;
+        }
         // Calculate acceleration
         if (this.rolling) {
             // Calculate the acceleration and position of the marble
@@ -43,6 +75,7 @@ export class Ball implements Drawable {
         // Laws of motion
         this.x += this.vx * dt / 1e3;
         this.y += this.vy * dt / 1e3;
+        this.angle += this.vx / this.r * dt / 1e3;
         // Game boundary
         if (this.x <= this.r) {
             // Hit left side
@@ -71,10 +104,8 @@ export class Ball implements Drawable {
                 latch = true;
                 if (!this.near && this.rolling) {
                     if (!this.tooFast()) {
-                        console.log('you win!');
-                        this.near = true;
+                        this.fallInto = hole;
                     } else {
-                        console.log('not yet buster');
                         this.near = true;
                         this.vx /= 2;
                         this.vy = -Math.abs(this.vx);
@@ -89,9 +120,16 @@ export class Ball implements Drawable {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Save and manipulate
+        graphics.save();
+        const yTranslate: number = translate(clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 0, this.r / 2);
+        const scaleFactor: number = translate(clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 1, 0);
+        graphics.translate(this.x, this.y + yTranslate);
+        graphics.scale(scaleFactor, scaleFactor);
+        graphics.rotate(this.angle);
         // Marble
         graphics.beginPath();
-        graphics.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        graphics.arc(0, 0, this.r, 0, 2 * Math.PI);
         graphics.fillStyle = 'darkgray';
         graphics.fill();
         // Outline
@@ -100,14 +138,16 @@ export class Ball implements Drawable {
         graphics.stroke();
         // Large reflection
         graphics.beginPath();
-        graphics.arc(this.x + this.r / 2, this.y + this.r / 2, this.r / 6, 0, 2 * Math.PI);
+        graphics.arc(this.r / 2, this.r / 2, this.r / 6, 0, 2 * Math.PI);
         graphics.fillStyle = 'lightgray';
         graphics.fill();
         // Small reflection
         graphics.beginPath();
-        graphics.arc(this.x - this.r / 3, this.y - this.r / 3, this.r / 3, 0, 2 * Math.PI);
+        graphics.arc(-this.r / 3, -this.r / 3, this.r / 3, 0, 2 * Math.PI);
         graphics.fillStyle = 'lightgray';
         graphics.fill();
+        // Restore
+        graphics.restore();
         if (this.showSpeed) {
             if (this.tooFast()) {
                 graphics.fillStyle = 'red';

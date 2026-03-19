@@ -9,7 +9,7 @@ const gameWidth = 400,
     ballSize = 10,
     padding = 2;
 
-const ball = new Ball(0, 0, ballSize, gameWidth, 9.81 * 500, 0.99, 100, 0.25, true);
+const ball = new Ball(0, 0, ballSize, gameWidth, 9.81 * 500, 0.99, 100, 0.25, 0.4, true);
 const rod = new Rod(gameHeight - 50, gameHeight - 50, gameWidth, gameHeight);
 const holes: Hole[] = [];
 
