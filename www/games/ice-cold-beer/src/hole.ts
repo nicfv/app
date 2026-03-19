@@ -23,6 +23,12 @@ export class Hole implements Drawable {
         this.selected = false;
     }
     /**
+     * Determine whether this hole is the goal.
+     */
+    public isGoal(): boolean {
+        return this.selected;
+    }
+    /**
      * Determine if this hole intersects with another.
      */
     public intersects(other: Hole): boolean {
