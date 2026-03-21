@@ -1,7 +1,7 @@
 import { Canvas } from 'graphico';
 import { Game } from './game';
 
-const game = new Game(400, 600, 'Easy');
+const game = new Game(400, 600, 'Medium');
 
 const canv = new Canvas({
     background: 'sandybrown',
@@ -12,10 +12,8 @@ const canv = new Canvas({
     width: game.width,
     loop(dt) {
         canv.clear();
-        // rod.move(dt,
-        //     canv.isKeyDown('w') ? 'Up' : canv.isKeyDown('s') ? 'Down' : 'None',
-        //     canv.isKeyDown('i') ? 'Up' : canv.isKeyDown('k') ? 'Down' : 'None');
-        // ball.move(dt, rod, holes);
+        game.input(canv.isKeyDown('w'), canv.isKeyDown('s'), canv.isKeyDown('i'), canv.isKeyDown('k'));
+        game.tick(dt);
         canv.draw(game);
     },
 });
