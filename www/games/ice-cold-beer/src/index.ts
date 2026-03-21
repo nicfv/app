@@ -1,7 +1,7 @@
 import { Canvas } from 'graphico';
 import { Game } from './game';
 
-const game = new Game(400, 600, 'Medium');
+const game = new Game(400, 600, 'X-treme');
 
 const canv = new Canvas({
     background: 'sandybrown',

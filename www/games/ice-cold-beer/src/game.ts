@@ -14,8 +14,8 @@ export class Game implements Drawable {
         rDown: false,
         rUp: false,
     };
-    constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard') {
-        const ballR = 10;
+    constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
+        let ballR: number; // ball radius
         let gFac: number; // gravity factor
         let maxSpeed: number; // maximum speed the ball can drop into a hole
         let maxDistFac: number; // maximum distance away the ball can fall into from the center of a hole
@@ -24,6 +24,7 @@ export class Game implements Drawable {
         let showSpeed: boolean; // show the speedometer for the ball
         switch (difficulty) {
             case ('Easy'): {
+                ballR = 12;
                 gFac = 0.75;
                 maxSpeed = 150;
                 maxDistFac = 0.30;
@@ -33,6 +34,7 @@ export class Game implements Drawable {
                 break;
             }
             case ('Medium'): {
+                ballR = 11;
                 gFac = 1;
                 maxSpeed = 175;
                 maxDistFac = 0.35;
@@ -42,11 +44,22 @@ export class Game implements Drawable {
                 break;
             }
             case ('Hard'): {
+                ballR = 10;
                 gFac = 1.25;
                 maxSpeed = 200;
                 maxDistFac = 0.40;
                 holeRFac = 1.1;
                 holePadding = 1.25;
+                showSpeed = false;
+                break;
+            }
+            case ('X-treme'): {
+                ballR = 8;
+                gFac = 1.50;
+                maxSpeed = 250;
+                maxDistFac = 0.45;
+                holeRFac = 1.05;
+                holePadding = 1.1;
                 showSpeed = false;
                 break;
             }
