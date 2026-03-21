@@ -4,7 +4,7 @@ import { Hole } from './hole';
 import { clamp, translate } from 'smath';
 
 export class Ball implements Drawable {
-    private rolling = true;
+    private rolling = false;
     private vx = 0;
     private vy = 0;
     private angle = 0;
@@ -35,6 +35,20 @@ export class Ball implements Drawable {
      */
     private fallAnimComplete(): boolean {
         return this.fallDuration > this.fallAnimDurationSec;
+    }
+    /**
+     * Reposition of the ball.
+     */
+    public reset(x: number, y: number): void {
+        this.rolling = false;
+        this.vx = 0;
+        this.vy = 0;
+        this.angle = 0;
+        this.near = false;
+        this.fallInto = undefined;
+        this.fallDuration = 0;
+        this.x = x;
+        this.y = y;
     }
     /**
      * Determine if the game is won.
