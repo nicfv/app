@@ -27,24 +27,24 @@ export class Game implements Drawable {
                 gFac = 0.75;
                 maxSpeed = 150;
                 maxDistFac = 0.30;
-                holeRFac = 1.5;
+                holeRFac = 1.3;
                 holePadding = 1.75;
                 showSpeed = true;
                 break;
             }
             case ('Medium'): {
                 gFac = 1;
-                maxSpeed = 100;
-                maxDistFac = 0.25;
-                holeRFac = 1.3;
+                maxSpeed = 175;
+                maxDistFac = 0.35;
+                holeRFac = 1.2;
                 holePadding = 1.50;
                 showSpeed = false;
                 break;
             }
             case ('Hard'): {
-                gFac = 1;
-                maxSpeed = 100;
-                maxDistFac = 0.25;
+                gFac = 1.25;
+                maxSpeed = 200;
+                maxDistFac = 0.40;
                 holeRFac = 1.1;
                 holePadding = 1.25;
                 showSpeed = false;
