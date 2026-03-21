@@ -80,7 +80,7 @@ export class Game implements Drawable {
         this.rod = new Rod(height - bottomPadding, height - bottomPadding, width, height, 100, 10);
         const holeR: number = ballR * holeRFac;
         this.holes = [];
-        for (let y = height - bottomPadding; y > holeR * 2; y -= rint(1, holeR)) {
+        for (let y = height - bottomPadding - holeR; y > holeR * 2; y -= rint(1, holeR)) {
             const hole = new Hole(rint(holeR * 2, width - holeR * 2), y, holeR, holePadding);
             let intersects = false;
             for (const existingHole of this.holes) {
@@ -93,16 +93,16 @@ export class Game implements Drawable {
                 this.holes.push(hole);
             }
         }
-        this.setGoal();
+        // Set the first hole as the goal
+        this.holes[0].select();
         this.lives = [];
         for (let life = 0; life < lifeCount; life++) {
             this.lives.push(new Ball(width - (life + 1) * ballR * 2.5, ballR * 2.5, ballR, width));
         }
     }
-    private setGoal(): void {
-        if (this.score > 0) {
-            this.holes[this.score - 1].deselect();
-        }
+    private nextGoal(): void {
+        this.holes[this.score].deselect();
+        this.score++;
         this.holes[this.score].select();
     }
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
@@ -116,6 +116,13 @@ export class Game implements Drawable {
             this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
             this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
         this.ball.move(dt, this.rod, this.holes);
+        if (this.ball.won()) {
+            this.nextGoal();
+            this.ball.reset(0, 0);
+        } else if (this.ball.lost()) {
+            this.lives.pop();
+            this.ball.reset(0, 0);
+        }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         for (const hole of this.holes) {
@@ -126,6 +133,7 @@ export class Game implements Drawable {
         }
         this.ball.draw(graphics);
         this.rod.draw(graphics);
+        graphics.fillStyle = 'white';
         graphics.font = 'bold 12px monospace';
         graphics.fillText(`Score: ${this.score}`, 6, 18);
     }
