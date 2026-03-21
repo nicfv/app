@@ -5,6 +5,8 @@ import { Hole } from './hole';
 import { rint } from 'smath';
 
 export class Game implements Drawable {
+    private score: number;
+    private readonly lives: Ball[];
     private readonly ball: Ball;
     private readonly rod: Rod;
     private readonly holes: Hole[];
@@ -15,6 +17,8 @@ export class Game implements Drawable {
         rUp: false,
     };
     constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
+        this.score = 0;
+        let lifeCount: number; // number of lives
         let ballR: number; // ball radius
         let gFac: number; // gravity factor
         let maxSpeed: number; // maximum speed the ball can drop into a hole
@@ -24,6 +28,7 @@ export class Game implements Drawable {
         let showSpeed: boolean; // show the speedometer for the ball
         switch (difficulty) {
             case ('Easy'): {
+                lifeCount = 4;
                 ballR = 12;
                 gFac = 0.75;
                 maxSpeed = 150;
@@ -34,6 +39,7 @@ export class Game implements Drawable {
                 break;
             }
             case ('Medium'): {
+                lifeCount = 3;
                 ballR = 11;
                 gFac = 1;
                 maxSpeed = 175;
@@ -44,6 +50,7 @@ export class Game implements Drawable {
                 break;
             }
             case ('Hard'): {
+                lifeCount = 3;
                 ballR = 10;
                 gFac = 1.25;
                 maxSpeed = 200;
@@ -54,6 +61,7 @@ export class Game implements Drawable {
                 break;
             }
             case ('X-treme'): {
+                lifeCount = 2;
                 ballR = 8;
                 gFac = 1.50;
                 maxSpeed = 250;
@@ -67,11 +75,12 @@ export class Game implements Drawable {
                 throw new Error(`${difficulty} is not a valid difficulty.`);
             }
         }
+        const bottomPadding: number = ballR * 10;
         this.ball = new Ball(0, 0, ballR, width, 9.81 * 500 * gFac, 0.99, maxSpeed, maxDistFac, 0.33, showSpeed);
-        this.rod = new Rod(height - 100, height - 100, width, height, 100, 10);
+        this.rod = new Rod(height - bottomPadding, height - bottomPadding, width, height, 100, 10);
         const holeR: number = ballR * holeRFac;
         this.holes = [];
-        for (let y = height - 100; y > holeR * 2; y -= rint(1, holeR)) {
+        for (let y = height - bottomPadding; y > holeR * 2; y -= rint(1, holeR)) {
             const hole = new Hole(rint(holeR * 2, width - holeR * 2), y, holeR, holePadding);
             let intersects = false;
             for (const existingHole of this.holes) {
@@ -84,6 +93,17 @@ export class Game implements Drawable {
                 this.holes.push(hole);
             }
         }
+        this.setGoal();
+        this.lives = [];
+        for (let life = 0; life < lifeCount; life++) {
+            this.lives.push(new Ball(width - (life + 1) * ballR * 2.5, ballR * 2.5, ballR, width));
+        }
+    }
+    private setGoal(): void {
+        if (this.score > 0) {
+            this.holes[this.score - 1].deselect();
+        }
+        this.holes[this.score].select();
     }
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
         this.inputs.lUp = leftUp;
@@ -101,8 +121,13 @@ export class Game implements Drawable {
         for (const hole of this.holes) {
             hole.draw(graphics);
         }
+        for (const life of this.lives) {
+            life.draw(graphics);
+        }
         this.ball.draw(graphics);
         this.rod.draw(graphics);
+        graphics.font = 'bold 12px monospace';
+        graphics.fillText(`Score: ${this.score}`, 6, 18);
     }
 }
 
