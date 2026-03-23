@@ -75,12 +75,12 @@ export class Game implements Drawable {
                 throw new Error(`${difficulty} is not a valid difficulty.`);
             }
         }
-        const bottomPadding: number = ballR * 10;
+        const vPadding: number = ballR * 5;
         this.ball = new Ball(0, 0, ballR, width, 9.81 * 500 * gFac, 0.99, maxSpeed, maxDistFac, 0.33, showSpeed);
-        this.rod = new Rod(height - bottomPadding, height - bottomPadding, width, height, 100, 10);
+        this.rod = new Rod(height - vPadding, height - vPadding, width, height, 100, 10);
         const holeR: number = ballR * holeRFac;
         this.holes = [];
-        for (let y = height - bottomPadding - holeR; y > holeR * 2; y -= rint(1, holeR)) {
+        for (let y = height - vPadding - holeR * 3; y > vPadding; y -= rint(1, holeR)) {
             const hole = new Hole(rint(holeR * 2, width - holeR * 2), y, holeR, holePadding);
             let intersects = false;
             for (const existingHole of this.holes) {
