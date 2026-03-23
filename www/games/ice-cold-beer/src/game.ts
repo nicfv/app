@@ -2,6 +2,7 @@ import { Drawable } from 'graphico';
 import { Ball } from './ball';
 import { Rod } from './rod';
 import { Hole } from './hole';
+import { Progress } from './progress';
 import { rint } from 'smath';
 
 /**
@@ -28,6 +29,10 @@ export class Game implements Drawable {
      * The total number of holes that need to be completed
      */
     private readonly total = 10;
+    /**
+     * The game progress bar
+     */
+    private readonly progress: Progress[];
     /**
      * The extra lives left
      */
@@ -157,6 +162,11 @@ export class Game implements Drawable {
         for (let y = height - vPadding - holeR * 3; y > vPadding; y -= holeR * sideHoleDistFac) {
             this.sideHoles.push(new Hole(ballR, y, holeR, 0), new Hole(width - ballR, y, holeR, 0));
         }
+        // Generate progress bar
+        this.progress = [];
+        for (let i = 0; i < this.total; i++) {
+            this.progress.push(new Progress((i + 1) * 15, 15, 5));
+        }
     }
     /**
      * Calculate the bonus score for getting the ball in the hole. The score starts high but slowly drops to 1...
@@ -174,6 +184,7 @@ export class Game implements Drawable {
      * Go to the next goal.
      */
     private nextGoal(): void {
+        this.progress[this.completed].complete();
         this.currentHole().deselect();
         this.completed++;
         this.currentHole().select();
@@ -184,6 +195,7 @@ export class Game implements Drawable {
      * Lose one life.
      */
     private loseLife(): void {
+        this.progress[this.completed].fail();
         this.lives.pop();
         this.resetting = true;
     }
@@ -236,7 +248,10 @@ export class Game implements Drawable {
         this.rod.draw(graphics);
         graphics.fillStyle = 'white';
         graphics.font = 'bold 12px monospace';
-        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()}) ${this.completed + 1}/${this.total}`, 6, 18);
+        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 6, 36);
+        for (const prog of this.progress) {
+            prog.draw(graphics);
+        }
     }
 }
 
