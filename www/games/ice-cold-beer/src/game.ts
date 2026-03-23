@@ -250,8 +250,8 @@ export class Game implements Drawable {
             prog.draw(graphics);
         }
         if (this.gameOver) {
-            let status: string = 'LOSE';
-            let livesLeft: number = 0;
+            let status = 'LOSE';
+            let livesLeft = 0;
             if (this.completed >= this.total) {
                 status = 'WIN';
                 livesLeft = this.lives.length + 1;
