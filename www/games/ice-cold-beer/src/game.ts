@@ -6,7 +6,9 @@ import { rint } from 'smath';
 
 export class Game implements Drawable {
     private score: number;
+    private roundTime: number;
     private resetting: boolean;
+    private completed: number;
     private readonly lives: Ball[];
     private readonly ball: Ball;
     private readonly rod: Rod;
@@ -20,7 +22,9 @@ export class Game implements Drawable {
     };
     constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
         this.score = 0;
+        this.roundTime = 0;
         this.resetting = false;
+        this.completed = 0;
         let lifeCount: number; // number of lives
         let ballR: number; // ball radius
         let gFac: number; // gravity factor
@@ -114,10 +118,17 @@ export class Game implements Drawable {
             this.sideHoles.push(new Hole(ballR, y, holeR, 0), new Hole(width - ballR, y, holeR, 0));
         }
     }
+    private scoreBonus(): number {
+        return (100 / (this.roundTime + 10) + 1) | 0;
+    }
+    private currentHole(): Hole {
+        return this.holes[(this.holes.length * this.completed / 10) | 0];
+    }
     private nextGoal(): void {
-        this.holes[this.score].deselect();
-        this.score++;
-        this.holes[this.score].select();
+        this.currentHole().deselect();
+        this.completed++;
+        this.currentHole().select();
+        this.score += this.scoreBonus();
         this.resetting = true;
     }
     private loseLife(): void {
@@ -128,6 +139,7 @@ export class Game implements Drawable {
         if (this.rod.reset(dt)) {
             this.ball.reset(0, 0);
             this.resetting = false;
+            this.roundTime = 0;
         }
     }
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
@@ -141,6 +153,7 @@ export class Game implements Drawable {
             this.reset(dt);
             return;
         }
+        this.roundTime += dt / 1e3;
         this.rod.move(dt,
             this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
             this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
@@ -162,7 +175,7 @@ export class Game implements Drawable {
         this.rod.draw(graphics);
         graphics.fillStyle = 'white';
         graphics.font = 'bold 12px monospace';
-        graphics.fillText(`Score: ${this.score}`, 6, 18);
+        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 6, 18);
     }
 }
 
