@@ -22,6 +22,10 @@ export class Game implements Drawable {
      */
     private resetting: boolean;
     /**
+     * Determine if the game is over
+     */
+    private gameOver: boolean;
+    /**
      * How many holes have been completed
      */
     private completed: number;
@@ -69,6 +73,7 @@ export class Game implements Drawable {
         this.score = 0;
         this.roundTime = 0;
         this.resetting = false;
+        this.gameOver = false;
         this.completed = 0;
         let lifeCount: number; // number of lives
         let ballR: number; // ball radius
@@ -77,7 +82,6 @@ export class Game implements Drawable {
         let maxDistFac: number; // maximum distance away the ball can fall into from the center of a hole
         let holeRFac: number; // the size of a hole compared to the size of the ball
         let holePadding: number; // the distance apart each hole can be from each other
-        let showSpeed: boolean; // show the speedometer for the ball
         let sideHoleDistFac: number;// side hole distance factor
         switch (difficulty) {
             case ('Easy'): {
@@ -88,7 +92,6 @@ export class Game implements Drawable {
                 maxDistFac = 0.35;
                 holeRFac = 1.3;
                 holePadding = 1.75;
-                showSpeed = true;
                 sideHoleDistFac = 5;
                 break;
             }
@@ -100,7 +103,6 @@ export class Game implements Drawable {
                 maxDistFac = 0.35;
                 holeRFac = 1.2;
                 holePadding = 1.50;
-                showSpeed = false;
                 sideHoleDistFac = 4;
                 break;
             }
@@ -112,7 +114,6 @@ export class Game implements Drawable {
                 maxDistFac = 0.40;
                 holeRFac = 1.1;
                 holePadding = 1.25;
-                showSpeed = false;
                 sideHoleDistFac = 3.5;
                 break;
             }
@@ -124,7 +125,6 @@ export class Game implements Drawable {
                 maxDistFac = 0.45;
                 holeRFac = 1.05;
                 holePadding = 1.1;
-                showSpeed = false;
                 sideHoleDistFac = 3;
                 break;
             }
@@ -133,7 +133,7 @@ export class Game implements Drawable {
             }
         }
         const vPadding: number = ballR * 5;
-        this.ball = new Ball(0, 0, ballR, width, 9.81 * 500 * gFac, 0.99, maxSpeed, maxDistFac, 0.33, showSpeed);
+        this.ball = new Ball(0, 0, ballR, width, 9.81 * 500 * gFac, 0.99, maxSpeed, maxDistFac, 0.33);
         this.rod = new Rod(height - vPadding, height - vPadding, width, height, 100, 10);
         const holeR: number = ballR * holeRFac;
         this.holes = [];
@@ -187,17 +187,25 @@ export class Game implements Drawable {
         this.progress[this.completed].complete();
         this.currentHole().deselect();
         this.completed++;
-        this.currentHole().select();
         this.score += this.scoreBonus();
-        this.resetting = true;
+        if (this.completed < this.total) {
+            this.currentHole().select();
+            this.resetting = true;
+        } else {
+            this.gameOver = true;
+        }
     }
     /**
      * Lose one life.
      */
     private loseLife(): void {
         this.progress[this.completed].fail();
-        this.lives.pop();
-        this.resetting = true;
+        if (this.lives.length > 0) {
+            this.lives.pop();
+            this.resetting = true;
+        } else {
+            this.gameOver = true;
+        }
     }
     /**
      * Reset the game board.
@@ -238,6 +246,23 @@ export class Game implements Drawable {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        for (const prog of this.progress) {
+            prog.draw(graphics);
+        }
+        if (this.gameOver) {
+            let status: string = 'LOSE';
+            let livesLeft: number = 0;
+            if (this.completed >= this.total) {
+                status = 'WIN';
+                livesLeft = this.lives.length + 1;
+            }
+            graphics.fillStyle = 'white';
+            graphics.font = 'bold 24px monospace';
+            graphics.fillText(`YOU ${status}!`, 10, 50);
+            graphics.font = 'bold 12px monospace';
+            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, 10, 70);
+            return;
+        }
         for (const hole of [...this.holes, ...this.sideHoles]) {
             hole.draw(graphics);
         }
@@ -248,10 +273,7 @@ export class Game implements Drawable {
         this.rod.draw(graphics);
         graphics.fillStyle = 'white';
         graphics.font = 'bold 12px monospace';
-        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 6, 36);
-        for (const prog of this.progress) {
-            prog.draw(graphics);
-        }
+        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 10, 36);
     }
 }
 
