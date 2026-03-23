@@ -120,6 +120,16 @@ export class Game implements Drawable {
         this.holes[this.score].select();
         this.resetting = true;
     }
+    private loseLife(): void {
+        this.lives.pop();
+        this.resetting = true;
+    }
+    private reset(dt: number): void {
+        if (this.rod.reset(dt)) {
+            this.ball.reset(0, 0);
+            this.resetting = false;
+        }
+    }
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
         this.inputs.lUp = leftUp;
         this.inputs.lDown = leftDown;
@@ -127,20 +137,18 @@ export class Game implements Drawable {
         this.inputs.rDown = rightDown;
     }
     public tick(dt: number): void {
-        if (!this.resetting) {
-            this.rod.move(dt,
-                this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
-                this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
-            this.ball.move(dt, this.rod, [...this.holes, ...this.sideHoles]);
-            if (this.ball.won()) {
-                this.nextGoal();
-            } else if (this.ball.lost()) {
-                this.lives.pop();
-                this.resetting = true;
-            }
-        } else if (this.rod.reset(dt)) {
-            this.ball.reset(0, 0);
-            this.resetting = false;
+        if (this.resetting) {
+            this.reset(dt);
+            return;
+        }
+        this.rod.move(dt,
+            this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
+            this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
+        this.ball.move(dt, this.rod, [...this.holes, ...this.sideHoles]);
+        if (this.ball.won()) {
+            this.nextGoal();
+        } else if (this.ball.lost()) {
+            this.loseLife();
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
