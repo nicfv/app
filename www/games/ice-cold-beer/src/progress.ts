@@ -19,6 +19,20 @@ export class Progress implements Drawable {
         this.completed = true;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        throw new Error("Method not implemented.");
+        graphics.fillStyle = 'gray';
+        graphics.beginPath();
+        graphics.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+        graphics.fill();
+        if (this.completed) {
+            // Draw checkmark
+            graphics.strokeStyle = 'lime';
+            graphics.lineWidth = 2;
+            graphics.lineCap = 'round';
+            graphics.beginPath();
+            graphics.moveTo(this.x - this.r / 2, this.y - this.r / 2);
+            graphics.lineTo(this.x, this.y);
+            graphics.lineTo(this.x + this.r, this.y - this.r);
+            graphics.stroke();
+        }
     }
 }
