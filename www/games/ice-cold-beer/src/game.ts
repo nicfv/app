@@ -10,6 +10,7 @@ export class Game implements Drawable {
     private readonly ball: Ball;
     private readonly rod: Rod;
     private readonly holes: Hole[];
+    private readonly sideHoles: Hole[];
     private readonly inputs: GameInput = {
         lDown: false,
         lUp: false,
@@ -26,16 +27,18 @@ export class Game implements Drawable {
         let holeRFac: number; // the size of a hole compared to the size of the ball
         let holePadding: number; // the distance apart each hole can be from each other
         let showSpeed: boolean; // show the speedometer for the ball
+        let sideHoleDistFac: number;// side hole distance factor
         switch (difficulty) {
             case ('Easy'): {
                 lifeCount = 4;
                 ballR = 12;
                 gFac = 0.75;
                 maxSpeed = 150;
-                maxDistFac = 0.30;
+                maxDistFac = 0.35;
                 holeRFac = 1.3;
                 holePadding = 1.75;
                 showSpeed = true;
+                sideHoleDistFac = 5;
                 break;
             }
             case ('Medium'): {
@@ -47,6 +50,7 @@ export class Game implements Drawable {
                 holeRFac = 1.2;
                 holePadding = 1.50;
                 showSpeed = false;
+                sideHoleDistFac = 4;
                 break;
             }
             case ('Hard'): {
@@ -58,6 +62,7 @@ export class Game implements Drawable {
                 holeRFac = 1.1;
                 holePadding = 1.25;
                 showSpeed = false;
+                sideHoleDistFac = 3.5;
                 break;
             }
             case ('X-treme'): {
@@ -69,6 +74,7 @@ export class Game implements Drawable {
                 holeRFac = 1.05;
                 holePadding = 1.1;
                 showSpeed = false;
+                sideHoleDistFac = 3;
                 break;
             }
             default: {
@@ -81,7 +87,7 @@ export class Game implements Drawable {
         const holeR: number = ballR * holeRFac;
         this.holes = [];
         for (let y = height - vPadding - holeR * 3; y > vPadding; y -= rint(1, holeR)) {
-            const hole = new Hole(rint(holeR * 2, width - holeR * 2), y, holeR, holePadding);
+            const hole = new Hole(rint(holeR * 3, width - holeR * 3), y, holeR, holePadding);
             let intersects = false;
             for (const existingHole of this.holes) {
                 if (hole.intersects(existingHole)) {
@@ -95,9 +101,15 @@ export class Game implements Drawable {
         }
         // Set the first hole as the goal
         this.holes[0].select();
+        // Generate lives counter
         this.lives = [];
         for (let life = 0; life < lifeCount; life++) {
             this.lives.push(new Ball(width - (life + 1) * ballR * 2.5, ballR * 2.5, ballR, width));
+        }
+        // Generate side holes
+        this.sideHoles = [];
+        for (let y = height - vPadding - holeR * 3; y > vPadding; y -= holeR * sideHoleDistFac) {
+            this.sideHoles.push(new Hole(ballR, y, holeR, 0), new Hole(width - ballR, y, holeR, 0));
         }
     }
     private nextGoal(): void {
@@ -115,7 +127,7 @@ export class Game implements Drawable {
         this.rod.move(dt,
             this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
             this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
-        this.ball.move(dt, this.rod, this.holes);
+        this.ball.move(dt, this.rod, [...this.holes, ...this.sideHoles]);
         if (this.ball.won()) {
             this.nextGoal();
             this.ball.reset(0, 0);
@@ -125,7 +137,7 @@ export class Game implements Drawable {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        for (const hole of this.holes) {
+        for (const hole of [...this.holes, ...this.sideHoles]) {
             hole.draw(graphics);
         }
         for (const life of this.lives) {
