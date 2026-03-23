@@ -9,14 +9,24 @@ export class Progress implements Drawable {
      */
     private completed = false;
     /**
+     * Whether or not this has been marked as failed
+     */
+    private failed = false;
+    /**
      * Create a new progress indicator
      */
     constructor(private readonly x: number, private readonly y: number, private readonly r: number) { }
     /**
      * Mark this progress indicator as completed
      */
-    public markComplete(): void {
+    public complete(): void {
         this.completed = true;
+    }
+    /**
+     * Mark this progress indicator as failed
+     */
+    public fail(): void {
+        this.failed = true;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.fillStyle = 'gray';
@@ -32,6 +42,20 @@ export class Progress implements Drawable {
             graphics.moveTo(this.x - this.r / 2, this.y - this.r / 2);
             graphics.lineTo(this.x, this.y);
             graphics.lineTo(this.x + this.r, this.y - this.r);
+            graphics.stroke();
+        }
+        if (this.failed) {
+            // Draw x
+            graphics.strokeStyle = 'red';
+            graphics.lineWidth = 2;
+            graphics.lineCap = 'round';
+            graphics.beginPath();
+            graphics.moveTo(this.x - this.r / 2, this.y);
+            graphics.lineTo(this.x + this.r / 2, this.y + this.r);
+            graphics.stroke();
+            graphics.beginPath();
+            graphics.moveTo(this.x + this.r / 2, this.y);
+            graphics.lineTo(this.x - this.r / 2, this.y + this.r);
             graphics.stroke();
         }
     }
