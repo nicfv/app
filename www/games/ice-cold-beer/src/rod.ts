@@ -6,18 +6,22 @@ type Control = 'Up' | 'Down' | 'None';
 export class Rod implements Drawable {
     private readonly lx: number;
     private readonly rx: number;
+    private ly: number;
+    private ry: number;
     /**
      * Create a new rod.
-     * @param ly The elevation of the left side of the rod
-     * @param ry The elevation of the right side of the rod
+     * @param startLeft The elevation of the left side of the rod
+     * @param startRight The elevation of the right side of the rod
      * @param gameWidth The width of the game window
      * @param gameHeight The height of the game window
      * @param px_per_sec The speed at which the rod can be moved
      * @param width The thickness of the rod
      */
-    constructor(private ly: number, private ry: number, gameWidth: number, private readonly gameHeight: number, private readonly px_per_sec = 100, public readonly width = 10) {
+    constructor(private readonly startLeft: number, private readonly startRight: number, gameWidth: number, private readonly gameHeight: number, private readonly px_per_sec = 100, public readonly width = 10) {
         this.lx = 0;
         this.rx = gameWidth;
+        this.ly = startLeft;
+        this.ry = startRight;
     }
     /**
      * Get the angle in radians of the rod.
@@ -48,6 +52,23 @@ export class Rod implements Drawable {
             this.ry += speed;
         }
         this.ry = clamp(this.ry, this.width, this.gameHeight - this.width);
+    }
+    /**
+     * Move the rod to a specified position and return `true` when it has reached it.
+     */
+    public reset(dt: number): boolean {
+        const px: number = this.px_per_sec * dt / 1000;
+        if (this.ly > this.startLeft) {
+            this.ly = clamp(this.ly - px, this.startLeft, this.ly);
+        } else if (this.ly < this.startLeft) {
+            this.ly = clamp(this.ly + px, this.ly, this.startLeft);
+        }
+        if (this.ry > this.startRight) {
+            this.ry = clamp(this.ry - px, this.startRight, this.ry);
+        } else if (this.ry < this.startRight) {
+            this.ry = clamp(this.ry + px, this.ry, this.startRight);
+        }
+        return this.ly === this.startLeft && this.ry === this.startRight;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.lineCap = 'round';
