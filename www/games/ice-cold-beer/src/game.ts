@@ -6,6 +6,7 @@ import { rint } from 'smath';
 
 export class Game implements Drawable {
     private score: number;
+    private resetting: boolean;
     private readonly lives: Ball[];
     private readonly ball: Ball;
     private readonly rod: Rod;
@@ -19,6 +20,7 @@ export class Game implements Drawable {
     };
     constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
         this.score = 0;
+        this.resetting = false;
         let lifeCount: number; // number of lives
         let ballR: number; // ball radius
         let gFac: number; // gravity factor
@@ -116,6 +118,7 @@ export class Game implements Drawable {
         this.holes[this.score].deselect();
         this.score++;
         this.holes[this.score].select();
+        this.resetting = true;
     }
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
         this.inputs.lUp = leftUp;
@@ -124,16 +127,20 @@ export class Game implements Drawable {
         this.inputs.rDown = rightDown;
     }
     public tick(dt: number): void {
-        this.rod.move(dt,
-            this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
-            this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
-        this.ball.move(dt, this.rod, [...this.holes, ...this.sideHoles]);
-        if (this.ball.won()) {
-            this.nextGoal();
+        if (!this.resetting) {
+            this.rod.move(dt,
+                this.inputs.lUp ? 'Up' : this.inputs.lDown ? 'Down' : 'None',
+                this.inputs.rUp ? 'Up' : this.inputs.rDown ? 'Down' : 'None');
+            this.ball.move(dt, this.rod, [...this.holes, ...this.sideHoles]);
+            if (this.ball.won()) {
+                this.nextGoal();
+            } else if (this.ball.lost()) {
+                this.lives.pop();
+                this.resetting = true;
+            }
+        } else if (this.rod.reset(dt)) {
             this.ball.reset(0, 0);
-        } else if (this.ball.lost()) {
-            this.lives.pop();
-            this.ball.reset(0, 0);
+            this.resetting = false;
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
