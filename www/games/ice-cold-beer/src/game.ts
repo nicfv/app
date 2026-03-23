@@ -4,22 +4,62 @@ import { Rod } from './rod';
 import { Hole } from './hole';
 import { rint } from 'smath';
 
+/**
+ * Represents an instance of the game
+ */
 export class Game implements Drawable {
+    /**
+     * The current score
+     */
     private score: number;
+    /**
+     * The time spent in the current round
+     */
     private roundTime: number;
+    /**
+     * Whether or not the board is resetting
+     */
     private resetting: boolean;
+    /**
+     * How many holes have been completed
+     */
     private completed: number;
+    /**
+     * The total number of holes that need to be completed
+     */
+    private readonly total = 10;
+    /**
+     * The extra lives left
+     */
     private readonly lives: Ball[];
+    /**
+     * The ball used to play the game
+     */
     private readonly ball: Ball;
+    /**
+     * The rod for playing the game
+     */
     private readonly rod: Rod;
+    /**
+     * The holes in the middle of the game board
+     */
     private readonly holes: Hole[];
+    /**
+     * The holes on the sides of the game board
+     */
     private readonly sideHoles: Hole[];
+    /**
+     * The user inputs
+     */
     private readonly inputs: GameInput = {
         lDown: false,
         lUp: false,
         rDown: false,
         rUp: false,
     };
+    /**
+     * Initialize a new game.
+     */
     constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
         this.score = 0;
         this.roundTime = 0;
@@ -118,12 +158,21 @@ export class Game implements Drawable {
             this.sideHoles.push(new Hole(ballR, y, holeR, 0), new Hole(width - ballR, y, holeR, 0));
         }
     }
+    /**
+     * Calculate the bonus score for getting the ball in the hole. The score starts high but slowly drops to 1...
+     */
     private scoreBonus(): number {
         return (100 / (this.roundTime + 10) + 1) | 0;
     }
+    /**
+     * Get the current goal hole.
+     */
     private currentHole(): Hole {
-        return this.holes[(this.holes.length * this.completed / 10) | 0];
+        return this.holes[(this.holes.length * this.completed / this.total) | 0];
     }
+    /**
+     * Go to the next goal.
+     */
     private nextGoal(): void {
         this.currentHole().deselect();
         this.completed++;
@@ -131,10 +180,16 @@ export class Game implements Drawable {
         this.score += this.scoreBonus();
         this.resetting = true;
     }
+    /**
+     * Lose one life.
+     */
     private loseLife(): void {
         this.lives.pop();
         this.resetting = true;
     }
+    /**
+     * Reset the game board.
+     */
     private reset(dt: number): void {
         if (this.rod.reset(dt)) {
             this.ball.reset(0, 0);
@@ -142,12 +197,18 @@ export class Game implements Drawable {
             this.roundTime = 0;
         }
     }
+    /**
+     * Accept user input.
+     */
     public input(leftUp: boolean, leftDown: boolean, rightUp: boolean, rightDown: boolean): void {
         this.inputs.lUp = leftUp;
         this.inputs.lDown = leftDown;
         this.inputs.rUp = rightUp;
         this.inputs.rDown = rightDown;
     }
+    /**
+     * Advance through the game.
+     */
     public tick(dt: number): void {
         if (this.resetting) {
             this.reset(dt);
@@ -175,7 +236,7 @@ export class Game implements Drawable {
         this.rod.draw(graphics);
         graphics.fillStyle = 'white';
         graphics.font = 'bold 12px monospace';
-        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 6, 18);
+        graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()}) ${this.completed + 1}/${this.total}`, 6, 18);
     }
 }
 
