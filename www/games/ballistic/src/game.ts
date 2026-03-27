@@ -5,6 +5,8 @@ import { Hole } from './hole';
 import { Progress } from './progress';
 import { rint } from 'smath';
 
+export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'X-treme';
+
 /**
  * Represents an instance of the game
  */
@@ -69,7 +71,7 @@ export class Game implements Drawable {
     /**
      * Initialize a new game.
      */
-    constructor(public readonly width: number, public readonly height: number, difficulty: 'Easy' | 'Medium' | 'Hard' | 'X-treme') {
+    constructor(width: number, height: number, difficulty: Difficulty) {
         this.score = 0;
         this.roundTime = 0;
         this.resetting = false;
@@ -259,9 +261,9 @@ export class Game implements Drawable {
             graphics.fillStyle = 'white';
             graphics.textAlign = 'center';
             graphics.font = 'bold 24px monospace';
-            graphics.fillText(`YOU ${status}!`, this.width / 2, 50);
+            graphics.fillText(`YOU ${status}!`, graphics.canvas.width / 2, 50);
             graphics.font = 'bold 12px monospace';
-            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, this.width / 2, 70);
+            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, graphics.canvas.width / 2, 70);
             return;
         }
         for (const hole of [...this.holes, ...this.sideHoles]) {
