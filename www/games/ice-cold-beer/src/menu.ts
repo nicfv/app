@@ -30,9 +30,19 @@ export class Menu<T extends string> implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.fillStyle = 'white';
         graphics.textAlign = 'center';
-        graphics.font = this.font(48);
-        graphics.fillText(this.title, graphics.canvas.width / 2, graphics.canvas.height / 2 - 50);
-        graphics.font = this.font(24);
-        graphics.fillText(this.description, graphics.canvas.width / 2, graphics.canvas.height / 2 + 20);
+        graphics.font = this.font(36);
+        graphics.fillText(this.title, graphics.canvas.width / 2, 50);
+        graphics.font = this.font(18);
+        this.description.split('\n').forEach((line, index) => {
+            graphics.fillText(line, graphics.canvas.width / 2, 100 + index * 24);
+        });
+        for (let i = 0; i < this.options.length; i++) {
+            if (i === this.selection) {
+                graphics.fillStyle = 'yellow';
+            } else {
+                graphics.fillStyle = 'white';
+            }
+            graphics.fillText(this.options[i], graphics.canvas.width / 2, graphics.canvas.height / 2 + i * 36);
+        }
     }
 }
