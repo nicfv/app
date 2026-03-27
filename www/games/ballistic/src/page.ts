@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 
 export class Page implements Drawable {
-    constructor(public title = '', public description = '', public drawables: Drawable[] = []) { }
+    constructor(public title = '', public description = '', public subtext = '', public drawables: Drawable[] = []) { }
     /**
      * Get the font string for a given size.
      */
@@ -20,5 +20,8 @@ export class Page implements Drawable {
         for (const drawable of this.drawables) {
             drawable.draw(graphics);
         }
+        graphics.font = this.font(14);
+        graphics.fillStyle = 'lightgray';
+        graphics.fillText(this.subtext, graphics.canvas.width / 2, graphics.canvas.height - 30);
     }
 }
