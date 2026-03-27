@@ -90,7 +90,7 @@ class Player implements Drawable {
     public getDirection(): Direction {
         return this.dPad.getDirection();
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         this.dPad.draw(ctx);
     }
 }
@@ -165,7 +165,7 @@ class Tile extends Hexagon implements Drawable {
     public getBorderingTileCenter(direction: Direction): Vec2 {
         return { x: this.center.x + Tile.DirectionMap[direction].x, y: this.center.y + Tile.DirectionMap[direction].y };
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         ctx.fillStyle = this.owner?.getColor() ?? (this.isWall ? 'dimgray' : 'lightgray');
         ctx.strokeStyle = 'black';
         ctx.lineWidth = 4;
@@ -264,7 +264,7 @@ class Board implements Drawable {
     public clear(): void {
         Object.values(this.tiles).forEach(tile => tile.clear());
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         ctx.save();
         ctx.translate(ctx.canvas.width * this.normalizedCenter.x, ctx.canvas.height * this.normalizedCenter.y);
         Object.values(this.tiles).forEach(tile => tile.draw(ctx));
@@ -373,7 +373,7 @@ class TurnOrder implements Drawable {
     public isGameOver(): boolean {
         return !this.players.some(player => this.board.hasLegalMoves(player));
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         ctx.save();
         ctx.translate(this.normalizedCenter.x * ctx.canvas.width, this.normalizedCenter.y * ctx.canvas.height);
         this.tiles.forEach((tile, i) => {
@@ -406,7 +406,7 @@ class Text implements Drawable {
             this.startTime = Hexles.time;
         }
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         if (this.writing) {
             this.progress = (Text.charsPerSec * (Hexles.time - this.startTime) / 1e3) | 0;
         } else {
@@ -588,7 +588,7 @@ class Game implements Drawable {
             this.aiInput();
         }
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         this.board.draw(ctx);
         if (this.turnOrder.isGameOver()) {
             this.gameOverText?.draw(ctx);
@@ -1043,7 +1043,7 @@ export class Hexles implements Drawable {
     public static handle(): Hexles {
         return this.me;
     }
-    draw(ctx: CanvasRenderingContext2D): void {
+    public draw(ctx: CanvasRenderingContext2D): void {
         Hexles.header.setText(Hexles.currentState);
         switch (Hexles.currentState) {
             case ('Hexles'): {
