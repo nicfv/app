@@ -13,6 +13,7 @@ export interface GameOverStats {
     readonly livesLeft: number;
     readonly completed: number;
     readonly multiplier: number;
+    readonly difficulty: Difficulty;
 }
 
 /**
@@ -46,7 +47,7 @@ export class Game implements Drawable {
     /**
      * The total number of holes that need to be completed
      */
-    private readonly total = 10;
+    private readonly total = 1;
     /**
      * The game progress bar
      */
@@ -83,7 +84,7 @@ export class Game implements Drawable {
     /**
      * Initialize a new game.
      */
-    constructor(width: number, height: number, difficulty: Difficulty) {
+    constructor(width: number, height: number, private readonly difficulty: Difficulty) {
         this.score = 0;
         this.roundTime = 0;
         this.resetting = false;
@@ -273,6 +274,7 @@ export class Game implements Drawable {
             livesLeft: this.completed >= this.total ? this.lives.length + 1 : 0,
             completed: this.completed,
             multiplier: this.difficultyMult,
+            difficulty: this.difficulty,
         } : undefined;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
