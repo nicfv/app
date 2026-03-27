@@ -8,11 +8,16 @@ type GameState = 'Menu' | 'Difficulty Select' | 'Tutorial' | 'Game' | 'Paused' |
 
 export class Ballistic implements Drawable {
     private state: GameState;
+    private helpPage = 0;
     private readonly main: Menu<string> = new Menu<string>('Ballistic', 'Created by Nicolas Ventura\n\n\nUse the arrow keys and\npress Space to select.', ['Play', 'Help', 'Scores'], `Version ${version}`);
     private readonly diff: Menu<Difficulty> = new Menu<Difficulty>('Select Difficulty', '\n\n\nUse the arrow keys and\npress Space to select.', ['Easy', 'Medium', 'Hard', 'X-treme'], 'Press Escape to return to the menu.');
     private readonly pause: Menu<string> = new Menu<string>('Paused', '', ['Resume', 'Quit'], '');
     private readonly over: Page = new Page('', '', 'Press Escape to return to the menu.');
     public readonly scores: Page = new Page('High Scores', '', 'Press Escape to return to the menu.');
+    public readonly help: Page[] = [
+        new Page('Tutorial - Part 1', 'Welcome to Ballistic!\n\nIn this game, you control a golf ball and try to get it into the hole in as few strokes as possible.\n\nUse the W and S keys to scroll through the power of your shot, and the I and K keys to scroll through the angle of your shot.\n\nPress Space to take the shot.', 'Press Space to continue.'),
+        new Page('Tutorial - Part 2', 'After you take your shot, you will have to wait for the ball to come to a complete stop before you can take another shot.\n\nIf you take too long to take your next shot, you will lose a stroke.\n\nTry to get the ball in the hole in as few strokes as possible!', 'Press Space to continue.'),
+    ];
     private game?: Game;
     private readonly highScores: Record<Difficulty, number> = {
         Easy: 0,
@@ -65,6 +70,7 @@ export class Ballistic implements Drawable {
                     }
                     case ('Help'): {
                         this.state = 'Tutorial';
+                        this.helpPage = 0;
                         break;
                     }
                     case ('Scores'): {
@@ -81,6 +87,14 @@ export class Ballistic implements Drawable {
             case ('Difficulty Select'): {
                 this.game = new Game(this.width, this.height, this.diff.select());
                 this.state = 'Game';
+                break;
+            }
+            case ('Tutorial'): {
+                if (this.helpPage < this.help.length - 1) {
+                    this.helpPage++;
+                } else {
+                    this.state = 'Menu';
+                }
                 break;
             }
             case ('Paused'): {
@@ -148,7 +162,7 @@ export class Ballistic implements Drawable {
                 break;
             }
             case ('Tutorial'): {
-                throw new Error('Tutorial not implemented yet');
+                this.help[this.helpPage].draw(graphics);
                 break;
             }
             case ('Game'): {
