@@ -8,10 +8,11 @@ type GameState = 'Menu' | 'Difficulty Select' | 'Tutorial' | 'Game' | 'Paused' |
 
 export class Ballistic implements Drawable {
     private state: GameState;
-    private readonly main: Menu<string> = new Menu<string>('Ballistic', `Created by Nicolas Ventura`, ['Play', 'Help', 'Scores'], `Version ${version}`);
-    private readonly diff: Menu<Difficulty> = new Menu<Difficulty>('Select Difficulty', '', ['Easy', 'Medium', 'Hard', 'X-treme'], '');
+    private readonly main: Menu<string> = new Menu<string>('Ballistic', 'Created by Nicolas Ventura\n\n\nUse the arrow keys and\npress Space to select.', ['Play', 'Help', 'Scores'], `Version ${version}`);
+    private readonly diff: Menu<Difficulty> = new Menu<Difficulty>('Select Difficulty', '\n\n\nUse the arrow keys and\npress Space to select.', ['Easy', 'Medium', 'Hard', 'X-treme'], 'Press Escape to return to the menu.');
     private readonly pause: Menu<string> = new Menu<string>('Paused', '', ['Resume', 'Quit'], '');
-    private readonly over: Page = new Page();
+    private readonly over: Page = new Page('', '', 'Press Escape to return to the menu.');
+    public readonly scores: Page = new Page('High Scores', '', 'Press Escape to return to the menu.');
     private game?: Game;
     constructor(public readonly width: number, public readonly height: number) {
         this.state = 'Menu';
@@ -115,7 +116,7 @@ export class Ballistic implements Drawable {
             if (stats) {
                 this.state = 'Over';
                 this.over.title = `YOU ${stats.status}!`;
-                this.over.description = `Base Score: ${stats.baseScore}\nLives Left: ${stats.livesLeft} x 10 = ${stats.livesLeft * 10}\nHoles Completed: ${stats.completed}\nDifficulty Multiplier: ${stats.multiplier}\nTotal Score:\n[${stats.baseScore} + ${stats.livesLeft * 10} + ${stats.completed}] x ${stats.multiplier} = ${(stats.baseScore + stats.livesLeft * 10 + stats.completed) * stats.multiplier}\n\nPress Escape to return to the menu.`;
+                this.over.description = `Base Score: ${stats.baseScore}\nLives Left: ${stats.livesLeft} x 10 = ${stats.livesLeft * 10}\nHoles Completed: ${stats.completed}\nDifficulty Multiplier: ${stats.multiplier}\n\nTotal Score:\n[${stats.baseScore} + ${stats.livesLeft * 10} + ${stats.completed}] x ${stats.multiplier} = ${(stats.baseScore + stats.livesLeft * 10 + stats.completed) * stats.multiplier}`;
             }
         }
     }
@@ -129,6 +130,10 @@ export class Ballistic implements Drawable {
                 this.diff.draw(graphics);
                 break;
             }
+            case ('Tutorial'): {
+                throw new Error('Tutorial not implemented yet');
+                break;
+            }
             case ('Game'): {
                 this.game?.draw(graphics);
                 break;
@@ -139,6 +144,10 @@ export class Ballistic implements Drawable {
             }
             case ('Over'): {
                 this.over.draw(graphics);
+                break;
+            }
+            case ('Scores'): {
+                this.scores.draw(graphics);
                 break;
             }
         }
