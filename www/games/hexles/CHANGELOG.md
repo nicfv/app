@@ -4,6 +4,7 @@
 
 - Update `graphico` dependency version
 - Remove unused variable assignment
+- Add access modifiers for drawing
 
 ## 1.1.2
 
