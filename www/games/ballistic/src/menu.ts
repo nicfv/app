@@ -2,7 +2,7 @@ import { Drawable } from 'graphico';
 
 export class Menu<T extends string> implements Drawable {
     private selection = 0;
-    constructor(private readonly title: string, private readonly description: string, private readonly options: T[]) { }
+    constructor(private readonly title: string, private readonly description: string, private readonly options: T[], private readonly subtext = '') { }
     /**
      * Get the font string for a given size.
      */
@@ -44,5 +44,8 @@ export class Menu<T extends string> implements Drawable {
             }
             graphics.fillText(this.options[i], graphics.canvas.width / 2, graphics.canvas.height / 2 + i * 36);
         }
+        graphics.font = this.font(14);
+        graphics.fillStyle = 'lightgray';
+        graphics.fillText(this.subtext, graphics.canvas.width / 2, graphics.canvas.height - 30);
     }
 }
