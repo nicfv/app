@@ -20,8 +20,9 @@ export class Page implements Drawable {
         for (const drawable of this.drawables) {
             drawable.draw(graphics);
         }
-        graphics.font = this.font(14);
         graphics.fillStyle = 'lightgray';
+        graphics.textAlign = 'center';
+        graphics.font = this.font(14);
         graphics.fillText(this.subtext, graphics.canvas.width / 2, graphics.canvas.height - 30);
     }
 }
