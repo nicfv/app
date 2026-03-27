@@ -1,5 +1,10 @@
 # Changes
 
+## 1.1.3
+
+- Update `graphico` dependency version
+- Remove unused variable assignment
+
 ## 1.1.2
 
 - Update dependency versions
