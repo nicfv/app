@@ -275,6 +275,7 @@ export class Game implements Drawable {
         this.ball.draw(graphics);
         this.rod.draw(graphics);
         graphics.fillStyle = 'white';
+        graphics.textAlign = 'left';
         graphics.font = 'bold 12px monospace';
         graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 10, 36);
     }
