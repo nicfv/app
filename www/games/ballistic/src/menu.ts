@@ -1,13 +1,9 @@
-import { Drawable } from 'graphico';
+import { Page } from './page';
 
-export class Menu<T extends string> implements Drawable {
+export class Menu<T extends string> extends Page {
     private selection = 0;
-    constructor(private readonly title: string, private readonly description: string, private readonly options: T[], private readonly subtext = '') { }
-    /**
-     * Get the font string for a given size.
-     */
-    private font(size: number): string {
-        return `bold ${size}px monospace`;
+    constructor(title: string, description: string, private readonly options: T[], private readonly subtext = '') {
+        super(title, description);
     }
     /**
      * Scroll the menu up, changing the selection.
@@ -28,14 +24,7 @@ export class Menu<T extends string> implements Drawable {
         return this.options[this.selection];
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        graphics.fillStyle = 'white';
-        graphics.textAlign = 'center';
-        graphics.font = this.font(36);
-        graphics.fillText(this.title, graphics.canvas.width / 2, 50);
-        graphics.font = this.font(18);
-        this.description.split('\n').forEach((line, index) => {
-            graphics.fillText(line, graphics.canvas.width / 2, 100 + index * 24);
-        });
+        super.draw(graphics);
         for (let i = 0; i < this.options.length; i++) {
             if (i === this.selection) {
                 graphics.fillStyle = 'yellow';
@@ -44,7 +33,7 @@ export class Menu<T extends string> implements Drawable {
             }
             graphics.fillText(this.options[i], graphics.canvas.width / 2, graphics.canvas.height / 2 + i * 36);
         }
-        graphics.font = this.font(14);
+        graphics.font = super.font(14);
         graphics.fillStyle = 'lightgray';
         graphics.fillText(this.subtext, graphics.canvas.width / 2, graphics.canvas.height - 30);
     }
