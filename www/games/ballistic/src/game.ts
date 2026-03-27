@@ -232,6 +232,9 @@ export class Game implements Drawable {
      * Advance through the game.
      */
     public tick(dt: number): void {
+        if (this.gameOver) {
+            return;
+        }
         if (this.resetting) {
             this.reset(dt);
             return;
