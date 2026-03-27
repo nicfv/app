@@ -14,6 +14,12 @@ export class Ballistic implements Drawable {
     private readonly over: Page = new Page('', '', 'Press Escape to return to the menu.');
     public readonly scores: Page = new Page('High Scores', '', 'Press Escape to return to the menu.');
     private game?: Game;
+    private readonly highScores: Record<Difficulty, number> = {
+        Easy: 0,
+        Medium: 0,
+        Hard: 0,
+        'X-treme': 0,
+    };
     constructor(public readonly width: number, public readonly height: number) {
         this.state = 'Menu';
     }
@@ -63,6 +69,10 @@ export class Ballistic implements Drawable {
                     }
                     case ('Scores'): {
                         this.state = 'Scores';
+                        this.scores.description = 'Try to beat these scores!\n\n';
+                        for (const diff in this.highScores) {
+                            this.scores.description += `${diff}\n${this.highScores[diff as Difficulty]}\n\n`;
+                        }
                         break;
                     }
                 }
@@ -115,8 +125,15 @@ export class Ballistic implements Drawable {
             const stats = this.game.gameOverStats();
             if (stats) {
                 this.state = 'Over';
+                const totalScore: number = (stats.baseScore + stats.livesLeft * 10 + stats.completed) * stats.multiplier;
                 this.over.title = `YOU ${stats.status}!`;
-                this.over.description = `Base Score: ${stats.baseScore}\nLives Left: ${stats.livesLeft} x 10 = ${stats.livesLeft * 10}\nHoles Completed: ${stats.completed}\nDifficulty Multiplier: ${stats.multiplier}\n\nTotal Score:\n[${stats.baseScore} + ${stats.livesLeft * 10} + ${stats.completed}] x ${stats.multiplier} = ${(stats.baseScore + stats.livesLeft * 10 + stats.completed) * stats.multiplier}`;
+                this.over.description = `Difficulty: ${stats.difficulty} (x${stats.multiplier})\n\nBase Score: ${stats.baseScore}\nLives Left: ${stats.livesLeft} x 10 = ${stats.livesLeft * 10}\nHoles Completed: ${stats.completed}\n\nTotal Score:\n[${stats.baseScore} + ${stats.livesLeft * 10} + ${stats.completed}] x ${stats.multiplier} = ${totalScore}`;
+                if (totalScore > this.highScores[stats.difficulty]) {
+                    this.over.description += `\n\nNew high score for ${stats.difficulty}!\nPrevious high score: ${this.highScores[stats.difficulty]}`;
+                    this.highScores[stats.difficulty] = totalScore;
+                } else {
+                    this.over.description += `\n\nHigh score for ${stats.difficulty}: ${this.highScores[stats.difficulty]}`;
+                }
             }
         }
     }
