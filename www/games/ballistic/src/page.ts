@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 
 export class Page implements Drawable {
-    constructor(public title: string, public description: string, public drawables: Drawable[] = []) { }
+    constructor(public title = '', public description = '', public drawables: Drawable[] = []) { }
     /**
      * Get the font string for a given size.
      */
