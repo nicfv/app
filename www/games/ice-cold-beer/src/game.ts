@@ -257,10 +257,11 @@ export class Game implements Drawable {
                 livesLeft = this.lives.length + 1;
             }
             graphics.fillStyle = 'white';
+            graphics.textAlign = 'center';
             graphics.font = 'bold 24px monospace';
-            graphics.fillText(`YOU ${status}!`, 10, 50);
+            graphics.fillText(`YOU ${status}!`, this.width / 2, 50);
             graphics.font = 'bold 12px monospace';
-            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, 10, 70);
+            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, this.width / 2, 70);
             return;
         }
         for (const hole of [...this.holes, ...this.sideHoles]) {
