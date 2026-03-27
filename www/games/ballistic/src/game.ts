@@ -7,6 +7,14 @@ import { rint } from 'smath';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'X-treme';
 
+export interface GameOverStats {
+    readonly status: 'WIN' | 'LOSE';
+    readonly baseScore: number;
+    readonly livesLeft: number;
+    readonly completed: number;
+    readonly multiplier: number;
+}
+
 /**
  * Represents an instance of the game
  */
@@ -15,6 +23,10 @@ export class Game implements Drawable {
      * The current score
      */
     private score: number;
+    /**
+     * Score multiplier based on difficulty level
+     */
+    private difficultyMult: number;
     /**
      * The time spent in the current round
      */
@@ -95,6 +107,7 @@ export class Game implements Drawable {
                 holeRFac = 1.3;
                 holePadding = 1.75;
                 sideHoleDistFac = 5;
+                this.difficultyMult = 1;
                 break;
             }
             case ('Medium'): {
@@ -106,6 +119,7 @@ export class Game implements Drawable {
                 holeRFac = 1.2;
                 holePadding = 1.50;
                 sideHoleDistFac = 4;
+                this.difficultyMult = 2;
                 break;
             }
             case ('Hard'): {
@@ -117,6 +131,7 @@ export class Game implements Drawable {
                 holeRFac = 1.1;
                 holePadding = 1.25;
                 sideHoleDistFac = 3.5;
+                this.difficultyMult = 3;
                 break;
             }
             case ('X-treme'): {
@@ -128,6 +143,7 @@ export class Game implements Drawable {
                 holeRFac = 1.05;
                 holePadding = 1.1;
                 sideHoleDistFac = 3;
+                this.difficultyMult = 4;
                 break;
             }
             default: {
@@ -250,24 +266,18 @@ export class Game implements Drawable {
             this.loseLife();
         }
     }
+    public gameOverStats(): GameOverStats | undefined {
+        return this.gameOver ? {
+            status: this.completed >= this.total ? 'WIN' : 'LOSE',
+            baseScore: this.score,
+            livesLeft: this.completed >= this.total ? this.lives.length + 1 : 0,
+            completed: this.completed,
+            multiplier: this.difficultyMult,
+        } : undefined;
+    }
     public draw(graphics: CanvasRenderingContext2D): void {
         for (const prog of this.progress) {
             prog.draw(graphics);
-        }
-        if (this.gameOver) {
-            let status = 'LOSE';
-            let livesLeft = 0;
-            if (this.completed >= this.total) {
-                status = 'WIN';
-                livesLeft = this.lives.length + 1;
-            }
-            graphics.fillStyle = 'white';
-            graphics.textAlign = 'center';
-            graphics.font = 'bold 24px monospace';
-            graphics.fillText(`YOU ${status}!`, graphics.canvas.width / 2, 50);
-            graphics.font = 'bold 12px monospace';
-            graphics.fillText(`Score: ${this.score} + [${livesLeft} lives] x 10 = ${this.score + livesLeft * 10}`, graphics.canvas.width / 2, 70);
-            return;
         }
         for (const hole of [...this.holes, ...this.sideHoles]) {
             hole.draw(graphics);
