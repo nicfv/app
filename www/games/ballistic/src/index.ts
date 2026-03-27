@@ -1,30 +1,30 @@
 import { Canvas } from 'graphico';
-import { Game } from './game';
-import { Menu } from './menu';
+import { Ballistic } from './ballistic';
 
-const game = new Game(400, 600, 'Easy');
-const menu = new Menu('Ballistic', 'Select a difficulty and\npress Enter to start:', ['Easy', 'Medium', 'Hard']);
+const ballistic = new Ballistic(400, 600);
 
 const canv = new Canvas({
     background: 'sandybrown',
     border: 'black',
     borderBlur: 'white',
     showMouse: false,
-    height: game.height,
-    width: game.width,
+    height: ballistic.height,
+    width: ballistic.width,
     loop(dt) {
         canv.clear();
-        game.input(canv.isKeyDown('w'), canv.isKeyDown('s'), canv.isKeyDown('i'), canv.isKeyDown('k'));
-        game.tick(dt);
-        canv.draw(game);
-        canv.clear();
-        canv.draw(menu);
+        ballistic.gameInput(canv.isKeyDown('w'), canv.isKeyDown('s'), canv.isKeyDown('i'), canv.isKeyDown('k'));
+        ballistic.tick(dt);
+        canv.draw(ballistic);
     },
     keydown(key) {
         if (key === 'w' || key === 'arrowup') {
-            menu.scrollUp();
+            ballistic.scrollUp();
         } else if (key === 's' || key === 'arrowdown') {
-            menu.scrollDown();
+            ballistic.scrollDown();
+        } else if (key === ' ' || key === 'enter' || key === 'tab') {
+            ballistic.select();
+        } else if (key === 'escape' || key === 'backspace') {
+            ballistic.escape();
         }
     },
 });
