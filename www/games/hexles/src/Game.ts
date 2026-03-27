@@ -574,7 +574,7 @@ class Game implements Drawable {
                 winners: string[] = playerSortByScore
                     .filter(p => p[1] === highScore)
                     .map(p => p[0] as string);
-            let winnerText = '';
+            let winnerText: string;
             if (winners.length === 1) {
                 winnerText = 'Winner! ' + winners[0] + ' captured ' + highScore + ' tiles.';
             } else {
