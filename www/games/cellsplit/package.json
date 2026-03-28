@@ -1,4 +1,5 @@
 {
+  "name": "cellsplit",
   "scripts": {
     "start": "../../../cmd/start"
   },
