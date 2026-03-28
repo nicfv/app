@@ -47,7 +47,7 @@ export class Game implements Drawable {
     /**
      * The total number of holes that need to be completed
      */
-    private readonly total = 1;
+    private readonly total = 10;
     /**
      * The game progress bar
      */
