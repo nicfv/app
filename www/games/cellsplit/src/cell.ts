@@ -10,7 +10,7 @@ export class Cell implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.fillStyle = 'lime';
         graphics.strokeStyle = 'green';
-        graphics.lineWidth = 2;
+        graphics.lineWidth = cellSize * 0.2;
         graphics.beginPath();
         graphics.arc(pan.x + this.gridPos.x * gridSize.x, pan.y + this.gridPos.y + gridSize.y, cellSize, 0, 2 * Math.PI);
         graphics.fill();
