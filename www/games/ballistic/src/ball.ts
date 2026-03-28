@@ -5,6 +5,8 @@ import { clamp, translate } from 'smath';
 
 export class Ball implements Drawable {
     private rolling = false;
+    private x = 0;
+    private y = 0;
     private vx = 0;
     private vy = 0;
     private angle = 0;
@@ -23,7 +25,10 @@ export class Ball implements Drawable {
      * @param maxDistanceFactor The maximum distance factor (of radius) away at which a ball can fall into a hole
      * @param showSpeed Show the speedometer
      */
-    constructor(private x: number, private y: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 5000, private readonly airResistance = 0.99, private readonly maxSpeed = 100, private readonly maxDistanceFactor = 0.25, private readonly fallAnimDurationSec = 0.5, private readonly showSpeed = false) { }
+    constructor(private readonly startX: number, private readonly startY: number, private readonly r: number, private readonly gameWidth: number, private readonly g = 5000, private readonly airResistance = 0.99, private readonly maxSpeed = 100, private readonly maxDistanceFactor = 0.25, private readonly fallAnimDurationSec = 0.5, private readonly showSpeed = false) {
+        this.x = startX;
+        this.y = startY;
+    }
     /**
      * Check if the ball is moving too fast to fall in a hole.
      */
@@ -39,7 +44,7 @@ export class Ball implements Drawable {
     /**
      * Reposition of the ball.
      */
-    public reset(x: number, y: number): void {
+    public reset(x: number = this.startX, y: number = this.startY): void {
         this.rolling = false;
         this.vx = 0;
         this.vy = 0;
