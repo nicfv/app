@@ -2,7 +2,7 @@ import { Canvas } from 'graphico';
 import { Cell } from './cell';
 import { Grid } from './grid';
 
-const grid = new Grid({ x: 10, y: 10 });
+const grid = new Grid({ x: 10, y: 10 }, { x: 100, y: 100 });
 const cell = new Cell({ x: 1, y: 1 }, grid, 5);
 
 const canv = new Canvas({
@@ -25,6 +25,7 @@ const canv = new Canvas({
             grid.pan('Up');
         }
         canv.clear();
+        canv.draw(grid);
         canv.draw(cell);
     },
     mousemove(x, y) {
