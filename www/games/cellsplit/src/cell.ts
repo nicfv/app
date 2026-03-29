@@ -20,10 +20,33 @@ export class Cell implements Drawable {
         };
     }
     /**
+     * Determine if this cell is on a specific grid position.
+     */
+    private isOn(gridPos: Vec2): boolean {
+        return this.gridPos.x === gridPos.x && this.gridPos.y === gridPos.y;
+    }
+    /**
      * Check if the mouse is hovering over this cell.
      */
     public checkHover(mousePos: Vec2): void {
         this.hover = (distance(this.getCenter(), mousePos) < this.size);
+    }
+    /**
+     * Multiply a cell if the 2 adjacent positions are available.
+     */
+    public split(cells: Cell[]): void {
+        if (!this.hover) {
+            return;
+        }
+        const left: Vec2 = { x: this.gridPos.x + 1, y: this.gridPos.y };
+        const down: Vec2 = { x: this.gridPos.x, y: this.gridPos.y + 1 };
+        const leftFree: boolean = typeof cells.find(cell => cell.isOn(left)) === 'undefined';
+        const downFree: boolean = typeof cells.find(cell => cell.isOn(down)) === 'undefined';
+        if (leftFree && downFree) {
+            cells.splice(cells.findIndex(cell => cell.isOn(this.gridPos)), 1);
+            cells.push(new Cell(left, this.grid, this.size));
+            cells.push(new Cell(down, this.grid, this.size));
+        }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         graphics.beginPath();
