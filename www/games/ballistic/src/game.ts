@@ -295,9 +295,11 @@ export class Game implements Drawable {
         graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 10, 36);
         // Show basic controls
         if (this.completed < 1) {
-            graphics.fillText('W/S', 10, graphics.canvas.height - 10);
+            graphics.fillText('W \u2191', 10, graphics.canvas.height - 30);
+            graphics.fillText('S \u2193', 10, graphics.canvas.height - 10);
             graphics.textAlign = 'right';
-            graphics.fillText('I/K', graphics.canvas.width - 10, graphics.canvas.height - 10);
+            graphics.fillText('\u2191 I', graphics.canvas.width - 10, graphics.canvas.height - 30);
+            graphics.fillText('\u2193 K', graphics.canvas.width - 10, graphics.canvas.height - 10);
         }
     }
 }
