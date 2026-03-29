@@ -46,5 +46,9 @@ const canv = new Canvas({
         if (key === 'r') {
             grid.pan('Reset');
         }
+        if (key === 'delete') {
+            cells.splice(0);
+            cells.push(new Cell({ x: 1, y: 1 }, grid, 5));
+        }
     },
 });
