@@ -58,4 +58,4 @@ export class Grid implements Drawable {
     }
 }
 
-export type Direction = 'Left' | 'Right' | 'Up' | 'Down' | 'None';
+type Direction = 'Left' | 'Right' | 'Up' | 'Down' | 'None';
