@@ -1,15 +1,13 @@
 import { Canvas } from 'graphico';
-import { Ballistic } from './ballistic';
-
-const ballistic = new Ballistic(400, 600);
+import { Ballistic, HighScores } from './ballistic';
 
 const canv = new Canvas({
     background: 'sandybrown',
     border: 'black',
     borderBlur: 'white',
     showMouse: false,
-    height: ballistic.height,
-    width: ballistic.width,
+    height: 600,
+    width: 400,
     loop(dt) {
         canv.clear();
         ballistic.gameInput(canv.isKeyDown('w'), canv.isKeyDown('s'), canv.isKeyDown('i'), canv.isKeyDown('k'));
@@ -28,3 +26,5 @@ const canv = new Canvas({
         }
     },
 });
+
+const ballistic = new Ballistic(canv.width, canv.height, canv.loadData<HighScores>('highscores'), hs => canv.saveData(hs, 'highscores'));
