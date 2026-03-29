@@ -35,6 +35,13 @@ const canv = new Canvas({
             cell.checkHover({ x: x, y: y });
         }
     },
+    mousedown(button) {
+        if (button === 0) {
+            for (const cell of cells) {
+                cell.split(cells);
+            }
+        }
+    },
     keydown(key) {
         if (key === 'r') {
             grid.pan('Reset');
