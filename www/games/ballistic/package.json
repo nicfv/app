@@ -4,7 +4,7 @@
     "start": "../../../cmd/start"
   },
   "dependencies": {
-    "graphico": "1.1.2",
+    "graphico": "1.2.0",
     "smath": "1.15.1"
   }
 }

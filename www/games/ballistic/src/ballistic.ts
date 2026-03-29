@@ -1,4 +1,4 @@
-import { Drawable } from 'graphico';
+import { Drawable, StoreData } from 'graphico';
 import { version } from './version';
 import { Menu } from './menu';
 import { Difficulty, Game } from './game';
@@ -9,6 +9,8 @@ import { Rod } from './rod';
 import { Progress } from './progress';
 
 type GameState = 'Menu' | 'Difficulty Select' | 'Tutorial' | 'Game' | 'Paused' | 'Over' | 'Scores';
+
+export type HighScores = StoreData & Record<Difficulty, number>;
 
 export class Ballistic implements Drawable {
     private state: GameState;
@@ -25,15 +27,20 @@ export class Ballistic implements Drawable {
     private readonly tutorialHole: Hole;
     private readonly tutorialProg: Progress[];
     private game?: Game;
-    private readonly highScores: Record<Difficulty, number> = {
+    private readonly highScores: HighScores = {
         Easy: 0,
         Medium: 0,
         Hard: 0,
         'X-treme': 0,
     };
-    constructor(public readonly width: number, public readonly height: number) {
+    constructor(public readonly width: number, public readonly height: number, loadedScores: Partial<HighScores>, private readonly saveData: (data: HighScores) => void) {
         this.state = 'Menu';
         this.helpPage = 0;
+        for (const diff in this.highScores) {
+            if (typeof loadedScores[diff] === 'number') {
+                this.highScores[diff] = loadedScores[diff];
+            }
+        }
         this.tutorialRod1 = new Rod(height * 0.76, height * 0.80, width, height);
         this.tutorialRod2 = new Rod(height * 0.75, height * 0.80, width, height);
         this.tutorialBall = new Ball(width * 0.30, height * 0.70, 15, width, 500);
@@ -179,6 +186,7 @@ export class Ballistic implements Drawable {
                 if (totalScore > this.highScores[stats.difficulty]) {
                     this.over.description += `\n\nNew high score for ${stats.difficulty}!\nPrevious high score: ${this.highScores[stats.difficulty]}`;
                     this.highScores[stats.difficulty] = totalScore;
+                    this.saveData(this.highScores);
                 } else {
                     this.over.description += `\n\nHigh score for ${stats.difficulty}: ${this.highScores[stats.difficulty]}`;
                 }
