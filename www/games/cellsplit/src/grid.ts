@@ -37,7 +37,7 @@ export class Grid implements Drawable {
         graphics.lineWidth = 1;
         // draw horizontal axes
         for (let y = 0; y < this.bounds.y; y++) {
-            const y_act: number = y * this.size.y + this.panY;
+            const y_act: number = y * this.size.y + this.panY - 0.5;
             if (y_act > 0 && y_act < graphics.canvas.height) {
                 graphics.beginPath()
                 graphics.moveTo(Math.max(0, this.panX), y_act);
@@ -47,11 +47,11 @@ export class Grid implements Drawable {
         }
         // draw vertical axes
         for (let x = 0; x < this.bounds.x; x++) {
-            const x_act: number = x * this.size.x + this.panX;
+            const x_act: number = x * this.size.x + this.panX - 0.5;
             if (x_act > 0 && x_act < graphics.canvas.width) {
                 graphics.beginPath()
-                graphics.moveTo(x_act, 0);
-                graphics.lineTo(x_act, Math.min(this.panY, graphics.canvas.height));
+                graphics.moveTo(x_act, Math.max(0, this.panY));
+                graphics.lineTo(x_act, graphics.canvas.height);
                 graphics.stroke();
             }
         }
