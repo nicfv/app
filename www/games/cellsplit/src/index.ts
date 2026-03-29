@@ -2,8 +2,8 @@ import { Canvas } from 'graphico';
 import { Cell } from './cell';
 import { Grid } from './grid';
 
-const grid = new Grid({ x: 10, y: 10 }, { x: 100, y: 100 });
-const cell = new Cell({ x: 1, y: 1 }, grid, 5);
+const grid: Grid = new Grid({ x: 10, y: 10 }, { x: 100, y: 100 });
+const cells: Cell[] = [new Cell({ x: 1, y: 1 }, grid, 5)];
 
 const canv = new Canvas({
     background: 'lightgray',
@@ -26,9 +26,13 @@ const canv = new Canvas({
         }
         canv.clear();
         canv.draw(grid);
-        canv.draw(cell);
+        for (const cell of cells) {
+            canv.draw(cell);
+        }
     },
     mousemove(x, y) {
-        cell.checkHover({ x: x, y: y });
+        for (const cell of cells) {
+            cell.checkHover({ x: x, y: y });
+        }
     },
 });
