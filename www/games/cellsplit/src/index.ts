@@ -1,8 +1,9 @@
 import { Canvas } from 'graphico';
 import { Cell } from './cell';
-import { pan } from './globals';
+import { Grid } from './grid';
 
-const cell = new Cell({ x: 1, y: 1 });
+const grid = new Grid({ x: 10, y: 10 });
+const cell = new Cell({ x: 1, y: 1 }, grid, 5);
 
 const canv = new Canvas({
     background: 'lightgray',
@@ -10,18 +11,18 @@ const canv = new Canvas({
     borderBlur: 'gray',
     width: 800,
     height: 600,
-    loop(dt) {
+    loop() {
         if (canv.isKeyDown('d') || canv.isKeyDown('arrowright')) {
-            pan.x--;
+            grid.pan('Right');
         }
         if (canv.isKeyDown('a') || canv.isKeyDown('arrowleft')) {
-            pan.x++;
+            grid.pan('Left');
         }
         if (canv.isKeyDown('s') || canv.isKeyDown('arrowdown')) {
-            pan.y--;
+            grid.pan('Down');
         }
         if (canv.isKeyDown('w') || canv.isKeyDown('arrowup')) {
-            pan.y++;
+            grid.pan('Up');
         }
         canv.clear();
         canv.draw(cell);
