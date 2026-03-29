@@ -35,4 +35,9 @@ const canv = new Canvas({
             cell.checkHover({ x: x, y: y });
         }
     },
+    keydown(key) {
+        if (key === 'r') {
+            grid.pan('Reset');
+        }
+    },
 });

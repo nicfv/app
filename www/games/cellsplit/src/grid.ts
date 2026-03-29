@@ -26,6 +26,11 @@ export class Grid implements Drawable {
                 this.panY++;
                 break;
             }
+            case ('Reset'): {
+                this.panX = 0;
+                this.panY = 0;
+                break;
+            }
         }
         return { x: this.panX, y: this.panY };
     }
@@ -58,4 +63,4 @@ export class Grid implements Drawable {
     }
 }
 
-type Direction = 'Left' | 'Right' | 'Up' | 'Down' | 'None';
+type Direction = 'Left' | 'Right' | 'Up' | 'Down' | 'None' | 'Reset';
