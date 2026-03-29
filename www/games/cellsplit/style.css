@@ -29,3 +29,17 @@ kbd {
 div#text {
     max-width: 800px;
 }
+
+a:link,
+a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
+}
