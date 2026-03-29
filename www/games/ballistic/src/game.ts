@@ -293,6 +293,12 @@ export class Game implements Drawable {
         graphics.textAlign = 'left';
         graphics.font = 'bold 12px monospace';
         graphics.fillText(`Score: ${this.score} (+${this.scoreBonus()})`, 10, 36);
+        // Show basic controls
+        if (this.completed < 1) {
+            graphics.fillText('W/S', 10, graphics.canvas.height - 10);
+            graphics.textAlign = 'right';
+            graphics.fillText('I/K', graphics.canvas.width - 10, graphics.canvas.height - 10);
+        }
     }
 }
 
