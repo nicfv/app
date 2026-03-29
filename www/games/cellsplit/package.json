@@ -1,10 +1,9 @@
 {
-  "name": "ice-cold-beer",
+  "name": "cellsplit",
   "scripts": {
     "start": "../../../cmd/start"
   },
   "dependencies": {
-    "graphico": "1.1.1",
-    "smath": "1.15.1"
+    "graphico": "1.1.2"
   }
 }

@@ -6,6 +6,7 @@ Free and open source software including tools, games, and more.
 ### Start Script Format
 ```json
 {
+    "name": "<project>",
     "start": "../../../cmd/start"
 }
 ```
