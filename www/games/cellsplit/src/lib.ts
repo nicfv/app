@@ -2,8 +2,8 @@
  * Represents a cartesian coordinate pair.
  */
 export interface Vec2 {
-    x: number;
-    y: number;
+    readonly x: number;
+    readonly y: number;
 }
 
 /**
