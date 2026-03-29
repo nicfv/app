@@ -1,6 +1,7 @@
 import { Drawable } from 'graphico';
 import { distance, Vec2 } from './lib';
-import { gridSize, pan } from './globals';
+import { pan } from './globals';
+import { Grid } from './grid';
 
 export class Cell implements Drawable {
     /**
@@ -11,7 +12,7 @@ export class Cell implements Drawable {
      * Whether or not the mouse is hovering over this cell
      */
     private hover: boolean;
-    constructor(private readonly gridPos: Vec2) {
+    constructor(private readonly gridPos: Vec2, private readonly grid: Grid) {
         this.hover = false;
     }
     /**
@@ -19,8 +20,8 @@ export class Cell implements Drawable {
      */
     private getCenter(): Vec2 {
         return {
-            x: pan.x + this.gridPos.x * gridSize.x,
-            y: pan.y + this.gridPos.y * gridSize.y,
+            x: pan.x + this.gridPos.x * this.grid.size.x,
+            y: pan.y + this.gridPos.y * this.grid.size.y,
         };
     }
     /**
