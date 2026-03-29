@@ -5,7 +5,6 @@ export interface Vec2 {
     readonly x: number;
     readonly y: number;
 }
-
 /**
  * Calculate the distance between two points.
  */
