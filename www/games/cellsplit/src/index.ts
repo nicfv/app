@@ -13,6 +13,10 @@ const canv = new Canvas({
         if (canv.isMouseButtonDown(dt)) {
             console.log('Life is meaningless.');
         }
+        canv.clear();
         canv.draw(cell);
+    },
+    mousemove(x, y) {
+        cell.checkHover({ x: x, y: y });
     },
 });
