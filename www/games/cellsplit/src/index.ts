@@ -1,4 +1,7 @@
 import { Canvas } from 'graphico';
+import { Cell } from './cell';
+
+const cell = new Cell({ x: 1, y: 1 });
 
 const canv = new Canvas({
     background: 'lightgray',
@@ -10,5 +13,6 @@ const canv = new Canvas({
         if (canv.isMouseButtonDown(dt)) {
             console.log('Life is meaningless.');
         }
+        canv.draw(cell);
     },
 });

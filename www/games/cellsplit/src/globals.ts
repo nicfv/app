@@ -11,4 +11,4 @@ export const gridSize: Vec2 = { x: 10, y: 10 };
 /**
  * Cell radius [px]
  */
-export const cellSize: number = 5;
+export const cellSize = 5;
