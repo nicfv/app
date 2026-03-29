@@ -11,6 +11,7 @@ const canv = new Canvas({
     borderBlur: 'gray',
     width: 800,
     height: 600,
+    parent: document.getElementById('canv') ?? document.body,
     loop() {
         if (canv.isKeyDown('d') || canv.isKeyDown('arrowright')) {
             grid.pan('Right');
