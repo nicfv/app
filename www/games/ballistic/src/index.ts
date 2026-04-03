@@ -27,4 +27,4 @@ const canv = new Canvas({
     },
 });
 
-const ballistic = new Ballistic(canv.width, canv.height, canv.loadData<HighScores>('highscores'), hs => canv.saveData(hs, 'highscores'));
+const ballistic = new Ballistic(canv.width, canv.height, canv.loadData<HighScores>('highscores') ?? {}, hs => canv.saveData<HighScores>(hs, 'highscores'));
