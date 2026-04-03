@@ -2,8 +2,8 @@ import { Canvas } from 'graphico';
 import { Cell } from './cell';
 import { Grid } from './grid';
 
-const grid: Grid = new Grid({ x: 10, y: 10 }, { x: 100, y: 100 });
-const cells: Cell[] = [new Cell({ x: 1, y: 1 }, grid, 5)];
+const grid: Grid = new Grid({ x: 20, y: 20 }, { x: 100, y: 100 });
+const cells: Cell[] = [new Cell({ x: 1, y: 1 }, grid, 10)];
 
 const canv = new Canvas({
     background: 'lightgray',
