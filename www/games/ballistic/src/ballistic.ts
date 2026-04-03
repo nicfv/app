@@ -1,4 +1,4 @@
-import { Drawable, StoreData } from 'graphico';
+import { Drawable } from 'graphico';
 import { version } from './version';
 import { Menu } from './menu';
 import { Difficulty, Game } from './game';
@@ -10,7 +10,7 @@ import { Progress } from './progress';
 
 type GameState = 'Menu' | 'Difficulty Select' | 'Tutorial' | 'Game' | 'Paused' | 'Over' | 'Scores';
 
-export type HighScores = StoreData & Record<Difficulty, number>;
+export type HighScores = Record<Difficulty, number>;
 
 export class Ballistic implements Drawable {
     private state: GameState;
@@ -37,8 +37,8 @@ export class Ballistic implements Drawable {
         this.state = 'Menu';
         this.helpPage = 0;
         for (const diff in this.highScores) {
-            if (typeof loadedScores[diff] === 'number') {
-                this.highScores[diff] = loadedScores[diff];
+            if (typeof loadedScores[diff as Difficulty] === 'number') {
+                this.highScores[diff as Difficulty] = +(loadedScores[diff as Difficulty] ?? 0);
             }
         }
         this.tutorialRod1 = new Rod(height * 0.76, height * 0.80, width, height);
