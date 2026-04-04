@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.4
+
+- Update `graphico` dependency version (1.2.1)
+
 ## 1.1.3
 
 - Update `graphico` dependency version
