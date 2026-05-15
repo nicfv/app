@@ -4,17 +4,22 @@
   outline: none;
 }
 
+html,
 body {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
   font-family: sans-serif;
   background: black;
   color: white;
 }
 
 #game {
-  width: 100%;
+  max-width: 40rem;
+  margin: 1rem auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -58,10 +63,23 @@ h2 {
   margin-left: 0.25rem;
 }
 
+#intro-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: not-allowed;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 #intro {
   position: absolute;
   background: black;
-  width: 100%;
+  cursor: initial;
+  max-width: 30rem;
+  margin: auto;
   padding: 0.5rem;
   border: 1px solid #4d4d4d;
 }
@@ -76,7 +94,9 @@ div.button {
   cursor: pointer;
 }
 
-div#footer {
+#footer {
+  background: #111;
+  padding: 0.5rem;
   color: #cdcdcd;
   text-align: center;
 }

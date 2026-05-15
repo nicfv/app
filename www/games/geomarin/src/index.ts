@@ -5,6 +5,16 @@ import svg from '../assets/marin.svg' with { type: 'text' };
 // Get DOM elements
 const mapContainer: HTMLObjectElement = document.getElementById('marin-map') as HTMLObjectElement;
 const buttonContainer: HTMLDivElement = document.getElementById('buttons') as HTMLDivElement;
+const introContainer: HTMLDivElement = document.getElementById('intro-bg') as HTMLDivElement;
+const helpButton: HTMLDivElement = document.getElementById('show-help') as HTMLDivElement;
+
+// Show and hide the intro message
+helpButton.addEventListener('click', () => {
+  introContainer.style.display = 'flex';
+});
+introContainer.addEventListener('click', () => {
+  introContainer.style.display = 'none';
+});
 
 // Parse the SVG and add it to the page
 const parser: DOMParser = new DOMParser();
