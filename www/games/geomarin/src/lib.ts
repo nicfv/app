@@ -74,4 +74,14 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
     button.style.cursor = 'default';
   }
 }
-
+/**
+ * Generate an SVG circle element.
+ */
+export function circlePath(cx: number, cy: number, r: number): SVGCircleElement {
+  const circle: SVGCircleElement = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', cx.toString());
+  circle.setAttribute('cy', cy.toString());
+  circle.setAttribute('r', r.toString());
+  circle.setAttribute('fill', global.colors.default);
+  return circle;
+}
