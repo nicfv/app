@@ -1,5 +1,5 @@
 import globals from './globals';
-import { Lib } from './lib';
+import * as Lib from './lib';
 
 window.addEventListener('load', main);
 
@@ -7,9 +7,9 @@ function main(): void {
   console.log('Loaded!', Lib.getDate());
   const map: HTMLObjectElement = document.getElementById('marin-map') as HTMLObjectElement,
     buttonContainer: HTMLDivElement = document.getElementById('buttons') as HTMLDivElement,
-    doc: Document = map.contentDocument!,
-    paths: Array<SVGElement> = Array.from(doc.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'path')),
-    filteredPaths: Array<SVGElement> = paths
+    doc: Document = map.contentDocument as Document,
+    paths: SVGElement[] = Array.from(doc.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'path')),
+    filteredPaths: SVGElement[] = paths
       .filter(path => !globals.staticPathNames.includes(path.id))
       .sort((a, b) => a.id.localeCompare(b.id)),
     title: SVGTextElement = Lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
