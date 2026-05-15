@@ -18,9 +18,10 @@ const filteredPaths: SVGElement[] = paths
   .filter(path => !globals.staticPathNames.includes(path.id))
   .sort((a, b) => a.id.localeCompare(b.id));
 
-// Add title element for tooltips
+// Add text elements for hints and tooltips
+const hint: SVGTextElement = lib.createText('white', 0.75, 290, 10, 'end', 'hanging');
 const title: SVGTextElement = lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
-svgElement.appendChild(title);
+svgElement.append(title, hint);
 
 // Add buttons and color behavior for each path
 filteredPaths.forEach(path => {
