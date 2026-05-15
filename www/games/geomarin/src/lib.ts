@@ -49,6 +49,9 @@ export function createText(fill: string, fontSizeRem: number, x: number, y: numb
   text.setAttribute('dominant-baseline', dominantBaseline);
   return text;
 }
+/**
+ * Handle a guess for a given path and button.
+ */
 export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
   path.addEventListener('click', guess);
   button.addEventListener('click', guess);
