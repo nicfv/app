@@ -7,6 +7,10 @@ const mapContainer: HTMLObjectElement = document.getElementById('marin-map') as 
 const buttonContainer: HTMLDivElement = document.getElementById('buttons') as HTMLDivElement;
 const introContainer: HTMLDivElement = document.getElementById('intro-bg') as HTMLDivElement;
 const helpButton: HTMLDivElement = document.getElementById('show-help') as HTMLDivElement;
+const puzzleDate: HTMLDivElement = document.getElementById('date') as HTMLDivElement;
+
+// Set the date in the footer
+puzzleDate.textContent = `Puzzle: ${new Date().toDateString()}`;
 
 // Show and hide the intro message
 helpButton.addEventListener('click', () => {
