@@ -17,15 +17,6 @@ body {
   color: white;
 }
 
-#game {
-  max-width: 40rem;
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 h2 {
   text-align: center;
   margin: 0;
@@ -43,24 +34,6 @@ h2 {
 
 .correct {
   color: #10d010;
-}
-
-#marin-map {
-  width: 100%;
-  margin: 0.25rem 0;
-}
-
-#marin-map svg {
-  width: 100%;
-  height: auto;
-}
-
-#buttons {
-  border: 1px solid #4d4d4d;
-  height: 100%;
-  overflow: auto;
-  width: max-content;
-  margin-left: 0.25rem;
 }
 
 #intro-bg {
@@ -82,6 +55,33 @@ h2 {
   margin: auto;
   padding: 0.5rem;
   border: 1px solid #4d4d4d;
+}
+
+#game {
+  max-width: 40rem;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#marin-map {
+  width: 100%;
+  margin: 0.25rem 0;
+}
+
+#marin-map svg {
+  width: 100%;
+  height: auto;
+}
+
+#buttons {
+  border: 1px solid #4d4d4d;
+  height: 100%;
+  overflow: auto;
+  width: max-content;
+  margin-left: 0.25rem;
 }
 
 div.button {
