@@ -1,4 +1,5 @@
 import global from './globals';
+import { close, correct, guesses } from './guesses';
 
 /**
  * Get the current date as a string.
@@ -11,21 +12,28 @@ export function getDate(): string {
  * Set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string): void {
-  path.setAttribute('fill', color);
-  button.style.background = color;
+  if (!guesses.includes(path.id)) {
+    path.setAttribute('fill', color);
+    button.style.background = color;
+  }
 }
 /**
- * Set the color-responsive behavior for cursor events.
+ * Set the color-responsive behavior for cursor events and show a tooltip when the mouse hovers over a path.
  */
-export function setColorBehavior(path: SVGElement, button: HTMLDivElement): void {
+export function setEvents(path: SVGElement, button: HTMLDivElement, text: SVGTextElement): void {
+  // Change button color on mouse events
   button.addEventListener('mouseenter', () => setColor(path, button, global.colors.hover));
   button.addEventListener('mouseleave', () => setColor(path, button, global.colors.default));
   button.addEventListener('mousedown', () => setColor(path, button, global.colors.active));
   button.addEventListener('mouseup', () => setColor(path, button, global.colors.hover));
+  // Change path color on mouse events
   path.addEventListener('mouseenter', () => setColor(path, button, global.colors.hover));
   path.addEventListener('mouseleave', () => setColor(path, button, global.colors.default));
   path.addEventListener('mousedown', () => setColor(path, button, global.colors.active));
   path.addEventListener('mouseup', () => setColor(path, button, global.colors.hover));
+  // Show tooltip with path name on mouse hover
+  path.addEventListener('mouseenter', () => text.textContent = path.id);
+  path.addEventListener('mouseleave', () => text.textContent = '');
 }
 /**
  * Create an SVG text element.
@@ -41,10 +49,23 @@ export function createText(fill: string, fontSizeRem: number, x: number, y: numb
   text.setAttribute('dominant-baseline', dominantBaseline);
   return text;
 }
-/**
- * Show a tooltip when the mouse hovers over a path.
- */
-export function handlePathTitle(path: SVGElement, text: SVGTextElement): void {
-  path.addEventListener('mouseenter', () => text.textContent = path.id);
-  path.addEventListener('mouseleave', () => text.textContent = '');
+export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
+  path.addEventListener('click', guess);
+  button.addEventListener('click', guess);
+  function guess() {
+    if (guesses.includes(path.id)) {
+      return; // Already guessed!
+    }
+    if (path.id === correct) {
+      setColor(path, button, global.colors.correct);
+    } else if (close.includes(path.id)) {
+      setColor(path, button, global.colors.close);
+    } else {
+      setColor(path, button, global.colors.incorrect);
+    }
+    guesses.push(path.id);
+    path.style.cursor = 'default';
+    button.style.cursor = 'default';
+  }
 }
+

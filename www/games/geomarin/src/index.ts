@@ -1,5 +1,5 @@
 import globals from './globals';
-import * as Lib from './lib';
+import * as lib from './lib';
 import svg from '../assets/marin.svg' with { type: 'text' };
 
 // Get DOM elements
@@ -18,15 +18,17 @@ const filteredPaths: SVGElement[] = paths
   .filter(path => !globals.staticPathNames.includes(path.id))
   .sort((a, b) => a.id.localeCompare(b.id));
 
-// Add buttons and color behavior for each path
-const title: SVGTextElement = Lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
+// Add title element for tooltips
+const title: SVGTextElement = lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
 svgElement.appendChild(title);
+
+// Add buttons and color behavior for each path
 filteredPaths.forEach(path => {
   const button = document.createElement('div');
   button.setAttribute('class', 'button')
   buttonContainer.append(button);
   button.innerText = path.id;
   path.style.cursor = 'pointer';
-  Lib.handlePathTitle(path, title);
-  Lib.setColorBehavior(path, button);
+  lib.setEvents(path, button, title);
+  lib.handleGuess(path, button);
 });
