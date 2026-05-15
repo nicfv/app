@@ -52,20 +52,34 @@ export function createText(fill: string, fontSizeRem: number, x: number, y: numb
 /**
  * Handle a guess for a given path and button.
  */
-export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
+export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators: SVGCircleElement[]): void {
   path.addEventListener('click', guess);
   button.addEventListener('click', guess);
   function guess() {
     if (guesses.includes(path.id)) {
-      return; // Already guessed!
+      // Already guessed!
+      return;
     }
+    if (guesses.length >= global.allowedGuesses) {
+      // No more guesses allowed!
+      return;
+    }
+    if (guesses.length > 0 && guesses[guesses.length - 1] === correct) {
+      // Already guessed correctly!
+      return;
+    }
+    // Get the indicator for this guess
+    const indicator: SVGCircleElement = indicators[guesses.length];
     // Set color based on guess accuracy
     if (path.id === correct) {
       setColor(path, button, global.colors.correct);
+      indicator.setAttribute('fill', global.colors.correct);
     } else if (close.includes(path.id)) {
       setColor(path, button, global.colors.close);
+      indicator.setAttribute('fill', global.colors.close);
     } else {
       setColor(path, button, global.colors.incorrect);
+      indicator.setAttribute('fill', global.colors.incorrect);
     }
     // Record this guess
     guesses.push(path.id);

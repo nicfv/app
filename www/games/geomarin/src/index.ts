@@ -23,6 +23,13 @@ const hint: SVGTextElement = lib.createText('white', 0.75, 290, 10, 'end', 'hang
 const title: SVGTextElement = lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
 svgElement.append(title, hint);
 
+// Generate guess indicators
+const indicators: SVGCircleElement[] = [];
+for (let i = 0; i < globals.allowedGuesses; i++) {
+  indicators.push(lib.circlePath(10 + i * 20, 10, 5));
+  svgElement.appendChild(indicators[i]);
+}
+
 // Add buttons and color behavior for each path
 filteredPaths.forEach(path => {
   const button = document.createElement('div');
@@ -31,5 +38,5 @@ filteredPaths.forEach(path => {
   button.innerText = path.id;
   path.style.cursor = 'pointer';
   lib.setEvents(path, button, title);
-  lib.handleGuess(path, button);
+  lib.handleGuess(path, button, indicators);
 });
