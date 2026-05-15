@@ -1,15 +1,6 @@
 {
+  "name": "geomarin",
   "scripts": {
-    "build": "npx webpack --mode production",
-    "dev": "npx webpack --mode development --watch",
-    "clean": "rm -rf node_modules package-lock.json dist",
-    "build:all": "npm run clean && npm i && npm run build",
-    "dev:all": "npm run clean && npm i && npm run dev"
-  },
-  "devDependencies": {
-    "@types/webpack": "5.28.5",
-    "ts-loader": "9.5.2",
-    "ts-node": "10.9.2",
-    "webpack-cli": "6.0.1"
+    "start": "../../../cmd/start"
   }
 }
