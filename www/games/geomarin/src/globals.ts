@@ -22,8 +22,4 @@ export default {
     'Outer Territory',
     'Marin County',
   ],
-  /**
-   * The guesses made by the player for this game
-   */
-  guesses: [],
 };
