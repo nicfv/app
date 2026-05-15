@@ -13,7 +13,7 @@ body {
   color: white;
 }
 
-div.flexrow {
+#game {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -21,7 +21,6 @@ div.flexrow {
   align-items: center;
 }
 
-h1,
 h2 {
   text-align: center;
   margin: 0;
@@ -41,15 +40,6 @@ h2 {
   color: #10d010;
 }
 
-div.counter {
-  width: 100%;
-  max-width: 4rem;
-  aspect-ratio: 1 / 1;
-  border-radius: 0.5rem;
-  margin: 1rem;
-  background: #f2f2f2;
-}
-
 #marin-map {
   width: 100%;
   margin: 0.25rem 0;
@@ -60,25 +50,20 @@ div.counter {
   height: auto;
 }
 
-#row2 {
-  height: 20rem;
-}
-
-#hint,
 #buttons {
   border: 1px solid #4d4d4d;
   height: 100%;
   overflow: auto;
-}
-
-#hint {
-  width: 100%;
-  padding: 0.5rem;
-}
-
-#buttons {
   width: max-content;
   margin-left: 0.25rem;
+}
+
+#intro {
+  position: absolute;
+  background: black;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #4d4d4d;
 }
 
 div.button {
@@ -89,14 +74,6 @@ div.button {
   background: #f2f2f2;
   color: black;
   cursor: pointer;
-}
-
-div.button:hover {
-  background: #cdcdcd;
-}
-
-div.button:active {
-  background: #cdefab;
 }
 
 div#footer {
