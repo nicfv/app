@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-cd site && npm run build:all && cd .. && mkdir prod && cp -r site/index.html site/assets site/dist prod || exit 1
