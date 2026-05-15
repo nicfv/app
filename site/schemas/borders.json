@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "borders": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "uniqueItems": true,
+                "items": {
+                    "$ref": "places.json"
+                }
+            }
+        }
+    },
+    "patternProperties": {
+        "^\\$.+": true
+    },
+    "additionalProperties": false
+}

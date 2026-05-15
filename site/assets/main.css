@@ -29,6 +29,18 @@ h2 {
   border-bottom: 1px solid #4d4d4d;
 }
 
+.incorrect {
+  color: #808080;
+}
+
+.close {
+  color: #dede10;
+}
+
+.correct {
+  color: #10d010;
+}
+
 div.counter {
   width: 100%;
   max-width: 4rem;

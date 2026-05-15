@@ -1,0 +1,25 @@
+{
+    "$schema": "../schemas/borders.json",
+    "borders": [
+        [
+            "Dillon Beach",
+            "Tomales"
+        ],
+        [
+            "Inverness",
+            "Point Reyes Station"
+        ],
+        [
+            "Inverness",
+            "Olema"
+        ],
+        [
+            "Olema",
+            "Point Reyes Station"
+        ],
+        [
+            "Bolinas",
+            "Stinson Beach"
+        ]
+    ]
+}

@@ -4,7 +4,7 @@ import { Lib } from './lib';
 window.addEventListener('load', main);
 
 function main(): void {
-  console.log('Loaded!');
+  console.log('Loaded!', Lib.getDate());
   const map: HTMLObjectElement = document.getElementById('marin-map') as HTMLObjectElement,
     buttonContainer: HTMLDivElement = document.getElementById('buttons') as HTMLDivElement,
     doc: Document = map.contentDocument!,
