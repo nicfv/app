@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+  border-collapse: collapse;
+  outline: none;
+}
+
+body {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: sans-serif;
+  background: black;
+  color: white;
+}
+
+div.flexrow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1,
+h2 {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #4d4d4d;
+}
+
+.incorrect {
+  color: #808080;
+}
+
+.close {
+  color: #dede10;
+}
+
+.correct {
+  color: #10d010;
+}
+
+div.counter {
+  width: 100%;
+  max-width: 4rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.5rem;
+  margin: 1rem;
+  background: #f2f2f2;
+}
+
+#marin-map {
+  width: 100%;
+  margin: 0.25rem 0;
+}
+
+#row2 {
+  height: 20rem;
+}
+
+#hint,
+#buttons {
+  border: 1px solid #4d4d4d;
+  height: 100%;
+  overflow: auto;
+}
+
+#hint {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#buttons {
+  width: max-content;
+  margin-left: 0.25rem;
+}
+
+div.button {
+  margin: 0.5rem;
+  padding: 0.25rem;
+  text-align: center;
+  border-radius: 0.25rem;
+  background: #f2f2f2;
+  color: black;
+  cursor: pointer;
+}
+
+div.button:hover {
+  background: #cdcdcd;
+}
+
+div.button:active {
+  background: #cdefab;
+}
+
+div#footer {
+  color: #cdcdcd;
+  text-align: center;
+}
+
+a,
+a:link,
+a:visited {
+  color: #f2f2f2;
+}
+
+a:hover {
+  color: #cdcdcd;
+}
+
+a:active {
+  color: #cdefab;
+}

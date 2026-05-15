@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>GeoMarin</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="Nicolas Ventura">
+  <meta name="description"
+    content="A daily puzzle game dedicated to the unique architecture and natural beauty of Marin county, California.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="assets/main.css">
+  <script type="text/javascript" src="dist/main.js"></script>
+</head>
+
+<body>
+  <h1>GeoMarin</h1>
+  <div class="flexrow">
+    <div id="c1" class="counter"></div>
+    <div id="c2" class="counter"></div>
+    <div id="c3" class="counter"></div>
+    <div id="c4" class="counter"></div>
+    <div id="c5" class="counter"></div>
+  </div>
+  <div class="flexrow" id="row2">
+    <div id="hint">
+      <h2>Location Hint</h2>
+      <p id="location-hint">Description</p>
+      <h2>Instructions</h2>
+      <p>The hint below describes a location found in Marin, California. Try to guess where it can be found within 5
+        guesses or less. To make a guess, click on the cities on the right, or click on the map below. Making one guess
+        at a time will color one of the 5 squares above. An incorrect guess will color a square in <b
+          class="incorrect">gray</b> or <b class="close">yellow</b> and the correct guess will color a square <b
+          class="correct">green</b>. A <b class="incorrect">gray</b> square means that your guess does not border the
+        correct guess at all, but a <b class="close">yellow</b> square means that your guess shares at least one border
+        with the correct guess (including corners.) Good luck, and enjoy discovering new places in Marin!</p>
+    </div>
+    <div id="buttons"></div>
+  </div>
+  <object id="marin-map" data="assets/marin.svg" type="image/svg+xml">
+    <img src="assets/marin.svg">
+  </object>
+  <div id="footer">Puzzle 2025-02-17 // Created by <a href="https://nicfv.com/" target="_blank">Nicolas Ventura</a>
+  </div>
+</body>
+
+</html>
