@@ -22,4 +22,8 @@ export default {
     'Outer Territory',
     'Marin County',
   ],
+  /**
+   * Number of allowed guesses
+   */
+  allowedGuesses: 5,
 };
