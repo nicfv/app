@@ -9,7 +9,7 @@ export function getDate(): string {
   return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
 /**
- * Set the color of an SVG and corresponding HTML elements.
+ * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string): void {
   if (!guesses.includes(path.id)) {
