@@ -72,11 +72,6 @@ h2 {
   align-items: center;
 }
 
-#marin-map {
-  width: 100%;
-  margin: 0.25rem 0;
-}
-
 #marin-map svg {
   width: 100%;
   height: auto;
