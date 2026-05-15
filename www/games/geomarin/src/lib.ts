@@ -59,6 +59,7 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
     if (guesses.includes(path.id)) {
       return; // Already guessed!
     }
+    // Set color based on guess accuracy
     if (path.id === correct) {
       setColor(path, button, global.colors.correct);
     } else if (close.includes(path.id)) {
@@ -66,7 +67,9 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement): void {
     } else {
       setColor(path, button, global.colors.incorrect);
     }
+    // Record this guess
     guesses.push(path.id);
+    // Indicate that this option is no longer interactive
     path.style.cursor = 'default';
     button.style.cursor = 'default';
   }
