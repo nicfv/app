@@ -1,0 +1,11 @@
+{
+  "name": "cave-explorer",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "graphico": "1.2.1",
+    "smath": "1.15.1",
+    "viridis": "1.4.2"
+  }
+}

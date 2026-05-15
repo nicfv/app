@@ -1,0 +1,6 @@
+{
+  "name": "hearts",
+  "scripts": {
+    "start": "../../../cmd/start"
+  }
+}

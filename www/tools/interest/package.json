@@ -1,0 +1,9 @@
+{
+  "name": "interest",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "smath": "1.13.3"
+  }
+}

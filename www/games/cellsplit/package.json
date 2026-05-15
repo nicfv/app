@@ -1,0 +1,9 @@
+{
+  "name": "cellsplit",
+  "scripts": {
+    "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "graphico": "1.2.1"
+  }
+}

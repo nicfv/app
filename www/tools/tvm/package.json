@@ -1,0 +1,6 @@
+{
+  "name": "tvm",
+  "scripts": {
+    "start": "../../../cmd/start"
+  }
+}

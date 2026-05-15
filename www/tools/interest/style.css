@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: sans-serif;
+    background: black;
+    color: white;
+}
+
+body>div {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+select,
+input {
+    width: 20rem;
+}
+
+select,
+input,
+button {
+    margin: 0.25rem 1rem;
+    padding: 0.25rem;
+    color: white;
+    background: #111;
+    border: 1px solid dimgray;
+    border-radius: 0.25rem;
+}
+
+select:focus,
+input:focus {
+    background: #222;
+}
+
+button:hover {
+    background: #222;
+}
+
+button:active {
+    background: #333;
+}
+
+select,
+button {
+    cursor: pointer;
+}

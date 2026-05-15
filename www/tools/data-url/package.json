@@ -1,0 +1,6 @@
+{
+  "name": "data-url",
+  "scripts": {
+    "start": "../../../cmd/start"
+  }
+}
