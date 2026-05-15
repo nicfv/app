@@ -19,14 +19,14 @@ const filteredPaths: SVGElement[] = paths
   .sort((a, b) => a.id.localeCompare(b.id));
 
 // Add text elements for hints and tooltips
-const hint: SVGTextElement = lib.createText('white', 0.75, 290, 10, 'end', 'hanging');
-const title: SVGTextElement = lib.createText('white', 0.75, 10, 290, 'start', 'alphabetic');
+const title: SVGTextElement = lib.createText('white', 0.75, 290, 10, 'end', 'hanging');
+const hint: SVGTextElement = lib.createText('white', 0.75, 10, 270, 'start', 'alphabetic');
 svgElement.append(title, hint);
 
 // Generate guess indicators
 const indicators: SVGCircleElement[] = [];
 for (let i = 0; i < globals.allowedGuesses; i++) {
-  indicators.push(lib.circlePath(10 + i * 20, 10, 5));
+  indicators.push(lib.circlePath(15 + i * 20, 285, 5));
   svgElement.appendChild(indicators[i]);
 }
 
