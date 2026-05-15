@@ -55,6 +55,11 @@ div.counter {
   margin: 0.25rem 0;
 }
 
+#marin-map svg {
+  width: 100%;
+  height: auto;
+}
+
 #row2 {
   height: 20rem;
 }
