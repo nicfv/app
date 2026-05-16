@@ -17,9 +17,7 @@ function setColor(path: SVGElement, button: HTMLDivElement, color: string, indic
     path.setAttribute('fill', color);
     button.style.background = color;
   }
-  if (indicator) {
-    indicator.setAttribute('fill', color);
-  }
+  indicator?.setAttribute('fill', color);
 }
 /**
  * Set the color-responsive behavior for cursor events and show a tooltip when the mouse hovers over a path.
