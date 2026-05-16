@@ -46,7 +46,7 @@ for (let i = 0; i < globals.allowedGuesses; i++) {
 }
 
 // Define interactive elements for each region
-const elements: { [key: string]: [SVGElement, HTMLDivElement] } = {};
+const elements: Record<string, [SVGElement, HTMLDivElement]> = {};
 
 // Add buttons and color behavior for each path
 filteredPaths.forEach(path => {
