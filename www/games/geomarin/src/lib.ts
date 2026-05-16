@@ -1,11 +1,19 @@
 import global from './globals';
-import { close, correct, guesses } from './guesses';
+import { close, correct } from './solution';
+import { saveData, state } from './state';
 
+/**
+ * Get a unique, sequential number per day.
+ */
+export function daysSinceEpoch(): number {
+  const msPerDay: number = 1000 * 60 * 60 * 24;
+  return Math.floor(Date.now() / msPerDay);
+}
 /**
  * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string): void {
-  if (!guesses.includes(path.id)) {
+  if (!state.guesses.includes(path.id)) {
     path.setAttribute('fill', color);
     button.style.background = color;
   }
@@ -49,24 +57,27 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
   path.addEventListener('click', guess);
   button.addEventListener('click', guess);
   function guess() {
-    if (guesses.includes(path.id)) {
+    if (state.guesses.includes(path.id)) {
       // Already guessed!
       return;
     }
-    if (guesses.length >= global.allowedGuesses) {
+    if (state.guesses.length >= global.allowedGuesses) {
       // No more guesses allowed!
       return;
     }
-    if (guesses.length > 0 && guesses[guesses.length - 1] === correct) {
+    if (state.guesses.length > 0 && state.guesses[state.guesses.length - 1] === correct) {
       // Already guessed correctly!
       return;
     }
     // Get the indicator for this guess
-    const indicator: SVGCircleElement = indicators[guesses.length];
+    const indicator: SVGCircleElement = indicators[state.guesses.length];
     // Set color based on guess accuracy
     if (path.id === correct) {
       setColor(path, button, global.colors.correct);
       indicator.setAttribute('fill', global.colors.correct);
+      state.solved += 1;
+      state.streak += 1;
+      state.lastSolved = daysSinceEpoch();
     } else if (close.includes(path.id)) {
       setColor(path, button, global.colors.close);
       indicator.setAttribute('fill', global.colors.close);
@@ -75,10 +86,12 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
       indicator.setAttribute('fill', global.colors.incorrect);
     }
     // Record this guess
-    guesses.push(path.id);
+    state.guesses.push(path.id);
     // Indicate that this option is no longer interactive
     path.style.cursor = 'default';
     button.style.cursor = 'default';
+    // Save game data
+    saveData(state);
   }
 }
 /**
