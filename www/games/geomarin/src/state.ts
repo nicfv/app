@@ -12,7 +12,7 @@ export interface GameState {
     /**
      * The number of puzzles the player has solved
      */
-    solved: number;
+    readonly solved: number[];
     /**
      * The current streak of consecutive days the player has solved the puzzle
      */
@@ -33,7 +33,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
     if (!rawData) {
         return {
             guesses: [],
-            solved: 0,
+            solved: [],
             streak: 0,
             lastSolved: 0,
             lastOpened: daysSinceEpoch(),
@@ -43,15 +43,15 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
     if (typeof rawData.lastOpened === 'number' && rawData.lastOpened > daysSinceEpoch()) {
         return {
             guesses: [],
-            solved: rawData.solved ?? 0,
-            streak: rawData.streak ?? 0,
+            solved: rawData.solved ?? [],
+            streak: ((rawData.lastSolved ?? 0) === daysSinceEpoch() - 1) ? (rawData.streak ?? 0) : 0,
             lastSolved: rawData.lastSolved ?? 0,
             lastOpened: daysSinceEpoch(),
         };
     }
     return {
         guesses: rawData.guesses ?? [],
-        solved: rawData.solved ?? 0,
+        solved: rawData.solved ?? [],
         streak: rawData.streak ?? 0,
         lastSolved: rawData.lastSolved ?? 0,
         lastOpened: daysSinceEpoch(),

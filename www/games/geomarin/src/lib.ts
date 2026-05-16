@@ -68,8 +68,12 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
     setGuessColor(path, button, indicator);
     // If correct, update solved and streak data
     if (path.id === correct) {
-      state.solved += 1;
-      state.streak += 1;
+      if (typeof state.solved[state.guesses.length] === 'number') {
+        state.solved[state.guesses.length]++;
+      } else {
+        state.solved[state.guesses.length] = 1;
+      }
+      state.streak++;
       state.lastSolved = daysSinceEpoch();
     }
     // Record this guess
