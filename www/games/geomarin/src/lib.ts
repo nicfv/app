@@ -13,7 +13,7 @@ export function daysSinceEpoch(): number {
  * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string, indicator?: SVGCircleElement): void {
-  if (!state.guesses.includes(path.id) || indicator) {
+  if ((!state.guesses.includes(correct) && !state.guesses.includes(path.id)) || indicator) {
     path.setAttribute('fill', color);
     button.style.background = color;
   }
@@ -108,7 +108,7 @@ function canGuess(id: string): boolean {
     // No more guesses allowed!
     return false;
   }
-  if (state.guesses.length > 0 && state.guesses[state.guesses.length - 1] === correct) {
+  if (state.guesses.length > 0 && state.guesses.includes(correct)) {
     // Already guessed correctly!
     return false;
   }
