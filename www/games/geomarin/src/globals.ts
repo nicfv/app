@@ -20,7 +20,6 @@ export default {
     'Water',
     'Coastal Marin',
     'Outer Territory',
-    'Marin County',
   ],
   /**
    * Number of allowed guesses
