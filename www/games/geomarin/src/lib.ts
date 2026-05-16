@@ -2,13 +2,6 @@ import global from './globals';
 import { close, correct, guesses } from './guesses';
 
 /**
- * Get the current date as a string.
- */
-export function getDate(): string {
-  const date: Date = new Date();
-  return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-}
-/**
  * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string): void {
