@@ -57,33 +57,44 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
   path.addEventListener('click', guess);
   button.addEventListener('click', guess);
   function guess() {
+    // Determine if the player can make a guess
     if (!canGuess(path.id)) {
       return;
     }
     // Get the indicator for this guess
     const indicator: SVGCircleElement = indicators[state.guesses.length];
     // Set color based on guess accuracy
+    setGuessColor(path, button, indicator);
+    // If correct, update solved and streak data
     if (path.id === correct) {
-      setColor(path, button, global.colors.correct);
-      indicator.setAttribute('fill', global.colors.correct);
       state.solved += 1;
       state.streak += 1;
       state.lastSolved = daysSinceEpoch();
-    } else if (close.includes(path.id)) {
-      setColor(path, button, global.colors.close);
-      indicator.setAttribute('fill', global.colors.close);
-    } else {
-      setColor(path, button, global.colors.incorrect);
-      indicator.setAttribute('fill', global.colors.incorrect);
     }
     // Record this guess
     state.guesses.push(path.id);
-    // Indicate that this option is no longer interactive
-    path.style.cursor = 'default';
-    button.style.cursor = 'default';
     // Save game data
     saveData(state);
   }
+}
+/**
+ * Set the color of a guess
+ */
+export function setGuessColor(path: SVGElement, button: HTMLDivElement, indicator: SVGCircleElement): void {
+  // Set color based on guess accuracy
+  if (path.id === correct) {
+    setColor(path, button, global.colors.correct);
+    indicator.setAttribute('fill', global.colors.correct);
+  } else if (close.includes(path.id)) {
+    setColor(path, button, global.colors.close);
+    indicator.setAttribute('fill', global.colors.close);
+  } else {
+    setColor(path, button, global.colors.incorrect);
+    indicator.setAttribute('fill', global.colors.incorrect);
+  }
+  // Indicate that this option is no longer interactive
+  path.style.cursor = 'default';
+  button.style.cursor = 'default';
 }
 /**
  * Determine if the player can make a guess

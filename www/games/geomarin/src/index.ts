@@ -61,6 +61,8 @@ filteredPaths.forEach(path => {
 });
 
 // If the player has already made guesses, simulate clicks on those paths to show feedback
+let i = 0;
 for (const guess of state.guesses) {
-  elements[guess][1].click();
+  lib.setGuessColor(elements[guess][0], elements[guess][1], indicators[i]);
+  i++;
 }
