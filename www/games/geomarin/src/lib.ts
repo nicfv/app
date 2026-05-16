@@ -12,10 +12,13 @@ export function daysSinceEpoch(): number {
 /**
  * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
-function setColor(path: SVGElement, button: HTMLDivElement, color: string): void {
-  if (!state.guesses.includes(path.id)) {
+function setColor(path: SVGElement, button: HTMLDivElement, color: string, indicator?: SVGCircleElement): void {
+  if (!state.guesses.includes(path.id) || indicator) {
     path.setAttribute('fill', color);
     button.style.background = color;
+  }
+  if (indicator) {
+    indicator.setAttribute('fill', color);
   }
 }
 /**
@@ -83,14 +86,11 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
 export function setGuessColor(path: SVGElement, button: HTMLDivElement, indicator: SVGCircleElement): void {
   // Set color based on guess accuracy
   if (path.id === correct) {
-    setColor(path, button, global.colors.correct);
-    indicator.setAttribute('fill', global.colors.correct);
+    setColor(path, button, global.colors.correct, indicator);
   } else if (close.includes(path.id)) {
-    setColor(path, button, global.colors.close);
-    indicator.setAttribute('fill', global.colors.close);
+    setColor(path, button, global.colors.close, indicator);
   } else {
-    setColor(path, button, global.colors.incorrect);
-    indicator.setAttribute('fill', global.colors.incorrect);
+    setColor(path, button, global.colors.incorrect, indicator);
   }
   // Indicate that this option is no longer interactive
   path.style.cursor = 'default';
