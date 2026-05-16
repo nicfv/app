@@ -57,16 +57,7 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
   path.addEventListener('click', guess);
   button.addEventListener('click', guess);
   function guess() {
-    if (state.guesses.includes(path.id)) {
-      // Already guessed!
-      return;
-    }
-    if (state.guesses.length >= global.allowedGuesses) {
-      // No more guesses allowed!
-      return;
-    }
-    if (state.guesses.length > 0 && state.guesses[state.guesses.length - 1] === correct) {
-      // Already guessed correctly!
+    if (!canGuess(path.id)) {
       return;
     }
     // Get the indicator for this guess
@@ -93,6 +84,24 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
     // Save game data
     saveData(state);
   }
+}
+/**
+ * Determine if the player can make a guess
+ */
+function canGuess(id: string): boolean {
+  if (state.guesses.includes(id)) {
+    // Already guessed!
+    return false;
+  }
+  if (state.guesses.length >= global.allowedGuesses) {
+    // No more guesses allowed!
+    return false;
+  }
+  if (state.guesses.length > 0 && state.guesses[state.guesses.length - 1] === correct) {
+    // Already guessed correctly!
+    return false;
+  }
+  return true;
 }
 /**
  * Generate an SVG circle element.
