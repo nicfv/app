@@ -113,6 +113,7 @@ div.button {
   padding: 0.5rem;
   color: #cdcdcd;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
 }
