@@ -1,4 +1,5 @@
 import globals from './globals';
+import { state } from './state';
 import * as lib from './lib';
 import svg from '../assets/marin.svg' with { type: 'text' };
 
@@ -44,13 +45,22 @@ for (let i = 0; i < globals.allowedGuesses; i++) {
   svgElement.appendChild(indicators[i]);
 }
 
+// Define interactive elements for each region
+const elements: { [key: string]: [SVGElement, HTMLDivElement] } = {};
+
 // Add buttons and color behavior for each path
 filteredPaths.forEach(path => {
   const button = document.createElement('div');
   button.setAttribute('class', 'button')
   buttonContainer.append(button);
-  button.innerText = path.id;
+  button.textContent = path.id;
   path.style.cursor = 'pointer';
   lib.setEvents(path, button, title);
   lib.handleGuess(path, button, indicators);
+  elements[path.id] = [path, button];
 });
+
+// If the player has already made guesses, simulate clicks on those paths to show feedback
+for (const guess of state.guesses) {
+  elements[guess][1].click();
+}
