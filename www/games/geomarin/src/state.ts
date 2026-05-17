@@ -1,5 +1,5 @@
 import { Canvas } from 'graphico';
-import { daysSinceEpoch } from './lib';
+import { daysSinceEpoch } from './lib/lib';
 
 /**
  * Represents the state of the game

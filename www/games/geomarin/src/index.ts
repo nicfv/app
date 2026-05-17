@@ -1,6 +1,6 @@
 import globals from './globals';
 import { state } from './state';
-import * as lib from './lib';
+import * as lib from './lib/lib';
 import svg from '../assets/marin.svg' with { type: 'text' };
 import { Canvas } from 'graphico';
 import { Bar } from './bar';

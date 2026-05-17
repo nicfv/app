@@ -1,6 +1,6 @@
-import global from './globals';
-import { close, correct } from './solution';
-import { saveData, state } from './state';
+import global from '../globals';
+import { close, correct } from '../solution';
+import { saveData, state } from '../state';
 
 /**
  * Shorthand for document.getElementById.
