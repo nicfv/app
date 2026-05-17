@@ -45,7 +45,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
         };
     }
     // If the game was last opened before today, reset guesses but keep solved and streak data
-    if (typeof rawData.lastOpened === 'number' && rawData.lastOpened > daysSinceEpoch()) {
+    if (typeof rawData.lastOpened === 'number' && rawData.lastOpened < daysSinceEpoch()) {
         return {
             guesses: [],
             solved: rawData.solved ?? [],
