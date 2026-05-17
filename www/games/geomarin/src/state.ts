@@ -1,5 +1,4 @@
 import { Canvas } from 'graphico';
-import { daysSinceEpoch } from './lib/game';
 
 /**
  * Represents the state of the game
@@ -33,6 +32,13 @@ export interface GameState {
      * The last time the player opened this game, in days since epoch
      */
     readonly lastOpened: number;
+}
+/**
+ * Get a unique, sequential number per day.
+ */
+export function daysSinceEpoch(): number {
+    const msPerDay: number = 1000 * 60 * 60 * 24;
+    return Math.floor(Date.now() / msPerDay);
 }
 /**
  * Load game state.

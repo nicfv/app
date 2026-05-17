@@ -2,8 +2,6 @@ import { global } from './globals';
 import { state } from './state';
 import * as lib from './lib/';
 import svg from '../assets/marin.svg' with { type: 'text' };
-import { Canvas } from 'graphico';
-import { Bar } from './bar';
 
 // Parse the SVG and add it to the page
 const parser: DOMParser = new DOMParser();
@@ -49,42 +47,3 @@ for (const i in state.guesses) {
   const guess: string = state.guesses[i];
   lib.game.setGuessColor(elements[guess][0], elements[guess][1], indicators[i]);
 }
-
-// Set the date in the footer
-lib.dom.el('date').textContent = `Puzzle: ${new Date().toDateString()}`;
-
-// Show and hide the intro message
-lib.dom.el('show-help').addEventListener('click', () => {
-  lib.dom.el('intro-bg').style.display = 'flex';
-});
-lib.dom.el('intro').addEventListener('click', () => {
-  lib.dom.el('intro-bg').style.display = 'none';
-});
-
-// Show, hide, and update the score message
-const distribution = new Canvas({
-  parent: lib.dom.el('distribution'),
-  width: 200,
-  height: 100,
-  background: 'black',
-});
-function updateScore() {
-  lib.dom.el('attempts').textContent = state.attempts.toString();
-  lib.dom.el('win-rate').textContent = `${Math.round(state.solved.reduce((a, b) => a + b, 0) / state.attempts * 100)}%`;
-  lib.dom.el('streak').textContent = state.streak.toString();
-  lib.dom.el('max-streak').textContent = state.maxStreak.toString();
-  const maxBarHeight: number = state.solved.reduce((a, b) => Math.max(a, b), 1);
-  distribution.clear();
-  for (let i = 1; i <= global.allowedGuesses; i++) {
-    const color: string = (lib.game.solved() && state.guesses.length === i) ? global.colors.correct : global.colors.incorrect;
-    distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, color));
-  }
-}
-updateScore();
-lib.dom.el('show-score').addEventListener('click', () => {
-  updateScore();
-  lib.dom.el('score-bg').style.display = 'flex';
-});
-lib.dom.el('close-score').addEventListener('click', () => {
-  lib.dom.el('score-bg').style.display = 'none';
-});

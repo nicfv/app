@@ -1,14 +1,8 @@
 import { global } from '../globals';
 import { close, correct } from '../solution';
-import { saveData, state } from '../state';
+import { daysSinceEpoch, saveData, state } from '../state';
+import { showScore } from './dom';
 
-/**
- * Get a unique, sequential number per day.
- */
-export function daysSinceEpoch(): number {
-  const msPerDay: number = 1000 * 60 * 60 * 24;
-  return Math.floor(Date.now() / msPerDay);
-}
 /**
  * Determine if the puzzle has been solved.
  */
@@ -86,6 +80,7 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
       state.streak++;
       state.maxStreak = Math.max(state.maxStreak, state.streak);
       state.lastSolved = daysSinceEpoch();
+      showScore();
     }
     // Save game data
     saveData(state);
