@@ -27,6 +27,34 @@
       <p>Click anywhere to close this popup and click the (?) icon at the bottom to show this message again.</p>
     </div>
   </div>
+  <div id="score-bg">
+    <div id="score">
+      <h2>Statistics</h2>
+      <div id="stats">
+        <div>
+          <h3 id="attempts">0</h3>
+          <p>Played</p>
+        </div>
+        <div>
+          <h3 id="win-rate">0</h3>
+          <p>Win %</p>
+        </div>
+        <div>
+          <h3 id="streak">0</h3>
+          <p>Current Streak</p>
+        </div>
+        <div>
+          <h3 id="max-streak">0</h3>
+          <p>Best Streak</p>
+        </div>
+      </div>
+      <div id="distribution"></div>
+      <div>
+        <a href="javascript:void(0);" title="Share results" id="share">Share</a>
+        <a href="javascript:void(0);" title="Close statistics" id="close-score">Close</a>
+      </div>
+    </div>
+  </div>
   <div id="content">
     <div></div> <!-- Placeholder to center the game -->
     <div id="game">
@@ -36,7 +64,8 @@
       </div>
     </div>
     <div id="footer">
-      <div>GeoMarin <a href="javascript:void(0);" title="Show help" id="show-help">(?)</a></div>
+      <div>GeoMarin <a href="javascript:void(0);" title="Show statistics" id="show-score">&#x1F4CA;</a> <a
+          href="javascript:void(0);" title="Show help" id="show-help">(?)</a></div>
       <div id="date">Placeholder</div>
       <div>Created by <a href="https://nicfv.com/" target="_blank">Nicolas Ventura</a></div>
     </div>
