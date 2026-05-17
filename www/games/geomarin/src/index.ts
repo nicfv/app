@@ -2,6 +2,8 @@ import globals from './globals';
 import { state } from './state';
 import * as lib from './lib';
 import svg from '../assets/marin.svg' with { type: 'text' };
+import { Canvas } from 'graphico';
+import { Bar } from './bar';
 
 // Parse the SVG and add it to the page
 const parser: DOMParser = new DOMParser();
@@ -58,4 +60,31 @@ lib.el('show-help').addEventListener('click', () => {
 });
 lib.el('intro').addEventListener('click', () => {
   lib.el('intro-bg').style.display = 'none';
+});
+
+// Show, hide, and update the score message
+const distribution = new Canvas({
+  parent: lib.el('distribution'),
+  width: 200,
+  height: 100,
+  background: 'black',
+});
+function updateScore() {
+  lib.el('attempts').textContent = state.attempts.toString();
+  lib.el('win-rate').textContent = `${Math.round(state.solved.reduce((a, b) => a + b, 0) / state.attempts * 100)}%`;
+  lib.el('streak').textContent = state.streak.toString();
+  lib.el('max-streak').textContent = state.maxStreak.toString();
+  const maxBarHeight: number = state.solved.reduce((a, b) => Math.max(a, b), 1);
+  distribution.clear();
+  for (let i = 1; i <= globals.allowedGuesses; i++) {
+    distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, globals.colors.correct));
+  }
+}
+updateScore();
+lib.el('show-score').addEventListener('click', () => {
+  updateScore();
+  lib.el('score-bg').style.display = 'flex';
+});
+lib.el('close-score').addEventListener('click', () => {
+  lib.el('score-bg').style.display = 'none';
 });
