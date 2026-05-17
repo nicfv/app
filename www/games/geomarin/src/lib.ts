@@ -16,10 +16,16 @@ export function daysSinceEpoch(): number {
   return Math.floor(Date.now() / msPerDay);
 }
 /**
+ * Determine if the puzzle has been solved.
+ */
+export function solved(): boolean {
+  return state.guesses.includes(correct);
+}
+/**
  * If not guessed, set the color of an SVG and corresponding HTML elements.
  */
 function setColor(path: SVGElement, button: HTMLDivElement, color: string, indicator?: SVGCircleElement): void {
-  if ((!state.guesses.includes(correct) && !state.guesses.includes(path.id)) || indicator) {
+  if ((!solved() && !state.guesses.includes(path.id)) || indicator) {
     path.setAttribute('fill', color);
     button.style.background = color;
   }
@@ -72,8 +78,10 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
     const indicator: SVGCircleElement = indicators[state.guesses.length];
     // Set color based on guess accuracy
     setGuessColor(path, button, indicator);
+    // Record this guess
+    state.guesses.push(path.id);
     // If correct, update solved and streak data
-    if (path.id === correct) {
+    if (solved()) {
       if (typeof state.solved[state.guesses.length] === 'number') {
         state.solved[state.guesses.length]++;
       } else {
@@ -83,8 +91,6 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
       state.maxStreak = Math.max(state.maxStreak, state.streak);
       state.lastSolved = daysSinceEpoch();
     }
-    // Record this guess
-    state.guesses.push(path.id);
     // Save game data
     saveData(state);
   }
@@ -117,8 +123,8 @@ function canGuess(id: string): boolean {
     // No more guesses allowed!
     return false;
   }
-  if (state.guesses.length > 0 && state.guesses.includes(correct)) {
-    // Already guessed correctly!
+  if (solved()) {
+    // Already solved the puzzle!
     return false;
   }
   return true;
