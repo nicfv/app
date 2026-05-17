@@ -1,4 +1,4 @@
-import globals from './globals';
+import { global } from './globals';
 import { state } from './state';
 import * as lib from './lib/';
 import svg from '../assets/marin.svg' with { type: 'text' };
@@ -14,7 +14,7 @@ lib.dom.el('marin-map').appendChild(svgElement);
 // Filter and sort path from the SVG
 const paths: SVGElement[] = Array.from(svgElement.getElementsByTagNameNS('http://www.w3.org/2000/svg', 'path'));
 const filteredPaths: SVGElement[] = paths
-  .filter(path => !globals.staticPathNames.includes(path.id))
+  .filter(path => !global.staticPathNames.includes(path.id))
   .sort((a, b) => a.id.localeCompare(b.id));
 
 // Add text elements for hints and tooltips
@@ -24,8 +24,8 @@ svgElement.append(title, hint);
 
 // Generate guess indicators
 const indicators: SVGCircleElement[] = [];
-for (let i = 0; i < globals.allowedGuesses; i++) {
-  indicators.push(lib.svg.circlePath(15 + i * 20, 285, 5, globals.colors.default));
+for (let i = 0; i < global.allowedGuesses; i++) {
+  indicators.push(lib.svg.circlePath(15 + i * 20, 285, 5, global.colors.default));
   svgElement.appendChild(indicators[i]);
 }
 
@@ -75,8 +75,8 @@ function updateScore() {
   lib.dom.el('max-streak').textContent = state.maxStreak.toString();
   const maxBarHeight: number = state.solved.reduce((a, b) => Math.max(a, b), 1);
   distribution.clear();
-  for (let i = 1; i <= globals.allowedGuesses; i++) {
-    const color: string = (lib.game.solved() && state.guesses.length === i) ? globals.colors.correct : globals.colors.incorrect;
+  for (let i = 1; i <= global.allowedGuesses; i++) {
+    const color: string = (lib.game.solved() && state.guesses.length === i) ? global.colors.correct : global.colors.incorrect;
     distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, color));
   }
 }

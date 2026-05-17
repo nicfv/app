@@ -1,7 +1,7 @@
 /**
  * Global properties
  */
-export default {
+export const global = {
   /**
    * Colors for SVG paths (regions)
    */
