@@ -74,14 +74,21 @@ el('intro').addEventListener('click', () => hideEl('intro-bg'));
 el('show-score').addEventListener('click', () => showScore());
 el('close-score').addEventListener('click', () => hideEl('score-bg'));
 
-// Show the score if the puzzle is already solved
+// Determine what to show on start up
 if (solved()) {
+  // Puzzle is already solved
+  hideEl('intro-bg');
+  showScore();
+} else if (state.guesses.length >= global.allowedGuesses) {
+  // Player has used all guesses
   hideEl('intro-bg');
   showScore();
 } else if (state.guesses.length > 0) {
+  // Player has made some guesses but hasn't solved yet
   hideEl('intro-bg');
   hideEl('score-bg');
 } else {
+  // Player hasn't made any guesses yet
   showEl('intro-bg');
   hideEl('score-bg');
 }
