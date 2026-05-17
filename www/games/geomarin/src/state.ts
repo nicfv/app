@@ -22,6 +22,10 @@ export interface GameState {
      */
     streak: number;
     /**
+     * The maximum streak of consecutive days the player has solved the puzzle
+     */
+    maxStreak: number;
+    /**
      * The last time the player solved this game, in days since epoch
      */
     lastSolved: number;
@@ -34,12 +38,14 @@ export interface GameState {
  * Load game state.
  */
 export function loadData(rawData: Partial<GameState> | undefined): GameState {
+    // console.log('Loaded data:', rawData);
     if (!rawData) {
         return {
             guesses: [],
             solved: [],
             attempts: 0,
             streak: 0,
+            maxStreak: 0,
             lastSolved: 0,
             lastOpened: daysSinceEpoch(),
         };
@@ -51,6 +57,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
             solved: rawData.solved ?? [],
             attempts: (rawData.attempts ?? 0) + 1,
             streak: ((rawData.lastSolved ?? 0) === daysSinceEpoch() - 1) ? (rawData.streak ?? 0) : 0,
+            maxStreak: Math.max(rawData.maxStreak ?? 0, rawData.streak ?? 0),
             lastSolved: rawData.lastSolved ?? 0,
             lastOpened: daysSinceEpoch(),
         };
@@ -60,6 +67,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
         solved: rawData.solved ?? [],
         attempts: rawData.attempts ?? 0,
         streak: rawData.streak ?? 0,
+        maxStreak: rawData.maxStreak ?? 0,
         lastSolved: rawData.lastSolved ?? 0,
         lastOpened: daysSinceEpoch(),
     }
@@ -69,8 +77,10 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
  */
 export function saveData(state: GameState): void {
     canvas.saveData<GameState>(state, 'geomarin');
+    // console.log('Saved data:', state);
 }
 
 // Load any saved game data
 const canvas: Canvas = new Canvas({ parent: document.createElement('div') });
 export const state: GameState = loadData(canvas.loadData<GameState>('geomarin'));
+// console.log('Current game state:', state);

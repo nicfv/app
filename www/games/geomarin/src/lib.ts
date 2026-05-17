@@ -74,6 +74,7 @@ export function handleGuess(path: SVGElement, button: HTMLDivElement, indicators
         state.solved[state.guesses.length] = 1;
       }
       state.streak++;
+      state.maxStreak = Math.max(state.maxStreak, state.streak);
       state.lastSolved = daysSinceEpoch();
     }
     // Record this guess
