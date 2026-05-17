@@ -3,6 +3,7 @@ import { state } from '../state';
 import { Canvas } from 'graphico';
 import { Bar } from './bar';
 import { solved } from './game';
+import { close, correct } from '../solution';
 
 /**
  * Shorthand for document.getElementById.
@@ -53,6 +54,8 @@ function updateScore() {
     const color: string = (solved() && state.guesses.length === i) ? global.colors.correct : global.colors.incorrect;
     distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, color));
   }
+  // Reset share button text
+  el('share').textContent = 'Share';
 }
 /**
  * Show the score distribution and stats.
@@ -72,6 +75,36 @@ el('intro').addEventListener('click', () => hideEl('intro-bg'));
 // Show and hide the score message
 el('show-score').addEventListener('click', () => showScore());
 el('close-score').addEventListener('click', () => hideEl('score-bg'));
+
+// Set share button behavior
+el('share').addEventListener('click', () => {
+  const url = 'https://.../';
+  let shareText: string;
+  let guesses = '';
+  for (let i = 0; i < global.allowedGuesses; i++) {
+    if (i < state.guesses.length) {
+      const guess = state.guesses[i];
+      if (guess === correct) {
+        guesses += '🟩';
+      } else if (close.includes(guess)) {
+        guesses += '🟨';
+      } else {
+        guesses += '⬛';
+      }
+    } else {
+      guesses += '⬜';
+    }
+  }
+  if (solved()) {
+    shareText = `${guesses}\n\nI solved today's GeoMarin puzzle in ${state.guesses.length} guesses!\nCan you beat my score?\n\n${url}`;
+  } else if (state.guesses.length >= global.allowedGuesses) {
+    shareText = `${guesses}\n\nI couldn't solve today's GeoMarin puzzle.\nCan you solve it?\n\n${url}`;
+  } else {
+    shareText = `${guesses}\n\nI'm playing today's GeoMarin puzzle and have made ${state.guesses.length} guesses so far.\nCan you solve it?\n\n${url}`;
+  }
+  navigator.clipboard.writeText(shareText);
+  el('share').textContent = 'Copied!';
+});
 
 // Determine what to show on start up
 if (solved()) {
