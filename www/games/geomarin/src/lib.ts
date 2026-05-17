@@ -3,6 +3,12 @@ import { close, correct } from './solution';
 import { saveData, state } from './state';
 
 /**
+ * Shorthand for document.getElementById.
+ */
+export function el(id: string): HTMLElement {
+  return document.getElementById(id) as HTMLElement;
+}
+/**
  * Get a unique, sequential number per day.
  */
 export function daysSinceEpoch(): number {
