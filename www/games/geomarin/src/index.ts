@@ -44,11 +44,10 @@ filteredPaths.forEach(path => {
   elements[path.id] = [path, button];
 });
 
-// If the player has already made guesses, simulate clicks on those paths to show feedback
-let i = 0;
-for (const guess of state.guesses) {
+// If the player has already made guesses, set path and button colors accordingly
+for (const i in state.guesses) {
+  const guess: string = state.guesses[i];
   lib.game.setGuessColor(elements[guess][0], elements[guess][1], indicators[i]);
-  i++;
 }
 
 // Set the date in the footer
