@@ -3,17 +3,6 @@ import { state } from './state';
 import * as lib from './lib';
 import svg from '../assets/marin.svg' with { type: 'text' };
 
-// Set the date in the footer
-lib.el('date').textContent = `Puzzle: ${new Date().toDateString()}`;
-
-// Show and hide the intro message
-lib.el('show-help').addEventListener('click', () => {
-  lib.el('intro-bg').style.display = 'flex';
-});
-lib.el('intro').addEventListener('click', () => {
-  lib.el('intro-bg').style.display = 'none';
-});
-
 // Parse the SVG and add it to the page
 const parser: DOMParser = new DOMParser();
 const svgDoc: Document = parser.parseFromString(svg, 'image/svg+xml');
@@ -59,3 +48,14 @@ for (const guess of state.guesses) {
   lib.setGuessColor(elements[guess][0], elements[guess][1], indicators[i]);
   i++;
 }
+
+// Set the date in the footer
+lib.el('date').textContent = `Puzzle: ${new Date().toDateString()}`;
+
+// Show and hide the intro message
+lib.el('show-help').addEventListener('click', () => {
+  lib.el('intro-bg').style.display = 'flex';
+});
+lib.el('intro').addEventListener('click', () => {
+  lib.el('intro-bg').style.display = 'none';
+});
