@@ -1,6 +1,12 @@
 import { Drawable } from 'graphico';
 
+/**
+ * Represents a bar in the distribution graph
+ */
 export class Bar implements Drawable {
+    /**
+     * Initializes a new bar with the given parameters
+     */
     constructor(private readonly name: string, private readonly value: number, private readonly maxValue: number, private readonly barNum: number, private readonly thickness: number, private readonly color: string) { }
     public draw(ctx: CanvasRenderingContext2D): void {
         const yOffset: number = this.barNum * this.thickness * 1.25;
