@@ -43,7 +43,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
         return {
             guesses: [],
             solved: [],
-            attempts: 0,
+            attempts: 1,
             streak: 0,
             maxStreak: 0,
             lastSolved: 0,
@@ -65,7 +65,7 @@ export function loadData(rawData: Partial<GameState> | undefined): GameState {
     return {
         guesses: rawData.guesses ?? [],
         solved: rawData.solved ?? [],
-        attempts: rawData.attempts ?? 0,
+        attempts: rawData.attempts ?? 1,
         streak: rawData.streak ?? 0,
         maxStreak: rawData.maxStreak ?? 0,
         lastSolved: rawData.lastSolved ?? 0,
