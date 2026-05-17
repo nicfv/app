@@ -42,7 +42,6 @@ function updateScore() {
   // Create the bar graph for the score distribution
   removeChildren(el('distribution'));
   const distribution = new Canvas({
-    debug: true,
     parent: el('distribution'),
     width: 200,
     height: 100,
