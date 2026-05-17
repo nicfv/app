@@ -77,7 +77,8 @@ function updateScore() {
   const maxBarHeight: number = state.solved.reduce((a, b) => Math.max(a, b), 1);
   distribution.clear();
   for (let i = 1; i <= globals.allowedGuesses; i++) {
-    distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, globals.colors.correct));
+    const color: string = (lib.solved() && state.guesses.length === i) ? globals.colors.correct : globals.colors.incorrect;
+    distribution.draw(new Bar(i.toString(), state.solved[i] ?? 0, maxBarHeight, i, 12, color));
   }
 }
 updateScore();
