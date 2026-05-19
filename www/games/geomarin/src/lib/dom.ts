@@ -78,7 +78,7 @@ el('close-score').addEventListener('click', () => hideEl('score-bg'));
 
 // Set share button behavior
 el('share').addEventListener('click', () => {
-  const url = 'https://.../';
+  const url = 'https://app.nicfv.com/games/geomarin/';
   let shareText: string;
   let guesses = '';
   for (let i = 0; i < global.allowedGuesses; i++) {
