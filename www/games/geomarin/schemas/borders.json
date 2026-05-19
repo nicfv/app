@@ -8,6 +8,7 @@
             "items": {
                 "type": "array",
                 "minItems": 2,
+                "maxItems": 2,
                 "uniqueItems": true,
                 "items": {
                     "$ref": "places.json"
