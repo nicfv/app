@@ -56,6 +56,26 @@
     "Hamilton Amphitheatre Park": {
       "region": "Novato",
       "hint": "Outdoor music venue"
+    },
+    "Scottsdale Pond": {
+      "region": "Novato",
+      "hint": ""
+    },
+    "Ohair Park": {
+      "region": "Novato",
+      "hint": "Dog friendly park"
+    },
+    "Lynwood Hill Park": {
+      "region": "Novato",
+      "hint": ""
+    },
+    "Stafford Lake Park": {
+      "region": "North Novato",
+      "hint": "Hilly 139-acre park with a fishing lake, a nature trail & picnic areas that can host large groups."
+    },
+    "Buck Gulch Falls": {
+      "region": "South Novato",
+      "hint": "Hike to a waterfall"
     }
   }
 }
