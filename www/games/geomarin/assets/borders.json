@@ -1,203 +1,185 @@
 {
-    "$schema": "../schemas/borders.json",
-    "borders": [
-        [
-            "Dillon Beach",
-            "Tomales",
-            "North Marin County"
-        ],
-        [
-            "North Marin County",
-            "Marshall"
-        ],
-        [
-            "North Marin County",
-            "Point Reyes Station",
-            "Olema"
-        ],
-        [
-            "Inverness",
-            "Point Reyes Station",
-            "Olema"
-        ],
-        [
-            "Inverness",
-            "Olema",
-            "West Marin County"
-        ],
-        [
-            "Bolinas",
-            "West Marin County"
-        ],
-        [
-            "North Marin County",
-            "West Marin County",
-            "Nicasio"
-        ],
-        [
-            "North Marin County",
-            "North Novato",
-            "Nicasio"
-        ],
-        [
-            "North Novato",
-            "Novato",
-            "Indian Valley",
-            "South Novato"
-        ],
-        [
-            "North Novato",
-            "Novato",
-            "Green Point"
-        ],
-        [
-            "Novato",
-            "Green Point",
-            "Black Point"
-        ],
-        [
-            "Novato",
-            "Black Point",
-            "Bel Marin Keys"
-        ],
-        [
-            "Novato",
-            "Marinwood",
-            "St. Vincent"
-        ],
-        [
-            "Novato",
-            "South Novato",
-            "Marinwood",
-            "Lucas Valley"
-        ],
-        [
-            "Novato",
-            "South Novato",
-            "Nicasio"
-        ],
-        [
-            "Nicasio",
-            "Lucas Valley",
-            "Sleepy Hollow",
-            "Fairfax"
-        ],
-        [
-            "St. Vincent",
-            "Marinwood",
-            "San Rafael"
-        ],
-        [
-            "San Rafael",
-            "Santa Venetia"
-        ],
-        [
-            "San Rafael",
-            "Point San Pedro"
-        ],
-        [
-            "San Rafael",
-            "Bayside Acres"
-        ],
-        [
-            "San Rafael",
-            "San Quentin",
-            "Larkspur"
-        ],
-        [
-            "San Rafael",
-            "Larkspur",
-            "Kentfield"
-        ],
-        [
-            "San Rafael",
-            "Kentfield",
-            "Ross"
-        ],
-        [
-            "San Rafael",
-            "Ross",
-            "San Anselmo"
-        ],
-        [
-            "San Rafael",
-            "San Anselmo",
-            "Sleepy Hollow"
-        ],
-        [
-            "San Anselmo",
-            "Fairfax",
-            "Central Marin County"
-        ],
-        [
-            "Woodacre",
-            "Fairfax",
-            "San Geronimo Valley"
-        ],
-        [
-            "San Geronimo Valley",
-            "Forest Knolls",
-            "Lagunitas"
-        ],
-        [
-            "Forest Knolls",
-            "Nicasio",
-            "West Marin County"
-        ],
-        [
-            "West Marin County",
-            "San Geronimo Valley",
-            "Lagunitas"
-        ],
-        [
-            "Central Marin County",
-            "West Marin County"
-        ],
-        [
-            "Central Marin County",
-            "South Marin County"
-        ],
-        [
-            "Paradise Cay",
-            "Corte Madera",
-            "Tiburon"
-        ],
-        [
-            "Tiburon",
-            "Belvedere"
-        ],
-        [
-            "Tiburon",
-            "Strawberry"
-        ],
-        [
-            "Corte Madera",
-            "Mill Valley",
-            "Strawberry"
-        ],
-        [
-            "Corte Madera",
-            "Larkspur",
-            "Mill Valley"
-        ],
-        [
-            "Larkspur",
-            "Kentfield",
-            "Mill Valley"
-        ],
-        [
-            "Kentfield",
-            "Mill Valley",
-            "Central Marin County"
-        ],
-        [
-            "Kentfield",
-            "Ross",
-            "Central Marin County"
-        ],
-        [
-            "Bolinas",
-            "Stinson Beach"
-        ]
+  "$schema": "../schemas/borders.json",
+  "borders": [
+    [
+      "Bayside Acres",
+      "San Rafael"
+    ],
+    [
+      "Bel Marin Keys",
+      "Black Point"
+    ],
+    [
+      "Bel Marin Keys",
+      "Novato"
+    ],
+    [
+      "Belvedere",
+      "Tiburon"
+    ],
+    [
+      "Black Point",
+      "Green Point"
+    ],
+    [
+      "Black Point",
+      "Novato"
+    ],
+    [
+      "Bolinas",
+      "Stinson Beach"
+    ],
+    [
+      "Bolinas",
+      "West Marin County"
+    ],
+    [
+      "Central Marin County",
+      "Fairfax"
+    ],
+    [
+      "Central Marin County",
+      "Kentfield"
+    ],
+    [
+      "Central Marin County",
+      "Mill Valley"
+    ],
+    [
+      "Central Marin County",
+      "Ross"
+    ],
+    [
+      "Central Marin County",
+      "San Anselmo"
+    ],
+    [
+      "Central Marin County",
+      "San Geronimo Valley"
+    ],
+    [
+      "Central Marin County",
+      "South Marin County"
+    ],
+    [
+      "Central Marin County",
+      "West Marin County"
+    ],
+    [
+      "Corte Madera",
+      "Larkspur"
+    ],
+    [
+      "Corte Madera",
+      "Mill Valley"
+    ],
+    [
+      "Corte Madera",
+      "Paradise Cay"
+    ],
+    [
+      "Corte Madera",
+      "Strawberry"
+    ],
+    [
+      "Corte Madera",
+      "Tiburon"
+    ],
+    [
+      "Dillon Beach",
+      "North Marin County"
+    ],
+    [
+      "Dillon Beach",
+      "Tomales"
+    ],
+    [
+      "Fairfax",
+      "Lucas Valley"
+    ],
+    [
+      "Fairfax",
+      "Nicasio"
+    ],
+    [
+      "Fairfax",
+      "San Anselmo"
+    ],
+    [
+      "Fairfax",
+      "San Geronimo Valley"
+    ],
+    [
+      "Fairfax",
+      "Sleepy Hollow"
+    ],
+    [
+      "Fairfax",
+      "Woodacre"
+    ],
+    [
+      "Forest Knolls",
+      "Lagunitas"
+    ],
+    [
+      "Forest Knolls",
+      "Nicasio"
+    ],
+    [
+      "Forest Knolls",
+      "San Geronimo Valley"
+    ],
+    [
+      "Forest Knolls",
+      "West Marin County"
+    ],
+    [
+      "Green Point",
+      "North Novato"
+    ],
+    [
+      "Green Point",
+      "Novato"
+    ],
+    [
+      "Indian Valley",
+      "North Novato"
+    ],
+    [
+      "Indian Valley",
+      "Novato"
+    ],
+    [
+      "Indian Valley",
+      "South Novato"
+    ],
+    [
+      "Inverness",
+      "Olema"
+    ],
+    [
+      "Inverness",
+      "Point Reyes Station"
+    ],
+    [
+      "Inverness",
+      "West Marin County"
+    ],
+    [
+      "Kentfield",
+      "Larkspur"
+    ],
+    [
+      "Kentfield",
+      "Mill Valley"
+    ],
+    [
+      "Kentfield",
+      "Ross"
+    ],
+    [
+      "Kentfield",
+      "San Rafael"
     ]
+  ]
 }
