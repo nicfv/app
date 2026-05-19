@@ -1,61 +1,31 @@
 {
   "$schema": "../schemas/solutions.json",
-  "solutions": {
-    "Hill Park": {
-      "region": "Novato",
+  "Novato": [
+    {
+      "name": "Hill Park",
       "hint": "Outdoor sports and dog friendly"
     },
-    "Miwok Park": {
-      "region": "Novato",
+    {
+      "name": "Miwok Park",
       "hint": "Dog friendly and has a Native American museum"
     },
-    "Museum of the American Indian": {
-      "region": "Novato",
+    {
+      "name": "Museum of the American Indian",
       "hint": "Located in a park"
     },
-    "Mt. Burdell Open Space Preserve": {
-      "region": "Novato",
-      "hint": "Hiking"
+    {
+      "name": "Mt. Burdell",
+      "hint": "Open space preserve for hiking"
     },
-    "Partridge Knolls Mini Park": {
-      "region": "Novato",
-      "hint": "Community park"
-    },
-    "Rush Creek Marsh": {
-      "region": "North Novato",
-      "hint": "Wildlife Preserve"
-    },
-    "Olive Park": {
-      "region": "Novato",
-      "hint": "Outdoor sports"
-    },
-    "Deer Island": {
-      "region": "Novato",
-      "hint": "Open space preserve"
-    },
-    "StoneTree": {
-      "region": "Novato",
-      "hint": "Golf Club"
-    },
-    "Vince Mulroy Nature Reserve": {
-      "region": "Novato",
-      "hint": "Memorial Wildlife Preserve"
-    },
-    "Cavalla Cay": {
-      "region": "Bel Marin Keys",
-      "hint": "Waterfront park"
-    },
-    "Montego Park": {
-      "region": "Bel Marin Keys",
-      "hint": "Tennis courts"
-    },
-    "Hamilton Wetlands": {
-      "region": "Novato",
-      "hint": "Wetlands nature preserve featuring walking/cycling trails, plus egrets & other wildlife."
-    },
-    "Hamilton Amphitheatre Park": {
-      "region": "Novato",
-      "hint": "Outdoor music venue"
+    {
+      "name": "Partridge Knolls Mini Park",
+      "hint": "Neighborhood community park"
     }
-  }
+  ],
+  "North Novato": [
+    {
+      "name": "Rush Creek Marsh",
+      "hint": "Wildlife Preserve"
+    }
+  ]
 }
