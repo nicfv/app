@@ -65,7 +65,8 @@ export function showScore() {
   updateScore();
 }
 
-// Set the date in the footer
+// Set the version and date in the footer
+el('version').textContent = `v${global.version}`;
 el('date').textContent = `Puzzle: ${new Date().toDateString()}`;
 
 // Show and hide the intro message
