@@ -1,7 +1,11 @@
 /**
  * Global properties
  */
-export default {
+export const global = {
+  /**
+   * Application version number
+   */
+  version: '1.0',
   /**
    * Colors for SVG paths (regions)
    */
@@ -20,10 +24,9 @@ export default {
     'Water',
     'Coastal Marin',
     'Outer Territory',
-    'Marin County',
   ],
   /**
-   * The guesses made by the player for this game
+   * Number of allowed guesses
    */
-  guesses: [],
+  allowedGuesses: 5,
 };

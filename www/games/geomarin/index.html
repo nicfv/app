@@ -9,37 +9,70 @@
     content="A daily puzzle game dedicated to the unique architecture and natural beauty of Marin county, California.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="assets/main.css">
-  <script type="text/javascript" src="dist/main.js"></script>
+  <script type="text/javascript" src="dist/main.js" defer></script>
 </head>
 
 <body>
-  <h1>GeoMarin</h1>
-  <div class="flexrow">
-    <div id="c1" class="counter"></div>
-    <div id="c2" class="counter"></div>
-    <div id="c3" class="counter"></div>
-    <div id="c4" class="counter"></div>
-    <div id="c5" class="counter"></div>
-  </div>
-  <div class="flexrow" id="row2">
-    <div id="hint">
-      <h2>Location Hint</h2>
-      <p id="location-hint">Description</p>
-      <h2>Instructions</h2>
+  <div id="intro-bg">
+    <div id="intro">
+      <h2>GeoMarin</h2>
       <p>The hint below describes a location found in Marin, California. Try to guess where it can be found within 5
-        guesses or less. To make a guess, click on the cities on the right, or click on the map below. Making one guess
-        at a time will color one of the 5 squares above. An incorrect guess will color a square in <b
-          class="incorrect">gray</b> or <b class="close">yellow</b> and the correct guess will color a square <b
-          class="correct">green</b>. A <b class="incorrect">gray</b> square means that your guess does not border the
-        correct guess at all, but a <b class="close">yellow</b> square means that your guess shares at least one border
+        guesses or less. To make a guess, click on the cities on the right, or click directly on the map. Making one
+        guess
+        at a time will color one of the 5 circles at the bottom of the map. An incorrect guess will color a circle in <b
+          class="incorrect">gray</b> or <b class="close">yellow</b> and the correct guess will color a circle <b
+          class="correct">green</b>. A <b class="incorrect">gray</b> circle means that your guess does not border the
+        correct guess at all, but a <b class="close">yellow</b> circle means that your guess shares at least one border
         with the correct guess (including corners.) Good luck, and enjoy discovering new places in Marin!</p>
+      <p>Click anywhere to close this popup and click the (?) icon at the bottom to show this message again.</p>
     </div>
-    <div id="buttons"></div>
   </div>
-  <object id="marin-map" data="assets/marin.svg" type="image/svg+xml">
-    <img src="assets/marin.svg">
-  </object>
-  <div id="footer">Puzzle 2025-02-17 // Created by <a href="https://nicfv.com/" target="_blank">Nicolas Ventura</a>
+  <div id="score-bg">
+    <div id="score">
+      <h2>Statistics</h2>
+      <div id="stats">
+        <div>
+          <h3 id="attempts">0</h3>
+          <p>Played</p>
+        </div>
+        <div>
+          <h3 id="win-rate">0</h3>
+          <p>Win %</p>
+        </div>
+        <div>
+          <h3 id="streak">0</h3>
+          <p>Current Streak</p>
+        </div>
+        <div>
+          <h3 id="max-streak">0</h3>
+          <p>Best Streak</p>
+        </div>
+      </div>
+      <div id="distribution"></div>
+      <div>
+        <a href="javascript:void(0);" title="Share results" id="share">Share</a>
+        <a href="javascript:void(0);" title="Close statistics" id="close-score">Close</a>
+      </div>
+    </div>
+  </div>
+  <div id="content">
+    <div></div> <!-- Placeholder to center the game -->
+    <div id="game">
+      <div id="marin-map"></div>
+      <div id="button-container">
+        <div id="buttons"></div>
+      </div>
+    </div>
+    <div id="footer">
+      <div>
+        <span>GeoMarin</span>
+        <sup id="version">Version</sup>
+        <a href="javascript:void(0);" title="Show statistics" id="show-score">&#x1F4CA;</a>
+        <a href="javascript:void(0);" title="Show help" id="show-help">(?)</a>
+      </div>
+      <div id="date">Placeholder</div>
+      <div>Created by <a href="https://nicfv.com/" target="_blank">Nicolas Ventura</a></div>
+    </div>
   </div>
 </body>
 

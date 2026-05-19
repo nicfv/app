@@ -1,0 +1,92 @@
+import { Canvas } from 'graphico';
+
+/**
+ * Represents the state of the game
+ */
+export interface GameState {
+    /**
+     * The guesses made by the player for this game
+     */
+    readonly guesses: string[];
+    /**
+     * The number of puzzles the player has solved
+     */
+    readonly solved: number[];
+    /**
+     * The total number of attempts the player has made
+     */
+    readonly attempts: number;
+    /**
+     * The current streak of consecutive days the player has solved the puzzle
+     */
+    streak: number;
+    /**
+     * The maximum streak of consecutive days the player has solved the puzzle
+     */
+    maxStreak: number;
+    /**
+     * The last time the player solved this game, in days since epoch
+     */
+    lastSolved: number;
+    /**
+     * The last time the player opened this game, in days since epoch
+     */
+    readonly lastOpened: number;
+}
+/**
+ * Get a unique, sequential number per day.
+ */
+export function daysSinceEpoch(): number {
+    const msPerDay: number = 1000 * 60 * 60 * 24;
+    return Math.floor(Date.now() / msPerDay);
+}
+/**
+ * Load game state.
+ */
+export function loadData(rawData: Partial<GameState> | undefined): GameState {
+    // console.log('Loaded data:', rawData);
+    if (!rawData) {
+        return {
+            guesses: [],
+            solved: [],
+            attempts: 1,
+            streak: 0,
+            maxStreak: 0,
+            lastSolved: 0,
+            lastOpened: daysSinceEpoch(),
+        };
+    }
+    // If the game was last opened before today, reset guesses but keep solved and streak data
+    if (typeof rawData.lastOpened === 'number' && rawData.lastOpened < daysSinceEpoch()) {
+        return {
+            guesses: [],
+            solved: rawData.solved ?? [],
+            attempts: (rawData.attempts ?? 0) + 1,
+            streak: ((rawData.lastSolved ?? 0) === daysSinceEpoch() - 1) ? (rawData.streak ?? 0) : 0,
+            maxStreak: Math.max(rawData.maxStreak ?? 0, rawData.streak ?? 0),
+            lastSolved: rawData.lastSolved ?? 0,
+            lastOpened: daysSinceEpoch(),
+        };
+    }
+    return {
+        guesses: rawData.guesses ?? [],
+        solved: rawData.solved ?? [],
+        attempts: rawData.attempts ?? 1,
+        streak: rawData.streak ?? 0,
+        maxStreak: rawData.maxStreak ?? 0,
+        lastSolved: rawData.lastSolved ?? 0,
+        lastOpened: daysSinceEpoch(),
+    }
+}
+/**
+ * Save game state.
+ */
+export function saveData(state: GameState): void {
+    canvas.saveData<GameState>(state, 'geomarin');
+    // console.log('Saved data:', state);
+}
+
+// Load any saved game data
+const canvas: Canvas = new Canvas({ parent: document.createElement('div') });
+export const state: GameState = loadData(canvas.loadData<GameState>('geomarin'));
+// console.log('Current game state:', state);

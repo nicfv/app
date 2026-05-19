@@ -2,5 +2,9 @@
   "name": "geomarin",
   "scripts": {
     "start": "../../../cmd/start"
+  },
+  "dependencies": {
+    "graphico": "1.3.0",
+    "smath": "2.2.0"
   }
 }

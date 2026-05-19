@@ -1,0 +1,81 @@
+{
+  "$schema": "../schemas/solutions.json",
+  "solutions": {
+    "Hill Park": {
+      "region": "Novato",
+      "hint": "Outdoor sports and dog friendly"
+    },
+    "Miwok Park": {
+      "region": "Novato",
+      "hint": "Dog friendly and has a Native American museum"
+    },
+    "Museum of the American Indian": {
+      "region": "Novato",
+      "hint": "Located in a park"
+    },
+    "Mt. Burdell Open Space Preserve": {
+      "region": "Novato",
+      "hint": "Hiking"
+    },
+    "Partridge Knolls Mini Park": {
+      "region": "Novato",
+      "hint": "Community park"
+    },
+    "Rush Creek Marsh": {
+      "region": "North Novato",
+      "hint": "Wildlife Preserve"
+    },
+    "Olive Park": {
+      "region": "Novato",
+      "hint": "Outdoor sports"
+    },
+    "Deer Island": {
+      "region": "Novato",
+      "hint": "Open space preserve"
+    },
+    "StoneTree": {
+      "region": "Novato",
+      "hint": "Golf Club"
+    },
+    "Vince Mulroy Nature Reserve": {
+      "region": "Novato",
+      "hint": "Memorial Wildlife Preserve"
+    },
+    "Cavalla Cay": {
+      "region": "Bel Marin Keys",
+      "hint": "Waterfront park"
+    },
+    "Montego Park": {
+      "region": "Bel Marin Keys",
+      "hint": "Tennis courts"
+    },
+    "Hamilton Wetlands": {
+      "region": "Novato",
+      "hint": "Wetlands nature preserve featuring walking/cycling trails, plus egrets & other wildlife."
+    },
+    "Hamilton Amphitheatre Park": {
+      "region": "Novato",
+      "hint": "Outdoor music venue"
+    },
+    "Scottsdale Pond": {
+      "region": "Novato",
+      "hint": ""
+    },
+    "Ohair Park": {
+      "region": "Novato",
+      "hint": "Dog friendly park"
+    },
+    "Lynwood Hill Park": {
+      "region": "Novato",
+      "hint": ""
+    },
+    "Stafford Lake Park": {
+      "region": "North Novato",
+      "hint": "Hilly 139-acre park with a fishing lake, a nature trail & picnic areas that can host large groups."
+    },
+    "Buck Gulch Falls": {
+      "region": "South Novato",
+      "hint": "Hike to a waterfall"
+    }
+  }
+}

@@ -4,24 +4,19 @@
   outline: none;
 }
 
+html,
 body {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
   font-family: sans-serif;
   background: black;
   color: white;
 }
 
-div.flexrow {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1,
 h2 {
   text-align: center;
   margin: 0;
@@ -41,38 +36,79 @@ h2 {
   color: #10d010;
 }
 
-div.counter {
+#intro-bg,
+#score-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: not-allowed;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 1000;
+}
+
+#intro,
+#score {
+  background: black;
+  cursor: initial;
+  max-width: 30rem;
+  margin: auto;
+  padding: 0.5rem;
+  border: 1px solid #4d4d4d;
+}
+
+#score {
+  text-align: center;
+}
+
+#stats {
+  display: flex;
+  flex-direction: row;
+}
+
+#stats>* {
+  flex: 1;
+}
+
+#content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#game {
+  /* Forces it to expand past the SVG's natural size */
   width: 100%;
-  max-width: 4rem;
-  aspect-ratio: 1 / 1;
-  border-radius: 0.5rem;
-  margin: 1rem;
-  background: #f2f2f2;
+  /* Caps the expansion right where you want it */
+  max-width: 50rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #marin-map {
+  /* Forces the map container to grow and fill the 50rem boundary */
+  flex: 1;
+  /* Essential flexbox safety net to keep the SVG from breaking layout boundaries */
+  min-width: 0;
+}
+
+#marin-map svg {
   width: 100%;
-  margin: 0.25rem 0;
+  height: auto;
 }
 
-#row2 {
-  height: 20rem;
-}
-
-#hint,
 #buttons {
+  height: 0;
+  min-height: 100%;
   border: 1px solid #4d4d4d;
-  height: 100%;
-  overflow: auto;
-}
-
-#hint {
-  width: 100%;
-  padding: 0.5rem;
-}
-
-#buttons {
-  width: max-content;
+  overflow-y: auto;
+  width: min-content;
   margin-left: 0.25rem;
 }
 
@@ -86,17 +122,15 @@ div.button {
   cursor: pointer;
 }
 
-div.button:hover {
-  background: #cdcdcd;
-}
-
-div.button:active {
-  background: #cdefab;
-}
-
-div#footer {
+#footer {
+  min-width: 100%;
+  background: #111;
+  padding: 0.5rem;
   color: #cdcdcd;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 a,
