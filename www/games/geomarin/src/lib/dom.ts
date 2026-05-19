@@ -3,7 +3,7 @@ import { state } from '../state';
 import { Canvas } from 'graphico';
 import { Bar } from './bar';
 import { solved } from './game';
-import { close, correct } from '../solution';
+import { close, correct } from './solution';
 
 /**
  * Shorthand for document.getElementById.

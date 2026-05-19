@@ -1,5 +1,5 @@
 import { global } from '../globals';
-import { close, correct } from '../solution';
+import { close, correct } from './solution';
 import { daysSinceEpoch, saveData, state } from '../state';
 import { showScore } from './dom';
 

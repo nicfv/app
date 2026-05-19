@@ -1,4 +1,4 @@
-import { borders } from '../assets/borders.json' with { type: 'json' };
+import { borders } from '../../assets/borders.json' with { type: 'json' };
 /**
  * The correct answer for this game
  */
