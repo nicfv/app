@@ -3,6 +3,7 @@
     "type": "object",
     "properties": {
         "borders": {
+            "description": "A complete list of region borders",
             "type": "array",
             "uniqueItems": true,
             "items": {
