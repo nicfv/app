@@ -17,8 +17,11 @@ const filteredPaths: SVGElement[] = paths
 
 // Add text elements for hints and tooltips
 const title: SVGTextElement = lib.svg.createText('white', 0.75, 290, 10, 'end', 'hanging');
-const hint: SVGTextElement = lib.svg.createText('white', 0.75, 10, 270, 'start', 'alphabetic');
-svgElement.append(title, hint);
+const name: SVGTextElement = lib.svg.createText('white', 0.75, 10, 260, 'start', 'alphabetic');
+const hint: SVGTextElement = lib.svg.createText('white', 0.35, 10, 270, 'start', 'alphabetic');
+name.textContent = lib.sln.name;
+hint.textContent = lib.sln.hint;
+svgElement.append(title, name, hint);
 
 // Generate guess indicators
 const indicators: SVGCircleElement[] = [];
