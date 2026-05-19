@@ -1,0 +1,9 @@
+{
+  "$schema": "../schemas/solutions.json",
+  "solutions": {
+    "Hill Park": {
+      "region": "Novato",
+      "hint": "Outdoor sports and dog friendly"
+    }
+  }
+}
