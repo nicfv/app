@@ -1,5 +1,6 @@
 import { borders } from '../../assets/borders.json' with { type: 'json' };
 import { solutions } from '../../assets/solutions.json' with { type: 'json' };
+import { SMath } from 'smath';
 import { daysSinceEpoch } from '../state';
 
 /**
@@ -9,13 +10,13 @@ type SolutionName = keyof typeof solutions;
 // Generate a pseudorandom point of interest
 const allSolutions: SolutionName[] = Object.keys(solutions) as SolutionName[];
 const numSolutions: number = allSolutions.length;
-const primes: number[] = [23, 19, 17, 13, 11, 7, 5, 3, 2, 1];
-let ran = 1;
-for (const prime of primes) {
-    if ((numSolutions % prime) > 0) {
-        ran = prime;
+let ran: number = SMath.clamp(numSolutions / 2 - 1, 1, Infinity) | 0;
+while (ran > 1) {
+    // Check if coprime
+    if (SMath.gcd(numSolutions, ran) === 1) {
         break;
     }
+    ran--;
 }
 const solutionId: number = (daysSinceEpoch() * ran) % numSolutions;
 const solutionName: SolutionName = allSolutions[solutionId];
