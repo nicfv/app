@@ -59,7 +59,7 @@
     },
     "Scottsdale Pond": {
       "region": "Novato",
-      "hint": ""
+      "hint": "Wildlife conservation area"
     },
     "Ohair Park": {
       "region": "Novato",
@@ -67,7 +67,7 @@
     },
     "Lynwood Hill Park": {
       "region": "Novato",
-      "hint": ""
+      "hint": "Neighborhood trails"
     },
     "Stafford Lake Park": {
       "region": "North Novato",
@@ -76,6 +76,54 @@
     "Buck Gulch Falls": {
       "region": "South Novato",
       "hint": "Hike to a waterfall"
+    },
+    "Indian Open Space Preserve": {
+      "region": "Indian Valley",
+      "hint": "Trails near a campus"
+    },
+    "Pacheco Pond": {
+      "region": "Novato",
+      "hint": "Bayfront pond to watch waterfowl"
+    },
+    "Marin French Cheese Company": {
+      "region": "North Marin County",
+      "hint": "Cheese-themed picnic venue by a pond."
+    },
+    "Lawson's Landing": {
+      "region": "Dillon Beach",
+      "hint": "Venerable fishing & boating resort, established in 1929, with a family-owned tent/RV campground."
+    },
+    "Elephant Rock": {
+      "region": "Dillon Beach",
+      "hint": ""
+    },
+    "Springhill Estate Mansion": {
+      "region": "Tomales",
+      "hint": "300-acre Victorian-style wedding and event venue."
+    },
+    "Chicken Ranch Beach": {
+      "region": "Inverness",
+      "hint": ""
+    },
+    "Cypress Tree Tunnel": {
+      "region": "West Marin County",
+      "hint": "Drive planted in around 1930 with Monterey cypress trees, leading to a historic radio station."
+    },
+    "Tomales Bay State Park": {
+      "region": "West Marin County",
+      "hint": ""
+    },
+    "Kehoe Beach": {
+      "region": "West Marin County",
+      "hint": ""
+    },
+    "Pierce Point Ranch": {
+      "region": "West Marin County",
+      "hint": ""
+    },
+    "Bird Rock": {
+      "region": "West Marin County",
+      "hint": ""
     }
   }
 }
