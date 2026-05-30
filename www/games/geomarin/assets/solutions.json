@@ -47,7 +47,7 @@
       "level": "state"
     },
     "Adrian Rosal Park": {
-      "region": "Novato",
+      "region": "Santa Venetia",
       "hint": "A small, sunny neighborhood gathering space offering a half-basketball court, play structures, and a grassy lawn.",
       "level": "regional"
     },
@@ -62,7 +62,7 @@
       "level": "regional"
     },
     "Aramburu Island": {
-      "region": "Tiburon",
+      "region": "Strawberry",
       "hint": "A restored shoreline sanctuary in the bay providing critical habitat and isolation for harbor seals and migratory shorebirds.",
       "level": "regional"
     },
@@ -77,12 +77,12 @@
       "level": "regional"
     },
     "Bayside Park": {
-      "region": "San Rafael",
+      "region": "Bayside Acres",
       "hint": "A peaceful waterfront area providing picnic spots and gentle walking paths right along the edge of the bay.",
       "level": "regional"
     },
     "Black Point Boat Launch": {
-      "region": "Novato",
+      "region": "Black Point",
       "hint": "A convenient, paved ramp providing boaters and kayakers direct access to the tidal waters of the nearby river.",
       "level": "regional"
     },
@@ -92,7 +92,7 @@
       "level": "regional"
     },
     "Bolinas Lagoon Preserve": {
-      "region": "Stinson Beach / Bolinas",
+      "region": "Bolinas",
       "hint": "This vital tidal estuary serves as a major stopover point for thousands of migrating birds on the Pacific Flyway.",
       "level": "regional"
     },
@@ -107,7 +107,7 @@
       "level": "regional"
     },
     "Buck's Landing": {
-      "region": "San Rafael",
+      "region": "Santa Venetia",
       "hint": "A scenic waterfront access point historically used for brick-making, now serving as a peaceful spot for launching kayaks into the bay.",
       "level": "regional"
     },
@@ -117,7 +117,7 @@
       "level": "regional"
     },
     "Candy's Park": {
-      "region": "Larkspur",
+      "region": "Santa Venetia",
       "hint": "A beloved, heavily shaded neighborhood pocket park offering a cozy playground under a canopy of mature redwood trees.",
       "level": "regional"
     },
@@ -127,7 +127,7 @@
       "level": "regional"
     },
     "Castro Park": {
-      "region": "San Rafael",
+      "region": "Santa Venetia",
       "hint": "A lively community recreation area featuring a basketball court, play equipment, and mature shade trees for neighborhood families.",
       "level": "regional"
     },
@@ -157,17 +157,17 @@
       "level": "regional"
     },
     "French Ranch Preserve": {
-      "region": "San Geronimo",
+      "region": "San Geronimo Valley",
       "hint": "A peaceful landscape of rolling, oak-studded hills nestled in a quiet, sunny valley.",
       "level": "regional"
     },
     "Gary Giacomini Preserve": {
-      "region": "San Geronimo",
+      "region": "San Geronimo Valley",
       "hint": "Situated on a high coastal ridge, this unique area harbors rare serpentine soils and a specialized dwarf forest.",
       "level": "regional"
     },
     "Hal Brown Park": {
-      "region": "Greenbrae",
+      "region": "Kentfield",
       "hint": "A sprawling, family-friendly area boasting expansive turf, a healing garden, and stunning views of the region's most iconic mountain peak.",
       "level": "regional"
     },
@@ -187,7 +187,7 @@
       "level": "regional"
     },
     "Indian Valley Preserve": {
-      "region": "Novato",
+      "region": "South Novato",
       "hint": "Shaded, gently rolling trails weave through a bowl-shaped oak forest featuring a seasonal creek and small waterfalls.",
       "level": "regional"
     },
@@ -207,7 +207,7 @@
       "level": "regional"
     },
     "Little Mountain Preserve": {
-      "region": "Novato",
+      "region": "North Novato",
       "hint": "Serving as an ecological transition zone, this lower slope area features a blend of open grasslands and oak woodlands.",
       "level": "regional"
     },
@@ -222,17 +222,17 @@
       "level": "regional"
     },
     "Lucas Valley Park": {
-      "region": "San Rafael",
+      "region": "Lucas Valley",
       "hint": "A sunny, open community space featuring rolling turf, a playground, and picnic areas surrounded by golden, grassy ridges.",
       "level": "regional"
     },
     "Lucas Valley Preserve": {
-      "region": "San Rafael",
+      "region": "Lucas Valley",
       "hint": "A prominent, grassy ridgeline dominated by a massive landmark boulder offers sweeping panoramic views of the surrounding area.",
       "level": "regional"
     },
     "Maurice Thorner Preserve": {
-      "region": "Novato",
+      "region": "San Geronimo Valley",
       "hint": "This compact sanctuary protects a vital ridge covered in dense chaparral and native oaks.",
       "level": "regional"
     },
@@ -247,7 +247,7 @@
       "level": "regional"
     },
     "McNears Beach Park": {
-      "region": "San Rafael",
+      "region": "Point San Pedro",
       "hint": "A beautifully landscaped shoreline destination offering a fishing pier, tennis courts, a swimming pool, and a sandy beach along the bay.",
       "level": "regional"
     },
@@ -287,12 +287,12 @@
       "level": "regional"
     },
     "Pueblo Park": {
-      "region": "San Rafael",
+      "region": "Santa Venetia",
       "hint": "A simple, welcoming neighborhood green space offering a playground and an open lawn for local residents.",
       "level": "regional"
     },
     "Ring Mountain Preserve": {
-      "region": "Tiburon / Corte Madera",
+      "region": "Tiburon",
       "hint": "Renowned for its unique geology, this prominent ridge harbors rare plants found nowhere else on earth.",
       "level": "regional"
     },
@@ -302,12 +302,12 @@
       "level": "regional"
     },
     "Rush Creek Preserve": {
-      "region": "Novato",
+      "region": "North Novato",
       "hint": "Blue oak woodlands stretch alongside vital seasonal wetlands, creating a haven for hundreds of species of waterfowl.",
       "level": "regional"
     },
     "San Geronimo Park": {
-      "region": "San Geronimo",
+      "region": "San Geronimo Valley",
       "hint": "A rural community gathering spot nestled in a forested valley, featuring play structures and quiet picnic areas.",
       "level": "regional"
     },
@@ -317,12 +317,12 @@
       "level": "regional"
     },
     "Santa Margarita Island Preserve": {
-      "region": "San Rafael",
+      "region": "Santa Venetia",
       "hint": "A small, oak-canopied hill surrounded by marshland becomes temporarily stranded by water during heavy winter rains.",
       "level": "regional"
     },
     "Santa Venetia Marsh": {
-      "region": "San Rafael",
+      "region": "Santa Venetia",
       "hint": "This small but critical tidal marsh serves as a vital high-tide refuge for endangered native marsh birds.",
       "level": "regional"
     },
@@ -337,12 +337,12 @@
       "level": "regional"
     },
     "Terra Linda / Sleepy Hollow Preserve": {
-      "region": "San Rafael / San Anselmo",
+      "region": "Sleepy Hollow",
       "hint": "A long, rolling grassy divide offers miles of sunny ridge-walking and expansive views.",
       "level": "regional"
     },
     "Tiburon Ridge Preserve": {
-      "region": "Tiburon",
+      "region": "Strawberry",
       "hint": "This high, narrow ridge provides a crucial trail link and breathtaking views of the bay and nearby straits.",
       "level": "regional"
     },
@@ -357,12 +357,12 @@
       "level": "regional"
     },
     "Verissimo Hills Preserve": {
-      "region": "Novato",
+      "region": "North Novato",
       "hint": "A rugged landscape of steep, grassy slopes dotted with mature oak trees.",
       "level": "regional"
     },
     "Village Green Park": {
-      "region": "Tomales",
+      "region": "Stinson Beach",
       "hint": "A classic, manicured central plaza featuring a lovely gazebo and grassy lawns tailored for community events and quiet lunches.",
       "level": "regional"
     },
