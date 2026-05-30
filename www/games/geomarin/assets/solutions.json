@@ -331,7 +331,7 @@
       "hint": "A sprawling, scenic destination surrounding a peaceful reservoir, renowned for its extensive disc golf course and large lakeside picnic areas.",
       "level": "regional"
     },
-    "Terra Linda / Sleepy Hollow Preserve": {
+    "Terra Linda Ridge": {
       "region": "Sleepy Hollow",
       "hint": "A long, rolling grassy divide offers miles of sunny ridge-walking and expansive views.",
       "level": "regional"
@@ -489,6 +489,161 @@
     "Bird Rock": {
       "region": "West Marin County",
       "hint": "",
+      "level": "local"
+    },
+    "Bahia Marsh": {
+      "region": "Novato",
+      "hint": "",
+      "level": "local"
+    },
+    "Las Gallinas Valley Birding Loop": {
+      "region": "St. Vincent",
+      "hint": "",
+      "level": "local"
+    },
+    "Chimney Rock": {
+      "region": "West Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Point Reyes Lighthouse": {
+      "region": "West Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Alamere Falls": {
+      "region": "West Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Palomarin Trail": {
+      "region": "West Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Red Rock Beach": {
+      "region": "Stinson Beach",
+      "hint": "",
+      "level": "local"
+    },
+    "Steep Ravine": {
+      "region": "Stinson Beach",
+      "hint": "",
+      "level": "local"
+    },
+    "Muir Beach Overlook": {
+      "region": "Muir Beach",
+      "hint": "",
+      "level": "local"
+    },
+    "Bay Model Visitor Center": {
+      "region": "Sausalito",
+      "hint": "Open for tours, this 1.5-ac. model of San Francisco's bay reproduces the rise & fall of tides.",
+      "level": "private"
+    },
+    "Manzanita Recreation Center": {
+      "region": "Marin City",
+      "hint": "",
+      "level": "local"
+    },
+    "Blackie's Pasture": {
+      "region": "Tiburon",
+      "hint": "Scenic waterfront park featuring grassy fields, a playground & paths for walking & biking.",
+      "level": "local"
+    },
+    "Boyd Memorial Park": {
+      "region": "San Rafael",
+      "hint": "This 4.2-acre green space offers a creek & picnic tables, plus redwood-forest trails & a playground.",
+      "level": "local"
+    },
+    "Pickleweed Park": {
+      "region": "San Rafael",
+      "hint": "Dogs allowed.",
+      "level": "local"
+    },
+    "Gerstle Park": {
+      "region": "San Rafael",
+      "hint": "Historic estate with 12 ornate rooms & cottages in a 2-acre park setting used for community events.",
+      "level": "local"
+    },
+    "Bret Harte Park": {
+      "region": "San Rafael",
+      "hint": "Dogs allowed.",
+      "level": "local"
+    },
+    "Piper Park": {
+      "region": "Larkspur",
+      "hint": "Dogs allowed.",
+      "level": "local"
+    },
+    "Alpine Lake": {
+      "region": "Central Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Bon Tempe Lake": {
+      "region": "Central Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Phoenix Lake": {
+      "region": "Central Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Lake Lagunitas": {
+      "region": "Central Marin County",
+      "hint": "",
+      "level": "local"
+    },
+    "Point Bonita Lighthouse": {
+      "region": "South Marin County",
+      "hint": "Historic active lighthouse reached by a half-mile trail offers visitor access & scenic ocean views.",
+      "level": "local"
+    },
+    "Black Sands Beach": {
+      "region": "South Marin County",
+      "hint": "Secluded stretch of black sand, accessed by a steep trail of steps from the clifftop above.",
+      "level": "local"
+    },
+    "Golden Gate Bridge North Vista Point": {
+      "region": "South Marin County",
+      "hint": "A brief hike leads to this elevated lookout above the Golden Gate Bridge, popular for photos.",
+      "level": "local"
+    },
+    "Bay Area Discovery Museum": {
+      "region": "South Marin County",
+      "hint": "Indoor/outdoor museum inspiring kid creativity via interactive exhibits, a play space & art classes.",
+      "level": "private"
+    },
+    "Belvedere Lagoon": {
+      "region": "Belvedere",
+      "hint": "",
+      "level": "local"
+    },
+    "Cascade Park": {
+      "region": "Mill Valley",
+      "hint": "",
+      "level": "local"
+    },
+    "Old Mill Park": {
+      "region": "Mill Valley",
+      "hint": "Dogs allowed.",
+      "level": "local"
+    },
+    "Scott Highland Park": {
+      "region": "Mill Valley",
+      "hint": "",
+      "level": "local"
+    },
+    "Natalie Coffin Greene Park": {
+      "region": "Ross",
+      "hint": "Dogs allowed.",
+      "level": "local"
+    },
+    "Imagination Park": {
+      "region": "San Anselmo",
+      "hint": "Dogs allowed.",
       "level": "local"
     }
   }
