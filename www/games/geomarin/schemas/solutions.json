@@ -17,9 +17,19 @@
             "hint": {
               "type": "string",
               "description": "An optional description or extra hint"
+            },
+            "level": {
+              "description": "The governmental level at which the public space is managed",
+              "enum": [
+                "national",
+                "state",
+                "regional",
+                "local",
+                "private"
+              ]
             }
           },
-          "minProperties": 2,
+          "minProperties": 3,
           "additionalProperties": false
         }
       },
