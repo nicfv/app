@@ -251,11 +251,6 @@
       "hint": "A beautifully landscaped shoreline destination offering a fishing pier, tennis courts, a swimming pool, and a sandy beach along the bay.",
       "level": "regional"
     },
-    "Mill Valley / Sausalito Pathway": {
-      "region": "Mill Valley / Sausalito",
-      "hint": "This highly popular, paved recreational trail skirts the edge of the bay, providing stunning water views and a flat route for commuters and walkers.",
-      "level": "regional"
-    },
     "Miller Boat Launch": {
       "region": "Marshall",
       "hint": "A major regional boating facility offering multiple launch ramps and a long pier extending out into a sprawling, sheltered bay.",
@@ -378,115 +373,123 @@
     },
     "Hill Park": {
       "region": "Novato",
-      "hint": "Outdoor sports and dog friendly"
+      "hint": "Outdoor sports and dog friendly",
+      "level": "local"
     },
     "Miwok Park": {
       "region": "Novato",
-      "hint": "Dog friendly and has a Native American museum"
+      "hint": "Dog friendly and has a Native American museum",
+      "level": "local"
     },
     "Museum of the American Indian": {
       "region": "Novato",
-      "hint": "Located in a park"
-    },
-    "Mt. Burdell Open Space Preserve": {
-      "region": "Novato",
-      "hint": "Hiking"
+      "hint": "Located in a park",
+      "level": "local"
     },
     "Partridge Knolls Mini Park": {
       "region": "Novato",
-      "hint": "Community park"
-    },
-    "Rush Creek Marsh": {
-      "region": "North Novato",
-      "hint": "Wildlife Preserve"
+      "hint": "Community park",
+      "level": "local"
     },
     "Olive Park": {
       "region": "Novato",
-      "hint": "Outdoor sports"
-    },
-    "Deer Island": {
-      "region": "Novato",
-      "hint": "Open space preserve"
+      "hint": "Outdoor sports",
+      "level": "local"
     },
     "StoneTree": {
       "region": "Novato",
-      "hint": "Golf Club"
+      "hint": "Golf Club",
+      "level": "private"
     },
     "Vince Mulroy Nature Reserve": {
       "region": "Novato",
-      "hint": "Memorial Wildlife Preserve"
+      "hint": "Memorial Wildlife Preserve",
+      "level": "local"
     },
     "Cavalla Cay": {
       "region": "Bel Marin Keys",
-      "hint": "Waterfront park"
+      "hint": "Waterfront park",
+      "level": "local"
     },
     "Montego Park": {
       "region": "Bel Marin Keys",
-      "hint": "Tennis courts"
+      "hint": "Tennis courts",
+      "level": "local"
     },
     "Hamilton Wetlands": {
       "region": "Novato",
-      "hint": "Wetlands nature preserve featuring walking/cycling trails, plus egrets & other wildlife."
+      "hint": "Wetlands nature preserve featuring walking/cycling trails, plus egrets & other wildlife.",
+      "level": "local"
     },
     "Hamilton Amphitheatre Park": {
       "region": "Novato",
-      "hint": "Outdoor music venue"
+      "hint": "Outdoor music venue",
+      "level": "local"
     },
     "Scottsdale Pond": {
       "region": "Novato",
-      "hint": "Wildlife conservation area"
+      "hint": "Wildlife conservation area",
+      "level": "local"
     },
     "Ohair Park": {
       "region": "Novato",
-      "hint": "Dog friendly park"
+      "hint": "Dog friendly park",
+      "level": "local"
     },
     "Lynwood Hill Park": {
       "region": "Novato",
-      "hint": "Neighborhood trails"
+      "hint": "Neighborhood trails",
+      "level": "local"
     },
     "Buck Gulch Falls": {
       "region": "South Novato",
-      "hint": "Hike to a waterfall"
-    },
-    "Indian Open Space Preserve": {
-      "region": "Indian Valley",
-      "hint": "Trails near a campus"
+      "hint": "Hike to a waterfall",
+      "level": "local"
     },
     "Pacheco Pond": {
       "region": "Novato",
-      "hint": "Bayfront pond to watch waterfowl"
+      "hint": "Bayfront pond to watch waterfowl",
+      "level": "local"
     },
     "Marin French Cheese Company": {
       "region": "North Marin County",
-      "hint": "Cheese-themed picnic venue by a pond."
+      "hint": "Cheese-themed picnic venue by a pond.",
+      "level": "local"
     },
     "Lawson's Landing": {
       "region": "Dillon Beach",
-      "hint": "Venerable fishing & boating resort, established in 1929, with a family-owned tent/RV campground."
+      "hint": "Venerable fishing & boating resort, established in 1929, with a family-owned tent/RV campground.",
+      "level": "local"
     },
     "Elephant Rock": {
       "region": "Dillon Beach",
-      "hint": ""
+      "hint": "",
+      "level": "local"
     },
     "Springhill Estate Mansion": {
       "region": "Tomales",
-      "hint": "300-acre Victorian-style wedding and event venue."
+      "hint": "300-acre Victorian-style wedding and event venue.",
+      "level": "private"
     },
     "Cypress Tree Tunnel": {
       "region": "West Marin County",
-      "hint": "Drive planted in around 1930 with Monterey cypress trees, leading to a historic radio station."
+      "hint": "Drive planted in around 1930 with Monterey cypress trees, leading to a historic radio station.",
+      "level": "local"
     },
     "Kehoe Beach": {
       "region": "West Marin County",
-      "hint": ""
+      "hint": "",
+      "level": "local"
     },
     "Pierce Point Ranch": {
       "region": "West Marin County",
-      "hint": ""
+      "hint": "",
+      "level": "local"
     },
     "Bird Rock": {
       "region": "West Marin County",
-      "hint": ""
+      "hint": "",
+      "level": "local"
     }
   }
 }
