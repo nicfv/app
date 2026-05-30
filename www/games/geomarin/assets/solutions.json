@@ -16,6 +16,36 @@
       "hint": "Offers diverse landscapes including coastal prairies, historic military sites, and beaches; entry to the GGNRA is free, though specific attractions or parking may have fees.",
       "level": "national"
     },
+    "Angel Island State Park": {
+      "region": "Tiburon",
+      "hint": "Located in San Francisco Bay, accessible by ferry, featuring historic sites and 360-degree bay views.",
+      "level": "state"
+    },
+    "China Camp State Park": {
+      "region": "Santa Venetia",
+      "hint": "Offers shrimping village history, marshes, and technical multi-use trails.",
+      "level": "state"
+    },
+    "Mt. Tamalpias State Park": {
+      "region": "Central Marin County",
+      "hint": "6,300 acre park, known for redwood groves, oak woodlands, and over 60 miles of trails.",
+      "level": "state"
+    },
+    "Olompali State Historic Park": {
+      "region": "North Novato",
+      "hint": "Preserves Coast Miwok indigenous history and Spanish-era adobe ruins.",
+      "level": "state"
+    },
+    "Samuel P. Taylor State Park": {
+      "region": "Forest Knolls",
+      "hint": "A popular 2,780-acre park with redwood groves, Lagunitas Creek, and camping.",
+      "level": "state"
+    },
+    "Tomales Bay State Park": {
+      "region": "West Marin County",
+      "hint": "A remote coastal park featuring Heart's Desire Beach, Shell Beach, and waterfront recreation.",
+      "level": "state"
+    },
     "Hill Park": {
       "region": "Novato",
       "hint": "Outdoor sports and dog friendly"
@@ -123,10 +153,6 @@
     "Cypress Tree Tunnel": {
       "region": "West Marin County",
       "hint": "Drive planted in around 1930 with Monterey cypress trees, leading to a historic radio station."
-    },
-    "Tomales Bay State Park": {
-      "region": "West Marin County",
-      "hint": ""
     },
     "Kehoe Beach": {
       "region": "West Marin County",
