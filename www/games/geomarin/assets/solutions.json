@@ -1,6 +1,18 @@
 {
   "$schema": "../schemas/solutions.json",
   "solutions": {
+    "Point Reyes National National Seashore": {
+      "region": "West Marin County",
+      "hint": "Features 71,000+ acres of rugged coastline, beaches, and trails; camping is backcountry-only (no car camping)."
+    },
+    "Muir Woods National Monument": {
+      "region": "South Marin County",
+      "hint": "Protected old-growth coast redwoods; parking reservations are required for all visitors."
+    },
+    "Golden Gate National Recreational Area": {
+      "region": "South Marin County",
+      "hint": "Offers diverse landscapes including coastal prairies, historic military sites, and beaches; entry to the GGNRA is free, though specific attractions or parking may have fees."
+    },
     "Hill Park": {
       "region": "Novato",
       "hint": "Outdoor sports and dog friendly"
