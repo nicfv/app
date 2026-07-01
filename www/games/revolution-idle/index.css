@@ -9,8 +9,13 @@ body {
     padding: 0 1rem;
 }
 
+div#game {
+    text-align: center;
+}
+
 div#game-info {
     background: lightblue;
+    margin: 1rem;
     padding: 1rem;
 }
 
