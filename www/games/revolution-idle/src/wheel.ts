@@ -1,11 +1,13 @@
 import { Drawable } from 'graphico';
 import { SMath } from 'smath';
 import { Color } from 'viridis';
+import { NUM_WHEELS } from './globals';
 
 /**
  * Represents a single spinning wheel
  */
 export class Wheel implements Drawable {
+    private static readonly TAU: number = Math.PI * 2;
     /**
      * The wheel color
      */
@@ -19,9 +21,13 @@ export class Wheel implements Drawable {
      */
     private readonly thickness: number;
     /**
-     * The maximum speed of the wheel
+     * The maximum speed of the wheel at the max level
      */
     private readonly maxSpeed: number;
+    /**
+     * The maximum level for the speed
+     */
+    private readonly maxSpeedLevel: number;
     /**
      * The cost for the first speed upgrade
      */
@@ -30,16 +36,29 @@ export class Wheel implements Drawable {
      * The incremental cost percentage increase
      */
     private readonly costIncrease: number;
-    constructor(index: number, public readonly data: WheelData) {
-        this.color = Color.hsl(SMath.translate(index, 0, 10, 0, 360), 100, 50);
-        this.radius = 1.2 ** (index + 1);
-        this.thickness = this.radius * 0.1;
-        this.maxSpeed = SMath.translate(index, 0, 10, 20, 1);
+    constructor(index: number, public readonly data: WheelData = defaultData) {
+        this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 50);
+        this.radius = 100 * 1.25 ** (index);
+        this.thickness = this.radius * 0.2;
+        this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1) * Wheel.TAU;
+        this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
-        this.costIncrease = SMath.translate(index, 0, 10, 0.01, 0.1);
+        this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 0.01, 0.1);
+    }
+    public rotate(dt: number): void {
+        this.data.angle += SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed) * dt / 1e3;
+        this.data.rotations += Math.floor(this.data.angle / Wheel.TAU);
+        this.data.angle %= Wheel.TAU;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        throw new Error("Method not implemented.");
+        const centerX: number = graphics.canvas.width / 2;
+        const centerY: number = graphics.canvas.height / 2;
+        graphics.strokeStyle = this.color.toString();
+        graphics.lineWidth = this.thickness;
+        graphics.lineCap = 'round';
+        graphics.beginPath();
+        graphics.arc(centerX, centerY, this.radius, 0, this.data.angle, false);
+        graphics.stroke();
     }
 }
 
@@ -64,3 +83,10 @@ export interface WheelData {
      */
     speedLevel: number;
 }
+
+const defaultData: WheelData = {
+    angle: 0,
+    rotations: 0,
+    ascensions: 0,
+    speedLevel: 0,
+};
