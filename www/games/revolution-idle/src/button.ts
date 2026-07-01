@@ -1,5 +1,6 @@
 import { Drawable } from 'graphico';
 import { Color } from 'viridis';
+import { FONT_FAMILY, FONT_SIZE } from './globals';
 
 /**
  * The base class for a UI button.
@@ -30,6 +31,23 @@ export class Button implements Drawable {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        throw new Error('Method not implemented.');
+        // Render the button and outline, if needed
+        graphics.fillStyle = this.color.toString();
+        graphics.strokeStyle = this.color.getContrastingColor().toString();
+        graphics.lineWidth = 2;
+        graphics.fillRect(this.x, this.y, this.w, this.h);
+        if (this.isHover) {
+            graphics.strokeRect(this.x, this.y, this.w, this.h);
+        }
+        // Render text (line-by-line) on the button
+        graphics.fillStyle = this.color.getContrastingColor().toString();
+        graphics.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
+        const lines: string[] = this.text.split('\n');
+        for (const linenum in lines) {
+            const line: string = lines[linenum];
+            graphics.textAlign = 'center';
+            graphics.textBaseline = 'top';
+            graphics.fillText(line, this.x + this.w / 2, this.y + FONT_SIZE * (+linenum + 0.5));
+        }
     }
 }
