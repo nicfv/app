@@ -3,6 +3,33 @@
     border-collapse: collapse;
 }
 
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0 1rem;
+}
+
 div#game-info {
-    border: 1px solid black;
+    background: lightblue;
+    padding: 1rem;
+}
+
+button#close-info {
+    float: right;
+    cursor: pointer;
+}
+
+a,
+a:link,
+a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
 }
