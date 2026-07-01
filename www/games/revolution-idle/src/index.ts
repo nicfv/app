@@ -1,11 +1,13 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
 import { Wheel } from './wheel';
+import { NUM_WHEELS } from './globals';
 
-const w1: Wheel = new Wheel(0);
-w1.data.speedLevel++;
-const w2: Wheel = new Wheel(1);
-w2.data.speedLevel++;
+const wheels: Wheel[] = [];
+for (let i = 0; i < NUM_WHEELS; i++) {
+    wheels.push(new Wheel(i));
+    wheels[i].data.speedLevel++;
+}
 
 const canv: Canvas = new Canvas({
     background: 'black',
@@ -15,11 +17,11 @@ const canv: Canvas = new Canvas({
     height: 600,
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
-        w1.rotate(dt);
-        w2.rotate(dt);
         canv.clear();
-        canv.draw(w1);
-        canv.draw(w2);
+        for (const wheel of wheels) {
+            wheel.rotate(dt);
+            canv.draw(wheel);
+        }
     },
 });
 

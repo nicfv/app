@@ -36,9 +36,9 @@ export class Wheel implements Drawable {
      * The incremental cost percentage increase
      */
     private readonly costIncrease: number;
-    constructor(index: number, public readonly data: WheelData = defaultData) {
+    constructor(index: number, public readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 50);
-        this.radius = 100 * 1.25 ** (index);
+        this.radius = 10 * 1.25 ** (index);
         this.thickness = this.radius * 0.2;
         this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1) * Wheel.TAU;
         this.maxSpeedLevel = 100;
