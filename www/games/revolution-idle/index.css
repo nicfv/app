@@ -1,0 +1,8 @@
+* {
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+div#game-info {
+    border: 1px solid black;
+}
