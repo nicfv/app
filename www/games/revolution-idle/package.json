@@ -1,0 +1,6 @@
+{
+  "name": "revolution-idle",
+  "scripts": {
+    "start": "../../../cmd/start"
+  }
+}
