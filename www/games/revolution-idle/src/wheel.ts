@@ -7,6 +7,9 @@ import { NUM_WHEELS } from './globals';
  * Represents a single spinning wheel
  */
 export class Wheel implements Drawable {
+    /**
+     * 2pi
+     */
     private static readonly TAU: number = Math.PI * 2;
     /**
      * The wheel color
@@ -36,6 +39,9 @@ export class Wheel implements Drawable {
      * The incremental cost percentage increase
      */
     private readonly costIncrease: number;
+    /**
+     * Create a new wheel.
+     */
     constructor(index: number, public readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 50);
         this.radius = 10 * 1.25 ** (index);
@@ -43,14 +49,32 @@ export class Wheel implements Drawable {
         this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1) * Wheel.TAU;
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
-        this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 0.01, 0.1);
+        this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 1.01, 1.15);
     }
+    /**
+     * Get the cost for the next `N` levels.
+     */
+    public getNextNCost(n = 1): number {
+        let cost = 0;
+        for (let level = this.data.speedLevel; level < SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel); level++) {
+            cost += this.baseCost * (this.costIncrease ** level) * (2 ** this.data.ascensions);
+        }
+        return cost;
+    }
+    /**
+     * Rotate this wheel.
+     */
     public rotate(dt: number): void {
         this.data.angle += SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed) * dt / 1e3;
         this.data.rotations += Math.floor(this.data.angle / Wheel.TAU);
         this.data.angle %= Wheel.TAU;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Skip drawing if it hasn't begun rotating yet
+        if (this.data.angle <= 0) {
+            return;
+        }
+        // Center the wheel on the canvas
         const centerX: number = graphics.canvas.width / 2;
         const centerY: number = graphics.canvas.height / 2;
         graphics.strokeStyle = this.color.toString();
