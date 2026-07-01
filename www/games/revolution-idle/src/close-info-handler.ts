@@ -1,3 +1,3 @@
-const closeInfoButton: HTMLButtonElement = document.getElementById('close-info') as HTMLButtonElement;
-const gameInfoDiv: HTMLDivElement = document.getElementById('game-info') as HTMLDivElement;
-closeInfoButton.addEventListener('click', () => gameInfoDiv.parentElement?.removeChild(gameInfoDiv));
+const closeInfo: HTMLElement = document.getElementById('close-info') as HTMLElement;
+const gameInfo: HTMLElement = document.getElementById('game-info') as HTMLElement;
+closeInfo.addEventListener('click', () => gameInfo.parentElement?.removeChild(gameInfo));
