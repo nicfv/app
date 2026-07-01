@@ -5,16 +5,19 @@
 
 body {
     font-family: sans-serif;
+    color: white;
+    background: dimgray;
     margin: 0;
     padding: 0 1rem;
 }
 
+h1,
 div#game {
     text-align: center;
 }
 
 div#game-info {
-    background: lightblue;
+    background: gray;
     margin: 1rem;
     padding: 1rem;
 }
@@ -27,7 +30,7 @@ button#close-info {
 a,
 a:link,
 a:visited {
-    color: blue;
+    color: cyan;
     text-decoration: none;
 }
 
@@ -36,5 +39,5 @@ a:hover {
 }
 
 a:active {
-    color: red;
+    color: pink;
 }
