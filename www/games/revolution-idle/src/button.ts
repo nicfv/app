@@ -13,7 +13,7 @@ export class Button implements Drawable {
     /**
      * Initialize a new button.
      */
-    constructor(public text: string, public color: Color, public x: number, public y: number, public w: number, public h: number, private callback: () => void) {
+    constructor(public text: string, public color: Color, public hoverColor: Color, public x: number, public y: number, public w: number, public h: number, private callback: () => void) {
         this.isHover = false;
     }
     /**
@@ -33,7 +33,7 @@ export class Button implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render the button and outline, if needed
         graphics.fillStyle = this.color.toString();
-        graphics.strokeStyle = 'white';
+        graphics.strokeStyle = this.hoverColor.toString();
         graphics.lineWidth = 2;
         graphics.fillRect(this.x, this.y, this.w, this.h);
         if (this.isHover) {

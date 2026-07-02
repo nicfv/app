@@ -1,9 +1,10 @@
+import { Color } from 'viridis';
 import { Button } from './button';
 import { Wheel } from './wheel';
 
 export class BuyButton extends Button {
     constructor(private readonly wheel: Wheel) {
-        super('', wheel.color, 10, 400 - 40 * wheel.index, 120, 35, () => {
+        super('', wheel.color, new Color(255, 255, 255), 10, 400 - 40 * wheel.index, 120, 35, () => {
             this.setText();
         });
         this.setText();
