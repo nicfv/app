@@ -15,8 +15,9 @@ export class BuyButton extends Button {
         super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed())}Hz\n$${N(this.wheel.getNextNCost())}`;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        if (Math.abs(NUM_WHEELS - this.wheel.index - this.zoom.getZoom()) < 5) {
-            this.y = (graphics.canvas.height - this.h) / 2 - 45 * (NUM_WHEELS - this.wheel.index - this.zoom.getZoom());
+        const centerDelta: number = NUM_WHEELS - this.wheel.index - this.zoom.getZoom();
+        if (Math.abs(centerDelta) < 5) {
+            this.y = (graphics.canvas.height - this.h) / 2 - 45 * centerDelta;
             super.draw(graphics);
         } else {
             this.y = -Infinity;
