@@ -1,5 +1,6 @@
 import { Button } from './button';
 import { NUM_WHEELS } from './globals';
+import { N } from './lib';
 import { Wheel } from './wheel';
 import { Zoom } from './zoom';
 
@@ -11,7 +12,7 @@ export class BuyButton extends Button {
         this.setText();
     }
     private setText(): void {
-        super.text = `${this.wheel.currentSpeedHz().toFixed(2)} > ${this.wheel.getNextNSpeed().toFixed(2)}Hz\n$${this.wheel.getNextNCost().toFixed(2)}`;
+        super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed())}Hz\n$${N(this.wheel.getNextNCost())}`;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         this.y = (graphics.canvas.height - this.h) / 2 - 40 * (NUM_WHEELS - this.wheel.index - this.zoom.getZoom());
