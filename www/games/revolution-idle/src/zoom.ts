@@ -22,37 +22,18 @@ export class Zoom implements Drawable {
     /**
      * Zoom in button
      */
-    private readonly zoomIn: Button;
+    private readonly zoomInBtn: Button;
     /**
      * Zoom out button
      */
-    private readonly zoomOut: Button;
+    private readonly zoomOutBtn: Button;
     /**
      * Create a new zoom control.
      */
     constructor(private readonly x: number, private readonly y: number, private zoom: number = NUM_WHEELS) {
-        this.zoomIn = new Button('+', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => {
-            if (this.zoom < NUM_WHEELS) {
-                this.zoom++;
-            }
-            if (this.zoom < NUM_WHEELS) {
-                this.zoomIn.enable();
-            } else {
-                this.zoomIn.disable();
-            }
-            this.zoomOut.enable();
-        });
-        this.zoomOut = new Button('-', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => {
-            if (this.zoom > 1) {
-                this.zoom--;
-            }
-            if (this.zoom > 1) {
-                this.zoomOut.enable();
-            } else {
-                this.zoomOut.disable();
-            }
-            this.zoomIn.enable();
-        });
+        this.zoomInBtn = new Button('+', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
+        this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
+        this.setButtonAbility();
     }
     /**
      * Get the zoom factor.
@@ -61,22 +42,55 @@ export class Zoom implements Drawable {
         return this.zoom;
     }
     /**
+     * Zoom in
+     */
+    private zoomIn(): void {
+        if (this.zoom < NUM_WHEELS) {
+            this.zoom++;
+            this.setButtonAbility();
+        }
+    }
+    /**
+     * Zoom out
+     */
+    private zoomOut(): void {
+        if (this.zoom > 1) {
+            this.zoom--;
+            this.setButtonAbility();
+        }
+    }
+    /**
+     * Set the enabled/disabled property for the zoom in/out buttons.
+     */
+    private setButtonAbility(): void {
+        if (this.zoom > 1) {
+            this.zoomOutBtn.enable();
+        } else {
+            this.zoomOutBtn.disable();
+        }
+        if (this.zoom < NUM_WHEELS) {
+            this.zoomInBtn.enable();
+        } else {
+            this.zoomInBtn.disable();
+        }
+    }
+    /**
      * Check if the mouse is currently hovering over any of the controls.
      */
     public checkHover(mx: number, my: number): void {
-        this.zoomIn.checkHover(mx, my);
-        this.zoomOut.checkHover(mx, my);
+        this.zoomInBtn.checkHover(mx, my);
+        this.zoomOutBtn.checkHover(mx, my);
     }
     /**
      * Check if the mouse has clicked on any of the controls.
      */
     public click(button: number): void {
-        this.zoomIn.click(button);
-        this.zoomOut.click(button);
+        this.zoomInBtn.click(button);
+        this.zoomOutBtn.click(button);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        this.zoomIn.draw(graphics);
-        this.zoomOut.draw(graphics);
+        this.zoomInBtn.draw(graphics);
+        this.zoomOutBtn.draw(graphics);
         // Render the zoom text
         graphics.fillStyle = 'white';
         graphics.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
