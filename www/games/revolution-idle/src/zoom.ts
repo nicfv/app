@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { Button } from './button';
 import { Color } from 'viridis';
-import { NUM_WHEELS } from './globals';
+import { FONT_FAMILY, FONT_SIZE, NUM_WHEELS } from './globals';
 
 export class Zoom implements Drawable {
     private readonly zoomIn: Button;
@@ -12,7 +12,7 @@ export class Zoom implements Drawable {
                 this.zoom++;
             }
         });
-        this.zoomOut = new Button('-', new Color(200, 200, 200), 750, 150, 25, 25, () => {
+        this.zoomOut = new Button('-', new Color(200, 200, 200), 735, 150, 25, 25, () => {
             if (this.zoom > 1) {
                 this.zoom--;
             }
@@ -41,5 +41,11 @@ export class Zoom implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         this.zoomIn.draw(graphics);
         this.zoomOut.draw(graphics);
+        // Render the zoom text
+        graphics.fillStyle = 'white';
+        graphics.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
+        graphics.textAlign = 'center';
+        graphics.textBaseline = 'bottom';
+        graphics.fillText(`Zoom x${this.zoom}`, 730, 150 - FONT_SIZE / 2);
     }
 }
