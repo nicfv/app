@@ -2,16 +2,15 @@ import './close-info-handler';
 import { Canvas } from 'graphico';
 import { Wheel } from './wheel';
 import { NUM_WHEELS } from './globals';
-import { Button } from './button';
-import { Color } from 'viridis';
+import { BuyButton } from './buy-button';
 
 const wheels: Wheel[] = [];
+const buttons: BuyButton[] = [];
 for (let i = 0; i < NUM_WHEELS; i++) {
     wheels.push(new Wheel(i));
     wheels[i].data.speedLevel++;
+    buttons.push(new BuyButton(wheels[i]));
 }
-
-const button1: Button = new Button('Hello\nworld', new Color(50, 100, 150), 20, 30, 40, 50, () => console.log('test'));
 
 const canv: Canvas = new Canvas({
     background: 'black',
@@ -26,13 +25,19 @@ const canv: Canvas = new Canvas({
             wheel.rotate(dt);
             canv.draw(wheel);
         }
-        canv.draw(button1);
+        for (const bbtn of buttons) {
+            canv.draw(bbtn);
+        }
     },
     mousemove(x, y) {
-        button1.checkHover(x, y);
+        for (const bbtn of buttons) {
+            bbtn.checkHover(x, y);
+        }
     },
     mousedown(button) {
-        button1.click(button);
+        for (const bbtn of buttons) {
+            bbtn.click(button);
+        }
     },
 });
 
