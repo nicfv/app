@@ -4,14 +4,16 @@ import { Wheel } from './wheel';
 import { NUM_WHEELS } from './globals';
 import { BuyButton } from './buy-button';
 import { Player } from './player';
+import { Zoom } from './zoom';
 
 const player: Player = new Player(0);
+const zoom: Zoom = new Zoom(1);
 
 const wheels: Wheel[] = [];
 const buttons: BuyButton[] = [];
 for (let i = 0; i < NUM_WHEELS; i++) {
-    wheels.push(new Wheel(i));
-    wheels[i].data.speedLevel++;
+    wheels.push(new Wheel(i, zoom));
+    wheels[i].increaseSpeed();
     buttons.push(new BuyButton(wheels[i]));
 }
 
@@ -32,15 +34,18 @@ const canv: Canvas = new Canvas({
             canv.draw(bbtn);
         }
         canv.draw(player);
+        canv.draw(zoom);
     },
     mousemove(x, y) {
         for (const bbtn of buttons) {
             bbtn.checkHover(x, y);
         }
+        zoom.checkHover(x, y);
     },
     mousedown(button) {
         for (const bbtn of buttons) {
             bbtn.click(button);
         }
+        zoom.click(button);
     },
 });
