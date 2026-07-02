@@ -20,14 +20,6 @@ export class Zoom implements Drawable {
      */
     private static readonly btnColor: Color = new Color(200, 200, 200);
     /**
-     * Button hover color when enabled
-     */
-    private static readonly btnHover: Color = new Color(255, 255, 255);
-    /**
-     * Button hover color when disabled
-     */
-    private static readonly btnDisabled: Color = new Color(255, 100, 100);
-    /**
      * Zoom in button
      */
     private readonly zoomIn: Button;
@@ -39,19 +31,27 @@ export class Zoom implements Drawable {
      * Create a new zoom control.
      */
     constructor(private readonly x: number, private readonly y: number, private zoom: number = NUM_WHEELS) {
-        this.zoomIn = new Button('+', Zoom.btnColor, Zoom.btnHover, x, y, Zoom.btnSize, Zoom.btnSize, () => {
+        this.zoomIn = new Button('+', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => {
             if (this.zoom < NUM_WHEELS) {
                 this.zoom++;
             }
-            this.zoomIn.hoverColor = (this.zoom < NUM_WHEELS) ? Zoom.btnHover : Zoom.btnDisabled;
-            this.zoomOut.hoverColor = Zoom.btnHover;
+            if (this.zoom < NUM_WHEELS) {
+                this.zoomIn.enable();
+            } else {
+                this.zoomIn.disable();
+            }
+            this.zoomOut.enable();
         });
-        this.zoomOut = new Button('-', Zoom.btnColor, Zoom.btnHover, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => {
+        this.zoomOut = new Button('-', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => {
             if (this.zoom > 1) {
                 this.zoom--;
             }
-            this.zoomOut.hoverColor = (this.zoom > 1) ? Zoom.btnHover : Zoom.btnDisabled;
-            this.zoomIn.hoverColor = Zoom.btnHover;
+            if (this.zoom > 1) {
+                this.zoomOut.enable();
+            } else {
+                this.zoomOut.disable();
+            }
+            this.zoomIn.enable();
         });
     }
     /**

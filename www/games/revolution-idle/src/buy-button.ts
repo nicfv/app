@@ -4,7 +4,7 @@ import { Wheel } from './wheel';
 
 export class BuyButton extends Button {
     constructor(private readonly wheel: Wheel) {
-        super('', wheel.color, new Color(255, 255, 255), 10, 400 - 40 * wheel.index, 120, 35, () => {
+        super('', wheel.color, true, 10, 400 - 40 * wheel.index, 120, 35, () => {
             this.setText();
         });
         this.setText();

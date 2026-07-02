@@ -13,8 +13,20 @@ export class Button implements Drawable {
     /**
      * Initialize a new button.
      */
-    constructor(public text: string, public color: Color, public hoverColor: Color, public x: number, public y: number, public w: number, public h: number, private callback: () => void) {
+    constructor(protected text: string, protected color: Color, protected enabled: boolean, protected x: number, protected y: number, protected w: number, protected h: number, protected callback: () => void) {
         this.isHover = false;
+    }
+    /**
+     * Enable this button.
+     */
+    public enable(): void {
+        this.enabled = true;
+    }
+    /**
+     * Disable this button.
+     */
+    public disable(): void {
+        this.enabled = false;
     }
     /**
      * Check if the mouse is currently hovering over this button.
@@ -26,14 +38,14 @@ export class Button implements Drawable {
      * Attempt to click this button.
      */
     public click(button: number): void {
-        if (button === 0 && this.isHover) {
+        if (button === 0 && this.isHover && this.enabled) {
             this.callback();
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render the button and outline, if needed
         graphics.fillStyle = this.color.toString();
-        graphics.strokeStyle = this.hoverColor.toString();
+        graphics.strokeStyle = this.enabled ? 'white' : 'pink';
         graphics.lineWidth = 2;
         graphics.fillRect(this.x, this.y, this.w, this.h);
         if (this.isHover) {
