@@ -7,7 +7,7 @@ import { Player } from './player';
 import { Zoom } from './zoom';
 
 const player: Player = new Player(0);
-const zoom: Zoom = new Zoom();
+const zoom: Zoom = new Zoom(700, 150);
 
 const wheels: Wheel[] = [];
 const buttons: BuyButton[] = [];
