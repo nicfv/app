@@ -47,9 +47,9 @@ export class Button implements Drawable {
         graphics.fillStyle = this.color.toString();
         graphics.strokeStyle = this.enabled ? 'white' : 'pink';
         graphics.lineWidth = 2;
-        graphics.fillRect(this.x, this.y, this.w, this.h);
+        graphics.fillRect(this.x | 0, this.y | 0, this.w | 0, this.h | 0);
         if (this.isHover) {
-            graphics.strokeRect(this.x, this.y, this.w, this.h);
+            graphics.strokeRect(this.x | 0, this.y | 0, this.w | 0, this.h | 0);
         }
         // Render text (line-by-line) on the button
         graphics.fillStyle = this.color.getContrastingColor().toString();
@@ -59,7 +59,7 @@ export class Button implements Drawable {
             const line: string = lines[linenum];
             graphics.textAlign = 'center';
             graphics.textBaseline = 'top';
-            graphics.fillText(line, this.x + this.w / 2, this.y + FONT_SIZE * (+linenum + 0.5));
+            graphics.fillText(line, (this.x + this.w / 2) | 0, (this.y + FONT_SIZE * (+linenum + 0.5)) | 0);
         }
     }
 }

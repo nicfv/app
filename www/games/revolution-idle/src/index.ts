@@ -14,7 +14,7 @@ const buttons: BuyButton[] = [];
 for (let i = 0; i < NUM_WHEELS; i++) {
     wheels.push(new Wheel(i, zoom));
     wheels[i].increaseSpeed();
-    buttons.push(new BuyButton(wheels[i]));
+    buttons.push(new BuyButton(wheels[i], zoom));
 }
 
 const canv: Canvas = new Canvas({
