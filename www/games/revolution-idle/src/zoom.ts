@@ -3,9 +3,21 @@ import { Button } from './button';
 import { Color } from 'viridis';
 import { FONT_FAMILY, FONT_SIZE, NUM_WHEELS } from './globals';
 
+/**
+ * Represents a zoom control.
+ */
 export class Zoom implements Drawable {
+    /**
+     * Zoom in button
+     */
     private readonly zoomIn: Button;
+    /**
+     * Zoom out button
+     */
     private readonly zoomOut: Button;
+    /**
+     * Create a new zoom control.
+     */
     constructor(private zoom: number = NUM_WHEELS) {
         this.zoomIn = new Button('+', new Color(200, 200, 200), 700, 150, 25, 25, () => {
             if (this.zoom < NUM_WHEELS) {
