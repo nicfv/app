@@ -44,5 +44,3 @@ const canv: Canvas = new Canvas({
         }
     },
 });
-
-console.log(canv);
