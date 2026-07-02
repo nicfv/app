@@ -14,7 +14,7 @@ export class Wheel implements Drawable {
     /**
      * The wheel color
      */
-    private readonly color: Color;
+    public readonly color: Color;
     /**
      * The radius of the wheel
      */
@@ -42,11 +42,11 @@ export class Wheel implements Drawable {
     /**
      * Create a new wheel.
      */
-    constructor(index: number, public readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
+    constructor(public readonly index: number, public readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 50);
         this.radius = 10 * 1.25 ** (index);
         this.thickness = this.radius * 0.2;
-        this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1) * Wheel.TAU;
+        this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1);
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
         this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 1.01, 1.15);
@@ -62,10 +62,22 @@ export class Wheel implements Drawable {
         return cost;
     }
     /**
+     * Get the final speed after `N` levels.
+     */
+    public getNextNSpeed(n = 1): number {
+        return SMath.translate(SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel), 0, this.maxSpeedLevel, 0, this.maxSpeed);
+    }
+    /**
+     * Calculates the current speed in rotations per second. (Hz)
+     */
+    public currentSpeedHz(): number {
+        return SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed);
+    }
+    /**
      * Rotate this wheel.
      */
     public rotate(dt: number): void {
-        this.data.angle += SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed) * dt / 1e3;
+        this.data.angle += this.currentSpeedHz() * dt / 1e3 * Wheel.TAU;
         this.data.rotations += Math.floor(this.data.angle / Wheel.TAU);
         this.data.angle %= Wheel.TAU;
     }
