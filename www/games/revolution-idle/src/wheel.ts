@@ -45,7 +45,7 @@ export class Wheel implements Drawable {
      */
     constructor(public readonly index: number, private readonly zoom: Zoom, private readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 55);
-        this.radius = 10 * 1.3 ** (index);
+        this.radius = 100 * 1.3 ** (index);
         this.thickness = this.radius * 0.2;
         this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1);
         this.maxSpeedLevel = 100;
@@ -96,12 +96,12 @@ export class Wheel implements Drawable {
         // Center the wheel on the canvas
         const centerX: number = graphics.canvas.width / 2;
         const centerY: number = graphics.canvas.height / 2;
-        const zoomFactor: number = 1.3 ** this.zoom.getZoom();
+        const zoomFactor: number = 1.3 ** (NUM_WHEELS - this.zoom.getZoom());
         graphics.strokeStyle = this.color.toString();
-        graphics.lineWidth = this.thickness * zoomFactor;
+        graphics.lineWidth = this.thickness / zoomFactor;
         graphics.lineCap = 'round';
         graphics.beginPath();
-        graphics.arc(centerX, centerY, this.radius * zoomFactor, 0, this.data.angle, false);
+        graphics.arc(centerX, centerY, this.radius / zoomFactor, 0, this.data.angle, false);
         graphics.stroke();
     }
 }
