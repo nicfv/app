@@ -3,6 +3,9 @@ import { Canvas } from 'graphico';
 import { Wheel } from './wheel';
 import { NUM_WHEELS } from './globals';
 import { BuyButton } from './buy-button';
+import { Player } from './player';
+
+const player: Player = new Player(0);
 
 const wheels: Wheel[] = [];
 const buttons: BuyButton[] = [];
@@ -28,6 +31,7 @@ const canv: Canvas = new Canvas({
         for (const bbtn of buttons) {
             canv.draw(bbtn);
         }
+        canv.draw(player);
     },
     mousemove(x, y) {
         for (const bbtn of buttons) {
