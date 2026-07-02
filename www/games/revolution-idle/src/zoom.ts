@@ -31,8 +31,8 @@ export class Zoom implements Drawable {
      * Create a new zoom control.
      */
     constructor(private readonly x: number, private readonly y: number, private zoom: number = NUM_WHEELS) {
-        this.zoomInBtn = new Button('+', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
-        this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
+        this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
+        this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
         this.setButtonAbility();
     }
     /**
