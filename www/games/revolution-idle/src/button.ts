@@ -33,7 +33,7 @@ export class Button implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render the button and outline, if needed
         graphics.fillStyle = this.color.toString();
-        graphics.strokeStyle = this.color.getContrastingColor().toString();
+        graphics.strokeStyle = 'white';
         graphics.lineWidth = 2;
         graphics.fillRect(this.x, this.y, this.w, this.h);
         if (this.isHover) {
