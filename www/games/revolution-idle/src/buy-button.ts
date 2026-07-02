@@ -1,4 +1,3 @@
-import { Color } from 'viridis';
 import { Button } from './button';
 import { Wheel } from './wheel';
 
@@ -10,6 +9,6 @@ export class BuyButton extends Button {
         this.setText();
     }
     private setText(): void {
-        super.text = `${this.wheel.currentSpeedHz().toFixed(2)} \u2192 ${this.wheel.getNextNSpeed().toFixed(2)}Hz\n$${this.wheel.getNextNCost().toFixed(2)}`;
+        super.text = `${this.wheel.currentSpeedHz().toFixed(2)} > ${this.wheel.getNextNSpeed().toFixed(2)}Hz\n$${this.wheel.getNextNCost().toFixed(2)}`;
     }
 }
