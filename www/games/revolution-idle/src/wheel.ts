@@ -2,6 +2,7 @@ import { Drawable } from 'graphico';
 import { SMath } from 'smath';
 import { Color } from 'viridis';
 import { NUM_WHEELS } from './globals';
+import { Zoom } from './zoom';
 
 /**
  * Represents a single spinning wheel
@@ -42,7 +43,7 @@ export class Wheel implements Drawable {
     /**
      * Create a new wheel.
      */
-    constructor(public readonly index: number, public readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
+    constructor(public readonly index: number, private readonly zoom: Zoom, private readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 55);
         this.radius = 10 * 1.25 ** (index);
         this.thickness = this.radius * 0.2;
@@ -68,6 +69,12 @@ export class Wheel implements Drawable {
         return SMath.translate(SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel), 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
+     * Increase the speed by `N` levels.
+     */
+    public increaseSpeed(n = 1): void {
+        this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel);
+    }
+    /**
      * Calculates the current speed in rotations per second. (Hz)
      */
     public currentSpeedHz(): number {
@@ -89,11 +96,12 @@ export class Wheel implements Drawable {
         // Center the wheel on the canvas
         const centerX: number = graphics.canvas.width / 2;
         const centerY: number = graphics.canvas.height / 2;
+        const zoomFactor: number = 1.3 ** this.zoom.zoom;
         graphics.strokeStyle = this.color.toString();
-        graphics.lineWidth = this.thickness;
+        graphics.lineWidth = this.thickness * zoomFactor;
         graphics.lineCap = 'round';
         graphics.beginPath();
-        graphics.arc(centerX, centerY, this.radius, 0, this.data.angle, false);
+        graphics.arc(centerX, centerY, this.radius * zoomFactor, 0, this.data.angle, false);
         graphics.stroke();
     }
 }
