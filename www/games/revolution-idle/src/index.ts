@@ -6,9 +6,11 @@ import { BuyButton } from './buy-button';
 import { Player } from './player';
 import { Zoom } from './zoom';
 import { Income } from './income';
+import { BuyType } from './buy-type';
 
 const player: Player = new Player(0);
 const zoom: Zoom = new Zoom(700, 150);
+const btype: BuyType = new BuyType(690, 250);
 
 const wheels: Wheel[] = [];
 const buttons: BuyButton[] = [];
@@ -39,17 +41,20 @@ const canv: Canvas = new Canvas({
         canv.draw(player);
         canv.draw(zoom);
         canv.draw(income);
+        canv.draw(btype);
     },
     mousemove(x, y) {
         for (const bbtn of buttons) {
             bbtn.checkHover(x, y);
         }
         zoom.checkHover(x, y);
+        btype.checkHover(x, y);
     },
     mousedown(button) {
         for (const bbtn of buttons) {
             bbtn.click(button);
         }
         zoom.click(button);
+        btype.click(button);
     },
 });
