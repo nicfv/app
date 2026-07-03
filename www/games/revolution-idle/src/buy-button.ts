@@ -1,18 +1,26 @@
 import { Button } from './button';
+import { BuyType } from './buy-type';
 import { NUM_WHEELS } from './globals';
 import { N } from './lib';
+import { Player } from './player';
 import { Wheel } from './wheel';
 import { Zoom } from './zoom';
 
 export class BuyButton extends Button {
-    constructor(private readonly wheel: Wheel, private readonly zoom: Zoom) {
+    constructor(private readonly wheel: Wheel, private readonly player: Player, private readonly zoom: Zoom, private readonly buyType: BuyType) {
         super('', wheel.color, true, 10, 0, 120, 35, () => {
             this.setText();
         });
         this.setText();
     }
-    private setText(): void {
-        super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed())}Hz\n$${N(this.wheel.getNextNCost())}`;
+    public setText(): void {
+        const cost: number = this.wheel.getNextNCost(this.buyType.getQuantity());
+        super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed(this.buyType.getQuantity()))}Hz\n$${N(cost)}`;
+        if (this.player.money >= cost) {
+            super.enable();
+        } else {
+            super.disable();
+        }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         const centerDelta: number = NUM_WHEELS - this.wheel.index - this.zoom.getZoom();
