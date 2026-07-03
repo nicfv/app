@@ -87,12 +87,14 @@ export class Wheel implements Drawable {
         return SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
-     * Rotate this wheel.
+     * Rotate this wheel. Returns the number of complete rotations this past interval.
      */
-    public rotate(dt: number): void {
+    public rotate(dt: number): number {
         this.data.angle += this.currentSpeedHz() * dt / 1e3 * Wheel.TAU;
-        this.data.rotations += Math.floor(this.data.angle / Wheel.TAU);
+        const rotations: number = Math.floor(this.data.angle / Wheel.TAU);
+        this.data.rotations += rotations;
         this.data.angle %= Wheel.TAU;
+        return rotations;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Skip drawing if it hasn't begun rotating yet
