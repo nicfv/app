@@ -8,7 +8,7 @@ import { Zoom } from './zoom';
 import { Income } from './income';
 import { BuyType } from './buy-type';
 
-const player: Player = new Player(0);
+const player: Player = new Player(1);
 const zoom: Zoom = new Zoom(700, 150);
 const btype: BuyType = new BuyType(690, 250);
 
@@ -16,8 +16,7 @@ const wheels: Wheel[] = [];
 const buttons: BuyButton[] = [];
 for (let i = 0; i < NUM_WHEELS; i++) {
     wheels.push(new Wheel(i, zoom));
-    wheels[i].increaseSpeed();
-    buttons.push(new BuyButton(wheels[i], zoom));
+    buttons.push(new BuyButton(wheels[i], player, zoom, btype));
 }
 
 const income: Income = new Income(zoom, wheels);
@@ -36,6 +35,7 @@ const canv: Canvas = new Canvas({
             canv.draw(wheel);
         }
         for (const bbtn of buttons) {
+            bbtn.setText();
             canv.draw(bbtn);
         }
         canv.draw(player);

@@ -1,5 +1,6 @@
 import { Drawable } from 'graphico';
 import { FONT_FAMILY, FONT_SIZE } from './globals';
+import { N } from './lib';
 
 export class Player implements Drawable {
     constructor(public money: number) { }
@@ -12,6 +13,6 @@ export class Player implements Drawable {
         graphics.font = `bold ${FONT_SIZE * 3}px ${FONT_FAMILY}`;
         graphics.textAlign = 'center';
         graphics.textBaseline = 'bottom';
-        graphics.fillText(`$${this.money.toFixed(2)}`, graphics.canvas.width / 2, graphics.canvas.height - FONT_SIZE / 2);
+        graphics.fillText(`$${N(this.money)}`, graphics.canvas.width / 2, graphics.canvas.height - FONT_SIZE / 2);
     }
 }
