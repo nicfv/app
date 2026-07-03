@@ -3,7 +3,6 @@ import { SMath } from 'smath';
 import { Color } from 'viridis';
 import { NUM_WHEELS } from './globals';
 import { Zoom } from './zoom';
-import { Player } from './player';
 
 /**
  * Represents a single spinning wheel
