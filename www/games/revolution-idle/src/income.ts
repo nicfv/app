@@ -1,6 +1,6 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
-import { FONT_SIZE } from './globals';
+import { FONT_SIZE, NUM_WHEELS } from './globals';
 import { Zoom } from './zoom';
 import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
@@ -38,13 +38,28 @@ export class Income implements Drawable {
         return this.getIncomePerRotation() * this.getRotationsPerSecond();
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Render the black background
         graphics.fillStyle = 'black';
         graphics.fillRect(0, 0, graphics.canvas.width, FONT_SIZE * 4);
-        let runningXOffset = 0;
-        for (const wheelScore of this.wheelScores) {
-            wheelScore.setXOffset(runningXOffset);
-            runningXOffset += wheelScore.getWidth();
-            wheelScore.draw(graphics);
+        // Render the focused score centered on the window
+        const focusedId: number = NUM_WHEELS - this.zoom.getZoom();
+        const focusedScore: WheelScore = this.wheelScores[focusedId];
+        let runningXOffset = (graphics.canvas.width - focusedScore.getWidth()) / 2;
+        focusedScore.setXOffset(runningXOffset);
+        focusedScore.draw(graphics);
+        // Render all wheel scores to the right of the focused score
+        runningXOffset += focusedScore.getWidth();
+        for (let i = focusedId + 1; i < this.wheelScores.length; i++) {
+            this.wheelScores[i].setXOffset(runningXOffset);
+            runningXOffset += this.wheelScores[i].getWidth();
+            this.wheelScores[i].draw(graphics);
+        }
+        // Render all wheel scores to the left of the focused score
+        runningXOffset = (graphics.canvas.width - focusedScore.getWidth()) / 2;
+        for (let i = focusedId - 1; i >= 0; i--) {
+            runningXOffset -= this.wheelScores[i].getWidth();
+            this.wheelScores[i].setXOffset(runningXOffset);
+            this.wheelScores[i].draw(graphics);
         }
     }
 }
