@@ -3,6 +3,7 @@ import { SMath } from 'smath';
 import { Color } from 'viridis';
 import { NUM_WHEELS } from './globals';
 import { Zoom } from './zoom';
+import { Player } from './player';
 
 /**
  * Represents a single spinning wheel
@@ -96,7 +97,7 @@ export class Wheel implements Drawable {
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Skip drawing if it hasn't begun rotating yet
-        if (this.data.angle <= 0) {
+        if (this.data.speedLevel <= 0) {
             return;
         }
         // Center the wheel on the canvas
