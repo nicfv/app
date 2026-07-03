@@ -53,6 +53,12 @@ export class Wheel implements Drawable {
         this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 1.01, 1.15);
     }
     /**
+     * Get data for this wheel.
+     */
+    public getData(): WheelData {
+        return JSON.parse(JSON.stringify(this.data));
+    }
+    /**
      * Get the cost for the next `N` levels.
      */
     public getNextNCost(n = 1): number {
