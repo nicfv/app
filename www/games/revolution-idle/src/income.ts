@@ -1,9 +1,10 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
-import { FONT_SIZE, NUM_WHEELS } from './globals';
+import { FONT_FAMILY, FONT_SIZE, NUM_WHEELS } from './globals';
 import { Zoom } from './zoom';
 import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
+import { N } from './lib';
 
 /**
  * Handles and renders game income.
@@ -61,5 +62,15 @@ export class Income implements Drawable {
             this.wheelScores[i].setXOffset(runningXOffset);
             this.wheelScores[i].draw(graphics);
         }
+        // Render total incomes
+        const rightAlign: number = graphics.canvas.width - FONT_SIZE / 2;
+        graphics.textAlign = 'right';
+        graphics.textBaseline = 'top';
+        graphics.fillStyle = 'white';
+        graphics.font = `bold ${FONT_SIZE * 2}px ${FONT_FAMILY}`;
+        graphics.fillText(`$${N(this.getIncomePerRotation())}/rev`, rightAlign, FONT_SIZE * 5);
+        graphics.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
+        graphics.fillText(`${N(this.getRotationsPerSecond())} rev/s`, rightAlign, FONT_SIZE * 7.5);
+        graphics.fillText(`$${N(this.getIncomePerSecond())}/s`, rightAlign, FONT_SIZE * 9);
     }
 }
