@@ -57,9 +57,11 @@ export class WheelScore implements Drawable {
         graphics.fillText(baseText, this.x + this.xOffset + this.width, FONT_SIZE);
         this.width += graphics.measureText(baseText).width;
         // Render and measure the exponent
-        graphics.font = `${FONT_SIZE * 1.5}px ${FONT_FAMILY}`;
-        const expText: string = N(this.wheel.getData().ascensions / 100 + 1);
-        graphics.fillText(expText, this.x + this.xOffset + this.width, FONT_SIZE * 0.5);
-        this.width += graphics.measureText(expText).width;
+        if (this.wheel.getData().ascensions > 0) {
+            graphics.font = `${FONT_SIZE * 1.5}px ${FONT_FAMILY}`;
+            const expText: string = N(this.wheel.getData().ascensions / 100 + 1);
+            graphics.fillText(expText, this.x + this.xOffset + this.width, FONT_SIZE * 0.5);
+            this.width += graphics.measureText(expText).width;
+        }
     }
 }
