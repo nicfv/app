@@ -68,9 +68,9 @@ export class Income implements Drawable {
         graphics.textBaseline = 'top';
         graphics.fillStyle = 'white';
         graphics.font = `bold ${FONT_SIZE * 2}px ${FONT_FAMILY}`;
-        graphics.fillText(`$${N(this.getIncomePerRotation())}/rev`, rightAlign, FONT_SIZE * 5);
+        graphics.fillText(`$${N(this.getIncomePerSecond())} /s`, rightAlign, FONT_SIZE * 5);
         graphics.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
-        graphics.fillText(`${N(this.getRotationsPerSecond())} rev/s`, rightAlign, FONT_SIZE * 7.5);
-        graphics.fillText(`$${N(this.getIncomePerSecond())}/s`, rightAlign, FONT_SIZE * 9);
+        graphics.fillText(`$${N(this.getIncomePerRotation())}  /rev`, rightAlign, FONT_SIZE * 7.5);
+        graphics.fillText(`${N(this.getRotationsPerSecond())} rev/s`, rightAlign, FONT_SIZE * 9);
     }
 }
