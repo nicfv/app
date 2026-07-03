@@ -61,7 +61,7 @@ export class Wheel implements Drawable {
     /**
      * Get the cost for the next `N` levels.
      */
-    public getNextNCost(n = 1): number {
+    public getNextNCost(n: number): number {
         let cost = 0;
         for (let level = this.data.speedLevel; level < SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel); level++) {
             cost += this.baseCost * (this.costIncrease ** level) * (2 ** this.data.ascensions);
@@ -71,13 +71,13 @@ export class Wheel implements Drawable {
     /**
      * Get the final speed after `N` levels.
      */
-    public getNextNSpeed(n = 1): number {
+    public getNextNSpeed(n: number): number {
         return SMath.translate(SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel), 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
      * Increase the speed by `N` levels.
      */
-    public increaseSpeed(n = 1): void {
+    public increaseSpeed(n: number): void {
         this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel);
     }
     /**
