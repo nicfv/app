@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { Wheel } from './wheel';
 import { N } from './lib';
-import { Text } from './text';
+import { Label } from './label';
 import { Color } from 'viridis';
 
 /**
@@ -10,18 +10,18 @@ import { Color } from 'viridis';
 export class WheelScore implements Drawable {
     private xOffset: number;
     private width: number;
-    private readonly xText: Text;
-    private readonly baseText: Text;
-    private readonly expText: Text;
+    private readonly xLabel: Label;
+    private readonly baseLabel: Label;
+    private readonly expLabel: Label;
     /**
      * Initialize a new wheel score
      */
     constructor(private readonly wheel: Wheel, private readonly x: number) {
         this.xOffset = 0;
         this.width = 0;
-        this.xText = new Text('x', new Color(200, 200, 200), 2, false, 'left', 'top', 0, Text.fontSize);
-        this.baseText = new Text('', wheel.color, 2, false, 'left', 'top', 0, Text.fontSize);
-        this.expText = new Text('', wheel.color, 1.5, false, 'left', 'top', 0, Text.fontSize * 0.5);
+        this.xLabel = new Label('x', new Color(200, 200, 200), 2, false, 'left', 'top', 0, Label.fontSize);
+        this.baseLabel = new Label('', wheel.color, 2, false, 'left', 'top', 0, Label.fontSize);
+        this.expLabel = new Label('', wheel.color, 1.5, false, 'left', 'top', 0, Label.fontSize * 0.5);
     }
     /**
      * Determine if the wheel has been activated
@@ -74,21 +74,21 @@ export class WheelScore implements Drawable {
         this.width = 0;
         // Render and measure the multiplier symbol
         if (this.wheel.index > 0) {
-            this.xText.x = this.x + this.xOffset;
-            this.xText.draw(graphics);
-            this.width += this.xText.getWidth();
+            this.xLabel.x = this.x + this.xOffset;
+            this.xLabel.draw(graphics);
+            this.width += this.xLabel.getWidth();
         }
         // Render and measure the base score
-        this.baseText.value = N(this.getBase());
-        this.baseText.x = this.x + this.xOffset + this.width;
-        this.baseText.draw(graphics);
-        this.width += this.baseText.getWidth();
+        this.baseLabel.value = N(this.getBase());
+        this.baseLabel.x = this.x + this.xOffset + this.width;
+        this.baseLabel.draw(graphics);
+        this.width += this.baseLabel.getWidth();
         // Render and measure the exponent
         if (this.hasAscended()) {
-            this.expText.value = N(this.getExp());
-            this.expText.x = this.x + this.xOffset + this.width;
-            this.expText.draw(graphics);
-            this.width += this.expText.getWidth();
+            this.expLabel.value = N(this.getExp());
+            this.expLabel.x = this.x + this.xOffset + this.width;
+            this.expLabel.draw(graphics);
+            this.width += this.expLabel.getWidth();
         }
     }
 }

@@ -4,7 +4,7 @@ import { Color } from 'viridis';
 /**
  * Represents a drawable text element.
  */
-export class Text implements Drawable {
+export class Label implements Drawable {
     /**
      * Global font family name
      */
@@ -28,9 +28,9 @@ export class Text implements Drawable {
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Calculate actual font size and set properties
-        const fontSize: number = Text.fontSize * this.fontSizeFactor;
+        const fontSize: number = Label.fontSize * this.fontSizeFactor;
         graphics.fillStyle = this.fill.toString();
-        graphics.font = `${this.bold ? 'bold ' : ''}${fontSize}px ${Text.fontFamily}`;
+        graphics.font = `${this.bold ? 'bold ' : ''}${fontSize}px ${Label.fontFamily}`;
         graphics.textAlign = this.textAlign;
         graphics.textBaseline = this.textBaseline;
         this.width = 0;

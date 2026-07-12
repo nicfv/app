@@ -5,7 +5,7 @@ import { Zoom } from './zoom';
 import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
 import { N } from './lib';
-import { Text } from './text';
+import { Label } from './label';
 import { Color } from 'viridis';
 
 /**
@@ -13,8 +13,8 @@ import { Color } from 'viridis';
  */
 export class Income implements Drawable {
     private readonly wheelScores: WheelScore[];
-    private readonly incomeLargeText: Text;
-    private readonly incomeSmallText: Text;
+    private readonly incomeLargeLabel: Label;
+    private readonly incomeSmallLabel: Label;
     /**
      * Initialize a new income handler.
      */
@@ -23,8 +23,8 @@ export class Income implements Drawable {
         for (const wheel of wheels) {
             this.wheelScores.push(new WheelScore(wheel, 0));
         }
-        this.incomeLargeText = new Text('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Text.fontSize * 5);
-        this.incomeSmallText = new Text('', new Color(255, 255, 255), 1, true, 'right', 'top', 0, Text.fontSize * 8);
+        this.incomeLargeLabel = new Label('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Label.fontSize * 5);
+        this.incomeSmallLabel = new Label('', new Color(255, 255, 255), 1, true, 'right', 'top', 0, Label.fontSize * 8);
     }
     /**
      * Calculate the income gained per complete rotation.
@@ -47,7 +47,7 @@ export class Income implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render the black background
         graphics.fillStyle = 'black';
-        graphics.fillRect(0, 0, graphics.canvas.width, Text.fontSize * 4);
+        graphics.fillRect(0, 0, graphics.canvas.width, Label.fontSize * 4);
         // Render the focused score centered on the window
         const focusedId: number = NUM_WHEELS - this.zoom.getZoom();
         const focusedScore: WheelScore = this.wheelScores[focusedId];
@@ -69,12 +69,12 @@ export class Income implements Drawable {
             this.wheelScores[i].draw(graphics);
         }
         // Render total incomes
-        const rightAlign: number = graphics.canvas.width - Text.fontSize / 2;
-        this.incomeLargeText.value = `$${N(this.getIncomePerSecond())} /s`;
-        this.incomeLargeText.x = rightAlign;
-        this.incomeLargeText.draw(graphics);
-        this.incomeSmallText.value = `$${N(this.getIncomePerRotation())}  /rev\n${N(this.getRotationsPerSecond())} rev/s`;
-        this.incomeSmallText.x = rightAlign;
-        this.incomeSmallText.draw(graphics);
+        const rightAlign: number = graphics.canvas.width - Label.fontSize / 2;
+        this.incomeLargeLabel.value = `$${N(this.getIncomePerSecond())} /s`;
+        this.incomeLargeLabel.x = rightAlign;
+        this.incomeLargeLabel.draw(graphics);
+        this.incomeSmallLabel.value = `$${N(this.getIncomePerRotation())}  /rev\n${N(this.getRotationsPerSecond())} rev/s`;
+        this.incomeSmallLabel.x = rightAlign;
+        this.incomeSmallLabel.draw(graphics);
     }
 }

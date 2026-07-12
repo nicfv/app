@@ -2,7 +2,7 @@ import { Drawable } from 'graphico';
 import { Button } from './button';
 import { Color } from 'viridis';
 import { NUM_WHEELS } from './globals';
-import { Text } from './text';
+import { Label } from './label';
 
 /**
  * Represents a zoom control.
@@ -11,11 +11,11 @@ export class Zoom implements Drawable {
     /**
      * Button sizing
      */
-    private static readonly btnSize: number = Text.fontSize * 2;
+    private static readonly btnSize: number = Label.fontSize * 2;
     /**
      * Button padding
      */
-    private static readonly btnPad: number = Text.fontSize / 2;
+    private static readonly btnPad: number = Label.fontSize / 2;
     /**
      * Button color
      */
@@ -31,14 +31,14 @@ export class Zoom implements Drawable {
     /**
      * Zoom factor text
      */
-    private readonly zoomText: Text;
+    private readonly label: Label;
     /**
      * Create a new zoom control.
      */
     constructor(x: number, y: number, private zoom: number = NUM_WHEELS) {
         this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
         this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
-        this.zoomText = new Text('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x + Zoom.btnSize + Zoom.btnPad / 2, y - Zoom.btnPad);
+        this.label = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x + Zoom.btnSize + Zoom.btnPad / 2, y - Zoom.btnPad);
         this.setButtonAbility();
     }
     /**
@@ -98,7 +98,7 @@ export class Zoom implements Drawable {
         this.zoomInBtn.draw(graphics);
         this.zoomOutBtn.draw(graphics);
         // Render the zoom text
-        this.zoomText.value = `Zoom x${this.zoom}`;
-        this.zoomText.draw(graphics);
+        this.label.value = `Zoom x${this.zoom}`;
+        this.label.draw(graphics);
     }
 }

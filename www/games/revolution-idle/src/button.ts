@@ -1,6 +1,6 @@
 import { Drawable } from 'graphico';
 import { Color } from 'viridis';
-import { Text } from './text';
+import { Label } from './label';
 
 /**
  * The base class for a UI button.
@@ -13,22 +13,22 @@ export class Button implements Drawable {
     /**
      * Text rendered on the button
      */
-    private readonly buttonText: Text;
+    private readonly label: Label;
     /**
      * Initialize a new button.
      */
     constructor(protected text: string, protected color: Color, protected enabled: boolean, protected x: number, protected y: number, protected w: number, protected h: number, protected callback: () => void) {
         this.isHover = false;
-        this.buttonText = new Text(text, color.getContrastingColor(), 1, false, 'center', 'top', this.x + this.w / 2, this.y + Text.fontSize / 2);
+        this.label = new Label(text, color.getContrastingColor(), 1, false, 'center', 'top', this.x + this.w / 2, this.y + Label.fontSize / 2);
     }
     /**
      * Update the value, color, and positioning of the button text.
      */
     private syncText(): void {
-        this.buttonText.value = this.text;
-        this.buttonText.fill = this.color.getContrastingColor();
-        this.buttonText.x = this.x + this.w / 2;
-        this.buttonText.y = this.y + Text.fontSize / 2;
+        this.label.value = this.text;
+        this.label.fill = this.color.getContrastingColor();
+        this.label.x = this.x + this.w / 2;
+        this.label.y = this.y + Label.fontSize / 2;
     }
     /**
      * Enable this button.
@@ -67,6 +67,6 @@ export class Button implements Drawable {
         }
         // Render text (line-by-line) on the button
         this.syncText();
-        this.buttonText.draw(graphics);
+        this.label.draw(graphics);
     }
 }
