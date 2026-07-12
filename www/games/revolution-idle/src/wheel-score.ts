@@ -1,7 +1,8 @@
 import { Drawable } from 'graphico';
 import { Wheel } from './wheel';
-import { FONT_FAMILY, FONT_SIZE } from './globals';
 import { N } from './lib';
+import { Text } from './text';
+import { Color } from 'viridis';
 
 /**
  * Renders the wheel score to the user interface.
@@ -9,18 +10,48 @@ import { N } from './lib';
 export class WheelScore implements Drawable {
     private xOffset: number;
     private width: number;
+    private readonly xText: Text;
+    private readonly baseText: Text;
+    private readonly expText: Text;
     /**
      * Initialize a new wheel score
      */
     constructor(private readonly wheel: Wheel, private readonly x: number) {
         this.xOffset = 0;
         this.width = 0;
+        this.xText = new Text('x', new Color(200, 200, 200), 2, false, 'left', 'top', 0, Text.fontSize);
+        this.baseText = new Text('', wheel.color, 2, false, 'left', 'top', 0, Text.fontSize);
+        this.expText = new Text('', wheel.color, 1.5, false, 'left', 'top', 0, Text.fontSize * 0.5);
+    }
+    /**
+     * Determine if the wheel has been activated
+     */
+    private isActive(): boolean {
+        return this.wheel.getData().speedLevel > 0;
+    }
+    /**
+     * Determine if this wheel has ascended yet
+     */
+    private hasAscended(): boolean {
+        return this.wheel.getData().ascensions > 0;
+    }
+    /**
+     * Get the base value to calculate score
+     */
+    private getBase(): number {
+        return this.wheel.getData().rotations / 100 + 1;
+    }
+    /**
+     * Get the exponent to calculate score
+     */
+    private getExp(): number {
+        return this.wheel.getData().ascensions / 100 + 1;
     }
     /**
      * Get the actual, calculated score for this wheel
      */
     public getScore(): number {
-        return (this.wheel.getData().rotations / 100 + 1) ** (this.wheel.getData().ascensions / 100 + 1);
+        return this.getBase() ** this.getExp();
     }
     /**
      * Set the X-offset in pixels for this score
@@ -36,32 +67,28 @@ export class WheelScore implements Drawable {
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Don't render if wheel hasn't been "activated"
-        if (this.wheel.getData().speedLevel <= 0) {
+        if (!this.isActive()) {
             return;
         }
         // Set graphical text properties
-        graphics.textAlign = 'left';
-        graphics.textBaseline = 'top';
         this.width = 0;
-        graphics.font = `${FONT_SIZE * 2}px ${FONT_FAMILY}`;
         // Render and measure the multiplier symbol
         if (this.wheel.index > 0) {
-            graphics.fillStyle = 'lightgray';
-            const multiplier = 'x';
-            graphics.fillText(multiplier, this.x + this.xOffset, FONT_SIZE);
-            this.width += graphics.measureText(multiplier).width;
+            this.xText.x = this.x + this.xOffset;
+            this.xText.draw(graphics);
+            this.width += this.xText.getWidth();
         }
         // Render and measure the base score
-        graphics.fillStyle = this.wheel.color.toString();
-        const baseText: string = N(this.wheel.getData().rotations / 100 + 1);
-        graphics.fillText(baseText, this.x + this.xOffset + this.width, FONT_SIZE);
-        this.width += graphics.measureText(baseText).width;
+        this.baseText.value = N(this.getBase());
+        this.baseText.x = this.x + this.xOffset + this.width;
+        this.baseText.draw(graphics);
+        this.width += this.baseText.getWidth();
         // Render and measure the exponent
-        if (this.wheel.getData().ascensions > 0) {
-            graphics.font = `${FONT_SIZE * 1.5}px ${FONT_FAMILY}`;
-            const expText: string = N(this.wheel.getData().ascensions / 100 + 1);
-            graphics.fillText(expText, this.x + this.xOffset + this.width, FONT_SIZE * 0.5);
-            this.width += graphics.measureText(expText).width;
+        if (this.hasAscended()) {
+            this.expText.value = N(this.getExp());
+            this.expText.x = this.x + this.xOffset + this.width;
+            this.expText.draw(graphics);
+            this.width += this.expText.getWidth();
         }
     }
 }

@@ -1,7 +1,8 @@
 import { Drawable } from 'graphico';
 import { Button } from './button';
 import { Color } from 'viridis';
-import { FONT_FAMILY, FONT_SIZE, NUM_WHEELS } from './globals';
+import { NUM_WHEELS } from './globals';
+import { Text } from './text';
 
 /**
  * Represents a zoom control.
@@ -10,11 +11,11 @@ export class Zoom implements Drawable {
     /**
      * Button sizing
      */
-    private static readonly btnSize: number = FONT_SIZE * 2;
+    private static readonly btnSize: number = Text.fontSize * 2;
     /**
      * Button padding
      */
-    private static readonly btnPad: number = FONT_SIZE / 2;
+    private static readonly btnPad: number = Text.fontSize / 2;
     /**
      * Button color
      */
@@ -28,11 +29,16 @@ export class Zoom implements Drawable {
      */
     private readonly zoomOutBtn: Button;
     /**
+     * Zoom factor text
+     */
+    private readonly zoomText: Text;
+    /**
      * Create a new zoom control.
      */
-    constructor(private readonly x: number, private readonly y: number, private zoom: number = NUM_WHEELS) {
+    constructor(x: number, y: number, private zoom: number = NUM_WHEELS) {
         this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
         this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
+        this.zoomText = new Text('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x + Zoom.btnSize + Zoom.btnPad / 2, y - Zoom.btnPad);
         this.setButtonAbility();
     }
     /**
@@ -92,10 +98,7 @@ export class Zoom implements Drawable {
         this.zoomInBtn.draw(graphics);
         this.zoomOutBtn.draw(graphics);
         // Render the zoom text
-        graphics.fillStyle = 'white';
-        graphics.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
-        graphics.textAlign = 'center';
-        graphics.textBaseline = 'bottom';
-        graphics.fillText(`Zoom x${this.zoom}`, this.x + Zoom.btnSize + Zoom.btnPad / 2, this.y - Zoom.btnPad);
+        this.zoomText.value = `Zoom x${this.zoom}`;
+        this.zoomText.draw(graphics);
     }
 }

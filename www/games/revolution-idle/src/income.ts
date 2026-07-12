@@ -1,16 +1,20 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
-import { FONT_FAMILY, FONT_SIZE, NUM_WHEELS } from './globals';
+import { NUM_WHEELS } from './globals';
 import { Zoom } from './zoom';
 import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
 import { N } from './lib';
+import { Text } from './text';
+import { Color } from 'viridis';
 
 /**
  * Handles and renders game income.
  */
 export class Income implements Drawable {
     private readonly wheelScores: WheelScore[];
+    private readonly incomeLargeText: Text;
+    private readonly incomeSmallText: Text;
     /**
      * Initialize a new income handler.
      */
@@ -19,6 +23,8 @@ export class Income implements Drawable {
         for (const wheel of wheels) {
             this.wheelScores.push(new WheelScore(wheel, 0));
         }
+        this.incomeLargeText = new Text('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Text.fontSize * 5);
+        this.incomeSmallText = new Text('', new Color(255, 255, 255), 1, true, 'right', 'top', 0, Text.fontSize * 8);
     }
     /**
      * Calculate the income gained per complete rotation.
@@ -41,7 +47,7 @@ export class Income implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render the black background
         graphics.fillStyle = 'black';
-        graphics.fillRect(0, 0, graphics.canvas.width, FONT_SIZE * 4);
+        graphics.fillRect(0, 0, graphics.canvas.width, Text.fontSize * 4);
         // Render the focused score centered on the window
         const focusedId: number = NUM_WHEELS - this.zoom.getZoom();
         const focusedScore: WheelScore = this.wheelScores[focusedId];
@@ -63,14 +69,12 @@ export class Income implements Drawable {
             this.wheelScores[i].draw(graphics);
         }
         // Render total incomes
-        const rightAlign: number = graphics.canvas.width - FONT_SIZE / 2;
-        graphics.textAlign = 'right';
-        graphics.textBaseline = 'top';
-        graphics.fillStyle = 'white';
-        graphics.font = `bold ${FONT_SIZE * 2}px ${FONT_FAMILY}`;
-        graphics.fillText(`$${N(this.getIncomePerSecond())} /s`, rightAlign, FONT_SIZE * 5);
-        graphics.font = `bold ${FONT_SIZE}px ${FONT_FAMILY}`;
-        graphics.fillText(`$${N(this.getIncomePerRotation())}  /rev`, rightAlign, FONT_SIZE * 7.5);
-        graphics.fillText(`${N(this.getRotationsPerSecond())} rev/s`, rightAlign, FONT_SIZE * 9);
+        const rightAlign: number = graphics.canvas.width - Text.fontSize / 2;
+        this.incomeLargeText.value = `$${N(this.getIncomePerSecond())} /s`;
+        this.incomeLargeText.x = rightAlign;
+        this.incomeLargeText.draw(graphics);
+        this.incomeSmallText.value = `$${N(this.getIncomePerRotation())}  /rev\n${N(this.getRotationsPerSecond())} rev/s`;
+        this.incomeSmallText.x = rightAlign;
+        this.incomeSmallText.draw(graphics);
     }
 }

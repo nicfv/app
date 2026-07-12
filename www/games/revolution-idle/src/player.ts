@@ -1,18 +1,21 @@
 import { Drawable } from 'graphico';
-import { FONT_FAMILY, FONT_SIZE } from './globals';
 import { N } from './lib';
+import { Text } from './text';
+import { Color } from 'viridis';
 
 export class Player implements Drawable {
-    constructor(public money: number) { }
+    private readonly moneyText: Text;
+    constructor(public money: number) {
+        this.moneyText = new Text('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
+    }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
         graphics.fillStyle = 'black';
-        graphics.fillRect(0, graphics.canvas.height - FONT_SIZE * 4, graphics.canvas.width, FONT_SIZE * 4);
+        graphics.fillRect(0, graphics.canvas.height - Text.fontSize * 4, graphics.canvas.width, Text.fontSize * 4);
         // Render white text (money)
-        graphics.fillStyle = 'white';
-        graphics.font = `bold ${FONT_SIZE * 3}px ${FONT_FAMILY}`;
-        graphics.textAlign = 'center';
-        graphics.textBaseline = 'bottom';
-        graphics.fillText(`$${N(this.money)}`, graphics.canvas.width / 2, graphics.canvas.height - FONT_SIZE / 2);
+        this.moneyText.value = `$${N(this.money)}`;
+        this.moneyText.x = graphics.canvas.width / 2;
+        this.moneyText.y = graphics.canvas.height - Text.fontSize / 2;
+        this.moneyText.draw(graphics);
     }
 }

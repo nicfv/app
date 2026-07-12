@@ -1,6 +1,6 @@
 import { Drawable } from 'graphico';
 import { Color } from 'viridis';
-import { FONT_FAMILY, FONT_SIZE } from './globals';
+import { Text } from './text';
 
 /**
  * The base class for a UI button.
@@ -11,10 +11,24 @@ export class Button implements Drawable {
      */
     private isHover: boolean;
     /**
+     * Text rendered on the button
+     */
+    private readonly buttonText: Text;
+    /**
      * Initialize a new button.
      */
     constructor(protected text: string, protected color: Color, protected enabled: boolean, protected x: number, protected y: number, protected w: number, protected h: number, protected callback: () => void) {
         this.isHover = false;
+        this.buttonText = new Text(text, color.getContrastingColor(), 1, false, 'center', 'top', this.x + this.w / 2, this.y + Text.fontSize / 2);
+    }
+    /**
+     * Update the value, color, and positioning of the button text.
+     */
+    private syncText(): void {
+        this.buttonText.value = this.text;
+        this.buttonText.fill = this.color.getContrastingColor();
+        this.buttonText.x = this.x + this.w / 2;
+        this.buttonText.y = this.y + Text.fontSize / 2;
     }
     /**
      * Enable this button.
@@ -52,14 +66,7 @@ export class Button implements Drawable {
             graphics.strokeRect(this.x | 0, this.y | 0, this.w | 0, this.h | 0);
         }
         // Render text (line-by-line) on the button
-        graphics.fillStyle = this.color.getContrastingColor().toString();
-        graphics.font = `${FONT_SIZE}px ${FONT_FAMILY}`;
-        const lines: string[] = this.text.split('\n');
-        for (const linenum in lines) {
-            const line: string = lines[linenum];
-            graphics.textAlign = 'center';
-            graphics.textBaseline = 'top';
-            graphics.fillText(line, (this.x + this.w / 2) | 0, (this.y + FONT_SIZE * (+linenum + 0.5)) | 0);
-        }
+        this.syncText();
+        this.buttonText.draw(graphics);
     }
 }
