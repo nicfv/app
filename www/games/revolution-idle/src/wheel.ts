@@ -59,6 +59,12 @@ export class Wheel implements Drawable {
         return JSON.parse(JSON.stringify(this.data));
     }
     /**
+     * Determine if this wheel's speed level is maxed out.
+     */
+    public isMaxed(): boolean {
+        return this.data.speedLevel >= this.maxSpeedLevel;
+    }
+    /**
      * Get the cost for the next `N` levels.
      */
     public getNextNCost(n: number): number {

@@ -19,7 +19,11 @@ export class BuyButton extends Button {
     }
     public setText(): void {
         this.cost = this.wheel.getNextNCost(this.buyType.getQuantity());
-        super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed(this.buyType.getQuantity()))}Hz\n$${N(this.cost)}`;
+        if (this.wheel.isMaxed()) {
+            super.text = `${N(this.wheel.currentSpeedHz())}Hz\n(Maxed)`;
+        } else {
+            super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed(this.buyType.getQuantity()))}Hz\n$${N(this.cost)}`;
+        }
         if (this.player.money >= this.cost) {
             super.enable();
         } else {
