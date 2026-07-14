@@ -93,6 +93,17 @@ export class Wheel implements Drawable {
         return SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
+     * Increase the number of ascensions for this wheel.
+     */
+    public ascend(): void {
+        if (this.isMaxed()) {
+            this.data.ascensions++;
+            this.data.angle = 0;
+            this.data.rotations = 0;
+            this.data.speedLevel = 0;
+        }
+    }
+    /**
      * Rotate this wheel. Returns the number of complete rotations this past interval.
      */
     public rotate(dt: number): number {
