@@ -13,7 +13,7 @@ for (let i = 0; i < NUM_WHEELS; i++) {
 }
 
 const income: Income = new Income(wheels);
-const store: Store = new Store(wheels);
+const store: Store = new Store(10, 120, wheels);
 
 const canv: Canvas = new Canvas({
     background: 'black',

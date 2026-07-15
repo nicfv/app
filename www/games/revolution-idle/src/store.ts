@@ -2,12 +2,15 @@ import { Drawable } from 'graphico';
 import { BuyButton } from './buy-button';
 import { Wheel } from './wheel';
 
+/**
+ * Represents a collection of buy buttons and ascension buttons (if applicable.)
+ */
 export class Store implements Drawable {
     private readonly buyButtons: BuyButton[];
-    constructor(wheels: Wheel[]) {
+    constructor(x: number, buyButtonWidth: number, wheels: Wheel[]) {
         this.buyButtons = [];
         for (const wheel of wheels) {
-            this.buyButtons.push(new BuyButton(wheel));
+            this.buyButtons.push(new BuyButton(x, buyButtonWidth, wheel));
         }
     }
     public checkHover(x: number, y: number): void {
