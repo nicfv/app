@@ -5,7 +5,7 @@ import { wheels } from './state';
 /**
  * Represents a collection of buy buttons and ascension buttons (if applicable.)
  */
-export class Store implements Drawable {
+export class Shop implements Drawable {
     private readonly buyButtons: BuyButton[];
     constructor(x: number, buyButtonWidth: number) {
         this.buyButtons = [];

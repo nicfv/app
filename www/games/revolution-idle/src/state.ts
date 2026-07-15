@@ -2,7 +2,7 @@ import { BuyType } from './buy-type';
 import { NUM_WHEELS } from './globals';
 import { Income } from './income';
 import { Player } from './player';
-import { Store } from './store';
+import { Shop } from './shop';
 import { Wheel } from './wheel';
 import { Zoom } from './zoom';
 
@@ -16,4 +16,4 @@ for (let i = 0; i < NUM_WHEELS; i++) {
 }
 
 export const income: Income = new Income();
-export const store: Store = new Store(10, 120);
+export const shop: Shop = new Shop(10, 120);
