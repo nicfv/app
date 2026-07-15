@@ -1,16 +1,13 @@
 import { Drawable } from 'graphico';
 import { BuyButton } from './buy-button';
 import { Wheel } from './wheel';
-import { Player } from './player';
-import { Zoom } from './zoom';
-import { BuyType } from './buy-type';
 
 export class Store implements Drawable {
     private readonly buyButtons: BuyButton[];
-    constructor(private readonly x: number, private readonly buyButtonWidth: number, private readonly zoom: Zoom, private readonly buyType: BuyType, private readonly player: Player, private readonly wheels: Wheel[]) {
+    constructor(wheels: Wheel[]) {
         this.buyButtons = [];
         for (const wheel of wheels) {
-            this.buyButtons.push(new BuyButton(wheel, player, zoom, buyType));
+            this.buyButtons.push(new BuyButton(wheel));
         }
     }
     public checkHover(x: number, y: number): void {

@@ -1,12 +1,12 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
 import { NUM_WHEELS } from './globals';
-import { Zoom } from './zoom';
 import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
 import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';
+import { zoom } from './state';
 
 /**
  * Handles and renders game income.
@@ -18,7 +18,7 @@ export class Income implements Drawable {
     /**
      * Initialize a new income handler.
      */
-    constructor(private readonly zoom: Zoom, private readonly wheels: Wheel[]) {
+    constructor(private readonly wheels: Wheel[]) {
         this.wheelScores = [];
         for (const wheel of wheels) {
             this.wheelScores.push(new WheelScore(wheel, 0));
@@ -49,7 +49,7 @@ export class Income implements Drawable {
         graphics.fillStyle = 'black';
         graphics.fillRect(0, 0, graphics.canvas.width, Label.fontSize * 4);
         // Render the focused score centered on the window
-        const focusedId: number = NUM_WHEELS - this.zoom.getZoom();
+        const focusedId: number = NUM_WHEELS - zoom.getZoom();
         const focusedScore: WheelScore = this.wheelScores[focusedId];
         let runningXOffset = (graphics.canvas.width - focusedScore.getWidth()) / 2;
         focusedScore.setXOffset(runningXOffset);
