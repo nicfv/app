@@ -13,18 +13,32 @@ export class Label implements Drawable {
      * Global base font size
      */
     public static readonly fontSize = 12;
+    /**
+     * Text width [px]
+     */
     private width: number;
+    /**
+     * Text height [px]
+     */
+    private height: number;
     /**
      * Create a new drawable text element.
      */
     constructor(public value: string, public fill: Color, public fontSizeFactor: number, public bold: boolean, public textAlign: CanvasTextAlign, public textBaseline: CanvasTextBaseline, public x: number, public y: number) {
         this.width = 0;
+        this.height = 0;
     }
     /**
      * Get the width of the rendered text.
      */
     public getWidth(): number {
         return this.width;
+    }
+    /**
+     * Get the height of the rendered text.
+     */
+    public getHeight(): number {
+        return this.height;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Calculate actual font size and set properties
@@ -44,5 +58,7 @@ export class Label implements Drawable {
                 this.width = lineWidth;
             }
         }
+        // Calculate total height
+        this.height = fontSize * lines.length;
     }
 }
