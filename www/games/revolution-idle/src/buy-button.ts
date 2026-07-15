@@ -12,10 +12,8 @@ export class BuyButton extends Button {
         super('', wheel.color, true, 10, 0, 120, 35, () => {
             player.money -= this.cost;
             wheel.increaseSpeed(buyType.getQuantity());
-            this.setText();
         });
         this.cost = 0;
-        this.setText();
     }
     private setText(): void {
         this.cost = this.wheel.getNextNCost(this.buyType.getQuantity());
@@ -31,10 +29,10 @@ export class BuyButton extends Button {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        this.setText();
         const centerDelta: number = NUM_WHEELS - this.wheel.index - this.zoom.getZoom();
         if (Math.abs(centerDelta) < 5) {
             this.y = (graphics.canvas.height - this.h) / 2 - 45 * centerDelta;
+            this.setText();
             super.draw(graphics);
         } else {
             this.y = -Infinity;
