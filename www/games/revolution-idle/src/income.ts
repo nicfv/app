@@ -1,12 +1,11 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
 import { NUM_WHEELS } from './globals';
-import { Wheel } from './wheel';
 import { WheelScore } from './wheel-score';
 import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';
-import { zoom } from './state';
+import { wheels, zoom } from './state';
 
 /**
  * Handles and renders game income.
@@ -18,7 +17,7 @@ export class Income implements Drawable {
     /**
      * Initialize a new income handler.
      */
-    constructor(private readonly wheels: Wheel[]) {
+    constructor() {
         this.wheelScores = [];
         for (const wheel of wheels) {
             this.wheelScores.push(new WheelScore(wheel, 0));
@@ -36,7 +35,7 @@ export class Income implements Drawable {
      * Calculate the number of complete rotations per second.
      */
     public getRotationsPerSecond(): number {
-        return SMath.sum(this.wheels.map(w => w.currentSpeedHz()));
+        return SMath.sum(wheels.map(w => w.currentSpeedHz()));
     }
     /**
      * Calculate the average income gained per second.

@@ -1,19 +1,6 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { Wheel } from './wheel';
-import { NUM_WHEELS } from './globals';
-import { Income } from './income';
-import { Store } from './store';
-import { buyType, player, zoom } from './state';
-
-
-const wheels: Wheel[] = [];
-for (let i = 0; i < NUM_WHEELS; i++) {
-    wheels.push(new Wheel(i));
-}
-
-const income: Income = new Income(wheels);
-const store: Store = new Store(10, 120, wheels);
+import { buyType, income, player, store, wheels, zoom } from './state';
 
 const canv: Canvas = new Canvas({
     background: 'black',

@@ -1,13 +1,13 @@
 import { Drawable } from 'graphico';
 import { BuyButton } from './buy-button';
-import { Wheel } from './wheel';
+import { wheels } from './state';
 
 /**
  * Represents a collection of buy buttons and ascension buttons (if applicable.)
  */
 export class Store implements Drawable {
     private readonly buyButtons: BuyButton[];
-    constructor(x: number, buyButtonWidth: number, wheels: Wheel[]) {
+    constructor(x: number, buyButtonWidth: number) {
         this.buyButtons = [];
         for (const wheel of wheels) {
             this.buyButtons.push(new BuyButton(x, buyButtonWidth, wheel));
