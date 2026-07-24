@@ -75,6 +75,17 @@ export class Wheel implements Drawable {
         return cost;
     }
     /**
+     * Get the cost for the next `N` ascensions.
+     */
+    public getNextNAscensionCost(n: number): number {
+        const maxCost: number = this.baseCost * (this.costIncrease ** this.maxSpeedLevel);
+        let cost = 0;
+        for (let asc = this.data.ascensions; asc < this.data.ascensions + n; asc++) {
+            cost += maxCost * (2 ** this.data.ascensions);
+        }
+        return cost;
+    }
+    /**
      * Get the final speed after `N` levels.
      */
     public getNextNSpeed(n: number): number {
@@ -93,11 +104,11 @@ export class Wheel implements Drawable {
         return SMath.translate(this.data.speedLevel, 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
-     * Increase the number of ascensions for this wheel.
+     * Increase the number of ascensions for this wheel `N` times.
      */
-    public ascend(): void {
+    public ascend(n: number): void {
         if (this.isMaxed()) {
-            this.data.ascensions++;
+            this.data.ascensions += n;
             this.data.angle = 0;
             this.data.rotations = 0;
             this.data.speedLevel = 0;
