@@ -66,12 +66,12 @@ export class WheelScore implements Drawable {
         return this.width;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Set graphical text properties
+        this.width = 0;
         // Don't render if wheel hasn't been "activated"
         if (!this.isActive()) {
             return;
         }
-        // Set graphical text properties
-        this.width = 0;
         // Render and measure the multiplier symbol
         if (this.wheel.index > 0) {
             this.xLabel.x = this.x + this.xOffset;
