@@ -81,7 +81,7 @@ export class Wheel implements Drawable {
         const maxCost: number = this.baseCost * (this.costIncrease ** this.maxSpeedLevel);
         let cost = 0;
         for (let asc = this.data.ascensions; asc < this.data.ascensions + n; asc++) {
-            cost += maxCost * (2 ** this.data.ascensions);
+            cost += maxCost * (2 ** asc);
         }
         return cost;
     }
