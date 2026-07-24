@@ -17,14 +17,12 @@ export class AscendButton extends Button {
         this.ascensions = 0;
     }
     private update(): void {
-        let nAscensions = 1;
-        while (this.wheel.getNextNAscensionCost(nAscensions) < player.money) {
-            nAscensions++;
-            return;
+        this.ascensions = 1;
+        while (this.wheel.getNextNAscensionCost(this.ascensions + 1) <= player.money) {
+            this.ascensions++;
         }
-        nAscensions--;
-        this.ascAmount = this.wheel.getNextNAscensionCost(nAscensions);
-        super.text = `${N(this.ascAmount)}\n-$All`;
+        this.ascAmount = this.wheel.getNextNAscensionCost(this.ascensions);
+        super.text = `Ascend +${this.ascensions}\n-${N(this.ascAmount)}`;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         const centerDelta: number = NUM_WHEELS - this.wheel.index - zoom.getZoom();
