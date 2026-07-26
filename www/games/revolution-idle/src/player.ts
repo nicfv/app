@@ -3,8 +3,17 @@ import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';
 
+/**
+ * Represents the main player of the game
+ */
 export class Player implements Drawable {
+    /**
+     * The label showing the amount of money in the player's bank
+     */
     private readonly moneyLabel: Label;
+    /**
+     * Create a new instance of the game player
+     */
     constructor(private money: number, private numWheels: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
