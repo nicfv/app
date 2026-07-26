@@ -8,8 +8,17 @@ import { Label } from './label';
  * Represents a collection of buy buttons and ascension buttons (if applicable.)
  */
 export class Shop implements Drawable {
+    /**
+     * Buttons to increase wheel speed
+     */
     private readonly buyButtons: BuyButton[];
+    /**
+     * Buttons to increase wheel ascension
+     */
     private readonly ascButtons: AscendButton[];
+    /**
+     * Create a new instance of the game shop
+     */
     constructor(x: number, buyButtonWidth: number) {
         this.buyButtons = [];
         this.ascButtons = [];
@@ -18,6 +27,9 @@ export class Shop implements Drawable {
             this.ascButtons.push(new AscendButton(x + buyButtonWidth + Label.fontSize / 2, buyButtonWidth, wheel));
         }
     }
+    /**
+     * Check to see if the mouse is currently hovering over any of the shop buttons
+     */
     public checkHover(x: number, y: number): void {
         for (const buyButton of this.buyButtons) {
             buyButton.checkHover(x, y);
@@ -26,6 +38,9 @@ export class Shop implements Drawable {
             ascButton.checkHover(x, y);
         }
     }
+    /**
+     * Check to see if the mouse currently clicked on any of the shop buttons
+     */
     public click(button: number): void {
         for (const buyButton of this.buyButtons) {
             buyButton.click(button);
