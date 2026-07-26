@@ -5,8 +5,14 @@ import { Color } from 'viridis';
 
 export class Player implements Drawable {
     private readonly moneyLabel: Label;
-    constructor(public money: number) {
+    constructor(public money: number, private numWheels: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
+    }
+    /**
+     * Get the total number of wheels
+     */
+    public getNumWheels(): number {
+        return this.numWheels;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background

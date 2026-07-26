@@ -1,8 +1,7 @@
 import { Drawable } from 'graphico';
 import { SMath } from 'smath';
 import { Color } from 'viridis';
-import { NUM_WHEELS } from './globals';
-import { zoom } from './state';
+import { player, zoom } from './state';
 
 /**
  * Represents a single spinning wheel
@@ -44,13 +43,13 @@ export class Wheel implements Drawable {
      * Create a new wheel.
      */
     constructor(public readonly index: number, private readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
-        this.color = Color.hsl(SMath.translate(index, 0, NUM_WHEELS, 0, 360), 100, 55);
+        this.color = Color.hsl(SMath.translate(index, 0, player.getNumWheels(), 0, 360), 100, 55);
         this.radius = 100 * 1.3 ** (index);
         this.thickness = this.radius * 0.2;
-        this.maxSpeed = SMath.translate(index, 0, NUM_WHEELS, 20, 1);
+        this.maxSpeed = SMath.translate(index, 0, player.getNumWheels(), 20, 1);
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
-        this.costIncrease = SMath.translate(index, 0, NUM_WHEELS, 1.01, 1.15);
+        this.costIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.01, 1.15);
     }
     /**
      * Get data for this wheel.
@@ -132,7 +131,7 @@ export class Wheel implements Drawable {
         // Center the wheel on the canvas
         const centerX: number = graphics.canvas.width / 2;
         const centerY: number = graphics.canvas.height / 2;
-        const zoomFactor: number = 1.3 ** (NUM_WHEELS - zoom.getZoom());
+        const zoomFactor: number = 1.3 ** (player.getNumWheels() - zoom.getZoom());
         graphics.strokeStyle = this.color.toString();
         graphics.lineWidth = this.thickness / zoomFactor;
         graphics.lineCap = 'round';
