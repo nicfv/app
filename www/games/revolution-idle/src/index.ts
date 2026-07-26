@@ -12,7 +12,7 @@ const canv: Canvas = new Canvas({
     loop(dt) {
         canv.clear();
         for (const wheel of wheels) {
-            player.money += income.getIncomePerRotation() * wheel.rotate(dt);
+            player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
             canv.draw(wheel);
         }
         canv.draw(player);

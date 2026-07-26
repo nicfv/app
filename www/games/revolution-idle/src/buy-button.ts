@@ -17,7 +17,7 @@ export class BuyButton extends Button {
      */
     constructor(x: number, width: number, private readonly wheel: Wheel) {
         super('', wheel.color, true, x, 0, width, Label.fontSize * 3, () => {
-            player.money -= this.cost;
+            player.spend(this.cost);
             wheel.increaseSpeed(buyType.getQuantity());
         });
         this.cost = 0;
@@ -32,7 +32,7 @@ export class BuyButton extends Button {
         } else {
             super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed(buyType.getQuantity()))}Hz\n$${N(this.cost)}`;
         }
-        if (player.money >= this.cost) {
+        if (player.hasFunds(this.cost)) {
             super.enable();
         } else {
             super.disable();

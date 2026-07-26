@@ -5,8 +5,26 @@ import { Color } from 'viridis';
 
 export class Player implements Drawable {
     private readonly moneyLabel: Label;
-    constructor(public money: number, private numWheels: number) {
+    constructor(private money: number, private numWheels: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
+    }
+    /**
+     * Earn a certain amount of money to the player's bank
+     */
+    public earn(amount: number): void {
+        this.money += amount;
+    }
+    /**
+     * Spend a certain amount of money from the player's bank
+     */
+    public spend(amount: number): void {
+        this.money -= amount;
+    }
+    /**
+     * Determine if the player has sufficient funds to purchase something of a certain amount
+     */
+    public hasFunds(amount: number): boolean {
+        return this.money >= amount;
     }
     /**
      * Get the total number of wheels

@@ -21,7 +21,7 @@ export class AscendButton extends Button {
      */
     constructor(x: number, width: number, private readonly wheel: Wheel) {
         super('', wheel.color, false, x, 0, width, Label.fontSize * 3, () => {
-            player.money -= this.ascAmount;
+            player.spend(this.ascAmount);
             this.wheel.ascend(this.ascensions);
         });
         this.ascAmount = 0;
@@ -33,14 +33,14 @@ export class AscendButton extends Button {
     private update(): void {
         // Determine the ascension level
         this.ascensions = 1;
-        while (this.wheel.getNextNAscensionCost(this.ascensions + 1) <= player.money) {
+        while (player.hasFunds(this.wheel.getNextNAscensionCost(this.ascensions + 1))) {
             this.ascensions++;
         }
         // Calculate and display cost
         this.ascAmount = this.wheel.getNextNAscensionCost(this.ascensions);
         super.text = `Ascend +${this.ascensions}\n$${N(this.ascAmount)}`;
         // Check if player has sufficient funds to ascend
-        if (player.money > this.ascAmount) {
+        if (player.hasFunds(this.ascAmount)) {
             super.enable();
         } else {
             super.disable();
