@@ -1,7 +1,15 @@
 import { Drawable } from 'graphico';
+import { Label } from './label';
+import { Color } from 'viridis';
 
-export class Help implements Drawable {
+export class Help extends Label implements Drawable {
+    constructor(text: string) {
+        super(text, new Color(255, 255, 255), 1, false, 'center', 'top', 0, 0);
+    }
     public draw(graphics: CanvasRenderingContext2D): void {
-        throw new Error('Method not implemented.');
+        // Make sure text is centered on page
+        super.x = graphics.canvas.width / 2;
+        super.y = (graphics.canvas.height - super.getHeight()) / 2;
+        super.draw(graphics);
     }
 }
