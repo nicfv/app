@@ -57,6 +57,12 @@ export class Wheel implements Drawable {
         this.ascCostIncrease = 1.25 + 0.05 * index;
     }
     /**
+     * Get data for this wheel.
+     */
+    public getData(): WheelData {
+        return JSON.parse(JSON.stringify(this.data));
+    }
+    /**
      * Determine if the wheel has been activated
      */
     public isActive(): boolean {
