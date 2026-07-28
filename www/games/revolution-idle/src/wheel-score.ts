@@ -8,10 +8,25 @@ import { Color } from 'viridis';
  * Renders the wheel score to the user interface.
  */
 export class WheelScore implements Drawable {
+    /**
+     * The x-offset, in pixels
+     */
     private xOffset: number;
+    /**
+     * The calculated width of the score
+     */
     private width: number;
+    /**
+     * The multiplier symbol
+     */
     private readonly xLabel: Label;
+    /**
+     * The base label
+     */
     private readonly baseLabel: Label;
+    /**
+     * The exponent label
+     */
     private readonly expLabel: Label;
     /**
      * Initialize a new wheel score
