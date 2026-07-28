@@ -14,7 +14,7 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private money: number, private numWheels: number) {
+    constructor(private money: number, private numWheels: number, private timestamp: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -28,6 +28,7 @@ export class Player implements Drawable {
      */
     public spend(amount: number): void {
         this.money -= amount;
+        this.timestamp = Date.now();
     }
     /**
      * Determine if the player has sufficient funds to purchase something of a certain amount
@@ -40,6 +41,12 @@ export class Player implements Drawable {
      */
     public getNumWheels(): number {
         return this.numWheels;
+    }
+    /**
+     * Get the last timestamp for a player action
+     */
+    public getLastTimestamp(): number {
+        return this.timestamp;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
