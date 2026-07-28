@@ -31,4 +31,9 @@ const canv: Canvas = new Canvas({
         buyType.click(button);
         shop.click(button);
     },
+    focus(dt) {
+        for (const wheel of wheels) {
+            player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
+        }
+    },
 });
