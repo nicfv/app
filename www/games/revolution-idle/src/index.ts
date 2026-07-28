@@ -1,6 +1,6 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { buyType, income, player, shop, wheels, zoom } from './state';
+import { buyType, income, paused, player, shop, wheels, zoom } from './state';
 
 const canv: Canvas = new Canvas({
     background: 'black',
@@ -35,5 +35,8 @@ const canv: Canvas = new Canvas({
         for (const wheel of wheels) {
             player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
         }
+    },
+    blur() {
+        canv.draw(paused);
     },
 });
