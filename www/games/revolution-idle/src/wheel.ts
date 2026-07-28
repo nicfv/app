@@ -40,16 +40,21 @@ export class Wheel implements Drawable {
      */
     private readonly costIncrease: number;
     /**
+     * The incremental cost percentage increase per ascension
+     */
+    private readonly ascCostIncrease: number;
+    /**
      * Create a new wheel.
      */
     constructor(public readonly index: number, private readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
         this.color = Color.hsl(SMath.translate(index, 0, player.getNumWheels(), 0, 360), 100, 55);
-        this.radius = 100 * 1.3 ** (index);
+        this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
         this.maxSpeed = SMath.translate(index, 0, player.getNumWheels(), 20, 1);
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
         this.costIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.01, 1.15);
+        this.ascCostIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.25, 1.75);
     }
     /**
      * Get data for this wheel.
@@ -69,7 +74,7 @@ export class Wheel implements Drawable {
     public getNextNCost(n: number): number {
         let cost = 0;
         for (let level = this.data.speedLevel; level < SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel); level++) {
-            cost += this.baseCost * (this.costIncrease ** level) * (2 ** this.data.ascensions);
+            cost += this.baseCost * (this.costIncrease ** level) * (this.ascCostIncrease ** this.data.ascensions);
         }
         return cost;
     }
@@ -80,7 +85,7 @@ export class Wheel implements Drawable {
         const maxCost: number = this.baseCost * (this.costIncrease ** this.maxSpeedLevel);
         let cost = 0;
         for (let asc = this.data.ascensions; asc < this.data.ascensions + n; asc++) {
-            cost += maxCost * (2 ** asc);
+            cost += maxCost * (this.ascCostIncrease ** asc);
         }
         return cost;
     }
