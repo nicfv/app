@@ -53,8 +53,8 @@ export class Wheel implements Drawable {
         this.maxSpeed = SMath.translate(index, 0, player.getNumWheels(), 20, 1);
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
-        this.costIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.01, 1.15);
-        this.ascCostIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.25, 1.75);
+        this.costIncrease = 1.02 + 0.02 * index;
+        this.ascCostIncrease = 1.25 + 0.05 * index;
     }
     /**
      * Determine if the wheel has been activated
@@ -155,11 +155,12 @@ export class Wheel implements Drawable {
         const centerX: number = graphics.canvas.width / 2;
         const centerY: number = graphics.canvas.height / 2;
         const zoomFactor: number = 1.3 ** (player.getNumWheels() - zoom.getZoom());
+        const angle: number = this.currentSpeedHz() > 10 ? Wheel.TAU : this.data.angle;
         graphics.strokeStyle = this.color.toString();
         graphics.lineWidth = this.thickness / zoomFactor;
         graphics.lineCap = 'round';
         graphics.beginPath();
-        graphics.arc(centerX, centerY, this.radius / zoomFactor, 0, this.data.angle, false);
+        graphics.arc(centerX, centerY, this.radius / zoomFactor, 0, angle, false);
         graphics.stroke();
     }
 }
