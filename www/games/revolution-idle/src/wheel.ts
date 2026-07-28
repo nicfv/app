@@ -63,7 +63,7 @@ export class Wheel implements Drawable {
         return JSON.parse(JSON.stringify(this.data));
     }
     /**
-     * Determine if the wheel has been activated
+     * Determine if the wheel has been activated.
      */
     public isActive(): boolean {
         return this.data.speedLevel > 0;
@@ -75,7 +75,7 @@ export class Wheel implements Drawable {
         return this.data.speedLevel >= this.maxSpeedLevel;
     }
     /**
-     * Determine if this wheel has ascended yet
+     * Determine if this wheel has ascended yet.
      */
     public hasAscended(): boolean {
         return this.data.ascensions > 0;
@@ -131,13 +131,13 @@ export class Wheel implements Drawable {
         }
     }
     /**
-     * Get the base value to calculate score
+     * Get the base value to calculate score.
      */
     public getBase(): number {
         return this.data.rotations / 100 + 1;
     }
     /**
-     * Get the exponent to calculate score
+     * Get the exponent to calculate score.
      */
     public getExp(): number {
         return this.data.ascensions / 100 + 1;
