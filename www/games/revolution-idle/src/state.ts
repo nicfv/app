@@ -1,4 +1,5 @@
 import { BuyType } from './buy-type';
+import { Help } from './help';
 import { Income } from './income';
 import { Player } from './player';
 import { Shop } from './shop';
@@ -16,3 +17,5 @@ for (let i = 0; i < player.getNumWheels(); i++) {
 
 export const income: Income = new Income();
 export const shop: Shop = new Shop(10, 120);
+
+export const paused: Help = new Help('Revolution Idle 4 has lost focus!\nThe game is NOT paused, but has\nstopped rendering to save resources.\nThe game is still running in the background.');
