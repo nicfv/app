@@ -57,16 +57,22 @@ export class Wheel implements Drawable {
         this.ascCostIncrease = SMath.translate(index, 0, player.getNumWheels(), 1.25, 1.75);
     }
     /**
-     * Get data for this wheel.
+     * Determine if the wheel has been activated
      */
-    public getData(): WheelData {
-        return JSON.parse(JSON.stringify(this.data));
+    public isActive(): boolean {
+        return this.data.speedLevel > 0;
     }
     /**
      * Determine if this wheel's speed level is maxed out.
      */
     public isMaxed(): boolean {
         return this.data.speedLevel >= this.maxSpeedLevel;
+    }
+    /**
+     * Determine if this wheel has ascended yet
+     */
+    public hasAscended(): boolean {
+        return this.data.ascensions > 0;
     }
     /**
      * Get the cost for the next `N` levels.
@@ -117,6 +123,18 @@ export class Wheel implements Drawable {
             this.data.rotations = 0;
             this.data.speedLevel = 0;
         }
+    }
+    /**
+     * Get the base value to calculate score
+     */
+    public getBase(): number {
+        return this.data.rotations / 100 + 1;
+    }
+    /**
+     * Get the exponent to calculate score
+     */
+    public getExp(): number {
+        return this.data.ascensions / 100 + 1;
     }
     /**
      * Rotate this wheel. Returns the number of complete rotations this past interval.
