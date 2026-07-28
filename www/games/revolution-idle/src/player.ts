@@ -22,6 +22,7 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.money += amount;
+        this.timestamp = Date.now();
     }
     /**
      * Spend a certain amount of money from the player's bank
@@ -43,10 +44,10 @@ export class Player implements Drawable {
         return this.numWheels;
     }
     /**
-     * Get the last timestamp for a player action
+     * Get the number of milliseconds since the last player action
      */
-    public getLastTimestamp(): number {
-        return this.timestamp;
+    public getDeltaTimeMS(): number {
+        return Date.now() - this.timestamp;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
