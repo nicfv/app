@@ -1,5 +1,4 @@
 import { Drawable } from 'graphico';
-import { Button } from './button';
 import { Color } from 'viridis';
 import { Label } from './label';
 import { ToggleButton } from './button-toggle';
@@ -9,20 +8,23 @@ export class Menu implements Drawable {
     private static readonly btnHeight: number = Label.fontSize * 2;
     private static readonly btnPadding: number = Label.fontSize / 2;
     private readonly title: Label;
-    private readonly save: Button;
-    private readonly help: Button;
-    private readonly mute: Button;
-    private readonly clear: Button;
+    private readonly save: ToggleButton;
+    private readonly help: ToggleButton;
+    private readonly mute: ToggleButton;
+    private readonly clear: ToggleButton;
     private readonly back: ToggleButton;
     private isOpen: boolean;
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
-        this.title = new Label('Menu', new Color(255, 255, 255), 1.5, true, 'center', 'bottom', x, y - Menu.btnPadding);
+        this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
         this.save = new ToggleButton([
             ['Save', Menu.btnColor, () => { return }],
-            ['Saved!', Menu.btnColor, () => { return }],
+            ['Saved!', new Color(150, 250, 150), () => { return }],
         ], x - (width / 2), y, width, Menu.btnHeight);
-        this.help = new Button('Help', Menu.btnColor, true, x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight, () => { return });
+        this.help = new ToggleButton([
+            ['Help', Menu.btnColor, () => { return }],
+            ['Hide Help', Menu.btnColor, () => { return }],
+        ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight);
         this.mute = new ToggleButton([
             ['Mute', Menu.btnColor, () => { return }],
             ['Unmute', Menu.btnColor, () => { return }],
@@ -41,6 +43,8 @@ export class Menu implements Drawable {
      */
     public toggle(): void {
         this.isOpen = !this.isOpen;
+        this.save.reset();
+        this.clear.reset();
     }
     /**
      * Check if the mouse is currently hovering over any of the menu buttons
