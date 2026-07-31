@@ -41,6 +41,13 @@ export class Player implements Drawable {
     public getNumWheels(): number {
         return this.numWheels;
     }
+    /**
+     * Add a new wheel to the collection
+     */
+    public getNewWheel(): void {
+        this.money = 0;
+        this.numWheels++;
+    }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
         graphics.fillStyle = 'black';
