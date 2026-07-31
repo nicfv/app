@@ -10,7 +10,7 @@ export class Pause extends Label implements Drawable {
      * Create a new help message with optional highlighted region.
      */
     constructor(text: string) {
-        super(text, new Color(255, 255, 255), 1, false, 'center', 'top', 0, 0);
+        super(text, new Color(255, 255, 255), 1.5, true, 'center', 'top', 0, 0);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Make sure text is centered on page
