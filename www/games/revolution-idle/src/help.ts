@@ -9,7 +9,11 @@ export class Help extends Label implements Drawable {
     /**
      * Highlight outline color
      */
-    private static readonly highlightColor: Color = new Color(255, 255, 0);
+    private static readonly highlightStroke: Color = new Color(255, 255, 0);
+    /**
+     * Highlight fill color
+     */
+    private static readonly highlightFill: Color = new Color(255, 255, 0, 10);
     /**
      * Highlight blink time in milliseconds
      */
@@ -38,7 +42,9 @@ export class Help extends Label implements Drawable {
         // Blink a rectangular outline
         if (this.time > Help.highlightBlinkMS) {
             graphics.lineWidth = 2;
-            graphics.strokeStyle = Help.highlightColor.toString();
+            graphics.fillStyle = Help.highlightFill.toString();
+            graphics.strokeStyle = Help.highlightStroke.toString();
+            graphics.fillRect(this.hx, this.hy, this.hw, this.hh);
             graphics.strokeRect(this.hx, this.hy, this.hw, this.hh);
         }
     }
