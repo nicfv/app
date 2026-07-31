@@ -21,6 +21,10 @@ export class Tutorial implements Drawable {
      */
     private static readonly btnColor: Color = new Color(200, 200, 200);
     /**
+     * Navigation title
+     */
+    private readonly title: Label;
+    /**
      * Next button
      */
     private readonly next: Button;
@@ -40,8 +44,9 @@ export class Tutorial implements Drawable {
      * Create a new zoom control.
      */
     constructor(x: number, y: number) {
-        this.back = new Button('<', Tutorial.btnColor, true, x, y, Tutorial.btnSize, Tutorial.btnSize, () => this.backPage());
-        this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnSize + Tutorial.btnPad, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
+        this.title = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Tutorial.btnPad);
+        this.back = new Button('<', Tutorial.btnColor, true, x - Tutorial.btnSize - Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.backPage());
+        this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
         this.helpPage = 0;
         this.pages = [
             new Help('Just a test', 10, 20, 30, 40, 50, 60),
@@ -103,6 +108,8 @@ export class Tutorial implements Drawable {
         this.pages[this.helpPage].tick(dt);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        this.title.value = `Help ${this.helpPage + 1}/${this.pages.length}`;
+        this.title.draw(graphics);
         this.back.draw(graphics);
         this.next.draw(graphics);
         this.pages[this.helpPage].draw(graphics);
