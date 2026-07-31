@@ -32,7 +32,10 @@ export class Tutorial implements Drawable {
      * The current help page
      */
     private helpPage: number;
-    private pages: Help[];
+    /**
+     * Represents the array of help pages
+     */
+    private readonly pages: Help[];
     /**
      * Create a new zoom control.
      */
