@@ -2,6 +2,7 @@ import { Drawable } from 'graphico';
 import { Button } from './button';
 import { Color } from 'viridis';
 import { Label } from './label';
+import { ToggleButton } from './button-toggle';
 
 export class Menu implements Drawable {
     private static readonly btnColor: Color = new Color(200, 200, 200);
@@ -12,16 +13,28 @@ export class Menu implements Drawable {
     private readonly help: Button;
     private readonly mute: Button;
     private readonly clear: Button;
-    private readonly back: Button;
+    private readonly back: ToggleButton;
     private isOpen: boolean;
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
         this.title = new Label('Menu', new Color(255, 255, 255), 1.5, true, 'center', 'bottom', x, y - Menu.btnPadding);
-        this.save = new Button('Save', Menu.btnColor, true, x - (width / 2), y, width, Menu.btnHeight, () => { return });
+        this.save = new ToggleButton([
+            ['Save', Menu.btnColor, () => { return }],
+            ['Saved!', Menu.btnColor, () => { return }],
+        ], x - (width / 2), y, width, Menu.btnHeight);
         this.help = new Button('Help', Menu.btnColor, true, x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight, () => { return });
-        this.mute = new Button('Mute', Menu.btnColor, true, x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight, () => { return });
-        this.clear = new Button('Reset', Menu.btnColor, true, x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, () => { return });
-        this.back = new Button('Back', Menu.btnColor, true, x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight, () => { this.toggle(); });
+        this.mute = new ToggleButton([
+            ['Mute', Menu.btnColor, () => { return }],
+            ['Unmute', Menu.btnColor, () => { return }],
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight);
+        this.clear = new ToggleButton([
+            ['Reset', Menu.btnColor, () => { return }],
+            ['Confirm', new Color(255, 0, 0), () => { return }],
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
+        this.back = new ToggleButton([
+            ['Menu', Menu.btnColor, () => this.toggle()],
+            ['Back', Menu.btnColor, () => this.toggle()],
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight);
     }
     /**
      * Open or close the menu depending on its current state
