@@ -3,17 +3,53 @@ import { Color } from 'viridis';
 import { Label } from './label';
 import { ToggleButton } from './button-toggle';
 
+/**
+ * Represents the in-game menu
+ */
 export class Menu implements Drawable {
+    /**
+     * Base button color
+     */
     private static readonly btnColor: Color = new Color(200, 200, 200);
+    /**
+     * Button height
+     */
     private static readonly btnHeight: number = Label.fontSize * 2;
+    /**
+     * Padding in between buttons
+     */
     private static readonly btnPadding: number = Label.fontSize / 2;
+    /**
+     * Menu title
+     */
     private readonly title: Label;
+    /**
+     * Save data button
+     */
     private readonly save: ToggleButton;
+    /**
+     * Help button
+     */
     private readonly help: ToggleButton;
+    /**
+     * Mute button
+     */
     private readonly mute: ToggleButton;
+    /**
+     * Clear data button
+     */
     private readonly clear: ToggleButton;
+    /**
+     * Open menu or back button
+     */
     private readonly back: ToggleButton;
+    /**
+     * Tracks whether the menu is opened or closed
+     */
     private isOpen: boolean;
+    /**
+     * Create a new in-game menu
+     */
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
