@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
-import { BuyButton } from './buy-button';
 import { wheels } from './state';
-import { AscendButton } from './asc-button';
 import { Label } from './label';
+import { BuyButton } from './button-buy';
+import { AscendButton } from './button-asc';
 
 /**
  * Represents a collection of buy buttons and ascension buttons (if applicable.)
