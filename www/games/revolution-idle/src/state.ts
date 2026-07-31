@@ -19,5 +19,5 @@ for (let i = 0; i < player.getNumWheels(); i++) {
 export const income: Income = new Income();
 export const shop: Shop = new Shop(10, 120);
 
-export const menu: Menu = new Menu(400, 200, 100);
+export const menu: Menu = new Menu(725, 400, 100);
 export const paused: Help = new Help('Revolution Idle 4 has lost focus!\nThe game is NOT paused, but has\nstopped rendering to save resources.\nThe game is still running in the background.');
