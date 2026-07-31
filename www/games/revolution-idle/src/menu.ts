@@ -86,7 +86,7 @@ export class Menu implements Drawable {
             ['Unmute', Menu.btnColor, () => { this.unmuteCallback(); }],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight);
         this.clear = new ToggleButton([
-            ['Reset', Menu.btnColor, () => { return }],
+            ['Wipe Data', Menu.btnColor, () => { return }],
             ['Confirm', new Color(255, 0, 0), () => { this.clearCallback(); }],
             ['Reload Page', Menu.btnColor, () => { return }],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
