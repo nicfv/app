@@ -13,6 +13,8 @@ export class Menu implements Drawable {
         this.help = new Button('Help', Menu.btnColor, true, x, y, 50, 50, () => { });
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        throw new Error("Method not implemented.");
+        this.save.draw(graphics);
+        this.clear.draw(graphics);
+        this.help.draw(graphics);
     }
 }
