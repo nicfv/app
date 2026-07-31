@@ -1,11 +1,11 @@
+import { Drawable } from 'graphico';
 import { Color } from 'viridis';
-import { Button } from './button';
 import { Label } from './label';
 
 /**
  * Represents a help message
  */
-export class Help extends Button {
+export class Help implements Drawable {
     /**
      * Highlight outline color
      */
@@ -14,10 +14,6 @@ export class Help extends Button {
      * Highlight fill color
      */
     private static readonly highlightFill: Color = new Color(255, 255, 0, 25);
-    /**
-     * Full transparency
-     */
-    private static readonly transparent: Color = new Color(0, 0, 0, 0);
     /**
      * Highlight blink time in milliseconds
      */
@@ -33,8 +29,7 @@ export class Help extends Button {
     /**
      * Create a new help message with optional highlighted region.
      */
-    constructor(text: string, textOffsetX: number, textOffsetY: number, x: number, y: number, w: number, h: number, callback: () => void) {
-        super('', Help.highlightFill, true, x, y, w, h, () => callback());
+    constructor(text: string, textOffsetX: number, textOffsetY: number, private readonly x: number, private readonly y: number, private readonly w: number, private readonly h: number) {
         this.tip = new Label(text, Help.highlightStroke, 1, false, 'left', 'top', x + textOffsetX, y + textOffsetY);
     }
     /**
@@ -42,15 +37,16 @@ export class Help extends Button {
      */
     public tick(dt: number): void {
         this.time = (this.time + dt) % (Help.highlightBlinkMS * 2);
-        if (this.time > Help.highlightBlinkMS) {
-            super.color = Help.transparent;
-        } else {
-            super.color = Help.highlightFill;
-        }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        // Render label and button as highlighted region
-        super.draw(graphics);
+        // Render label and highlighted region
         this.tip.draw(graphics);
+        if (this.time > Help.highlightBlinkMS) {
+            graphics.lineWidth = 2;
+            graphics.fillStyle = Help.highlightFill.toString();
+            graphics.strokeStyle = Help.highlightStroke.toString();
+            graphics.fillRect(this.x, this.y, this.w, this.h);
+            graphics.strokeRect(this.x, this.y, this.w, this.h);
+        }
     }
 }
