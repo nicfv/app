@@ -2,14 +2,26 @@ import { Drawable } from 'graphico';
 import { Orbit, OrbitData } from './orbit';
 import { income, player } from './state';
 
+/**
+ * Represents the solar system in the game
+ */
 export class SolarSystem implements Drawable {
+    /**
+     * Contains orbits for all planets within the solar system
+     */
     public readonly orbits: Orbit[];
+    /**
+     * Create a new solar system, passing in optional orbit data
+     */
     constructor(solarData?: SolarData) {
         this.orbits = [];
         for (let i = 0; i < player.getNumOrbits(); i++) {
             this.orbits.push(new Orbit(i, solarData?.[i]));
         }
     }
+    /**
+     * Compute a single timestep for the solar system
+     */
     public step(dt: number): void {
         for (const orbit of this.orbits) {
             player.earn(income.getIncomePerRotation() * orbit.rotate(dt));
@@ -22,4 +34,7 @@ export class SolarSystem implements Drawable {
     }
 }
 
+/**
+ * Represents data for saving/loading
+ */
 export type SolarData = OrbitData[];
