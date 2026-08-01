@@ -6,6 +6,6 @@
   "dependencies": {
     "graphico": "1.6.0",
     "smath": "3.0.0",
-    "viridis": "1.5.0"
+    "viridis": "1.6.0"
   }
 }
