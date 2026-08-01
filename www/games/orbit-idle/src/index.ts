@@ -3,25 +3,26 @@ import { Canvas } from 'graphico';
 import { buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
 
 const canv: Canvas = new Canvas({
-    background: 'black',
+    background: 'white',
     border: 'black',
     borderBlur: 'gray',
     width: 800,
     height: 600,
+    numLayers: 2,
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
-        canv.clear();
+        canv.clear(1);
         system.step(dt);
-        canv.draw(system);
-        canv.draw(player);
-        canv.draw(zoom);
-        canv.draw(income);
-        canv.draw(shop);
-        canv.draw(buyType);
-        canv.draw(menu);
+        canv.draw(system, 0);
+        canv.draw(player, 1);
+        canv.draw(zoom, 1);
+        canv.draw(income, 1);
+        canv.draw(shop, 1);
+        canv.draw(buyType, 1);
+        canv.draw(menu, 1);
         if (menu.showHelp()) {
             tutorial.tick(dt);
-            canv.draw(tutorial);
+            canv.draw(tutorial, 1);
         }
     },
     mousemove(x, y) {
@@ -42,7 +43,7 @@ const canv: Canvas = new Canvas({
         system.step(dt);
     },
     blur() {
-        canv.draw(paused);
+        canv.draw(paused, 1);
     },
 });
 

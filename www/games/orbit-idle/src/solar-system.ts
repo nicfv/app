@@ -1,6 +1,7 @@
 import { Drawable } from 'graphico';
 import { Orbit, OrbitData } from './orbit';
 import { income, player } from './state';
+import { Color } from 'viridis';
 
 /**
  * Represents the solar system in the game
@@ -28,6 +29,11 @@ export class SolarSystem implements Drawable {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Shade in the background
+        const semiTransparent: Color = new Color(0, 0, 0, 10);
+        graphics.fillStyle = semiTransparent.toString();
+        graphics.fillRect(0, 0, graphics.canvas.width, graphics.canvas.height);
+        // Draw all orbits/planets
         for (const orbit of this.orbits) {
             orbit.draw(graphics);
         }
