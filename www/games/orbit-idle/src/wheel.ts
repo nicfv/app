@@ -4,27 +4,27 @@ import { Color } from 'viridis';
 import { player, zoom } from './state';
 
 /**
- * Represents a single spinning wheel
+ * Represents a single planetary orbit
  */
-export class Wheel implements Drawable {
+export class Orbit implements Drawable {
     /**
      * 2pi
      */
     private static readonly TAU: number = Math.PI * 2;
     /**
-     * The wheel color
+     * The planet color
      */
     public readonly color: Color;
     /**
-     * The radius of the wheel
+     * The radius of the orbit
      */
     private readonly radius: number;
     /**
-     * The thickness of the wheel
+     * The radius of the planet
      */
     private readonly thickness: number;
     /**
-     * The maximum speed of the wheel at the max level
+     * The maximum speed of the orbit at the max level
      */
     private readonly maxSpeed: number;
     /**
@@ -44,10 +44,10 @@ export class Wheel implements Drawable {
      */
     private readonly ascCostIncrease: number;
     /**
-     * Create a new wheel.
+     * Create a new planet.
      */
-    constructor(public readonly index: number, private readonly data: WheelData = JSON.parse(JSON.stringify(defaultData))) {
-        this.color = Color.hsl(SMath.translate(index, 0, player.getNumWheels(), 0, 360), 100, 55);
+    constructor(public readonly index: number, private readonly data: OrbitData = JSON.parse(JSON.stringify(defaultData))) {
+        this.color = Color.hsl(SMath.translate(index, 0, player.getNumOrbits(), 0, 360), 100, 55);
         this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
         this.maxSpeed = 2 * (index + 1) ** -0.25;
@@ -57,25 +57,25 @@ export class Wheel implements Drawable {
         this.ascCostIncrease = 1.25 + 0.05 * index;
     }
     /**
-     * Get data for this wheel.
+     * Get data for this orbit.
      */
-    public getData(): WheelData {
+    public getData(): OrbitData {
         return JSON.parse(JSON.stringify(this.data));
     }
     /**
-     * Determine if the wheel has been activated.
+     * Determine if the orbit has been activated.
      */
     public isActive(): boolean {
         return this.data.speedLevel > 0;
     }
     /**
-     * Determine if this wheel's speed level is maxed out.
+     * Determine if this orbit's speed level is maxed out.
      */
     public isMaxed(): boolean {
         return this.data.speedLevel >= this.maxSpeedLevel;
     }
     /**
-     * Determine if this wheel has ascended yet.
+     * Determine if this orbit has ascended yet.
      */
     public hasAscended(): boolean {
         return this.data.ascensions > 0;
@@ -143,13 +143,13 @@ export class Wheel implements Drawable {
         return this.data.ascensions / 100 + 1;
     }
     /**
-     * Rotate this wheel. Returns the number of complete rotations this past interval.
+     * Rotate this orbit. Returns the number of complete rotations this past interval.
      */
     public rotate(dt: number): number {
-        this.data.angle += this.currentSpeedHz() * dt / 1e3 * Wheel.TAU;
-        const rotations: number = Math.floor(this.data.angle / Wheel.TAU);
+        this.data.angle += this.currentSpeedHz() * dt / 1e3 * Orbit.TAU;
+        const rotations: number = Math.floor(this.data.angle / Orbit.TAU);
         this.data.rotations += rotations;
-        this.data.angle %= Wheel.TAU;
+        this.data.angle %= Orbit.TAU;
         return rotations;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
@@ -157,25 +157,25 @@ export class Wheel implements Drawable {
         if (this.data.speedLevel <= 0) {
             return;
         }
-        // Center the wheel on the canvas
+        // Center the orbit on the canvas
         const center: Vec3 = new Vec3(graphics.canvas.width / 2, graphics.canvas.height / 2);
-        const zoomFactor: number = 1.3 ** (player.getNumWheels() - zoom.getZoom());
+        const zoomFactor: number = 1.3 ** (player.getNumOrbits() - zoom.getZoom());
         const radial: Vec3 = Vec3.fromPolar(this.radius / zoomFactor, this.data.angle);
         const planetCenter: Vec3 = center.plus(radial);
         const planetRadius: number = this.thickness / zoomFactor / 2;
         graphics.fillStyle = this.color.toString();
         graphics.beginPath();
-        graphics.arc(planetCenter.x, planetCenter.y, planetRadius, 0, Wheel.TAU, false);
+        graphics.arc(planetCenter.x, planetCenter.y, planetRadius, 0, Orbit.TAU, false);
         graphics.fill();
     }
 }
 
 /**
- * Volatile wheel data, used for saving and loading game state
+ * Volatile orbit data, used for saving and loading game state
  */
-export interface WheelData {
+export interface OrbitData {
     /**
-     * The current angle of the wheel
+     * The current angle of the orbit
      */
     angle: number;
     /**
@@ -187,12 +187,12 @@ export interface WheelData {
      */
     ascensions: number;
     /**
-     * The current rotation speed of this wheel
+     * The current rotation speed of this orbit
      */
     speedLevel: number;
 }
 
-const defaultData: WheelData = {
+const defaultData: OrbitData = {
     angle: 0,
     rotations: 0,
     ascensions: 0,

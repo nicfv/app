@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { wheels } from './state';
+import { orbits } from './state';
 import { Label } from './label';
 import { BuyButton } from './button-buy';
 import { AscendButton } from './button-asc';
@@ -9,11 +9,11 @@ import { AscendButton } from './button-asc';
  */
 export class Shop implements Drawable {
     /**
-     * Buttons to increase wheel speed
+     * Buttons to increase orbit speed
      */
     private readonly buyButtons: BuyButton[];
     /**
-     * Buttons to increase wheel ascension
+     * Buttons to increase orbit ascension
      */
     private readonly ascButtons: AscendButton[];
     /**
@@ -22,9 +22,9 @@ export class Shop implements Drawable {
     constructor(x: number, buyButtonWidth: number) {
         this.buyButtons = [];
         this.ascButtons = [];
-        for (const wheel of wheels) {
-            this.buyButtons.push(new BuyButton(x, buyButtonWidth, wheel));
-            this.ascButtons.push(new AscendButton(x + buyButtonWidth + Label.fontSize / 2, buyButtonWidth, wheel));
+        for (const orbit of orbits) {
+            this.buyButtons.push(new BuyButton(x, buyButtonWidth, orbit));
+            this.ascButtons.push(new AscendButton(x + buyButtonWidth + Label.fontSize / 2, buyButtonWidth, orbit));
         }
     }
     /**

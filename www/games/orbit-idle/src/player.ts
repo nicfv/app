@@ -14,7 +14,7 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private money: number, private numWheels: number) {
+    constructor(private money: number, private numOrbits: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -36,17 +36,17 @@ export class Player implements Drawable {
         return this.money >= amount;
     }
     /**
-     * Get the total number of wheels
+     * Get the total number of orbits
      */
-    public getNumWheels(): number {
-        return this.numWheels;
+    public getNumOrbits(): number {
+        return this.numOrbits;
     }
     /**
-     * Add a new wheel to the collection
+     * Add a new orbit to the solar system
      */
-    public getNewWheel(): void {
+    public getNewOrbit(): void {
         this.money = 0;
-        this.numWheels++;
+        this.numOrbits++;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background

@@ -35,7 +35,7 @@ export class Zoom implements Drawable {
     /**
      * Create a new zoom control.
      */
-    constructor(x: number, y: number, private zoom: number = player.getNumWheels()) {
+    constructor(x: number, y: number, private zoom: number = player.getNumOrbits()) {
         this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
         this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnSize + Zoom.btnPad, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
         this.label = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x + Zoom.btnSize + Zoom.btnPad / 2, y - Zoom.btnPad);
@@ -51,7 +51,7 @@ export class Zoom implements Drawable {
      * Zoom in
      */
     private zoomIn(): void {
-        if (this.zoom < player.getNumWheels()) {
+        if (this.zoom < player.getNumOrbits()) {
             this.zoom++;
             this.setButtonAbility();
         }
@@ -74,7 +74,7 @@ export class Zoom implements Drawable {
         } else {
             this.zoomOutBtn.disable();
         }
-        if (this.zoom < player.getNumWheels()) {
+        if (this.zoom < player.getNumOrbits()) {
             this.zoomInBtn.enable();
         } else {
             this.zoomInBtn.disable();

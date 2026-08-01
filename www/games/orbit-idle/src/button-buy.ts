@@ -2,10 +2,10 @@ import { Button } from './button';
 import { Label } from './label';
 import { N } from './lib';
 import { buyType, player, zoom } from './state';
-import { Wheel } from './wheel';
+import { Orbit } from './wheel';
 
 /**
- * Represents a button to increase a wheel's speed.
+ * Represents a button to increase a orbit's speed.
  */
 export class BuyButton extends Button {
     /**
@@ -15,10 +15,10 @@ export class BuyButton extends Button {
     /**
      * Initialize a new buy button.
      */
-    constructor(x: number, width: number, private readonly wheel: Wheel) {
-        super('', wheel.color, true, x, 0, width, Label.fontSize * 3, () => {
+    constructor(x: number, width: number, private readonly orbit: Orbit) {
+        super('', orbit.color, true, x, 0, width, Label.fontSize * 3, () => {
             player.spend(this.cost);
-            wheel.increaseSpeed(buyType.getQuantity());
+            orbit.increaseSpeed(buyType.getQuantity());
         });
         this.cost = 0;
     }
@@ -26,11 +26,11 @@ export class BuyButton extends Button {
      * Update the text on this button.
      */
     private setText(): void {
-        this.cost = this.wheel.getNextNCost(buyType.getQuantity());
-        if (this.wheel.isMaxed()) {
-            super.text = `${N(this.wheel.currentSpeedHz())}Hz\n(Maxed)`;
+        this.cost = this.orbit.getNextNCost(buyType.getQuantity());
+        if (this.orbit.isMaxed()) {
+            super.text = `${N(this.orbit.currentSpeedHz())}Hz\n(Maxed)`;
         } else {
-            super.text = `${N(this.wheel.currentSpeedHz())} > ${N(this.wheel.getNextNSpeed(buyType.getQuantity()))}Hz\n$${N(this.cost)}`;
+            super.text = `${N(this.orbit.currentSpeedHz())} > ${N(this.orbit.getNextNSpeed(buyType.getQuantity()))}Hz\n$${N(this.cost)}`;
         }
         if (player.hasFunds(this.cost)) {
             super.enable();
@@ -39,7 +39,7 @@ export class BuyButton extends Button {
         }
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        const centerDelta: number = player.getNumWheels() - this.wheel.index - zoom.getZoom();
+        const centerDelta: number = player.getNumOrbits() - this.orbit.index - zoom.getZoom();
         if (Math.abs(centerDelta) < 5) {
             this.y = (graphics.canvas.height - this.h) / 2 - (Label.fontSize * 3.5) * centerDelta;
             this.setText();

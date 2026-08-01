@@ -5,16 +5,16 @@ import { Pause } from './pause';
 import { Player } from './player';
 import { Shop } from './shop';
 import { Tutorial } from './tutorial';
-import { Wheel } from './wheel';
+import { Orbit } from './wheel';
 import { Zoom } from './zoom';
 
-export const player: Player = new Player(1, 10);
+export const player: Player = new Player(1e20, 10);
 export const zoom: Zoom = new Zoom(700, 175);
 export const buyType: BuyType = new BuyType(685, 250);
 
-export const wheels: Wheel[] = [];
-for (let i = 0; i < player.getNumWheels(); i++) {
-    wheels.push(new Wheel(i));
+export const orbits: Orbit[] = [];
+for (let i = 0; i < player.getNumOrbits(); i++) {
+    orbits.push(new Orbit(i));
 }
 
 export const income: Income = new Income();

@@ -1,6 +1,6 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { buyType, income, menu, paused, player, shop, tutorial, wheels, zoom } from './state';
+import { buyType, income, menu, paused, player, shop, tutorial, orbits, zoom } from './state';
 
 const canv: Canvas = new Canvas({
     background: 'black',
@@ -11,9 +11,9 @@ const canv: Canvas = new Canvas({
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
         canv.clear();
-        for (const wheel of wheels) {
-            player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
-            canv.draw(wheel);
+        for (const orbit of orbits) {
+            player.earn(income.getIncomePerRotation() * orbit.rotate(dt));
+            canv.draw(orbit);
         }
         canv.draw(player);
         canv.draw(zoom);
@@ -41,8 +41,8 @@ const canv: Canvas = new Canvas({
         menu.click(button);
     },
     focus(dt) {
-        for (const wheel of wheels) {
-            player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
+        for (const orbit of orbits) {
+            player.earn(income.getIncomePerRotation() * orbit.rotate(dt));
         }
     },
     blur() {
