@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { SMath } from 'smath';
+import { SMath, Vec3 } from 'smath';
 import { Color } from 'viridis';
 import { player, zoom } from './state';
 
@@ -50,7 +50,7 @@ export class Wheel implements Drawable {
         this.color = Color.hsl(SMath.translate(index, 0, player.getNumWheels(), 0, 360), 100, 55);
         this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
-        this.maxSpeed = SMath.translate(index, 0, player.getNumWheels(), 20, 1);
+        this.maxSpeed = 2 * (index + 1) ** -0.25;
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
         this.costIncrease = 1.02 + 0.02 * index;
@@ -158,16 +158,15 @@ export class Wheel implements Drawable {
             return;
         }
         // Center the wheel on the canvas
-        const centerX: number = graphics.canvas.width / 2;
-        const centerY: number = graphics.canvas.height / 2;
+        const center: Vec3 = new Vec3(graphics.canvas.width / 2, graphics.canvas.height / 2);
         const zoomFactor: number = 1.3 ** (player.getNumWheels() - zoom.getZoom());
-        const angle: number = this.currentSpeedHz() > 10 ? Wheel.TAU : this.data.angle;
-        graphics.strokeStyle = this.color.toString();
-        graphics.lineWidth = this.thickness / zoomFactor;
-        graphics.lineCap = 'round';
+        const radial: Vec3 = Vec3.fromPolar(this.radius / zoomFactor, this.data.angle);
+        const planetCenter: Vec3 = center.plus(radial);
+        const planetRadius: number = this.thickness / zoomFactor / 2;
+        graphics.fillStyle = this.color.toString();
         graphics.beginPath();
-        graphics.arc(centerX, centerY, this.radius / zoomFactor, 0, angle, false);
-        graphics.stroke();
+        graphics.arc(planetCenter.x, planetCenter.y, planetRadius, 0, Wheel.TAU, false);
+        graphics.fill();
     }
 }
 
