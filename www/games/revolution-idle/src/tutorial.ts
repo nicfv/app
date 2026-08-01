@@ -49,9 +49,17 @@ export class Tutorial implements Drawable {
         this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
         this.helpPage = 0;
         this.pages = [
-            new Help('Just a test', 10, 20, 30, 40, 50, 60),
-            new Help('Another test', 70, 60, 50, 40, 30, 20),
+            new Help('Your goal is to complete orbits as\noptimally as possible. Orbits earn\nyou cash and are compounded with\nother planets. Click the ">" button\nto advance to the next page.', 0, -75, 325, 375, 150, 75),
+            new Help('You can spend your hard-earned\ncash to purchase speed boosts\nfor each orbit. Start by upgrading\nyour red orbit speed!', 140, 0, 5, 100, 130, 400),
+            new Help('When you unlock a lot of planets,\nyou can zoom in and out to observe them,\nand this will also update the store buttons and income.\nTry zooming out!', -10, 0, 675, 150, 100, 60),
         ];
+        this.setButtonAbility();
+    }
+    /**
+     * Restart the tutorial.
+     */
+    public reset(): void {
+        this.helpPage = 0;
         this.setButtonAbility();
     }
     /**
