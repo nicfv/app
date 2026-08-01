@@ -36,6 +36,24 @@ export class Player implements Drawable {
         return this.money >= amount;
     }
     /**
+     * Current player score `log10(money)`
+     */
+    public score(): number {
+        return Math.log10(this.money);
+    }
+    /**
+     * Calculate the score required to gain another planet/orbit
+     */
+    public scoreRequired(): number {
+        return (3 * (this.numOrbits ** 1.5)) | 0;
+    }
+    /**
+     * Determine if this player can ascend
+     */
+    public canAscend(): boolean {
+        return this.score() >= this.scoreRequired();
+    }
+    /**
      * Get the total number of orbits
      */
     public getNumOrbits(): number {
