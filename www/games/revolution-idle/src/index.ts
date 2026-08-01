@@ -11,7 +11,6 @@ const canv: Canvas = new Canvas({
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
         canv.clear();
-        tutorial.tick(dt);
         for (const wheel of wheels) {
             player.earn(income.getIncomePerRotation() * wheel.rotate(dt));
             canv.draw(wheel);
@@ -22,7 +21,10 @@ const canv: Canvas = new Canvas({
         canv.draw(shop);
         canv.draw(buyType);
         canv.draw(menu);
-        canv.draw(tutorial);
+        if (menu.showHelp()) {
+            tutorial.tick(dt);
+            canv.draw(tutorial);
+        }
     },
     mousemove(x, y) {
         tutorial.checkHover(x, y);

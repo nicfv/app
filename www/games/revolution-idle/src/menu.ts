@@ -2,6 +2,7 @@ import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from './label';
 import { ToggleButton } from './button-toggle';
+import { tutorial } from './state';
 
 /**
  * Represents the in-game menu
@@ -78,8 +79,8 @@ export class Menu implements Drawable {
             ['Saved!', new Color(150, 250, 150), () => { return }],
         ], x - (width / 2), y, width, Menu.btnHeight);
         this.help = new ToggleButton([
-            ['Help', Menu.btnColor, () => { this.isShowHelp = true; }],
-            ['Hide Help', Menu.btnColor, () => { this.isShowHelp = false; }],
+            ['Tutorial', Menu.btnColor, () => { this.isShowHelp = true; }],
+            ['End Tutorial', Menu.btnColor, () => { tutorial.reset(); this.isShowHelp = false; }],
         ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight);
         this.mute = new ToggleButton([
             ['Mute', Menu.btnColor, () => { this.muteCallback(); }],
