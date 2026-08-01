@@ -4,7 +4,7 @@ import { OrbitScore } from './orbit-score';
 import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';
-import { player, orbits, zoom } from './state';
+import { player, system, zoom } from './state';
 
 /**
  * Handles and renders game income.
@@ -18,7 +18,7 @@ export class Income implements Drawable {
      */
     constructor() {
         this.orbitScores = [];
-        for (const orbit of orbits) {
+        for (const orbit of system.orbits) {
             this.orbitScores.push(new OrbitScore(orbit, 0));
         }
         this.incomeLargeLabel = new Label('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Label.fontSize * 5);
@@ -34,7 +34,7 @@ export class Income implements Drawable {
      * Calculate the number of complete rotations per second.
      */
     public getRotationsPerSecond(): number {
-        return SMath.sum(orbits.map(o => o.currentSpeedHz()));
+        return SMath.sum(system.orbits.map(o => o.currentSpeedHz()));
     }
     /**
      * Calculate the average income gained per second.

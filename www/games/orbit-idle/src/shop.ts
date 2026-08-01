@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
-import { orbits } from './state';
 import { Label } from './label';
 import { BuyButton } from './button-buy';
 import { AscendButton } from './button-asc';
+import { system } from './state';
 
 /**
  * Represents a collection of buy buttons and ascension buttons (if applicable.)
@@ -22,7 +22,7 @@ export class Shop implements Drawable {
     constructor(x: number, buyButtonWidth: number) {
         this.buyButtons = [];
         this.ascButtons = [];
-        for (const orbit of orbits) {
+        for (const orbit of system.orbits) {
             this.buyButtons.push(new BuyButton(x, buyButtonWidth, orbit));
             this.ascButtons.push(new AscendButton(x + buyButtonWidth + Label.fontSize / 2, buyButtonWidth, orbit));
         }

@@ -1,10 +1,10 @@
 import { BuyType } from './buy-type';
 import { Income } from './income';
 import { Menu } from './menu';
-import { Orbit } from './orbit';
 import { Pause } from './pause';
 import { Player } from './player';
 import { Shop } from './shop';
+import { SolarSystem } from './solar-system';
 import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
@@ -12,10 +12,7 @@ export const player: Player = new Player(1e20, 10);
 export const zoom: Zoom = new Zoom(700, 175);
 export const buyType: BuyType = new BuyType(685, 250);
 
-export const orbits: Orbit[] = [];
-for (let i = 0; i < player.getNumOrbits(); i++) {
-    orbits.push(new Orbit(i));
-}
+export const system: SolarSystem = new SolarSystem();
 
 export const income: Income = new Income();
 export const shop: Shop = new Shop(10, 120);
