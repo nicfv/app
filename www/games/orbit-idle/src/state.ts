@@ -1,11 +1,11 @@
 import { BuyType } from './buy-type';
 import { Income } from './income';
 import { Menu } from './menu';
+import { Orbit } from './orbit';
 import { Pause } from './pause';
 import { Player } from './player';
 import { Shop } from './shop';
 import { Tutorial } from './tutorial';
-import { Orbit } from './wheel';
 import { Zoom } from './zoom';
 
 export const player: Player = new Player(1e20, 10);

@@ -1,6 +1,6 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
-import { OrbitScore } from './wheel-score';
+import { OrbitScore } from './orbit-score';
 import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';

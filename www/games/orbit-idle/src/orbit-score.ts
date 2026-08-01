@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
-import { Orbit } from './wheel';
+import { Color } from 'viridis';
+import { Orbit } from './orbit';
 import { N } from './lib';
 import { Label } from './label';
-import { Color } from 'viridis';
 
 /**
  * Renders the orbit score to the user interface.
