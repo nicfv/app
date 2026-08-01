@@ -30,7 +30,7 @@ export class Help implements Drawable {
      * Create a new help message with optional highlighted region.
      */
     constructor(text: string, textOffsetX: number, textOffsetY: number, private readonly x: number, private readonly y: number, private readonly w: number, private readonly h: number) {
-        this.tip = new Label(text, Help.highlightStroke, 1, false, 'left', 'top', x + textOffsetX, y + textOffsetY);
+        this.tip = new Label(text, Help.highlightStroke, 1, false, textOffsetX < 0 ? 'right' : 'left', 'top', x + textOffsetX, y + textOffsetY);
     }
     /**
      * Compute a single timestep for this help message
