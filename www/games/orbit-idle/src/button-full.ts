@@ -1,8 +1,32 @@
 import { Color } from 'viridis';
 import { Button } from './button';
+import { player } from './state';
+import { N } from './lib';
 
+/**
+ * Represents a button to perform a full ascension
+ */
 export class FullAscendButton extends Button {
-    constructor() {
-        super('', new Color(200, 200, 200), false, 0, 0, 0, 0, () => { return });
+    /**
+     * Create a new full ascend button
+     */
+    constructor(x: number, y: number, w: number, h: number) {
+        super('', new Color(200, 200, 200), true, x, y, w, h, () => {
+            player.getNewOrbit();
+            // TODO: Re-generate the solar system, buy buttons, etc.
+        });
+    }
+    /**
+     * Update the text property of this button
+     */
+    private setText(): void {
+        super.text = `+1 Planet\n${N(player.score())}/${N(player.scoreRequired())}\nNew system`;
+        super.enabled = player.canAscend();
+    }
+    public draw(graphics: CanvasRenderingContext2D): void {
+        if (player.score() > player.scoreRequired() / 2) {
+            this.setText();
+            super.draw(graphics);
+        }
     }
 }
