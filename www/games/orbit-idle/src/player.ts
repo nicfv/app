@@ -47,7 +47,7 @@ export class Player implements Drawable {
      * Calculate the score required to gain another planet/orbit
      */
     public scoreRequired(): number {
-        return (3 * (this.data.orbits ** 1.5)) | 0;
+        return (1.25 * (this.data.orbits ** 1.75) + 1) | 0;
     }
     /**
      * Determine if this player can ascend
