@@ -135,7 +135,7 @@ export class Orbit implements Drawable {
         if (this.isMaxed()) {
             this.data.ascensions += n | 0;
             this.data.angle = 0;
-            this.data.rotations = 0;
+            // this.data.rotations = 0;
             this.data.speedLevel = 0;
         }
     }
