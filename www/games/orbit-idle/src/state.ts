@@ -10,12 +10,11 @@ import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
 export const player: Player = new Player(1e20, 10);
-export const zoom: Zoom = new Zoom(700, 175);
+export const zoom: Zoom = new Zoom(725, 175);
 export const buyType: BuyType = new BuyType(685, 250);
 export const ascBtn: FullAscendButton = new FullAscendButton(675, 300, 100, 50);
 
 export const system: SolarSystem = new SolarSystem();
-
 export const income: Income = new Income();
 export const shop: Shop = new Shop(10, 120);
 
