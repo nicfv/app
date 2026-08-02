@@ -67,7 +67,7 @@ export class Tutorial implements Drawable {
             new Help('Welcome!\nOrbit Idle is all about building a strong\nsolar system. Each orbit spins to generate\ncash, and more planets compound your income\nfor faster growth. Click ">" to continue.', 0, -75, 325, 375, 150, 75),
             new Help('This is your personal bank.\nThis indicates your spending power.', 0, -30, 5, 550, 790, 45),
             new Help('Click the buy buttons to spend cash\nto speed up individual orbits.\nTry upgrading your red planet now!', 140, 0, 5, 100, 130, 400),
-            new Help('When an orbit reaches its max speed, you\ncan Ascend it. Ascensions are expensive\nand reset progression for that orbit, but\nincrease your long-term income.', 140, 0, 135, 100, 130, 400),
+            new Help('When an orbit reaches its max speed, you\ncan Ascend it. Ascensions are expensive\nand reset speed for that orbit, but\nincrease your long-term income.', 140, 0, 135, 100, 130, 400),
             new Help('The breakdown of your income is shown here.\nEach planet gains +0.01 bonus each planetary year\nby completing a full revolution around the sun.\nBonuses from individual orbits are multiplied\ntogether and raised to their ascension level.', 0, 50, 5, 5, 790, 45),
             new Help('This is your total income and\ntotal revolutions per second.\nEach time any planet completes\none full revolution, you earn\nthe income under $/rev.', -10, 0, 600, 50, 200, 80),
             new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60),
