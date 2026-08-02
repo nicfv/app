@@ -39,7 +39,7 @@ export class Player implements Drawable {
      * Current player score `log10(money)`
      */
     public score(): number {
-        return this.money > 0 ? Math.log10(this.money) : 0;
+        return this.money > 1 ? Math.log10(this.money) : 0;
     }
     /**
      * Calculate the score required to gain another planet/orbit
