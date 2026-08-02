@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+body {
+    font-family: sans-serif;
+    color: white;
+    background: dimgray;
+    margin: 0;
+    padding: 0 1rem;
+}
+
+h1,
+div#game {
+    text-align: center;
+}
+
+div#game-info {
+    background: gray;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+button#close-info {
+    float: right;
+    cursor: pointer;
+}
+
+a,
+a:link,
+a:visited {
+    color: cyan;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: pink;
+}
