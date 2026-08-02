@@ -60,5 +60,17 @@ menu.setCallbacks(() => {
 }, () => canv.mute(), () => canv.unmute(), () => canv.clearData());
 
 const data: Partial<GameData> | undefined = canv.loadData<GameData>();
-console.log(data);
-ascBtn.ascend();
+if (data) {
+    // Load and parse saved data
+    player.load(data.playerData);
+    system.load(data.solarData);
+    const dt: number = Date.now() - (data.timestamp ?? Date.now());
+    system.step(dt);
+    // Reset zoom and regenerate UI
+    zoom.reset();
+    income.regenerate();
+    shop.regenerate();
+} else {
+    // Start with a clean system
+    ascBtn.ascend();
+}
