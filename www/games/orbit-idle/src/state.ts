@@ -9,15 +9,18 @@ import { SolarSystem } from './solar-system';
 import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
+// UI elements
 export const player: Player = new Player(1e20, 10);
 export const zoom: Zoom = new Zoom(725, 175);
 export const buyType: BuyType = new BuyType(725, 250);
 export const ascBtn: FullAscendButton = new FullAscendButton(675, 300, 100, 50);
 
+// Game elements
 export const system: SolarSystem = new SolarSystem();
 export const income: Income = new Income();
 export const shop: Shop = new Shop(10, 120);
 
+// Additional popups
 export const tutorial: Tutorial = new Tutorial(400, 400);
 export const menu: Menu = new Menu(725, 400, 100);
 export const paused: Pause = new Pause('Revolution Idle 4 has lost focus!\nThe game is NOT paused, but has\nstopped rendering to save resources.\nThe game is still running in the background.');
