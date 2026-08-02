@@ -3,6 +3,13 @@ import { Canvas } from 'graphico';
 import { ascBtn, buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
 import { GameData } from './gamedata';
 
+/**
+ * Whether the canvas started playing audio yet
+ */
+let audio = false;
+/**
+ * The HTML canvas for the game
+ */
 const canv: Canvas = new Canvas({
     background: 'white',
     border: 'black',
@@ -41,6 +48,10 @@ const canv: Canvas = new Canvas({
         shop.click(button);
         ascBtn.click(button);
         menu.click(button);
+        if (!audio) {
+            audio = true;
+            canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
+        }
     },
     focus(dt) {
         system.step(dt);
