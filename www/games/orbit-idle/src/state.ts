@@ -10,7 +10,7 @@ import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
 // Global constants
-export const version = 'v1.1.0';
+export const version = 'v1.1.1';
 
 // UI elements
 export const player: Player = new Player();

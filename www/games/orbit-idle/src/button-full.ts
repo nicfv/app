@@ -33,9 +33,7 @@ export class FullAscendButton extends Button {
         super.enabled = player.canAscend();
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        if (player.score() > player.scoreRequired() * 0.25) {
-            this.setText();
-            super.draw(graphics);
-        }
+        this.setText();
+        super.draw(graphics);
     }
 }
