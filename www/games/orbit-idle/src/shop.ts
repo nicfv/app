@@ -19,12 +19,20 @@ export class Shop implements Drawable {
     /**
      * Create a new instance of the game shop
      */
-    constructor(x: number, buyButtonWidth: number) {
+    constructor(private readonly x: number, private readonly buyButtonWidth: number) {
         this.buyButtons = [];
         this.ascButtons = [];
+        this.regenerate();
+    }
+    /**
+     * Regenerate all store buttons (e.g. if a new solar system is created)
+     */
+    public regenerate(): void {
+        this.buyButtons.splice(0);
+        this.ascButtons.splice(0);
         for (const orbit of system.orbits) {
-            this.buyButtons.push(new BuyButton(x, buyButtonWidth, orbit));
-            this.ascButtons.push(new AscendButton(x + buyButtonWidth + Label.fontSize / 2, buyButtonWidth, orbit));
+            this.buyButtons.push(new BuyButton(this.x, this.buyButtonWidth, orbit));
+            this.ascButtons.push(new AscendButton(this.x + this.buyButtonWidth + Label.fontSize / 2, this.buyButtonWidth, orbit));
         }
     }
     /**

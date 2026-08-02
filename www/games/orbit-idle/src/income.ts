@@ -18,11 +18,18 @@ export class Income implements Drawable {
      */
     constructor() {
         this.orbitScores = [];
+        this.regenerate();
+        this.incomeLargeLabel = new Label('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Label.fontSize * 5);
+        this.incomeSmallLabel = new Label('', new Color(255, 255, 255), 1, true, 'right', 'top', 0, Label.fontSize * 8);
+    }
+    /**
+     * Regenerate all orbit scores (e.g. if a new solar system was created)
+     */
+    public regenerate(): void {
+        this.orbitScores.splice(0);
         for (const orbit of system.orbits) {
             this.orbitScores.push(new OrbitScore(orbit, 0));
         }
-        this.incomeLargeLabel = new Label('', new Color(255, 255, 255), 2, true, 'right', 'top', 0, Label.fontSize * 5);
-        this.incomeSmallLabel = new Label('', new Color(255, 255, 255), 1, true, 'right', 'top', 0, Label.fontSize * 8);
     }
     /**
      * Calculate the income gained per complete rotation.
