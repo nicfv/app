@@ -103,7 +103,7 @@ export class Menu implements Drawable {
         this.clear = new ToggleButton([
             ['Wipe Data', Menu.btnColor, () => { return }],
             ['Confirm', new Color(255, 0, 0), () => { this.clearCallback(); }],
-            ['Reload Page', Menu.btnColor, () => { return }],
+            ['Reload Page', Menu.btnColor, () => { window.location.reload(); }],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
         this.back = new ToggleButton([
             ['Menu', Menu.btnColor, () => this.toggle()],
