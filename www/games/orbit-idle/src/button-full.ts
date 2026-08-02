@@ -11,9 +11,10 @@ export class FullAscendButton extends Button {
      * Create a new full ascend button
      */
     constructor(x: number, y: number, w: number, h: number) {
-        super('', new Color(200, 200, 200), true, x, y, w, h, () => {
+        super('', new Color(200, 200, 200), false, x, y, w, h, () => {
             player.getNewOrbit();
             zoom.reset();
+            this.disable();
             // TODO: Re-generate the solar system, buy buttons, etc.
         });
     }
