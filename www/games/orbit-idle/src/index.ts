@@ -1,6 +1,7 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
 import { ascBtn, buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
+import { GameData } from './gamedata';
 
 const canv: Canvas = new Canvas({
     background: 'white',
@@ -51,7 +52,13 @@ const canv: Canvas = new Canvas({
 });
 
 menu.setCallbacks(() => {
-    canv.saveData({});
+    canv.saveData<GameData>({
+        timestamp: Date.now(),
+        playerData: player.save(),
+        solarData: system.save(),
+    });
 }, () => canv.mute(), () => canv.unmute(), () => canv.clearData());
 
+const data: Partial<GameData> | undefined = canv.loadData<GameData>();
+console.log(data);
 ascBtn.ascend();
