@@ -20,7 +20,7 @@ export class FullAscendButton extends Button {
         this.disable();
         player.ascend();
         zoom.reset();
-        system.regenerate();
+        system.load();
         income.regenerate();
         shop.regenerate();
         player.earn(system.orbits[0].getNextNCost(1));
