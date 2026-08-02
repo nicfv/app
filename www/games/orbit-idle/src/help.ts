@@ -7,6 +7,10 @@ import { Label } from './label';
  */
 export class Help implements Drawable {
     /**
+     * Shade color for the background
+     */
+    private static readonly shade: Color = new Color(0, 0, 0, 50);
+    /**
      * Highlight outline color
      */
     private static readonly highlightStroke: Color = new Color(255, 255, 25);
@@ -39,14 +43,20 @@ export class Help implements Drawable {
         this.time = (this.time + dt) % (Help.highlightBlinkMS * 2);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
+        // Shade in the background
+        graphics.fillStyle = Help.shade.toString();
+        graphics.fillRect(0, 0, graphics.canvas.width, this.y);
+        graphics.fillRect(0, this.y + this.h, graphics.canvas.width, graphics.canvas.height);
+        graphics.fillRect(0, this.y, this.x, this.h);
+        graphics.fillRect(this.x + this.w, this.y, graphics.canvas.width, this.h);
         // Render label and highlighted region
         this.tip.draw(graphics);
+        graphics.lineWidth = 2;
+        graphics.fillStyle = Help.highlightFill.toString();
+        graphics.strokeStyle = Help.highlightStroke.toString();
+        graphics.strokeRect(this.x, this.y, this.w, this.h);
         if (this.time > Help.highlightBlinkMS) {
-            graphics.lineWidth = 2;
-            graphics.fillStyle = Help.highlightFill.toString();
-            graphics.strokeStyle = Help.highlightStroke.toString();
             graphics.fillRect(this.x, this.y, this.w, this.h);
-            graphics.strokeRect(this.x, this.y, this.w, this.h);
         }
     }
 }
