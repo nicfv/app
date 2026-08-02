@@ -9,6 +9,9 @@ import { SolarSystem } from './solar-system';
 import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
+// Global constants
+export const version = 'v1.0.0';
+
 // UI elements
 export const player: Player = new Player();
 export const zoom: Zoom = new Zoom(725, 175);
