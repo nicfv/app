@@ -66,6 +66,13 @@ export class Zoom implements Drawable {
         }
     }
     /**
+     * Reset the zoom factor
+     */
+    public reset(): void {
+        this.zoom = player.getNumOrbits();
+        this.setButtonAbility();
+    }
+    /**
      * Set the enabled/disabled property for the zoom in/out buttons.
      */
     private setButtonAbility(): void {
