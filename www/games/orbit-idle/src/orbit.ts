@@ -57,10 +57,19 @@ export class Orbit implements Drawable {
         this.ascCostIncrease = 1.25 + 0.05 * index;
     }
     /**
-     * Get data for this orbit.
+     * Copy orbit data for saving this orbit.
      */
-    public getData(): OrbitData {
+    public save(): OrbitData {
         return JSON.parse(JSON.stringify(this.data));
+    }
+    /**
+     * Load orbit data into this orbit.
+     */
+    public load(data: OrbitData): void {
+        this.data.angle = SMath.clamp(data.angle, 0, Orbit.TAU);
+        this.data.ascensions = SMath.clamp(data.ascensions, 0, Infinity) | 0;
+        this.data.rotations = SMath.clamp(data.rotations, 0, Infinity) | 0;
+        this.data.speedLevel = SMath.clamp(data.speedLevel, 0, Infinity) | 0;
     }
     /**
      * Determine if the orbit has been activated.
@@ -111,7 +120,7 @@ export class Orbit implements Drawable {
      * Increase the speed by `N` levels.
      */
     public increaseSpeed(n: number): void {
-        this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel);
+        this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel) | 0;
     }
     /**
      * Calculates the current speed in rotations per second. (Hz)
@@ -124,7 +133,7 @@ export class Orbit implements Drawable {
      */
     public ascend(n: number): void {
         if (this.isMaxed()) {
-            this.data.ascensions += n;
+            this.data.ascensions += n | 0;
             this.data.angle = 0;
             this.data.rotations = 0;
             this.data.speedLevel = 0;
@@ -147,7 +156,7 @@ export class Orbit implements Drawable {
      */
     public rotate(dt: number): number {
         this.data.angle += this.currentSpeedHz() * dt / 1e3 * Orbit.TAU;
-        const rotations: number = Math.floor(this.data.angle / Orbit.TAU);
+        const rotations: number = (this.data.angle / Orbit.TAU) | 0;
         this.data.rotations += rotations;
         this.data.angle %= Orbit.TAU;
         return rotations;
