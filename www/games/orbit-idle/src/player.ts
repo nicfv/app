@@ -14,7 +14,7 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private money: number, private numOrbits: number) {
+    constructor(private money: number, private accumulation: number, private numOrbits: number) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -22,6 +22,7 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.money += amount;
+        this.accumulation += amount;
     }
     /**
      * Spend a certain amount of money from the player's bank
@@ -39,7 +40,7 @@ export class Player implements Drawable {
      * Current player score `log10(money)`
      */
     public score(): number {
-        return this.money > 1 ? Math.log10(this.money) : 0;
+        return this.accumulation > 1 ? Math.log10(this.accumulation) : 0;
     }
     /**
      * Calculate the score required to gain another planet/orbit
