@@ -2,7 +2,7 @@ import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from './label';
 import { ToggleButton } from './button-toggle';
-import { tutorial } from './state';
+import { tutorial, version } from './state';
 
 /**
  * Represents the in-game menu
@@ -85,9 +85,9 @@ export class Menu implements Drawable {
      */
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
-        this.autosaveTick = Menu.autosaveLabelDuration;
+        this.autosaveTick = 0;
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
-        this.autosaveLabel = new Label('Autosaved!', new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
+        this.autosaveLabel = new Label(`Created by Nicolas Ventura [${version}]`, new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
         this.save = new ToggleButton([
             ['Save', Menu.btnColor, () => { this.saveCallback(); }],
             ['Saved!', new Color(150, 250, 150), () => { return }],
@@ -133,6 +133,7 @@ export class Menu implements Drawable {
     public autosave(dt: number): void {
         this.autosaveTick += dt;
         if (this.autosaveTick > Menu.autosaveInterval) {
+            this.autosaveLabel.value = 'Autosaved!';
             this.autosaveTick = 0;
             this.saveCallback();
         }
