@@ -1,6 +1,6 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
+import { ascBtn, buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
 
 const canv: Canvas = new Canvas({
     background: 'white',
@@ -19,6 +19,7 @@ const canv: Canvas = new Canvas({
         canv.draw(income, 1);
         canv.draw(shop, 1);
         canv.draw(buyType, 1);
+        canv.draw(ascBtn, 1);
         canv.draw(menu, 1);
         if (menu.showHelp()) {
             tutorial.tick(dt);
@@ -30,6 +31,7 @@ const canv: Canvas = new Canvas({
         zoom.checkHover(x, y);
         buyType.checkHover(x, y);
         shop.checkHover(x, y);
+        ascBtn.checkHover(x, y);
         menu.checkHover(x, y);
     },
     mousedown(button) {
@@ -37,6 +39,7 @@ const canv: Canvas = new Canvas({
         zoom.click(button);
         buyType.click(button);
         shop.click(button);
+        ascBtn.click(button);
         menu.click(button);
     },
     focus(dt) {
