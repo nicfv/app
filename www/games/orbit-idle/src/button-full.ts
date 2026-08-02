@@ -1,6 +1,6 @@
 import { Color } from 'viridis';
 import { Button } from './button';
-import { player } from './state';
+import { player, zoom } from './state';
 import { N } from './lib';
 
 /**
@@ -13,6 +13,7 @@ export class FullAscendButton extends Button {
     constructor(x: number, y: number, w: number, h: number) {
         super('', new Color(200, 200, 200), true, x, y, w, h, () => {
             player.getNewOrbit();
+            zoom.reset();
             // TODO: Re-generate the solar system, buy buttons, etc.
         });
     }
