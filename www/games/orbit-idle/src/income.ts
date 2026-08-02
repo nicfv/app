@@ -78,7 +78,7 @@ export class Income implements Drawable {
         this.incomeLargeLabel.value = `$${N(this.getIncomePerSecond())} /s`;
         this.incomeLargeLabel.x = rightAlign;
         this.incomeLargeLabel.draw(graphics);
-        this.incomeSmallLabel.value = `$${N(this.getIncomePerRotation())}  /rev\n${N(this.getRotationsPerSecond())} rev/s`;
+        this.incomeSmallLabel.value = `$${N(this.getIncomePerRotation())} $/rev\n${N(this.getRotationsPerSecond())} rev/s`;
         this.incomeSmallLabel.x = rightAlign;
         this.incomeSmallLabel.draw(graphics);
     }
