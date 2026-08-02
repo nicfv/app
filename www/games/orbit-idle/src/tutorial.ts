@@ -53,7 +53,7 @@ export class Tutorial implements Drawable {
      */
     private readonly first: Label;
     /**
-     * Create a new zoom control.
+     * Create a new tutorial instance.
      */
     constructor(x: number, y: number) {
         this.title = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Tutorial.btnPad);
@@ -128,15 +128,19 @@ export class Tutorial implements Drawable {
      * Check if the mouse is currently hovering over any of the controls.
      */
     public checkHover(mx: number, my: number): void {
-        this.back.checkHover(mx, my);
-        this.next.checkHover(mx, my);
+        if (this.visible) {
+            this.back.checkHover(mx, my);
+            this.next.checkHover(mx, my);
+        }
     }
     /**
      * Check if the mouse has clicked on any of the controls.
      */
     public click(button: number): void {
-        this.back.click(button);
-        this.next.click(button);
+        if (this.visible) {
+            this.back.click(button);
+            this.next.click(button);
+        }
     }
     /**
      * Run the tick cycle for the active help page
