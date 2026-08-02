@@ -16,7 +16,7 @@ const canv: Canvas = new Canvas({
     borderBlur: 'gray',
     width: 800,
     height: 600,
-    numLayers: 2,
+    numLayers: 3,
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
         canv.clear(1);
