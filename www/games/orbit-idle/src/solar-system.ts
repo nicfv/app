@@ -22,14 +22,19 @@ export class SolarSystem implements Drawable {
     /**
      * Create a new solar system, passing in optional orbit data
      */
-    constructor(solarData?: SolarData) {
+    constructor() {
         this.orbits = [];
-        this.regenerate(solarData);
+    }
+    /**
+     * Generate data for all orbits in the solar system for saving data
+     */
+    public save(): SolarData {
+        return this.orbits.map(o => o.save());
     }
     /**
      * Regenerate the solar system, optionally passing in data
      */
-    public regenerate(solarData?: SolarData): void {
+    public load(solarData?: SolarData): void {
         this.orbits.splice(0);
         for (let i = 0; i < player.getNumOrbits(); i++) {
             this.orbits.push(new Orbit(i, solarData?.[i]));
