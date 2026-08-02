@@ -11,12 +11,12 @@ export class FullAscendButton extends Button {
      * Create a new full ascend button
      */
     constructor(x: number, y: number, w: number, h: number) {
-        super('', new Color(200, 200, 200), false, x, y, w, h, () => this.regenerate());
+        super('', new Color(200, 200, 200), false, x, y, w, h, () => this.ascend());
     }
     /**
-     * Regenerate the game elements
+     * Ascend and regenerate the game elements
      */
-    public regenerate(): void {
+    public ascend(): void {
         this.disable();
         player.ascend();
         zoom.reset();
