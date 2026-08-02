@@ -72,7 +72,7 @@ export class Tutorial implements Drawable {
             new Help('This is your total income and\ntotal revolutions per second.\nEach time any planet completes\none full revolution, you earn\nthe income under $/rev.', -10, 0, 600, 50, 200, 80),
             new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60),
             new Help('For convenience, you can buy\nspeed upgrades in bulk. It\ndoes not affect ascending.', -10, 0, 660, 220, 130, 60),
-            new Help('When you have accumulated enough income,\nyou will be given the option to perform\na full ascension. This resets the entire\nsolar system, but adds an additional\nplanet. The required "score" is the log10\nof your total accumulated cash.', -10, 0, 660, 290, 130, 70),
+            new Help('When you have accumulated enough income,\nyou will be given the option to perform\na full ascension. This resets the entire\nsolar system, but adds an additional planet.\nThe required "score" is the log10 of your\naccumulated cash. For example, 9 = $1B.', -10, 0, 660, 290, 130, 70),
             new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!', -10, 75, 660, 375, 130, 175),
         ];
         this.setButtonAbility();
