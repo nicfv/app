@@ -27,12 +27,12 @@ export class BuyType implements Drawable {
     /**
      * Initialize a new buy type control.
      */
-    constructor(private readonly x: number, private readonly y: number) {
+    constructor(x: number, y: number) {
         this.quantity = 1;
-        this.buy1 = new Button('1', BuyType.btnColor, true, x, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 1);
-        this.buy10 = new Button('10', BuyType.btnColor, true, x + BuyType.btnSize + BuyType.btnPad, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 10);
-        this.buy100 = new Button('100', BuyType.btnColor, true, x + (BuyType.btnSize + BuyType.btnPad) * 2, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 100);
-        this.label = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x + BuyType.btnSize * 3 / 2 + BuyType.btnPad, y - Label.fontSize);
+        this.buy1 = new Button('1', BuyType.btnColor, true, x - BuyType.btnSize * 3 / 2 - BuyType.btnPad, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 1);
+        this.buy10 = new Button('10', BuyType.btnColor, true, x - BuyType.btnSize / 2, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 10);
+        this.buy100 = new Button('100', BuyType.btnColor, true, x + BuyType.btnSize / 2 + BuyType.btnPad, y, BuyType.btnSize, BuyType.btnSize, () => this.quantity = 100);
+        this.label = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Label.fontSize);
     }
     /**
      * Get the purchase quantity currently selected.
