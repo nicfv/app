@@ -64,11 +64,16 @@ export class Tutorial implements Drawable {
         this.firstDuration = 0;
         this.helpPage = 0;
         this.pages = [
-            new Help('Orbit Idle is all about building a strong solar system.\nEach orbit spins to generate cash, and more planets\ncompound your income for faster growth.', 0, -75, 325, 375, 150, 75),
-            new Help('Use the Buy buttons on the left to spend cash\nand speed up individual orbits.\nChoose Buy x1, x10, or x100 before clicking the orbit button.', 0, -75, 10, 120, 260, 400),
-            new Help('When an orbit reaches its max speed, you can Ascend it.\nAscensions reset progression for that orbit\nbut increase your long-term score and income.', 0, -75, 150, 120, 260, 400),
+            new Help('Welcome!\nOrbit Idle is all about building a strong\nsolar system. Each orbit spins to generate\ncash, and more planets compound your income\nfor faster growth. Click ">" to continue.', 0, -75, 325, 375, 150, 75),
+            new Help('This is your personal bank.\nThis indicates your spending power.', 0, -30, 5, 550, 790, 45),
+            new Help('Click the buy buttons to spend cash\nto speed up individual orbits.\nTry upgrading your red planet now!', 140, 0, 5, 100, 130, 400),
+            new Help('When an orbit reaches its max speed, you\ncan Ascend it. Ascensions are expensive\nand reset progression for that orbit, but\nincrease your long-term income.', 140, 0, 135, 100, 130, 400),
+            new Help('The breakdown of your income is shown here.\nEach planet gains +0.01 bonus each planetary year\nby completing a full revolution around the sun.\nBonuses from individual orbits are multiplied\ntogether and raised to their ascension level.', 0, 50, 5, 5, 790, 45),
+            new Help('This is your total income and\ntotal revolutions per second.\nEach time any planet completes\none full revolution, you earn\nthe income under $/rev.', -10, 0, 600, 50, 200, 80),
             new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60),
-            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.', 0, -70, 675, 385, 150, 100),
+            new Help('For convenience, you can buy\nspeed upgrades in bulk. It\ndoes not affect ascending.', -10, 0, 660, 220, 130, 60),
+            new Help('When you have accumulated enough income,\nyou will be given the option to perform\na full ascension. This resets the entire\nsolar system, but adds an additional\nplanet. The required "score" is the log10\nof your total accumulated cash.', -10, 0, 660, 290, 130, 70),
+            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!', -10, 75, 660, 375, 130, 175),
         ];
         this.setButtonAbility();
     }
