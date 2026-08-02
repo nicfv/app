@@ -3,7 +3,6 @@ import { Color } from 'viridis';
 import { Button } from './button';
 import { Label } from './label';
 import { Help } from './help';
-import { menu } from './state';
 
 /**
  * Represents the in-game tutorial.
@@ -34,6 +33,10 @@ export class Tutorial implements Drawable {
      */
     private readonly back: Button;
     /**
+     * Determines whether or not the tutorial is visible
+     */
+    private visible: boolean;
+    /**
      * The current help page
      */
     private helpPage: number;
@@ -57,6 +60,7 @@ export class Tutorial implements Drawable {
         this.back = new Button('<', Tutorial.btnColor, true, x - Tutorial.btnSize - Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.backPage());
         this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
         this.first = new Label('Welcome to Orbit Idle!\n\nNeed help?\n\nClick on "Menu" and "Tutorial" to\nopen an interactive tutorial!', new Color(255, 255, 255), 1.5, true, 'center', 'top', 0, Label.fontSize * 5);
+        this.visible = false;
         this.firstDuration = 0;
         this.helpPage = 0;
         this.pages = [
@@ -67,11 +71,18 @@ export class Tutorial implements Drawable {
         this.setButtonAbility();
     }
     /**
-     * Restart the tutorial.
+     * Show the tutorial
      */
-    public reset(): void {
+    public show(): void {
+        this.visible = true;
         this.helpPage = 0;
         this.setButtonAbility();
+    }
+    /**
+     * Close the tutorial
+     */
+    public hide(): void {
+        this.visible = false;
     }
     /**
      * Go forward one page
@@ -124,7 +135,9 @@ export class Tutorial implements Drawable {
      * Run the tick cycle for the active help page
      */
     public tick(dt: number): void {
-        this.pages[this.helpPage].tick(dt);
+        if (this.visible) {
+            this.pages[this.helpPage].tick(dt);
+        }
         if (this.firstDuration > 0) {
             this.firstDuration -= dt;
         }
@@ -136,7 +149,7 @@ export class Tutorial implements Drawable {
         this.firstDuration = duration;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        if (menu.showHelp()) {
+        if (this.visible) {
             this.firstDuration = 0;
             this.title.value = `Help ${this.helpPage + 1}/${this.pages.length}`;
             this.title.draw(graphics);

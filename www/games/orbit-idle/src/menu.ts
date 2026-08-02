@@ -61,10 +61,6 @@ export class Menu implements Drawable {
      */
     private isOpen: boolean;
     /**
-     * Determines whether the tutorial should be shown
-     */
-    private isShowHelp: boolean;
-    /**
      * Autosave timer in milliseconds
      */
     private autosaveTick: number;
@@ -89,7 +85,6 @@ export class Menu implements Drawable {
      */
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
-        this.isShowHelp = false;
         this.autosaveTick = Menu.autosaveLabelDuration;
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
         this.autosaveLabel = new Label('Autosaved!', new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
@@ -98,8 +93,8 @@ export class Menu implements Drawable {
             ['Saved!', new Color(150, 250, 150), () => { return }],
         ], x - (width / 2), y, width, Menu.btnHeight);
         this.help = new ToggleButton([
-            ['Tutorial', Menu.btnColor, () => { this.isShowHelp = true; }],
-            ['End Tutorial', Menu.btnColor, () => { tutorial.reset(); this.isShowHelp = false; }],
+            ['Tutorial', Menu.btnColor, () => tutorial.show()],
+            ['End Tutorial', Menu.btnColor, () => tutorial.hide()],
         ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight);
         this.mute = new ToggleButton([
             ['Mute', Menu.btnColor, () => { this.muteCallback(); }],
@@ -131,12 +126,6 @@ export class Menu implements Drawable {
         this.isOpen = !this.isOpen;
         this.save.reset();
         this.clear.reset();
-    }
-    /**
-     * Return whether the tutorial should be displayed
-     */
-    public showHelp(): boolean {
-        return this.isShowHelp;
     }
     /**
      * Perform an autosave at the specified interval
