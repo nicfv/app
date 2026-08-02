@@ -3,6 +3,7 @@ import { Color } from 'viridis';
 import { Button } from './button';
 import { Label } from './label';
 import { Help } from './help';
+import { menu } from './state';
 
 /**
  * Represents the in-game tutorial.
@@ -41,12 +42,22 @@ export class Tutorial implements Drawable {
      */
     private readonly pages: Help[];
     /**
+     * Time [ms] left to show the player's first time message opening the game
+     */
+    private firstDuration: number;
+    /**
+     * The message the player sees when opening the game for the first time
+     */
+    private readonly first: Label;
+    /**
      * Create a new zoom control.
      */
     constructor(x: number, y: number) {
         this.title = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Tutorial.btnPad);
         this.back = new Button('<', Tutorial.btnColor, true, x - Tutorial.btnSize - Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.backPage());
         this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
+        this.first = new Label('Welcome to Orbit Idle!\n\nNeed help?\n\nClick on "Menu" and "Tutorial" to\nopen an interactive tutorial!', new Color(255, 255, 255), 1.5, true, 'center', 'top', 0, Label.fontSize * 5);
+        this.firstDuration = 0;
         this.helpPage = 0;
         this.pages = [
             new Help('Your goal is to complete orbits as\noptimally as possible. Orbits earn\nyou cash and are compounded with\nother planets. Click the ">" button\nto advance to the next page.', 0, -75, 325, 375, 150, 75),
@@ -114,12 +125,28 @@ export class Tutorial implements Drawable {
      */
     public tick(dt: number): void {
         this.pages[this.helpPage].tick(dt);
+        if (this.firstDuration > 0) {
+            this.firstDuration -= dt;
+        }
+    }
+    /**
+     * Pop up with a message the first time the player opens the game
+     */
+    public showFirstTimeMessage(duration: number): void {
+        this.firstDuration = duration;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
-        this.title.value = `Help ${this.helpPage + 1}/${this.pages.length}`;
-        this.title.draw(graphics);
-        this.back.draw(graphics);
-        this.next.draw(graphics);
-        this.pages[this.helpPage].draw(graphics);
+        if (menu.showHelp()) {
+            this.firstDuration = 0;
+            this.title.value = `Help ${this.helpPage + 1}/${this.pages.length}`;
+            this.title.draw(graphics);
+            this.back.draw(graphics);
+            this.next.draw(graphics);
+            this.pages[this.helpPage].draw(graphics);
+        }
+        if (this.firstDuration > 0) {
+            this.first.x = graphics.canvas.width / 2;
+            this.first.draw(graphics);
+        }
     }
 }

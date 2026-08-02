@@ -23,10 +23,8 @@ const canv: Canvas = new Canvas({
         canv.draw(buyType, 1);
         canv.draw(ascBtn, 1);
         canv.draw(menu, 1);
-        if (menu.showHelp()) {
-            tutorial.tick(dt);
-            canv.draw(tutorial, 1);
-        }
+        tutorial.tick(dt);
+        canv.draw(tutorial, 1);
     },
     mousemove(x, y) {
         tutorial.checkHover(x, y);
@@ -74,4 +72,5 @@ if (data) {
 } else {
     // Start with a clean system
     ascBtn.ascend();
+    tutorial.showFirstTimeMessage(10e3);
 }
