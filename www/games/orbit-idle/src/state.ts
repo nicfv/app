@@ -10,7 +10,7 @@ import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
 // UI elements
-export const player: Player = new Player(0, 0, 2);
+export const player: Player = new Player();
 export const zoom: Zoom = new Zoom(725, 175);
 export const buyType: BuyType = new BuyType(725, 250);
 export const ascBtn: FullAscendButton = new FullAscendButton(675, 300, 100, 50);
