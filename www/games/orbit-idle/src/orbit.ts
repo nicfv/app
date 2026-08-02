@@ -75,7 +75,7 @@ export class Orbit implements Drawable {
      * Determine if the orbit has been activated.
      */
     public isActive(): boolean {
-        return this.data.speedLevel > 0;
+        return this.data.speedLevel > 0 || this.data.rotations > 0;
     }
     /**
      * Determine if this orbit's speed level is maxed out.
