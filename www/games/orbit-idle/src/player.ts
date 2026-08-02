@@ -2,6 +2,7 @@ import { Drawable } from 'graphico';
 import { N } from './lib';
 import { Label } from './label';
 import { Color } from 'viridis';
+import { SMath } from 'smath';
 
 /**
  * Represents the main player of the game
@@ -14,7 +15,7 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private data: PlayerData = defaultPlayerData) {
+    constructor(private readonly data: PlayerData = defaultPlayerData) {
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -67,6 +68,20 @@ export class Player implements Drawable {
         this.data.money = 0;
         this.data.accumulation = 0;
         this.data.orbits++;
+    }
+    /**
+     * Copy player data for saving
+     */
+    public save(): PlayerData {
+        return JSON.parse(JSON.stringify(this.data));
+    }
+    /**
+     * Load data for the player
+     */
+    public load(data: PlayerData): void {
+        this.data.money = SMath.clamp(data.money, 0, Infinity);
+        this.data.accumulation = SMath.clamp(data.accumulation, this.data.money, Infinity);
+        this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
