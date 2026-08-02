@@ -63,8 +63,9 @@ export class Player implements Drawable {
     /**
      * Add a new orbit to the solar system
      */
-    public getNewOrbit(): void {
+    public ascend(): void {
         this.money = 0;
+        this.accumulation = 0;
         this.numOrbits++;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
