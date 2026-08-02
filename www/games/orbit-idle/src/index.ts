@@ -14,6 +14,7 @@ const canv: Canvas = new Canvas({
     loop(dt) {
         canv.clear(1);
         system.step(dt);
+        menu.autosave(dt);
         canv.draw(system, 0);
         canv.draw(player, 1);
         canv.draw(zoom, 1);

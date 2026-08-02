@@ -21,6 +21,14 @@ export class Menu implements Drawable {
      */
     private static readonly btnPadding: number = Label.fontSize / 2;
     /**
+     * Autosave interval in milliseconds
+     */
+    private static readonly autosaveInterval: number = 30e3;
+    /**
+     * Autosave label duration shown in milliseconds
+     */
+    private static readonly autosaveLabelDuration: number = 2e3;
+    /**
      * Menu title
      */
     private readonly title: Label;
@@ -45,13 +53,21 @@ export class Menu implements Drawable {
      */
     private readonly back: ToggleButton;
     /**
+     * Label showing when the game has been autosaved
+     */
+    private readonly autosaveLabel: Label;
+    /**
      * Tracks whether the menu is opened or closed
      */
     private isOpen: boolean;
     /**
      * Determines whether the tutorial should be shown
      */
-    private isShowHelp = false;
+    private isShowHelp: boolean;
+    /**
+     * Autosave timer in milliseconds
+     */
+    private autosaveTick: number;
     /**
      * The callback for saving data
      */
@@ -73,7 +89,10 @@ export class Menu implements Drawable {
      */
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
+        this.isShowHelp = false;
+        this.autosaveTick = Menu.autosaveLabelDuration;
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
+        this.autosaveLabel = new Label('Autosaved!', new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
         this.save = new ToggleButton([
             ['Save', Menu.btnColor, () => { this.saveCallback(); }],
             ['Saved!', new Color(150, 250, 150), () => { return }],
@@ -120,6 +139,16 @@ export class Menu implements Drawable {
         return this.isShowHelp;
     }
     /**
+     * Perform an autosave at the specified interval
+     */
+    public autosave(dt: number): void {
+        this.autosaveTick += dt;
+        if (this.autosaveTick > Menu.autosaveInterval) {
+            this.autosaveTick = 0;
+            this.saveCallback();
+        }
+    }
+    /**
      * Check if the mouse is currently hovering over any of the menu buttons
      */
     public checkHover(x: number, y: number): void {
@@ -152,5 +181,10 @@ export class Menu implements Drawable {
             this.clear.draw(graphics);
         }
         this.back.draw(graphics);
+        if (this.autosaveTick < Menu.autosaveLabelDuration) {
+            this.autosaveLabel.x = graphics.canvas.width - Label.fontSize / 2;
+            this.autosaveLabel.y = graphics.canvas.height - Label.fontSize / 2;
+            this.autosaveLabel.draw(graphics);
+        }
     }
 }
