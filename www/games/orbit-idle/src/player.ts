@@ -78,7 +78,7 @@ export class Player implements Drawable {
     /**
      * Load data for the player
      */
-    public load(data: PlayerData): void {
+    public load(data: PlayerData = defaultPlayerData): void {
         this.data.money = SMath.clamp(data.money, 0, Infinity);
         this.data.accumulation = SMath.clamp(data.accumulation, this.data.money, Infinity);
         this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
