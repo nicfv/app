@@ -23,4 +23,4 @@ export const shop: Shop = new Shop(10, 120);
 // Additional popups
 export const tutorial: Tutorial = new Tutorial(400, 400);
 export const menu: Menu = new Menu(725, 400, 100);
-export const paused: Pause = new Pause('Revolution Idle 4 has lost focus!\nThe game is NOT paused, but has\nstopped rendering to save resources.\nThe game is still running in the background.');
+export const paused: Pause = new Pause('Orbit Idle has lost focus!\nThe game is NOT paused, but has\nstopped rendering to save resources.\nThe game is still running in the background.');
