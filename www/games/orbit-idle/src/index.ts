@@ -53,3 +53,5 @@ const canv: Canvas = new Canvas({
 menu.setCallbacks(() => {
     canv.saveData({});
 }, () => canv.mute(), () => canv.unmute(), () => canv.clearData());
+
+ascBtn.ascend();
