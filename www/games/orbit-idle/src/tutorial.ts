@@ -59,14 +59,16 @@ export class Tutorial implements Drawable {
         this.title = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Tutorial.btnPad);
         this.back = new Button('<', Tutorial.btnColor, true, x - Tutorial.btnSize - Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.backPage());
         this.next = new Button('>', Tutorial.btnColor, true, x + Tutorial.btnPad / 2, y, Tutorial.btnSize, Tutorial.btnSize, () => this.nextPage());
-        this.first = new Label('Welcome to Orbit Idle!\n\nNeed help?\n\nClick on "Menu" and "Tutorial" to\nopen an interactive tutorial!', new Color(255, 255, 255), 1.5, true, 'center', 'top', 0, Label.fontSize * 5);
+        this.first = new Label('Welcome to Orbit Idle!\n\nNeed help?\n\nOpen Menu and click Tutorial\nfor a quick guided tour.', new Color(255, 255, 255), 1.5, true, 'center', 'top', 0, Label.fontSize * 5);
         this.visible = false;
         this.firstDuration = 0;
         this.helpPage = 0;
         this.pages = [
-            new Help('Your goal is to complete orbits as\noptimally as possible. Orbits earn\nyou cash and are compounded with\nother planets. Click the ">" button\nto advance to the next page.', 0, -75, 325, 375, 150, 75),
-            new Help('You can spend your hard-earned\ncash to purchase speed boosts\nfor each orbit. Start by upgrading\nyour red orbit speed!', 140, 0, 5, 100, 130, 400),
-            new Help('When you unlock a lot of planets,\nyou can zoom in and out to observe them,\nand this will also update the store buttons and income.\nTry zooming out!', -10, 0, 675, 150, 100, 60),
+            new Help('Orbit Idle is all about building a strong solar system.\nEach orbit spins to generate cash, and more planets\ncompound your income for faster growth.', 0, -75, 325, 375, 150, 75),
+            new Help('Use the Buy buttons on the left to spend cash\nand speed up individual orbits.\nChoose Buy x1, x10, or x100 before clicking the orbit button.', 0, -75, 10, 120, 260, 400),
+            new Help('When an orbit reaches its max speed, you can Ascend it.\nAscensions reset progression for that orbit\nbut increase your long-term score and income.', 0, -75, 150, 120, 260, 400),
+            new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60),
+            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.', 0, -70, 675, 385, 150, 100),
         ];
         this.setButtonAbility();
     }
