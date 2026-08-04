@@ -54,7 +54,7 @@ export class Orbit implements Drawable {
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
         this.costIncrease = 1.02 + 0.02 * index;
-        this.ascCostIncrease = 1.25 + 0.05 * index;
+        this.ascCostIncrease = 2.25 + 0.05 * index;
     }
     /**
      * Copy orbit data for saving this orbit.
