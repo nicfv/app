@@ -122,7 +122,7 @@ export class Menu implements Drawable {
     /**
      * Open or close the menu depending on its current state
      */
-    public toggle(): void {
+    private toggle(): void {
         this.isOpen = !this.isOpen;
         this.save.reset();
         this.clear.reset();
