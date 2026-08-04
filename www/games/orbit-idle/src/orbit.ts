@@ -93,9 +93,10 @@ export class Orbit implements Drawable {
      * Get the cost for the next `N` levels.
      */
     public getNextNCost(n: number): number {
+        const ascensionMult: number = this.ascCostIncrease ** this.data.ascensions;
         let cost = 0;
         for (let level = this.data.speedLevel; level < SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel); level++) {
-            cost += this.baseCost * (this.costIncrease ** level) * (this.ascCostIncrease ** this.data.ascensions);
+            cost += this.baseCost * (this.costIncrease ** level) * ascensionMult;
         }
         return cost;
     }
@@ -135,7 +136,6 @@ export class Orbit implements Drawable {
         if (this.isMaxed()) {
             this.data.ascensions += n | 0;
             this.data.angle = 0;
-            // this.data.rotations = 0;
             this.data.speedLevel = 0;
         }
     }
