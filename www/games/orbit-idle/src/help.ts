@@ -46,10 +46,8 @@ export class Help extends Button {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Shade in the background
         graphics.fillStyle = Help.shade.toString();
-        graphics.fillRect(0, 0, graphics.canvas.width, this.y);
-        graphics.fillRect(0, this.y + this.h, graphics.canvas.width, graphics.canvas.height);
-        graphics.fillRect(0, this.y, this.x, this.h);
-        graphics.fillRect(this.x + this.w, this.y, graphics.canvas.width, this.h);
+        graphics.fillRect(0, 0, graphics.canvas.width, graphics.canvas.height);
+        graphics.clearRect(this.x, this.y, this.w, this.h);
         // Render label and highlighted region
         this.tip.draw(graphics);
         graphics.lineWidth = 2;
