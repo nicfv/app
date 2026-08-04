@@ -1,6 +1,6 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { ascBtn, buyType, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
+import { ascBtn, buyType, cursor, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
 import { GameData } from './gamedata';
 
 /**
@@ -17,9 +17,11 @@ const canv: Canvas = new Canvas({
     width: 800,
     height: 600,
     numLayers: 3,
+    showMouse: false,
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
         canv.clear(1);
+        canv.clear(2);
         system.step(dt);
         menu.autosave(dt);
         canv.draw(system, 0);
@@ -32,8 +34,10 @@ const canv: Canvas = new Canvas({
         canv.draw(menu, 1);
         tutorial.tick(dt);
         canv.draw(tutorial, 1);
+        canv.draw(cursor, 2);
     },
     mousemove(x, y) {
+        cursor.move(x, y);
         tutorial.checkHover(x, y);
         zoom.checkHover(x, y);
         buyType.checkHover(x, y);
