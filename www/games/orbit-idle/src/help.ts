@@ -1,11 +1,11 @@
-import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from './label';
+import { Button } from './button';
 
 /**
  * Represents a help message
  */
-export class Help implements Drawable {
+export class Help extends Button {
     /**
      * Shade color for the background
      */
@@ -33,7 +33,8 @@ export class Help implements Drawable {
     /**
      * Create a new help message with optional highlighted region.
      */
-    constructor(text: string, textOffsetX: number, textOffsetY: number, private readonly x: number, private readonly y: number, private readonly w: number, private readonly h: number) {
+    constructor(text: string, textOffsetX: number, textOffsetY: number, protected readonly x: number, protected readonly y: number, protected readonly w: number, protected readonly h: number, callback: () => void) {
+        super('', new Color(0, 0, 0, 0), true, x, y, w, h, callback);
         this.tip = new Label(text, Help.highlightStroke, 1, false, textOffsetX < 0 ? 'right' : 'left', 'top', x + textOffsetX, y + textOffsetY);
     }
     /**
@@ -52,11 +53,13 @@ export class Help implements Drawable {
         // Render label and highlighted region
         this.tip.draw(graphics);
         graphics.lineWidth = 2;
-        graphics.fillStyle = Help.highlightFill.toString();
         graphics.strokeStyle = Help.highlightStroke.toString();
         graphics.strokeRect(this.x, this.y, this.w, this.h);
         if (this.time > Help.highlightBlinkMS) {
-            graphics.fillRect(this.x, this.y, this.w, this.h);
+            super.color = Help.highlightFill;
+        } else {
+            super.color = new Color(0, 0, 0, 0);
         }
+        super.draw(graphics);
     }
 }
