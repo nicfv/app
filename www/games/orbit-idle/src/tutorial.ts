@@ -45,14 +45,14 @@ export class Tutorial implements Drawable {
             new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60, () => this.helpPage++),
             new Help('For convenience, you can buy\nspeed upgrades in bulk. It\ndoes not affect ascending.', -10, 0, 660, 220, 130, 60, () => this.helpPage++),
             new Help('When you have make the required income\nper second, you will be given the option\nto perform a full ascension. This resets\nthe entire solar system, but adds\nan additional planet.', -10, 0, 660, 290, 130, 70, () => this.helpPage++),
-            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!', -10, 75, 660, 375, 130, 175, () => this.hide()),
+            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!', -10, 75, 660, 375, 130, 175, () => { return }),
         ];
     }
     /**
      * Show (or hide) the tutorial
      */
     public show(): void {
-        this.visible = !this.visible;
+        this.visible = true;
         this.helpPage = 0;
     }
     /**
