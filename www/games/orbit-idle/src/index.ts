@@ -16,13 +16,12 @@ const canv: Canvas = new Canvas({
     borderBlur: 'gray',
     width: 800,
     height: 600,
-    numLayers: 4,
+    numLayers: 3,
     showMouse: false,
     parent: document.getElementById('game') as HTMLElement,
     loop(dt) {
         canv.clear(1);
         canv.clear(2);
-        canv.clear(3);
         system.step(dt);
         menu.autosave(dt);
         canv.draw(system, 0);
@@ -36,7 +35,7 @@ const canv: Canvas = new Canvas({
         tutorial.tick(dt);
         canv.draw(tutorial, 2);
         cursor.tick(dt);
-        canv.draw(cursor, 3);
+        canv.draw(cursor, 2);
     },
     mousemove(x, y) {
         cursor.move(x, y);
