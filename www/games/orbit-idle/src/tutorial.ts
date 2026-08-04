@@ -49,7 +49,7 @@ export class Tutorial implements Drawable {
         ];
     }
     /**
-     * Show (or hide) the tutorial
+     * Show the tutorial
      */
     public show(): void {
         this.visible = true;
