@@ -29,8 +29,8 @@ export class FullAscendButton extends Button {
      * Update the text property of this button
      */
     private setText(): void {
-        super.text = `+1 Planet\n${N(player.score())}/${N(player.scoreRequired())}\nNew system`;
-        super.enabled = player.canAscend();
+        super.text = `+1 Planet\n$${N(player.incomeRequired())}/s\nNew system`;
+        super.enabled = income.getIncomePerSecond() > player.incomeRequired();
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         this.setText();

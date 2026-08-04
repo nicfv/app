@@ -1,11 +1,15 @@
-import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from './label';
+import { Button } from './button';
 
 /**
  * Represents a help message
  */
-export class Help implements Drawable {
+export class Help extends Button {
+    /**
+     * Transparent color
+     */
+    private static readonly transparent: Color = new Color(0, 0, 0, 0);
     /**
      * Shade color for the background
      */
@@ -33,7 +37,8 @@ export class Help implements Drawable {
     /**
      * Create a new help message with optional highlighted region.
      */
-    constructor(text: string, textOffsetX: number, textOffsetY: number, private readonly x: number, private readonly y: number, private readonly w: number, private readonly h: number) {
+    constructor(text: string, textOffsetX: number, textOffsetY: number, protected readonly x: number, protected readonly y: number, protected readonly w: number, protected readonly h: number, callback: () => void) {
+        super('', Help.transparent, true, x, y, w, h, callback);
         this.tip = new Label(text, Help.highlightStroke, 1, false, textOffsetX < 0 ? 'right' : 'left', 'top', x + textOffsetX, y + textOffsetY);
     }
     /**
@@ -45,18 +50,14 @@ export class Help implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Shade in the background
         graphics.fillStyle = Help.shade.toString();
-        graphics.fillRect(0, 0, graphics.canvas.width, this.y);
-        graphics.fillRect(0, this.y + this.h, graphics.canvas.width, graphics.canvas.height);
-        graphics.fillRect(0, this.y, this.x, this.h);
-        graphics.fillRect(this.x + this.w, this.y, graphics.canvas.width, this.h);
+        graphics.fillRect(0, 0, graphics.canvas.width, graphics.canvas.height);
+        graphics.clearRect(this.x, this.y, this.w, this.h);
         // Render label and highlighted region
         this.tip.draw(graphics);
         graphics.lineWidth = 2;
-        graphics.fillStyle = Help.highlightFill.toString();
         graphics.strokeStyle = Help.highlightStroke.toString();
         graphics.strokeRect(this.x, this.y, this.w, this.h);
-        if (this.time > Help.highlightBlinkMS) {
-            graphics.fillRect(this.x, this.y, this.w, this.h);
-        }
+        super.color = (this.time > Help.highlightBlinkMS) ? Help.highlightFill : Help.transparent;
+        super.draw(graphics);
     }
 }

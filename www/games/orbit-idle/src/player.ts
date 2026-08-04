@@ -23,7 +23,6 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.data.money += amount;
-        this.data.accumulation += amount;
     }
     /**
      * Spend a certain amount of money from the player's bank
@@ -38,22 +37,10 @@ export class Player implements Drawable {
         return this.data.money >= amount;
     }
     /**
-     * Current player score `log10(money)`
+     * Calculate the income required to ascend (gain another planet/orbit)
      */
-    public score(): number {
-        return this.data.accumulation > 1 ? Math.log10(this.data.accumulation) : 0;
-    }
-    /**
-     * Calculate the score required to gain another planet/orbit
-     */
-    public scoreRequired(): number {
-        return (1.25 * (this.data.orbits ** 1.75) + 1) | 0;
-    }
-    /**
-     * Determine if this player can ascend
-     */
-    public canAscend(): boolean {
-        return this.score() >= this.scoreRequired();
+    public incomeRequired(): number {
+        return 10 ** ((1.25 * (this.data.orbits ** 1.75) + 1) | 0);
     }
     /**
      * Get the total number of orbits
@@ -66,7 +53,6 @@ export class Player implements Drawable {
      */
     public ascend(): void {
         this.data.money = 0;
-        this.data.accumulation = 0;
         this.data.orbits++;
     }
     /**
@@ -80,7 +66,6 @@ export class Player implements Drawable {
      */
     public load(data: PlayerData = defaultPlayerData): void {
         this.data.money = SMath.clamp(data.money, 0, Infinity);
-        this.data.accumulation = SMath.clamp(data.accumulation, this.data.money, Infinity);
         this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
@@ -100,12 +85,10 @@ export class Player implements Drawable {
  */
 export interface PlayerData {
     money: number;
-    accumulation: number;
     orbits: number;
 }
 
 const defaultPlayerData: PlayerData = {
     money: 0,
-    accumulation: 0,
     orbits: 2,
 };

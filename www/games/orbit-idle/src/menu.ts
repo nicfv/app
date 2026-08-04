@@ -89,7 +89,7 @@ export class Menu implements Drawable {
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
         this.autosaveLabel = new Label(`Created by Nicolas Ventura [${version}]`, new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
         this.save = new ToggleButton([
-            ['Save', Menu.btnColor, () => { this.saveCallback(); }],
+            ['Save', Menu.btnColor, () => this.saveCallback()],
             ['Saved!', new Color(150, 250, 150), () => { return }],
         ], x - (width / 2), y, width, Menu.btnHeight);
         this.help = new ToggleButton([
@@ -97,13 +97,13 @@ export class Menu implements Drawable {
             ['End Tutorial', Menu.btnColor, () => tutorial.hide()],
         ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight);
         this.mute = new ToggleButton([
-            ['Mute', Menu.btnColor, () => { this.muteCallback(); }],
-            ['Unmute', Menu.btnColor, () => { this.unmuteCallback(); }],
+            ['Mute', Menu.btnColor, () => this.muteCallback()],
+            ['Unmute', Menu.btnColor, () => this.unmuteCallback()],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight);
         this.clear = new ToggleButton([
             ['Wipe Data', Menu.btnColor, () => { return }],
-            ['Confirm', new Color(255, 0, 0), () => { this.clearCallback(); }],
-            ['Reload Page', Menu.btnColor, () => { window.location.reload(); }],
+            ['Confirm', new Color(255, 0, 0), () => this.clearCallback()],
+            ['Reload Page', Menu.btnColor, () => window.location.reload()],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
         this.back = new ToggleButton([
             ['Menu', Menu.btnColor, () => this.toggle()],
@@ -122,7 +122,7 @@ export class Menu implements Drawable {
     /**
      * Open or close the menu depending on its current state
      */
-    public toggle(): void {
+    private toggle(): void {
         this.isOpen = !this.isOpen;
         this.save.reset();
         this.clear.reset();
