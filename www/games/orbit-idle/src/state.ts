@@ -1,5 +1,6 @@
 import { FullAscendButton } from './button-full';
 import { BuyType } from './buy-type';
+import { Cursor } from './cursor';
 import { Income } from './income';
 import { Menu } from './menu';
 import { Pause } from './pause';
@@ -13,6 +14,7 @@ import { Zoom } from './zoom';
 export const version = 'v1.1.1';
 
 // UI elements
+export const cursor: Cursor = new Cursor();
 export const player: Player = new Player();
 export const zoom: Zoom = new Zoom(725, 175);
 export const buyType: BuyType = new BuyType(725, 250);
