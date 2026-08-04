@@ -49,10 +49,10 @@ export class Tutorial implements Drawable {
         ];
     }
     /**
-     * Show the tutorial
+     * Show (or hide) the tutorial
      */
     public show(): void {
-        this.visible = true;
+        this.visible = !this.visible;
         this.helpPage = 0;
     }
     /**
@@ -65,17 +65,13 @@ export class Tutorial implements Drawable {
      * Check if the mouse is currently hovering over any of the controls.
      */
     public checkHover(mx: number, my: number): void {
-        for (const page of this.pages) {
-            page.checkHover(mx, my);
-        }
+        this.pages[this.helpPage].checkHover(mx, my);
     }
     /**
      * Check if the mouse has clicked on any of the controls.
      */
     public click(button: number): void {
-        for (const page of this.pages) {
-            page.click(button);
-        }
+        this.pages[this.helpPage].click(button);
     }
     /**
      * Run the tick cycle for the active help page
