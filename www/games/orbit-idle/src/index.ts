@@ -34,6 +34,7 @@ const canv: Canvas = new Canvas({
         canv.draw(menu, 1);
         tutorial.tick(dt);
         canv.draw(tutorial, 1);
+        cursor.tick(dt);
         canv.draw(cursor, 2);
     },
     mousemove(x, y) {
