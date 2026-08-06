@@ -23,7 +23,7 @@ const canv: Canvas = new Canvas({
         canv.clear(1);
         canv.clear(2);
         system.step(dt);
-        menu.autosave(dt);
+        menu.tick(dt);
         canv.draw(system, 0);
         canv.draw(player, 1);
         canv.draw(zoom, 1);

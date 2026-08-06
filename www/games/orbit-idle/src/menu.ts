@@ -29,6 +29,10 @@ export class Menu implements Drawable {
      */
     private static readonly autosaveLabelDuration: number = 2e3;
     /**
+     * Button reset duration in milliseconds
+     */
+    private static readonly buttonResetDuration: number = 5e3;
+    /**
      * Menu title
      */
     private readonly title: Label;
@@ -65,6 +69,14 @@ export class Menu implements Drawable {
      */
     private autosaveTick: number;
     /**
+     * The number of milliseconds until resetting the save button
+     */
+    private saveReset: number;
+    /**
+     * The number of milliseconds until resetting the clear button
+     */
+    private clearReset: number;
+    /**
      * The callback for saving data
      */
     private saveCallback = () => { return };
@@ -86,10 +98,12 @@ export class Menu implements Drawable {
     constructor(x: number, y: number, width: number) {
         this.isOpen = false;
         this.autosaveTick = 0;
+        this.saveReset = 0;
+        this.clearReset = 0;
         this.title = new Label('Menu', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Menu.btnPadding);
         this.autosaveLabel = new Label(`Created by Nicolas Ventura [${version}]`, new Color(255, 255, 255), 1, false, 'right', 'bottom', 0, 0);
         this.save = new ToggleButton([
-            ['Save', Menu.btnColor, () => this.saveCallback()],
+            ['Save', Menu.btnColor, () => { this.saveReset = Menu.buttonResetDuration; this.saveCallback(); }],
             ['Saved!', new Color(150, 250, 150), () => { return }],
         ], x - (width / 2), y, width, Menu.btnHeight);
         this.help = new ToggleButton([
@@ -101,7 +115,7 @@ export class Menu implements Drawable {
             ['Unmute', Menu.btnColor, () => this.unmuteCallback()],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight);
         this.clear = new ToggleButton([
-            ['Wipe Data', Menu.btnColor, () => { return }],
+            ['Wipe Data', Menu.btnColor, () => this.clearReset = Menu.buttonResetDuration],
             ['Confirm', new Color(255, 0, 0), () => this.clearCallback()],
             ['Reload Page', Menu.btnColor, () => window.location.reload()],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
@@ -128,9 +142,27 @@ export class Menu implements Drawable {
         this.clear.reset();
     }
     /**
+     * Menu tick for resetting buttons and autosaving
+     */
+    public tick(dt: number): void {
+        if (this.saveReset > 0) {
+            this.saveReset -= dt;
+            if (this.saveReset <= 0) {
+                this.save.reset();
+            }
+        }
+        if (this.clearReset > 0) {
+            this.clearReset -= dt;
+            if (this.clearReset <= 0) {
+                this.clear.reset();
+            }
+        }
+        this.autosave(dt);
+    }
+    /**
      * Perform an autosave at the specified interval
      */
-    public autosave(dt: number): void {
+    private autosave(dt: number): void {
         this.autosaveTick += dt;
         if (this.autosaveTick > Menu.autosaveInterval) {
             this.autosaveLabel.value = 'Autosaved!';
