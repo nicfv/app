@@ -105,24 +105,24 @@ export class Menu implements Drawable {
         this.save = new ToggleButton([
             ['Save', Menu.btnColor, () => { this.saveReset = Menu.buttonResetDuration; this.saveCallback(); }],
             ['Saved!', new Color(150, 250, 150), () => { return }],
-        ], x - (width / 2), y, width, Menu.btnHeight);
+        ], x - (width / 2), y, width, Menu.btnHeight, ['s']);
         this.help = new ToggleButton([
             ['Tutorial', Menu.btnColor, () => tutorial.show()],
             ['End Tutorial', Menu.btnColor, () => tutorial.hide()],
-        ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight);
+        ], x - (width / 2), y + Menu.btnHeight + Menu.btnPadding, width, Menu.btnHeight, ['h']);
         this.mute = new ToggleButton([
             ['Mute', Menu.btnColor, () => this.muteCallback()],
             ['Unmute', Menu.btnColor, () => this.unmuteCallback()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight, ['m']);
         this.clear = new ToggleButton([
             ['Wipe Data', Menu.btnColor, () => this.clearReset = Menu.buttonResetDuration],
             ['Confirm', new Color(255, 0, 0), () => this.clearCallback()],
             ['Reload Page', Menu.btnColor, () => window.location.reload()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, null);
         this.back = new ToggleButton([
             ['Menu', Menu.btnColor, () => this.toggle()],
             ['Back', Menu.btnColor, () => this.toggle()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight, ['escape']);
     }
     /**
      * Set all callbacks, needed from the main canvas
@@ -140,6 +140,15 @@ export class Menu implements Drawable {
         this.isOpen = !this.isOpen;
         this.save.reset();
         this.clear.reset();
+    }
+    /**
+     * Check to see if the user inputted any hotkeys.
+     */
+    public checkHotkeys(key: string): void {
+        this.save.hotkey(key);
+        this.help.hotkey(key);
+        this.mute.hotkey(key);
+        this.back.hotkey(key);
     }
     /**
      * Menu tick for resetting buttons and autosaving
