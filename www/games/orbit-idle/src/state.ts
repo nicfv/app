@@ -11,7 +11,7 @@ import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
 // Global constants
-export const version = 'v1.2.0';
+export const version = 'v1.2.1-alpha';
 
 // UI elements
 export const cursor: Cursor = new Cursor();
