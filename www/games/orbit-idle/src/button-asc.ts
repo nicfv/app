@@ -20,7 +20,7 @@ export class AscendButton extends Button {
      * Initialize a new ascension button
      */
     constructor(x: number, width: number, private readonly orbit: Orbit) {
-        super('', orbit.color, false, x, 0, width, Label.fontSize * 3, () => {
+        super('', orbit.color, false, x, 0, width, Label.fontSize * 3, null, () => {
             this.orbit.ascend(this.ascensions);
             player.spend(this.ascAmount);
             player.earn(this.orbit.getNextNCost(1));

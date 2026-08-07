@@ -16,7 +16,7 @@ export class BuyButton extends Button {
      * Initialize a new buy button.
      */
     constructor(x: number, width: number, private readonly orbit: Orbit) {
-        super('', orbit.color, true, x, 0, width, Label.fontSize * 3, () => {
+        super('', orbit.color, true, x, 0, width, Label.fontSize * 3, null, () => {
             player.spend(this.cost);
             orbit.increaseSpeed(buyType.getQuantity());
         });
