@@ -58,6 +58,11 @@ const canv: Canvas = new Canvas({
             canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
         }
     },
+    keydown(key) {
+        console.log(key);
+        menu.checkHotkeys(key);
+        zoom.checkHotkeys(key);
+    },
     focus(dt) {
         system.step(dt);
     },
