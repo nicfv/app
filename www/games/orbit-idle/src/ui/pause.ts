@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { Label } from './label';
+import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
 
 /**

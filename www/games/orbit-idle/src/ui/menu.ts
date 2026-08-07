@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
 import { Color } from 'viridis';
-import { Label } from './label';
-import { ToggleButton } from './button-toggle';
-import { tutorial, version } from './state';
+import { Label } from '../form-controls/label';
+import { ToggleButton } from '../form-controls/button-toggle';
+import { tutorial, version } from '../state';
 
 /**
  * Represents the in-game menu

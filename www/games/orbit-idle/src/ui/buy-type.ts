@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
-import { Button } from './button';
+import { Button } from '../form-controls/button';
 import { Color } from 'viridis';
-import { Label } from './label';
+import { Label } from '../form-controls/label';
 
 /**
  * Represents a control to change how many items are being purchased at once.

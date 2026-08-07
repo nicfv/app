@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
-import { Button } from './button';
+import { Button } from '../form-controls/button';
 import { Color } from 'viridis';
-import { Label } from './label';
-import { player } from './state';
+import { Label } from '../form-controls/label';
+import { player } from '../state';
 
 /**
  * Represents a zoom control.
