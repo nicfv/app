@@ -1,7 +1,9 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { ascBtn, buyType, cursor, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
+import { ascBtn, buyType, cursor, income, menu, paused, player, shop, stats, system, tutorial, zoom } from './state';
 import { GameData } from './gamedata';
+
+stats.show();
 
 /**
  * Whether the canvas started playing audio yet
@@ -32,6 +34,7 @@ const canv: Canvas = new Canvas({
         canv.draw(buyType, 1);
         canv.draw(ascBtn, 1);
         canv.draw(menu, 1);
+        canv.draw(stats, 1);
         tutorial.tick(dt);
         canv.draw(tutorial, 2);
         cursor.tick(dt);
@@ -45,6 +48,7 @@ const canv: Canvas = new Canvas({
         shop.checkHover(x, y);
         ascBtn.checkHover(x, y);
         menu.checkHover(x, y);
+        stats.checkHover(x, y);
     },
     mousedown(button) {
         tutorial.click(button);
@@ -53,6 +57,7 @@ const canv: Canvas = new Canvas({
         shop.click(button);
         ascBtn.click(button);
         menu.click(button);
+        stats.click(button);
         if (!audio) {
             audio = true;
             canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
