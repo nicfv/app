@@ -36,8 +36,8 @@ export class Zoom implements Drawable {
      * Create a new zoom control.
      */
     constructor(x: number, y: number, private zoom: number = player.getNumOrbits()) {
-        this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x - Zoom.btnSize - Zoom.btnPad / 2, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomOut());
-        this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnPad / 2, y, Zoom.btnSize, Zoom.btnSize, () => this.zoomIn());
+        this.zoomOutBtn = new Button('-', Zoom.btnColor, true, x - Zoom.btnSize - Zoom.btnPad / 2, y, Zoom.btnSize, Zoom.btnSize, ['-', '_'], () => this.zoomOut());
+        this.zoomInBtn = new Button('+', Zoom.btnColor, true, x + Zoom.btnPad / 2, y, Zoom.btnSize, Zoom.btnSize, ['=', '+'], () => this.zoomIn());
         this.label = new Label('', new Color(255, 255, 255), 1, false, 'center', 'bottom', x, y - Zoom.btnPad);
         this.setButtonAbility();
     }
@@ -100,6 +100,13 @@ export class Zoom implements Drawable {
     public click(button: number): void {
         this.zoomInBtn.click(button);
         this.zoomOutBtn.click(button);
+    }
+    /**
+     * Check to see if the user inputted any hotkeys.
+     */
+    public checkHotkeys(key: string): void {
+        this.zoomInBtn.hotkey(key);
+        this.zoomOutBtn.hotkey(key);
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         this.zoomInBtn.draw(graphics);
