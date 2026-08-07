@@ -7,6 +7,7 @@ import { Pause } from './pause';
 import { Player } from './player';
 import { Shop } from './shop';
 import { SolarSystem } from './solar-system';
+import { Statistics } from './stats';
 import { Tutorial } from './tutorial';
 import { Zoom } from './zoom';
 
@@ -19,6 +20,7 @@ export const player: Player = new Player();
 export const zoom: Zoom = new Zoom(725, 175);
 export const buyType: BuyType = new BuyType(725, 250);
 export const ascBtn: FullAscendButton = new FullAscendButton(675, 300, 100, 50);
+export const stats: Statistics = new Statistics();
 
 // Game elements
 export const system: SolarSystem = new SolarSystem();
