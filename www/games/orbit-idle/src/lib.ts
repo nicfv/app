@@ -3,8 +3,18 @@
  */
 export function N(num: number): string {
     const log10: number = Math.log10(Math.abs(num)) | 0;
-    if (log10 >= 21) {
+    if (log10 >= 36) {
         return `${(num / (10 ** log10)).toFixed(2)}E${log10}`;
+    } else if (log10 >= 33) {
+        return `${(num / 1e33).toFixed(2)}D`;
+    } else if (log10 >= 30) {
+        return `${(num / 1e30).toFixed(2)}N`;
+    } else if (log10 >= 27) {
+        return `${(num / 1e27).toFixed(2)}o`;
+    } else if (log10 >= 24) {
+        return `${(num / 1e24).toFixed(2)}S`;
+    } else if (log10 >= 21) {
+        return `${(num / 1e21).toFixed(2)}s`;
     } else if (log10 >= 18) {
         return `${(num / 1e18).toFixed(2)}Q`;
     } else if (log10 >= 15) {
