@@ -12,8 +12,8 @@ export class ToggleButton extends Button {
     /**
      * Initialize a new toggle button, where the first state is the default state.
      */
-    constructor(private readonly states: [string, Color, () => void][], x: number, y: number, width: number, height: number) {
-        super(states[0][0], states[0][1], true, x, y, width, height, () => {
+    constructor(private readonly states: [string, Color, () => void][], x: number, y: number, width: number, height: number, hotkey: string | null) {
+        super(states[0][0], states[0][1], true, x, y, width, height, hotkey, () => {
             // Execute the current state's callback function
             states[0][2]();
             // Change the current state of the toggle button
