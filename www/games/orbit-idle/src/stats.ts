@@ -66,3 +66,13 @@ export class Statistics implements Drawable {
         this.close.draw(graphics);
     }
 }
+
+/**
+ * Interface containing various in-game statistics
+ */
+export interface Stats {
+    moneyEarned: number;
+    orbitsCompleted: number;
+    speedLevelsPurchased: number;
+    ascensionsPurchased: number;
+}
