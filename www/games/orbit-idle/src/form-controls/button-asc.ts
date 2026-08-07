@@ -1,8 +1,8 @@
 import { Button } from './button';
 import { Label } from './label';
-import { N } from './lib';
-import { player, zoom } from './state';
-import { Orbit } from './orbit';
+import { N } from '../lib';
+import { player, zoom } from '../state';
+import { Orbit } from '../orbit';
 
 /**
  * Represents a button to ascend a specific orbit
