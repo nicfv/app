@@ -1,8 +1,8 @@
 import { Button } from './button';
 import { Label } from './label';
-import { N } from '../lib';
-import { buyType, player, zoom } from '../state';
-import { Orbit } from '../orbit';
+import { N } from '../data/lib';
+import { buyType, player, zoom } from '../data/state';
+import { Orbit } from '../game/orbit';
 
 /**
  * Represents a button to increase a orbit's speed.

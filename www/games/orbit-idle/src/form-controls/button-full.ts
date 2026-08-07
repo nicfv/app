@@ -1,7 +1,7 @@
 import { Color } from 'viridis';
 import { Button } from './button';
-import { income, player, shop, system, zoom } from '../state';
-import { N } from '../lib';
+import { income, player, shop, system, zoom } from '../data/state';
+import { N } from '../data/lib';
 
 /**
  * Represents a button to perform a full ascension

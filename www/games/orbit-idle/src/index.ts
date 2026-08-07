@@ -1,7 +1,7 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { ascBtn, buyType, cursor, income, menu, paused, player, shop, stats, system, tutorial, zoom } from './state';
-import { GameData } from './gamedata';
+import { ascBtn, buyType, cursor, income, menu, paused, player, shop, stats, system, tutorial, zoom } from './data/state';
+import { GameData } from './data/gamedata';
 
 /**
  * Whether the canvas started playing audio yet

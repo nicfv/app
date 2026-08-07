@@ -1,5 +1,5 @@
-import { PlayerData } from "./player";
-import { SolarData } from "./solar-system";
+import { PlayerData } from '../game/player';
+import { SolarData } from '../game/solar-system';
 
 /**
  * Represents and interface for saving and loading game data

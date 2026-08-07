@@ -1,6 +1,6 @@
 import { Drawable } from 'graphico';
-import { N } from './lib';
-import { Label } from './label';
+import { N } from '../data/lib';
+import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
 import { SMath } from 'smath';
 

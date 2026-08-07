@@ -1,15 +1,15 @@
-import { FullAscendButton } from './button-full';
-import { BuyType } from './buy-type';
-import { Cursor } from './cursor';
-import { Income } from './income';
-import { Menu } from './menu';
-import { Pause } from './pause';
-import { Player } from './player';
-import { Shop } from './shop';
-import { SolarSystem } from './solar-system';
+import { FullAscendButton } from '../form-controls/button-full';
+import { BuyType } from '../ui/buy-type';
+import { Cursor } from '../ui/cursor';
+import { Income } from '../game/income';
+import { Menu } from '../ui/menu';
+import { Pause } from '../ui/pause';
+import { Player } from '../game/player';
+import { Shop } from '../game/shop';
+import { SolarSystem } from '../game/solar-system';
 import { Statistics } from './stats';
-import { Tutorial } from './tutorial';
-import { Zoom } from './zoom';
+import { Tutorial } from '../form-controls/tutorial';
+import { Zoom } from '../ui/zoom';
 
 // Global constants
 export const version = 'v1.2.1-alpha';

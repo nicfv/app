@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
-import { Label } from './label';
+import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
-import { Button } from './button';
+import { Button } from '../form-controls/button';
 
 /**
  * Represents an in-game statistics panel

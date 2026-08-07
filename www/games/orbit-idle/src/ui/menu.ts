@@ -2,7 +2,7 @@ import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from '../form-controls/label';
 import { ToggleButton } from '../form-controls/button-toggle';
-import { tutorial, version } from '../state';
+import { tutorial, version } from '../data/state';
 
 /**
  * Represents the in-game menu

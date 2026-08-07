@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { SMath, Vec3 } from 'smath';
 import { Color } from 'viridis';
-import { player, zoom } from './state';
+import { player, zoom } from '../data/state';
 
 /**
  * Represents a single planetary orbit

@@ -1,6 +1,6 @@
 import { Drawable } from 'graphico';
 import { Orbit, OrbitData } from './orbit';
-import { income, player, zoom } from './state';
+import { income, player, zoom } from '../data/state';
 import { Color, Gradient } from 'viridis';
 import { Vec3 } from 'smath';
 

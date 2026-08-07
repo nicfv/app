@@ -1,10 +1,10 @@
 import { SMath } from 'smath';
 import { Drawable } from 'graphico';
 import { OrbitScore } from './orbit-score';
-import { N } from './lib';
-import { Label } from './label';
+import { N } from '../data/lib';
+import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
-import { player, system, zoom } from './state';
+import { player, system, zoom } from '../data/state';
 
 /**
  * Handles and renders game income.
