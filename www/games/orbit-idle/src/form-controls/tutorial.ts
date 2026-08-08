@@ -42,10 +42,10 @@ export class Tutorial implements Drawable {
             new Help('When an orbit reaches its max speed, you\ncan Ascend it. Ascensions are expensive\nand reset speed for that orbit, but\nincrease your long-term income.', 140, 0, 135, 100, 130, 400, () => this.next()),
             new Help('The breakdown of your income is shown here.\nEach planet gains +0.01 bonus each planetary year\nby completing a full revolution around the sun.\nBonuses from individual orbits are multiplied\ntogether and raised to their ascension level.', 0, 50, 5, 5, 790, 45, () => this.next()),
             new Help('This is your total income and\ntotal revolutions per second.\nEach time any planet completes\none full revolution, you earn\nthe income under $/rev.', -10, 0, 600, 50, 200, 80, () => this.next()),
-            new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused orbit.', -10, 0, 675, 150, 100, 60, () => this.next()),
-            new Help('For convenience, you can buy\nspeed upgrades in bulk. It\ndoes not affect ascending.', -10, 0, 660, 220, 130, 60, () => this.next()),
-            new Help('When you have make the required income\nper second, you will be given the option\nto perform a full ascension. This resets\nthe entire solar system, but adds\nan additional planet.', -10, 0, 660, 290, 130, 70, () => this.next()),
-            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!', -10, 75, 660, 375, 130, 175, () => this.next()),
+            new Help('Use the Zoom controls on the top right to focus\non different planets. Zooming changes the store\nbuttons and income labels to match the focused\norbit. Hotkeys: + and -', -10, 0, 675, 125, 100, 60, () => this.next()),
+            new Help('For convenience, you can buy\nspeed upgrades in bulk. It\ndoes not affect ascending.', -10, 0, 660, 195, 130, 60, () => this.next()),
+            new Help('When you have make the required income\nper second, you will be given the option\nto perform a full ascension. This resets\nthe entire solar system, but adds\nan additional planet.', -10, 0, 660, 265, 130, 70, () => this.next()),
+            new Help('Open Menu > Tutorial anytime to review these slides.\nYour progress saves automatically, and the game\ncontinues earning even when the tab is not active.\nClick "End Tutorial" to close this message.\nGood luck!\n\nHotkeys: (S)ave, (H)elp, (M)ute, St(A)ts, (ESC) open/close menu', -10, 75, 660, 335, 130, 215, () => this.next()),
         ];
     }
     /**

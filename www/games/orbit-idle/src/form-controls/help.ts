@@ -38,7 +38,7 @@ export class Help extends Button {
      * Create a new help message with optional highlighted region.
      */
     constructor(text: string, textOffsetX: number, textOffsetY: number, protected readonly x: number, protected readonly y: number, protected readonly w: number, protected readonly h: number, callback: () => void) {
-        super('', Help.transparent, true, x, y, w, h, callback);
+        super('', Help.transparent, true, x, y, w, h, null, callback);
         this.tip = new Label(text, Help.highlightStroke, 1, false, textOffsetX < 0 ? 'right' : 'left', 'top', x + textOffsetX, y + textOffsetY);
     }
     /**

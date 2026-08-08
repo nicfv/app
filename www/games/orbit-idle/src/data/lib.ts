@@ -31,3 +31,25 @@ export function N(num: number): string {
         return num.toFixed(2);
     }
 };
+
+/**
+ * Represents a data type which can be saved and loaded from memory
+ */
+export abstract class SaveLoad<T extends object> {
+    /**
+     * Create a new instance of this class
+     */
+    constructor(protected readonly data: T) {
+        this.data = JSON.parse(JSON.stringify(data));
+    }
+    /**
+     * Make a copy of this data object for saving
+     */
+    public save(): T {
+        return JSON.parse(JSON.stringify(this.data));
+    }
+    /**
+     * Load the saved data into this object
+     */
+    public abstract load(data?: Partial<T>): void;
+}

@@ -1,8 +1,8 @@
 import { Drawable } from 'graphico';
-import { Label } from './label';
-import { BuyButton } from './button-buy';
-import { AscendButton } from './button-asc';
-import { system } from './state';
+import { Label } from '../form-controls/label';
+import { BuyButton } from '../form-controls/button-buy';
+import { AscendButton } from '../form-controls/button-asc';
+import { system } from '../data/state';
 
 /**
  * Represents a collection of buy buttons and ascension buttons (if applicable.)

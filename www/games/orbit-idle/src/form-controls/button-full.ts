@@ -1,7 +1,7 @@
 import { Color } from 'viridis';
 import { Button } from './button';
-import { income, player, shop, system, zoom } from './state';
-import { N } from './lib';
+import { income, player, shop, system, zoom } from '../data/state';
+import { N } from '../data/lib';
 
 /**
  * Represents a button to perform a full ascension
@@ -11,7 +11,7 @@ export class FullAscendButton extends Button {
      * Create a new full ascend button
      */
     constructor(x: number, y: number, w: number, h: number) {
-        super('', new Color(200, 200, 200), false, x, y, w, h, () => this.ascend());
+        super('', new Color(200, 200, 200), false, x, y, w, h, null, () => this.ascend());
     }
     /**
      * Ascend and regenerate the game elements

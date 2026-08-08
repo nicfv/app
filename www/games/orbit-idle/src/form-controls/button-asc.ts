@@ -1,8 +1,8 @@
 import { Button } from './button';
 import { Label } from './label';
-import { N } from './lib';
-import { player, zoom } from './state';
-import { Orbit } from './orbit';
+import { N } from '../data/lib';
+import { player, zoom } from '../data/state';
+import { Orbit } from '../game/orbit';
 
 /**
  * Represents a button to ascend a specific orbit
@@ -20,7 +20,7 @@ export class AscendButton extends Button {
      * Initialize a new ascension button
      */
     constructor(x: number, width: number, private readonly orbit: Orbit) {
-        super('', orbit.color, false, x, 0, width, Label.fontSize * 3, () => {
+        super('', orbit.color, false, x, 0, width, Label.fontSize * 3, null, () => {
             this.orbit.ascend(this.ascensions);
             player.spend(this.ascAmount);
             player.earn(this.orbit.getNextNCost(1));
@@ -39,7 +39,7 @@ export class AscendButton extends Button {
         }
         // Calculate and display cost
         this.ascAmount = this.orbit.getNextNAscensionCost(this.ascensions);
-        super.text = `Ascend +${this.ascensions}\n$${N(this.ascAmount)}`;
+        super.text = `^${N(this.orbit.getExp())} > ^${N(this.orbit.getNextNAscensionExp(this.ascensions))}\n$${N(this.ascAmount)}`;
         // Check if player has sufficient funds to ascend
         if (player.hasFunds(this.ascAmount)) {
             super.enable();

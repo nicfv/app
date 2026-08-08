@@ -1,7 +1,7 @@
 import './close-info-handler';
 import { Canvas } from 'graphico';
-import { ascBtn, buyType, cursor, income, menu, paused, player, shop, system, tutorial, zoom } from './state';
-import { GameData } from './gamedata';
+import { ascBtn, buyType, cursor, income, menu, paused, player, shop, stats, system, tutorial, zoom } from './data/state';
+import { GameData } from './data/gamedata';
 
 /**
  * Whether the canvas started playing audio yet
@@ -32,6 +32,7 @@ const canv: Canvas = new Canvas({
         canv.draw(buyType, 1);
         canv.draw(ascBtn, 1);
         canv.draw(menu, 1);
+        canv.draw(stats, 1);
         tutorial.tick(dt);
         canv.draw(tutorial, 2);
         cursor.tick(dt);
@@ -58,6 +59,10 @@ const canv: Canvas = new Canvas({
             canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
         }
     },
+    keydown(key) {
+        menu.checkHotkeys(key);
+        zoom.checkHotkeys(key);
+    },
     focus(dt) {
         system.step(dt);
     },
@@ -71,6 +76,7 @@ menu.setCallbacks(() => {
         timestamp: Date.now(),
         playerData: player.save(),
         solarData: system.save(),
+        statsData: stats.save(),
     });
 }, () => canv.mute(), () => canv.unmute(), () => canv.clearData());
 
@@ -79,6 +85,7 @@ if (data) {
     // Load and parse saved data
     player.load(data.playerData);
     system.load(data.solarData);
+    stats.load(data.statsData);
     const dt: number = Date.now() - (data.timestamp ?? Date.now());
     system.step(dt);
     // Reset zoom and regenerate UI

@@ -21,7 +21,7 @@ export class Button implements Drawable {
     /**
      * Initialize a new button.
      */
-    constructor(protected text: string, protected color: Color, protected enabled: boolean, protected x: number, protected y: number, protected w: number, protected h: number, protected callback: () => void) {
+    constructor(protected text: string, protected color: Color, protected enabled: boolean, protected x: number, protected y: number, protected w: number, protected h: number, protected hotkeys: string[] | null, protected callback: () => void) {
         this.isHover = false;
         this.label = new Label(text, color.getContrastingColor(), 1, false, 'center', 'top', this.x + this.w / 2, this.y + Label.fontSize / 2);
         this.disabledColor = new Color(color.red, color.green, color.blue, color.alpha * 0.5);
@@ -58,6 +58,14 @@ export class Button implements Drawable {
      */
     public click(button: number): void {
         if (button === 0 && this.isHover && this.enabled) {
+            this.callback();
+        }
+    }
+    /**
+     * Attempt to use the hotkey for this button.
+     */
+    public hotkey(key: string): void {
+        if (this.hotkeys?.includes(key) && this.enabled) {
             this.callback();
         }
     }

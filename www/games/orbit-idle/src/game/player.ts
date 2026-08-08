@@ -1,13 +1,14 @@
 import { Drawable } from 'graphico';
-import { N } from './lib';
-import { Label } from './label';
+import { N, SaveLoad } from '../data/lib';
+import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
 import { SMath } from 'smath';
+import { stats } from '../data/state';
 
 /**
  * Represents the main player of the game
  */
-export class Player implements Drawable {
+export class Player extends SaveLoad<PlayerData> implements Drawable {
     /**
      * The label showing the amount of money in the player's bank
      */
@@ -15,7 +16,8 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private readonly data: PlayerData = defaultPlayerData) {
+    constructor() {
+        super(defaultPlayerData);
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -23,12 +25,14 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.data.money += amount;
+        stats.data.moneyEarned += amount;
     }
     /**
      * Spend a certain amount of money from the player's bank
      */
     public spend(amount: number): void {
         this.data.money -= amount;
+        stats.data.moneySpent += amount;
     }
     /**
      * Determine if the player has sufficient funds to purchase something of a certain amount
@@ -40,7 +44,7 @@ export class Player implements Drawable {
      * Calculate the income required to ascend (gain another planet/orbit)
      */
     public incomeRequired(): number {
-        return 10 ** ((1.25 * (this.data.orbits ** 1.75) + 1) | 0);
+        return 10 ** Math.floor(1.25 * (this.data.orbits ** 1.75) + 1);
     }
     /**
      * Get the total number of orbits
@@ -55,18 +59,9 @@ export class Player implements Drawable {
         this.data.money = 0;
         this.data.orbits++;
     }
-    /**
-     * Copy player data for saving
-     */
-    public save(): PlayerData {
-        return JSON.parse(JSON.stringify(this.data));
-    }
-    /**
-     * Load data for the player
-     */
-    public load(data: PlayerData = defaultPlayerData): void {
-        this.data.money = SMath.clamp(data.money, 0, Infinity);
-        this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
+    public load(data: Partial<PlayerData> = defaultPlayerData): void {
+        this.data.money = SMath.clamp(data.money ?? defaultPlayerData.money, 0, Infinity);
+        this.data.orbits = Math.floor(SMath.clamp(data.orbits ?? defaultPlayerData.orbits, 2, Infinity));
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background

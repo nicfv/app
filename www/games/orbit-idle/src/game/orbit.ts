@@ -1,12 +1,13 @@
 import { Drawable } from 'graphico';
 import { SMath, Vec3 } from 'smath';
 import { Color } from 'viridis';
-import { player, zoom } from './state';
+import { player, stats, zoom } from '../data/state';
+import { SaveLoad } from '../data/lib';
 
 /**
  * Represents a single planetary orbit
  */
-export class Orbit implements Drawable {
+export class Orbit extends SaveLoad<OrbitData> implements Drawable {
     /**
      * 2pi
      */
@@ -46,7 +47,8 @@ export class Orbit implements Drawable {
     /**
      * Create a new planet.
      */
-    constructor(public readonly index: number, private readonly data: OrbitData = JSON.parse(JSON.stringify(defaultData))) {
+    constructor(public readonly index: number, data?: OrbitData) {
+        super(data ?? defaultOrbitData);
         this.color = Color.hsl(SMath.translate(index, 0, player.getNumOrbits(), 0, 360), 100, 55);
         this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
@@ -56,20 +58,11 @@ export class Orbit implements Drawable {
         this.costIncrease = 1.02 + 0.02 * index;
         this.ascCostIncrease = 2.25 + 0.05 * index;
     }
-    /**
-     * Copy orbit data for saving this orbit.
-     */
-    public save(): OrbitData {
-        return JSON.parse(JSON.stringify(this.data));
-    }
-    /**
-     * Load orbit data into this orbit.
-     */
-    public load(data: OrbitData): void {
-        this.data.angle = SMath.clamp(data.angle, 0, Orbit.TAU);
-        this.data.ascensions = SMath.clamp(data.ascensions, 0, Infinity) | 0;
-        this.data.rotations = SMath.clamp(data.rotations, 0, Infinity) | 0;
-        this.data.speedLevel = SMath.clamp(data.speedLevel, 0, Infinity) | 0;
+    public load(data: Partial<OrbitData> = defaultOrbitData): void {
+        this.data.angle = SMath.clamp(data.angle ?? defaultOrbitData.angle, 0, Orbit.TAU);
+        this.data.ascensions = Math.floor(SMath.clamp(data.ascensions ?? defaultOrbitData.ascensions, 0, Infinity));
+        this.data.rotations = Math.floor(SMath.clamp(data.rotations ?? defaultOrbitData.rotations, 0, Infinity));
+        this.data.speedLevel = Math.floor(SMath.clamp(data.speedLevel ?? defaultOrbitData.speedLevel, 0, Infinity));
     }
     /**
      * Determine if the orbit has been activated.
@@ -118,10 +111,18 @@ export class Orbit implements Drawable {
         return SMath.translate(SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel), 0, this.maxSpeedLevel, 0, this.maxSpeed);
     }
     /**
+     * Get the next ascension exponent after `N` ascensions.
+     */
+    public getNextNAscensionExp(n: number): number {
+        return (this.data.ascensions + n) / 100 + 1;
+    }
+    /**
      * Increase the speed by `N` levels.
      */
     public increaseSpeed(n: number): void {
-        this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel) | 0;
+        const upgradeAmount: number = SMath.clamp(n, 0, this.maxSpeedLevel - this.data.speedLevel) | 0;
+        this.data.speedLevel += upgradeAmount;
+        stats.data.speedLevelsPurchased += upgradeAmount;
     }
     /**
      * Calculates the current speed in rotations per second. (Hz)
@@ -137,6 +138,7 @@ export class Orbit implements Drawable {
             this.data.ascensions += n | 0;
             this.data.angle = 0;
             this.data.speedLevel = 0;
+            stats.data.ascensionsPurchased += n | 0;
         }
     }
     /**
@@ -156,9 +158,10 @@ export class Orbit implements Drawable {
      */
     public rotate(dt: number): number {
         this.data.angle += this.currentSpeedHz() * dt / 1e3 * Orbit.TAU;
-        const rotations: number = (this.data.angle / Orbit.TAU) | 0;
+        const rotations: number = Math.floor(this.data.angle / Orbit.TAU);
         this.data.rotations += rotations;
         this.data.angle %= Orbit.TAU;
+        stats.data.orbitsCompleted += rotations;
         return rotations;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
@@ -201,9 +204,9 @@ export interface OrbitData {
     speedLevel: number;
 }
 
-const defaultData: OrbitData = {
+const defaultOrbitData: OrbitData = {
     angle: 0,
-    rotations: 0,
     ascensions: 0,
+    rotations: 0,
     speedLevel: 0,
 };

@@ -1,8 +1,8 @@
 import { Button } from './button';
 import { Label } from './label';
-import { N } from './lib';
-import { buyType, player, zoom } from './state';
-import { Orbit } from './orbit';
+import { N } from '../data/lib';
+import { buyType, player, zoom } from '../data/state';
+import { Orbit } from '../game/orbit';
 
 /**
  * Represents a button to increase a orbit's speed.
@@ -16,7 +16,7 @@ export class BuyButton extends Button {
      * Initialize a new buy button.
      */
     constructor(x: number, width: number, private readonly orbit: Orbit) {
-        super('', orbit.color, true, x, 0, width, Label.fontSize * 3, () => {
+        super('', orbit.color, true, x, 0, width, Label.fontSize * 3, null, () => {
             player.spend(this.cost);
             orbit.increaseSpeed(buyType.getQuantity());
         });

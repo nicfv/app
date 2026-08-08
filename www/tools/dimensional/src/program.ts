@@ -36,7 +36,7 @@ export function getUnitNames(): string[] {
  * Find the unit matching the selected name
  */
 export function getUnitByName(name: string): Unit {
-    return allUnits.find(nu => nu[0] === name)?.[1];
+    return allUnits.find(nu => nu[0] === name)?.[1] ?? units.Unitless;
 }
 /**
  * Swap the input and output of a pair
