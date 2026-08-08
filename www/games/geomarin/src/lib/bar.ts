@@ -15,7 +15,7 @@ export class Bar implements Drawable {
         const barWidth: number = this.value / this.maxValue * maxWidth;
         // Draw the bar background
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.thickness * 1.5, yOffset - this.thickness / 2, barWidth + this.thickness * 0.5, this.thickness);
+        ctx.fillRect((this.thickness * 1.5) | 0, (yOffset - this.thickness / 2) | 0, (barWidth + this.thickness * 0.5) | 0, this.thickness | 0);
         // Draw the bar name and value
         ctx.font = `${this.thickness}px sans-serif`;
         ctx.fillStyle = 'white';
