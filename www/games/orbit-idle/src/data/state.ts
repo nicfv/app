@@ -17,9 +17,9 @@ export const version = 'v1.2.1-alpha';
 // UI elements
 export const cursor: Cursor = new Cursor();
 export const player: Player = new Player();
-export const zoom: Zoom = new Zoom(725, 175);
-export const buyType: BuyType = new BuyType(725, 250);
-export const ascBtn: FullAscendButton = new FullAscendButton(675, 300, 100, 50);
+export const zoom: Zoom = new Zoom(725, 150);
+export const buyType: BuyType = new BuyType(725, 225);
+export const ascBtn: FullAscendButton = new FullAscendButton(675, 275, 100, 50);
 export const stats: Statistics = new Statistics();
 
 // Game elements
