@@ -3,6 +3,7 @@ import { N } from '../data/lib';
 import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
 import { SMath } from 'smath';
+import { stats } from '../data/state';
 
 /**
  * Represents the main player of the game
@@ -23,12 +24,14 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.data.money += amount;
+        stats.stats.moneyEarned += amount;
     }
     /**
      * Spend a certain amount of money from the player's bank
      */
     public spend(amount: number): void {
         this.data.money -= amount;
+        stats.stats.moneySpent += amount;
     }
     /**
      * Determine if the player has sufficient funds to purchase something of a certain amount
