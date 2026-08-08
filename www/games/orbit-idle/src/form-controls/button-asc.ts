@@ -39,7 +39,7 @@ export class AscendButton extends Button {
         }
         // Calculate and display cost
         this.ascAmount = this.orbit.getNextNAscensionCost(this.ascensions);
-        super.text = `Ascend +${this.ascensions}\n$${N(this.ascAmount)}`;
+        super.text = `^${N(this.orbit.getExp())} > ^${N(this.orbit.getNextNAscensionExp(this.ascensions))}\n$${N(this.ascAmount)}`;
         // Check if player has sufficient funds to ascend
         if (player.hasFunds(this.ascAmount)) {
             super.enable();
