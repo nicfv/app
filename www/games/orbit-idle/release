@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cp dist/main.js released
+cp dist/main.js ./*.mp3 released
 zip -r released.zip released
