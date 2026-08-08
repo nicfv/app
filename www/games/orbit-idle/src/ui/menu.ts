@@ -121,7 +121,7 @@ export class Menu implements Drawable {
         this.stats = new ToggleButton([
             ['Show Stats', Menu.btnColor, () => stats.show()],
             ['Close Stats', Menu.btnColor, () => stats.hide()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, null);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, ['a']);
         this.clear = new ToggleButton([
             ['Wipe Data', Menu.btnColor, () => this.clearReset = Menu.buttonResetDuration],
             ['Confirm', new Color(255, 0, 0), () => this.clearCallback()],
@@ -157,6 +157,7 @@ export class Menu implements Drawable {
         this.help.hotkey(key);
         this.mute.hotkey(key);
         this.back.hotkey(key);
+        this.stats.hotkey(key);
     }
     /**
      * Menu tick for resetting buttons and autosaving
