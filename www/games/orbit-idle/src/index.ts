@@ -1,4 +1,3 @@
-import './close-info-handler';
 import { Canvas } from 'graphico';
 import { ascBtn, buyType, cursor, income, menu, paused, player, shop, stats, system, tutorial, zoom } from './data/state';
 import { GameData } from './data/gamedata';
