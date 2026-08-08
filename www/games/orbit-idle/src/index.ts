@@ -60,7 +60,6 @@ const canv: Canvas = new Canvas({
         }
     },
     keydown(key) {
-        console.log(key);
         menu.checkHotkeys(key);
         zoom.checkHotkeys(key);
     },
