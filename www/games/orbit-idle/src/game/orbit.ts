@@ -47,8 +47,8 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
     /**
      * Create a new planet.
      */
-    constructor(public readonly index: number) {
-        super({
+    constructor(public readonly index: number, data?: OrbitData) {
+        super(data ?? {
             angle: 0,
             ascensions: 0,
             rotations: 0,
