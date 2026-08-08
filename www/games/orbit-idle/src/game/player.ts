@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { N } from '../data/lib';
+import { N, SaveLoad } from '../data/lib';
 import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
 import { SMath } from 'smath';
@@ -8,7 +8,7 @@ import { stats } from '../data/state';
 /**
  * Represents the main player of the game
  */
-export class Player implements Drawable {
+export class Player extends SaveLoad<PlayerData> implements Drawable {
     /**
      * The label showing the amount of money in the player's bank
      */
@@ -16,7 +16,8 @@ export class Player implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(private readonly data: PlayerData = defaultPlayerData) {
+    constructor(data: PlayerData = defaultPlayerData) {
+        super(data);
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -24,14 +25,14 @@ export class Player implements Drawable {
      */
     public earn(amount: number): void {
         this.data.money += amount;
-        stats.stats.moneyEarned += amount;
+        stats.data.moneyEarned += amount;
     }
     /**
      * Spend a certain amount of money from the player's bank
      */
     public spend(amount: number): void {
         this.data.money -= amount;
-        stats.stats.moneySpent += amount;
+        stats.data.moneySpent += amount;
     }
     /**
      * Determine if the player has sufficient funds to purchase something of a certain amount
@@ -58,15 +59,6 @@ export class Player implements Drawable {
         this.data.money = 0;
         this.data.orbits++;
     }
-    /**
-     * Copy player data for saving
-     */
-    public save(): PlayerData {
-        return JSON.parse(JSON.stringify(this.data));
-    }
-    /**
-     * Load data for the player
-     */
     public load(data: PlayerData = defaultPlayerData): void {
         this.data.money = SMath.clamp(data.money, 0, Infinity);
         this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
