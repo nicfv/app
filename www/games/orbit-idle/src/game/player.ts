@@ -44,7 +44,7 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
      * Calculate the income required to ascend (gain another planet/orbit)
      */
     public incomeRequired(): number {
-        return 10 ** ((1.25 * (this.data.orbits ** 1.75) + 1) | 0);
+        return 10 ** Math.floor(1.25 * (this.data.orbits ** 1.75) + 1);
     }
     /**
      * Get the total number of orbits
@@ -61,7 +61,7 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
     }
     public load(data: Partial<PlayerData> = defaultPlayerData): void {
         this.data.money = SMath.clamp(data.money ?? defaultPlayerData.money, 0, Infinity);
-        this.data.orbits = SMath.clamp(data.orbits ?? defaultPlayerData.orbits, 2, Infinity) | 0;
+        this.data.orbits = Math.floor(SMath.clamp(data.orbits ?? defaultPlayerData.orbits, 2, Infinity));
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
