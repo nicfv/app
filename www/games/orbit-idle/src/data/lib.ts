@@ -39,7 +39,7 @@ export abstract class SaveLoad<T extends object> {
     /**
      * Create a new instance of this class
      */
-    constructor(protected data: T) { }
+    constructor(protected readonly data: T) { }
     /**
      * Make a copy of this data object for saving
      */
