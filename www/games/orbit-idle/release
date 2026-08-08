@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-echo test
+cp dist/main.js released
+zip -r released.zip released
