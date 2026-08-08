@@ -3,11 +3,12 @@ import { Orbit, OrbitData } from './orbit';
 import { income, player, zoom } from '../data/state';
 import { Color, Gradient } from 'viridis';
 import { Vec3 } from 'smath';
+import { SaveLoad } from '../data/lib';
 
 /**
  * Represents the solar system in the game
  */
-export class SolarSystem implements Drawable {
+export class SolarSystem extends SaveLoad<SolarData> implements Drawable {
     /**
      * The gradient for the main central star
      */
@@ -23,12 +24,13 @@ export class SolarSystem implements Drawable {
      * Create a new solar system, passing in optional orbit data
      */
     constructor() {
+        super([]);
         this.orbits = [];
     }
     /**
      * Generate data for all orbits in the solar system for saving data
      */
-    public save(): SolarData {
+    public override save(): SolarData {
         return this.orbits.map(o => o.save());
     }
     /**
