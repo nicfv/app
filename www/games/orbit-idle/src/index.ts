@@ -79,6 +79,7 @@ menu.setCallbacks(() => {
         timestamp: Date.now(),
         playerData: player.save(),
         solarData: system.save(),
+        statsData: stats.save(),
     });
 }, () => canv.mute(), () => canv.unmute(), () => canv.clearData());
 
@@ -87,6 +88,7 @@ if (data) {
     // Load and parse saved data
     player.load(data.playerData);
     system.load(data.solarData);
+    stats.load(data.statsData);
     const dt: number = Date.now() - (data.timestamp ?? Date.now());
     system.step(dt);
     // Reset zoom and regenerate UI
