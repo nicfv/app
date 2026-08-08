@@ -34,7 +34,7 @@ export class Statistics implements Drawable {
     /**
      * Hide the statistics panel
      */
-    private hide(): void {
+    public hide(): void {
         this.visible = false;
     }
     /**
