@@ -19,8 +19,8 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
     /**
      * Create a new statistics window
      */
-    constructor(stats: StatsData = defaultStats) {
-        super(stats);
+    constructor(public readonly data: StatsData = defaultStats) {
+        super(data);
         this.visible = false;
         this.title = new Label('Orbit Idle: Statistics', new Color(255, 255, 255), 2, true, 'center', 'bottom', 0, Label.fontSize * 14);
         this.headers = new Label('Started on\nSolar system size\nTotal earned\nTotal spent\nTotal planetary years\nSpeed levels purchased\nAscensions purchased\n\nCredits\n\n\nDisclaimer', new Color(255, 255, 255), 1, false, 'right', 'top', 0, Label.fontSize * 15);
