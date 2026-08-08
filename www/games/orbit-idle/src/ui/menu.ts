@@ -2,7 +2,7 @@ import { Drawable } from 'graphico';
 import { Color } from 'viridis';
 import { Label } from '../form-controls/label';
 import { ToggleButton } from '../form-controls/button-toggle';
-import { tutorial, version } from '../data/state';
+import { stats, tutorial, version } from '../data/state';
 
 /**
  * Represents the in-game menu
@@ -48,6 +48,10 @@ export class Menu implements Drawable {
      * Mute button
      */
     private readonly mute: ToggleButton;
+    /**
+     * Stats button
+     */
+    private readonly stats: ToggleButton;
     /**
      * Clear data button
      */
@@ -114,15 +118,19 @@ export class Menu implements Drawable {
             ['Mute', Menu.btnColor, () => this.muteCallback()],
             ['Unmute', Menu.btnColor, () => this.unmuteCallback()],
         ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 2, width, Menu.btnHeight, ['m']);
+        this.stats = new ToggleButton([
+            ['Show Stats', Menu.btnColor, () => stats.show()],
+            ['Close Stats', Menu.btnColor, () => stats.hide()],
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, null);
         this.clear = new ToggleButton([
             ['Wipe Data', Menu.btnColor, () => this.clearReset = Menu.buttonResetDuration],
             ['Confirm', new Color(255, 0, 0), () => this.clearCallback()],
             ['Reload Page', Menu.btnColor, () => window.location.reload()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 3, width, Menu.btnHeight, null);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight, null);
         this.back = new ToggleButton([
             ['Menu', Menu.btnColor, () => this.toggle()],
             ['Back', Menu.btnColor, () => this.toggle()],
-        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 4, width, Menu.btnHeight, ['escape']);
+        ], x - (width / 2), y + (Menu.btnHeight + Menu.btnPadding) * 5, width, Menu.btnHeight, ['escape']);
     }
     /**
      * Set all callbacks, needed from the main canvas
@@ -187,6 +195,7 @@ export class Menu implements Drawable {
             this.save.checkHover(x, y);
             this.help.checkHover(x, y);
             this.mute.checkHover(x, y);
+            this.stats.checkHover(x, y);
             this.clear.checkHover(x, y);
         }
         this.back.checkHover(x, y);
@@ -199,6 +208,7 @@ export class Menu implements Drawable {
             this.save.click(button);
             this.help.click(button);
             this.mute.click(button);
+            this.stats.click(button);
             this.clear.click(button);
         }
         this.back.click(button);
@@ -209,6 +219,7 @@ export class Menu implements Drawable {
             this.save.draw(graphics);
             this.help.draw(graphics);
             this.mute.draw(graphics);
+            this.stats.draw(graphics);
             this.clear.draw(graphics);
         }
         this.back.draw(graphics);
