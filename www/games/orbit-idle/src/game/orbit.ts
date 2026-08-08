@@ -2,11 +2,12 @@ import { Drawable } from 'graphico';
 import { SMath, Vec3 } from 'smath';
 import { Color } from 'viridis';
 import { player, stats, zoom } from '../data/state';
+import { SaveLoad } from '../data/lib';
 
 /**
  * Represents a single planetary orbit
  */
-export class Orbit implements Drawable {
+export class Orbit extends SaveLoad<OrbitData> implements Drawable {
     /**
      * 2pi
      */
@@ -46,7 +47,13 @@ export class Orbit implements Drawable {
     /**
      * Create a new planet.
      */
-    constructor(public readonly index: number, private readonly data: OrbitData = JSON.parse(JSON.stringify(defaultData))) {
+    constructor(public readonly index: number) {
+        super({
+            angle: 0,
+            ascensions: 0,
+            rotations: 0,
+            speedLevel: 0,
+        });
         this.color = Color.hsl(SMath.translate(index, 0, player.getNumOrbits(), 0, 360), 100, 55);
         this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
@@ -56,15 +63,6 @@ export class Orbit implements Drawable {
         this.costIncrease = 1.02 + 0.02 * index;
         this.ascCostIncrease = 2.25 + 0.05 * index;
     }
-    /**
-     * Copy orbit data for saving this orbit.
-     */
-    public save(): OrbitData {
-        return JSON.parse(JSON.stringify(this.data));
-    }
-    /**
-     * Load orbit data into this orbit.
-     */
     public load(data: OrbitData): void {
         this.data.angle = SMath.clamp(data.angle, 0, Orbit.TAU);
         this.data.ascensions = SMath.clamp(data.ascensions, 0, Infinity) | 0;
@@ -129,7 +127,7 @@ export class Orbit implements Drawable {
     public increaseSpeed(n: number): void {
         const upgradeAmount: number = SMath.clamp(n, 0, this.maxSpeedLevel - this.data.speedLevel) | 0;
         this.data.speedLevel += upgradeAmount;
-        stats.stats.speedLevelsPurchased += upgradeAmount;
+        stats.data.speedLevelsPurchased += upgradeAmount;
     }
     /**
      * Calculates the current speed in rotations per second. (Hz)
@@ -145,7 +143,7 @@ export class Orbit implements Drawable {
             this.data.ascensions += n | 0;
             this.data.angle = 0;
             this.data.speedLevel = 0;
-            stats.stats.ascensionsPurchased += n | 0;
+            stats.data.ascensionsPurchased += n | 0;
         }
     }
     /**
@@ -168,7 +166,7 @@ export class Orbit implements Drawable {
         const rotations: number = (this.data.angle / Orbit.TAU) | 0;
         this.data.rotations += rotations;
         this.data.angle %= Orbit.TAU;
-        stats.stats.orbitsCompleted += rotations;
+        stats.data.orbitsCompleted += rotations;
         return rotations;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
@@ -210,10 +208,3 @@ export interface OrbitData {
      */
     speedLevel: number;
 }
-
-const defaultData: OrbitData = {
-    angle: 0,
-    rotations: 0,
-    ascensions: 0,
-    speedLevel: 0,
-};
