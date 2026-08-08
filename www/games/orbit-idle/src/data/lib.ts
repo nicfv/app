@@ -39,7 +39,9 @@ export abstract class SaveLoad<T extends object> {
     /**
      * Create a new instance of this class
      */
-    constructor(protected readonly data: T) { }
+    constructor(protected readonly data: T) {
+        this.data = JSON.parse(JSON.stringify(data));
+    }
     /**
      * Make a copy of this data object for saving
      */
