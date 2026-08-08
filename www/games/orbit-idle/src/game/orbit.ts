@@ -127,7 +127,9 @@ export class Orbit implements Drawable {
      * Increase the speed by `N` levels.
      */
     public increaseSpeed(n: number): void {
-        this.data.speedLevel = SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel) | 0;
+        const upgradeAmount: number = SMath.clamp(n, 0, this.maxSpeedLevel - this.data.speedLevel) | 0;
+        this.data.speedLevel += upgradeAmount;
+        stats.stats.speedLevelsPurchased += upgradeAmount;
     }
     /**
      * Calculates the current speed in rotations per second. (Hz)
