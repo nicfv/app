@@ -25,12 +25,12 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         this.content = new Label('', new Color(255, 255, 255), 1, true, 'left', 'top', 0, Label.fontSize * 18);
     }
     public load(data: Partial<StatsData> = defaultStats): void {
-        this.data.startTime = SMath.clamp(data.startTime ?? defaultStats.startTime, 0, Infinity) | 0;
+        this.data.startTime = Math.floor(SMath.clamp(data.startTime ?? defaultStats.startTime, 0, Infinity));
         this.data.moneyEarned = SMath.clamp(data.moneyEarned ?? defaultStats.moneyEarned, 0, Infinity);
         this.data.moneySpent = SMath.clamp(data.moneySpent ?? defaultStats.moneySpent, 0, Infinity);
-        this.data.orbitsCompleted = SMath.clamp(data.orbitsCompleted ?? defaultStats.orbitsCompleted, 0, Infinity) | 0;
-        this.data.speedLevelsPurchased = SMath.clamp(data.speedLevelsPurchased ?? defaultStats.speedLevelsPurchased, 0, Infinity) | 0;
-        this.data.ascensionsPurchased = SMath.clamp(data.ascensionsPurchased ?? defaultStats.ascensionsPurchased, 0, Infinity) | 0;
+        this.data.orbitsCompleted = Math.floor(SMath.clamp(data.orbitsCompleted ?? defaultStats.orbitsCompleted, 0, Infinity));
+        this.data.speedLevelsPurchased = Math.floor(SMath.clamp(data.speedLevelsPurchased ?? defaultStats.speedLevelsPurchased, 0, Infinity));
+        this.data.ascensionsPurchased = Math.floor(SMath.clamp(data.ascensionsPurchased ?? defaultStats.ascensionsPurchased, 0, Infinity));
     }
     /**
      * Show the statistics panel

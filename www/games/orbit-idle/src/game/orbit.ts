@@ -60,9 +60,9 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
     }
     public load(data: Partial<OrbitData> = defaultOrbitData): void {
         this.data.angle = SMath.clamp(data.angle ?? defaultOrbitData.angle, 0, Orbit.TAU);
-        this.data.ascensions = SMath.clamp(data.ascensions ?? defaultOrbitData.ascensions, 0, Infinity) | 0;
-        this.data.rotations = SMath.clamp(data.rotations ?? defaultOrbitData.rotations, 0, Infinity) | 0;
-        this.data.speedLevel = SMath.clamp(data.speedLevel ?? defaultOrbitData.speedLevel, 0, Infinity) | 0;
+        this.data.ascensions = Math.floor(SMath.clamp(data.ascensions ?? defaultOrbitData.ascensions, 0, Infinity));
+        this.data.rotations = Math.floor(SMath.clamp(data.rotations ?? defaultOrbitData.rotations, 0, Infinity));
+        this.data.speedLevel = Math.floor(SMath.clamp(data.speedLevel ?? defaultOrbitData.speedLevel, 0, Infinity));
     }
     /**
      * Determine if the orbit has been activated.
@@ -158,7 +158,7 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
      */
     public rotate(dt: number): number {
         this.data.angle += this.currentSpeedHz() * dt / 1e3 * Orbit.TAU;
-        const rotations: number = (this.data.angle / Orbit.TAU) | 0;
+        const rotations: number = Math.floor(this.data.angle / Orbit.TAU);
         this.data.rotations += rotations;
         this.data.angle %= Orbit.TAU;
         stats.data.orbitsCompleted += rotations;
