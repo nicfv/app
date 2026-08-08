@@ -48,12 +48,7 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
      * Create a new planet.
      */
     constructor(public readonly index: number, data?: OrbitData) {
-        super(data ?? {
-            angle: 0,
-            ascensions: 0,
-            rotations: 0,
-            speedLevel: 0,
-        });
+        super(data ?? defaultOrbitData);
         this.color = Color.hsl(SMath.translate(index, 0, player.getNumOrbits(), 0, 360), 100, 55);
         this.radius = 100 * (1.3 ** index);
         this.thickness = this.radius * 0.2;
@@ -63,11 +58,11 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
         this.costIncrease = 1.02 + 0.02 * index;
         this.ascCostIncrease = 2.25 + 0.05 * index;
     }
-    public load(data: OrbitData): void {
-        this.data.angle = SMath.clamp(data.angle, 0, Orbit.TAU);
-        this.data.ascensions = SMath.clamp(data.ascensions, 0, Infinity) | 0;
-        this.data.rotations = SMath.clamp(data.rotations, 0, Infinity) | 0;
-        this.data.speedLevel = SMath.clamp(data.speedLevel, 0, Infinity) | 0;
+    public load(data: Partial<OrbitData> = defaultOrbitData): void {
+        this.data.angle = SMath.clamp(data.angle ?? defaultOrbitData.angle, 0, Orbit.TAU);
+        this.data.ascensions = SMath.clamp(data.ascensions ?? defaultOrbitData.ascensions, 0, Infinity) | 0;
+        this.data.rotations = SMath.clamp(data.rotations ?? defaultOrbitData.rotations, 0, Infinity) | 0;
+        this.data.speedLevel = SMath.clamp(data.speedLevel ?? defaultOrbitData.speedLevel, 0, Infinity) | 0;
     }
     /**
      * Determine if the orbit has been activated.
@@ -208,3 +203,10 @@ export interface OrbitData {
      */
     speedLevel: number;
 }
+
+const defaultOrbitData: OrbitData = {
+    angle: 0,
+    ascensions: 0,
+    rotations: 0,
+    speedLevel: 0,
+};

@@ -27,13 +27,13 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         this.content = new Label('', new Color(255, 255, 255), 1, true, 'left', 'top', 0, Label.fontSize * 15);
         this.close = new Button('x', new Color(255, 100, 100), true, Label.fontSize / 2, Label.fontSize / 2, Label.fontSize * 2, Label.fontSize * 2, null, () => this.hide());
     }
-    public load(data: StatsData): void {
-        super.data.startTime = SMath.clamp(data.startTime, 0, Infinity) | 0;
-        super.data.moneyEarned = SMath.clamp(data.moneyEarned, 0, Infinity);
-        super.data.moneySpent = SMath.clamp(data.moneySpent, 0, Infinity);
-        super.data.orbitsCompleted = SMath.clamp(data.orbitsCompleted, 0, Infinity) | 0;
-        super.data.speedLevelsPurchased = SMath.clamp(data.speedLevelsPurchased, 0, Infinity) | 0;
-        super.data.ascensionsPurchased = SMath.clamp(data.ascensionsPurchased, 0, Infinity) | 0;
+    public load(data: Partial<StatsData> = defaultStats): void {
+        super.data.startTime = SMath.clamp(data.startTime ?? defaultStats.startTime, 0, Infinity) | 0;
+        super.data.moneyEarned = SMath.clamp(data.moneyEarned ?? defaultStats.moneyEarned, 0, Infinity);
+        super.data.moneySpent = SMath.clamp(data.moneySpent ?? defaultStats.moneySpent, 0, Infinity);
+        super.data.orbitsCompleted = SMath.clamp(data.orbitsCompleted ?? defaultStats.orbitsCompleted, 0, Infinity) | 0;
+        super.data.speedLevelsPurchased = SMath.clamp(data.speedLevelsPurchased ?? defaultStats.speedLevelsPurchased, 0, Infinity) | 0;
+        super.data.ascensionsPurchased = SMath.clamp(data.ascensionsPurchased ?? defaultStats.ascensionsPurchased, 0, Infinity) | 0;
     }
     /**
      * Show the statistics panel

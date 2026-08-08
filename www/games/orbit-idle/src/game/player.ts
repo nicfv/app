@@ -17,10 +17,7 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
      * Create a new instance of the game player
      */
     constructor() {
-        super({
-            money: 0,
-            orbits: 2,
-        });
+        super(defaultPlayerData);
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -62,9 +59,9 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
         this.data.money = 0;
         this.data.orbits++;
     }
-    public load(data: PlayerData): void {
-        this.data.money = SMath.clamp(data.money, 0, Infinity);
-        this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
+    public load(data: Partial<PlayerData> = defaultPlayerData): void {
+        this.data.money = SMath.clamp(data.money ?? defaultPlayerData.money, 0, Infinity);
+        this.data.orbits = SMath.clamp(data.orbits ?? defaultPlayerData.orbits, 2, Infinity) | 0;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
         // Render black background
@@ -85,3 +82,8 @@ export interface PlayerData {
     money: number;
     orbits: number;
 }
+
+const defaultPlayerData: PlayerData = {
+    money: 0,
+    orbits: 2,
+};
