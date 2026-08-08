@@ -12,7 +12,7 @@ import { Tutorial } from '../form-controls/tutorial';
 import { Zoom } from '../ui/zoom';
 
 // Global constants
-export const version = 'v1.2.1-alpha';
+export const version = 'v1.3.0-alpha';
 
 // UI elements
 export const cursor: Cursor = new Cursor();
