@@ -11,4 +11,4 @@ else
 fi
 
 # Lint and build project
-bun x tsc src/index.ts --noEmit --ignoreConfig && bun x eslint src && bun build "${args[@]}" --outfile=dist/main.js src/index.ts
+bun x tsc --noEmit && bun x eslint src && bun build "${args[@]}" --outfile=dist/main.js src/index.ts
