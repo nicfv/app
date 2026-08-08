@@ -16,8 +16,11 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
     /**
      * Create a new instance of the game player
      */
-    constructor(data: PlayerData = defaultPlayerData) {
-        super(data);
+    constructor() {
+        super({
+            money: 0,
+            orbits: 2,
+        });
         this.moneyLabel = new Label('', new Color(255, 255, 255), 3, true, 'center', 'bottom', 0, 0);
     }
     /**
@@ -59,7 +62,7 @@ export class Player extends SaveLoad<PlayerData> implements Drawable {
         this.data.money = 0;
         this.data.orbits++;
     }
-    public load(data: PlayerData = defaultPlayerData): void {
+    public load(data: PlayerData): void {
         this.data.money = SMath.clamp(data.money, 0, Infinity);
         this.data.orbits = SMath.clamp(data.orbits, 2, Infinity) | 0;
     }
@@ -82,8 +85,3 @@ export interface PlayerData {
     money: number;
     orbits: number;
 }
-
-const defaultPlayerData: PlayerData = {
-    money: 0,
-    orbits: 2,
-};
