@@ -49,5 +49,5 @@ export abstract class SaveLoad<T extends object> {
     /**
      * Load the saved data into this object
      */
-    public abstract load(data?: T): void;
+    public abstract load(data?: Partial<T>): void;
 }
