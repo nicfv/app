@@ -72,6 +72,7 @@ export class Statistics implements Drawable {
  */
 export interface Stats {
     moneyEarned: number;
+    moneySpent: number;
     orbitsCompleted: number;
     speedLevelsPurchased: number;
     ascensionsPurchased: number;
@@ -79,6 +80,7 @@ export interface Stats {
 
 const defaultStats: Stats = {
     moneyEarned: 0,
+    moneySpent: 0,
     orbitsCompleted: 0,
     speedLevelsPurchased: 0,
     ascensionsPurchased: 0,
