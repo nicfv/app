@@ -16,7 +16,7 @@ export class Statistics implements Drawable {
     /**
      * Create a new statistics window
      */
-    constructor() {
+    constructor(public stats: Stats = defaultStats) {
         this.visible = false;
         this.title = new Label('Orbit Idle: Statistics', new Color(255, 255, 255), 2, true, 'center', 'bottom', 0, Label.fontSize * 14);
         this.headers = new Label('Test', new Color(255, 255, 255), 1, false, 'right', 'top', 0, Label.fontSize * 15);
@@ -76,3 +76,10 @@ export interface Stats {
     speedLevelsPurchased: number;
     ascensionsPurchased: number;
 }
+
+const defaultStats: Stats = {
+    moneyEarned: 0,
+    orbitsCompleted: 0,
+    speedLevelsPurchased: 0,
+    ascensionsPurchased: 0,
+};
