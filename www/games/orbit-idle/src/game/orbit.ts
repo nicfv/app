@@ -143,6 +143,7 @@ export class Orbit implements Drawable {
             this.data.ascensions += n | 0;
             this.data.angle = 0;
             this.data.speedLevel = 0;
+            stats.stats.ascensionsPurchased += n | 0;
         }
     }
     /**
@@ -165,6 +166,7 @@ export class Orbit implements Drawable {
         const rotations: number = (this.data.angle / Orbit.TAU) | 0;
         this.data.rotations += rotations;
         this.data.angle %= Orbit.TAU;
+        stats.stats.orbitsCompleted += rotations;
         return rotations;
     }
     public draw(graphics: CanvasRenderingContext2D): void {
