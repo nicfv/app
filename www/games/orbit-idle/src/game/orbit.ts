@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { SMath, Vec3 } from 'smath';
 import { Color } from 'viridis';
-import { player, zoom } from '../data/state';
+import { player, stats, zoom } from '../data/state';
 
 /**
  * Represents a single planetary orbit
@@ -116,6 +116,12 @@ export class Orbit implements Drawable {
      */
     public getNextNSpeed(n: number): number {
         return SMath.translate(SMath.clamp(this.data.speedLevel + n, 0, this.maxSpeedLevel), 0, this.maxSpeedLevel, 0, this.maxSpeed);
+    }
+    /**
+     * Get the next ascension exponent after `N` ascensions.
+     */
+    public getNextNAscensionExp(n: number): number {
+        return (this.data.ascensions + n) / 100 + 1;
     }
     /**
      * Increase the speed by `N` levels.
