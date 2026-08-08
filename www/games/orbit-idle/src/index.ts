@@ -46,7 +46,6 @@ const canv: Canvas = new Canvas({
         shop.checkHover(x, y);
         ascBtn.checkHover(x, y);
         menu.checkHover(x, y);
-        stats.checkHover(x, y);
     },
     mousedown(button) {
         tutorial.click(button);
@@ -55,7 +54,6 @@ const canv: Canvas = new Canvas({
         shop.click(button);
         ascBtn.click(button);
         menu.click(button);
-        stats.click(button);
         if (!audio) {
             audio = true;
             canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
