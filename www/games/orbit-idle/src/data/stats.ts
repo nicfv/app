@@ -28,12 +28,12 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         this.close = new Button('x', new Color(255, 100, 100), true, Label.fontSize / 2, Label.fontSize / 2, Label.fontSize * 2, Label.fontSize * 2, null, () => this.hide());
     }
     public load(data: Partial<StatsData> = defaultStats): void {
-        super.data.startTime = SMath.clamp(data.startTime ?? defaultStats.startTime, 0, Infinity) | 0;
-        super.data.moneyEarned = SMath.clamp(data.moneyEarned ?? defaultStats.moneyEarned, 0, Infinity);
-        super.data.moneySpent = SMath.clamp(data.moneySpent ?? defaultStats.moneySpent, 0, Infinity);
-        super.data.orbitsCompleted = SMath.clamp(data.orbitsCompleted ?? defaultStats.orbitsCompleted, 0, Infinity) | 0;
-        super.data.speedLevelsPurchased = SMath.clamp(data.speedLevelsPurchased ?? defaultStats.speedLevelsPurchased, 0, Infinity) | 0;
-        super.data.ascensionsPurchased = SMath.clamp(data.ascensionsPurchased ?? defaultStats.ascensionsPurchased, 0, Infinity) | 0;
+        this.data.startTime = SMath.clamp(data.startTime ?? defaultStats.startTime, 0, Infinity) | 0;
+        this.data.moneyEarned = SMath.clamp(data.moneyEarned ?? defaultStats.moneyEarned, 0, Infinity);
+        this.data.moneySpent = SMath.clamp(data.moneySpent ?? defaultStats.moneySpent, 0, Infinity);
+        this.data.orbitsCompleted = SMath.clamp(data.orbitsCompleted ?? defaultStats.orbitsCompleted, 0, Infinity) | 0;
+        this.data.speedLevelsPurchased = SMath.clamp(data.speedLevelsPurchased ?? defaultStats.speedLevelsPurchased, 0, Infinity) | 0;
+        this.data.ascensionsPurchased = SMath.clamp(data.ascensionsPurchased ?? defaultStats.ascensionsPurchased, 0, Infinity) | 0;
     }
     /**
      * Show the statistics panel
@@ -72,7 +72,7 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         graphics.fillStyle = Statistics.shade.toString();
         graphics.fillRect(0, 0, graphics.canvas.width, graphics.canvas.height);
         // Set content
-        this.content.value = `${new Date(super.data.startTime).toLocaleString()}\n${N(player.getNumOrbits())} planets\n$${N(super.data.moneyEarned)}\n$${N(super.data.moneySpent)}\n${N(super.data.orbitsCompleted)} orbits\n${N(super.data.speedLevelsPurchased)}\n${N(super.data.ascensionsPurchased)}\n\nNicolas Ventura\nnicfv.com\n\nGenerative AI was used for\n30-second looping audio but\nnot for game design or code`;
+        this.content.value = `${new Date(this.data.startTime).toLocaleString()}\n${N(player.getNumOrbits())} planets\n$${N(this.data.moneyEarned)}\n$${N(this.data.moneySpent)}\n${N(this.data.orbitsCompleted)} orbits\n${N(this.data.speedLevelsPurchased)}\n${N(this.data.ascensionsPurchased)}\n\nNicolas Ventura\nnicfv.com\n\nGenerative AI was used for\n30-second looping audio but\nnot for game design or code`;
         // X-center all labels
         this.title.x = graphics.canvas.width / 2;
         this.headers.x = (graphics.canvas.width - Label.fontSize) / 2;
@@ -98,7 +98,7 @@ export interface StatsData {
 }
 
 const defaultStats: StatsData = {
-    startTime: 0,
+    startTime: Date.now(),
     moneyEarned: 0,
     moneySpent: 0,
     orbitsCompleted: 0,
