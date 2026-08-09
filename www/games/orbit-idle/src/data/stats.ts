@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { Label } from '../form-controls/label';
 import { Color } from 'viridis';
-import { player } from './state';
+import { player, version } from './state';
 import { N, SaveLoad } from './lib';
 import { SMath } from 'smath';
 
@@ -21,7 +21,7 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         super(data);
         this.visible = false;
         this.title = new Label('Orbit Idle: Statistics', new Color(255, 255, 255), 2, true, 'center', 'bottom', 0, Label.fontSize * 16);
-        this.headers = new Label('Started on\nSolar system size\nTotal earned\nTotal spent\nTotal planetary years\nSpeed levels purchased\nAscensions purchased\n\nCredits\n\n\nDisclaimer', new Color(255, 255, 255), 1, false, 'right', 'top', 0, Label.fontSize * 18);
+        this.headers = new Label('Started on\nSolar system size\nTotal earned\nTotal spent\nTotal planetary years\nSpeed levels purchased\nAscensions purchased\n\nCredits\n\n\nDisclaimer\n\n\n\nVersion', new Color(255, 255, 255), 1, false, 'right', 'top', 0, Label.fontSize * 18);
         this.content = new Label('', new Color(255, 255, 255), 1, true, 'left', 'top', 0, Label.fontSize * 18);
     }
     public load(data: Partial<StatsData> = defaultStats): void {
@@ -53,7 +53,7 @@ export class Statistics extends SaveLoad<StatsData> implements Drawable {
         graphics.fillStyle = Statistics.shade.toString();
         graphics.fillRect(Label.fontSize * 15, Label.fontSize * 10, graphics.canvas.width - Label.fontSize * 30, graphics.canvas.height - Label.fontSize * 20);
         // Set content
-        this.content.value = `${new Date(this.data.startTime).toLocaleString()}\n${N(player.getNumOrbits())} planets\n$${N(this.data.moneyEarned)}\n$${N(this.data.moneySpent)}\n${N(this.data.orbitsCompleted)} orbits\n${N(this.data.speedLevelsPurchased)}\n${N(this.data.ascensionsPurchased)}\n\nNicolas Ventura\nnicfv.com\n\nGenerative AI was used for\n30-second looping audio but\nnot for game design or code`;
+        this.content.value = `${new Date(this.data.startTime).toLocaleString()}\n${N(player.getNumOrbits())} planets\n$${N(this.data.moneyEarned)}\n$${N(this.data.moneySpent)}\n${N(this.data.orbitsCompleted)} orbits\n${N(this.data.speedLevelsPurchased)}\n${N(this.data.ascensionsPurchased)}\n\nNicolas Ventura\nnicfv.com\n\nGenerative AI was used for\n30-second looping audio but\nnot for game design or code\n\n${version}`;
         // X-center all labels
         this.title.x = graphics.canvas.width / 2;
         this.headers.x = (graphics.canvas.width - Label.fontSize) / 2;
