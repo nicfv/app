@@ -56,7 +56,7 @@ export class Orbit extends SaveLoad<OrbitData> implements Drawable {
         this.maxSpeedLevel = 100;
         this.baseCost = 10 ** index;
         this.costIncrease = 1.02 + 0.02 * index;
-        this.ascCostIncrease = 2.25 + 0.05 * index;
+        this.ascCostIncrease = 3.25 + 0.25 * index;
     }
     public load(data: Partial<OrbitData> = defaultOrbitData): void {
         this.data.angle = SMath.clamp(data.angle ?? defaultOrbitData.angle, 0, Orbit.TAU);

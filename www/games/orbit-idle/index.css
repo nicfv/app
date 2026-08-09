@@ -43,3 +43,8 @@ a:hover {
 a:active {
     color: pink;
 }
+
+kbd {
+    padding: 0.25rem;
+    background: dimgray;
+}
