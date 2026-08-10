@@ -1,7 +1,8 @@
 {
   "name": "orbit-idle",
   "scripts": {
-    "start": "../../../cmd/start"
+    "start": "../../../cmd/start",
+    "release": "../../../cmd/release"
   },
   "dependencies": {
     "graphico": "1.6.0",

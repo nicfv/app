@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+bun start prod
+cp dist/main.js ./*.mp3 release
+zip -r release.zip release
+rm -r release/*.js release/*.mp3
