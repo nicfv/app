@@ -7,7 +7,7 @@ if [[ ! -f 'cmd/clean' ]] ; then
 fi
 
 # Select files to delete
-files=('node_modules' 'bun.lock' 'package.json' 'site')
+files=('node_modules' 'bun.lock' 'site')
 
 # Delete corresponding files
 for file in "${files[@]}" ; do
