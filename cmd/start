@@ -16,3 +16,8 @@ mkdir -p "${name}"
 
 # Lint and build project
 bun x tsc --noEmit && bun x eslint src && bun build "${args[@]}" --compile --target=browser ./index.html --outfile="${name}/index.html"
+
+# Package for releasing
+if [[ "${2}" == 'zip' ]] ; then
+    zip -r "${name}/release.zip" "${name}/index.html"
+fi
