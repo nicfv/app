@@ -6,21 +6,8 @@ if [[ ! -f 'cmd/clean' ]] ; then
     exit 1
 fi
 
-# Check to make sure a single argument was provided
-if [[ "${#}" -ne 1 ]] ; then
-    echo "Usage: ${0} <dev|prod>"
-    exit 1
-fi
-
 # Select files to delete
-if [[ "${1}" == 'dev' ]] ; then
-    files=('node_modules' 'site' 'bun.lock' '*.zip')
-elif [[ "${1}" == 'prod' ]] ; then
-    files=('node_modules' 'src' 'package.json' '*.md' '*.zip' 'release')
-else
-    echo "Unknown argument ${1}."
-    exit 1
-fi
+files=('node_modules' 'bun.lock' 'package.json' 'site')
 
 # Delete corresponding files
 for file in "${files[@]}" ; do
