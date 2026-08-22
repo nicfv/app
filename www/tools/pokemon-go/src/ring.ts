@@ -1,4 +1,4 @@
-import { expand } from 'smath';
+import { SMath } from 'smath';
 import { Color, Gradient } from 'viridis';
 
 /**
@@ -42,7 +42,7 @@ export class Ring {
      * Set the size of the inner ring, using a value [0-1]
      */
     public setSize(normalized: number): void {
-        this.ring.setAttribute('r', `${expand(normalized, this.strokeWidth / 2, this.size / 2 - this.strokeWidth)}`);
+        this.ring.setAttribute('r', `${SMath.expand(normalized, this.strokeWidth / 2, this.size / 2 - this.strokeWidth)}`);
     }
     /**
      * Set the color of the inner ring, using a value [0-1]

@@ -1,6 +1,6 @@
 import { Drawable } from 'graphico';
 import { allDirections, Direction, move, tileSize, Vec2 } from './types';
-import * as SMath from 'smath';
+import { SMath } from 'smath';
 
 export class GameMap implements Drawable {
     private readonly tiles: TileType[][];

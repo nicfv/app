@@ -1,4 +1,4 @@
-import { clamp, selectRandom, selectRandomWeighted } from 'smath';
+import { SMath } from 'smath';
 import { Drawable } from 'graphico';
 import { Hexagon, Vec2 } from './Geometry';
 import { VERSION } from './version';
@@ -37,7 +37,7 @@ class Player implements Drawable {
             if (unusedColors.length === 0) {
                 throw new Error('All colors are in use.');
             }
-            this.color = selectRandom(unusedColors);
+            this.color = SMath.selectRandom(unusedColors);
         }
         Player.ColorMap[this.color].inUse = true;
         this.dPad = new DPad(this);
@@ -224,7 +224,7 @@ class Board implements Drawable {
         if (neutralTiles.length === 0) {
             throw new Error('No neutral tiles left.');
         }
-        const tile: Tile = selectRandom(neutralTiles);
+        const tile: Tile = SMath.selectRandom(neutralTiles);
         tile.capture(player);
     }
     /**
@@ -447,9 +447,9 @@ class Game implements Drawable {
         this.paused = false;
         this.board = new Board(boardSize, wallDensity);
         this.turnText = new Text('', 22, { x: 0.01, y: 0.01 });
-        numHumans = clamp(numHumans, 0, Game.MAX_PLAYERS);
-        numAI = clamp(numAI, 0, Game.MAX_PLAYERS);
-        numAI = clamp(numAI, Game.MIN_PLAYERS - numHumans, Game.MAX_PLAYERS - numHumans);
+        numHumans = SMath.clamp(numHumans, 0, Game.MAX_PLAYERS);
+        numAI = SMath.clamp(numAI, 0, Game.MAX_PLAYERS);
+        numAI = SMath.clamp(numAI, Game.MIN_PLAYERS - numHumans, Game.MAX_PLAYERS - numHumans);
         for (let i = 0; i < numHumans; i++) {
             this.players.push(new Player(favoriteColor, false));
         }
@@ -535,7 +535,7 @@ class Game implements Drawable {
         if (this.turnOrder.getCurrentPlayer().isAI) {
             const bucketNames: Direction[] = ['North', 'NorthEast', 'NorthWest', 'South', 'SouthEast', 'SouthWest'],
                 buckets: number[] = bucketNames.map(name => this.board.captureWeight(this.turnOrder.getCurrentPlayer(), name)),
-                selectedDirection = bucketNames[selectRandomWeighted(buckets)]; // Note: is `undefined` when there are no legal moves
+                selectedDirection = bucketNames[SMath.selectRandomWeighted(buckets)]; // Note: is `undefined` when there are no legal moves
             let startThinkTime: number = this.time + 500; // Wait 0.5 sec before "thinking"
             const aiTick = setInterval(() => {
                 const elapsedTime: number = this.time - startThinkTime;

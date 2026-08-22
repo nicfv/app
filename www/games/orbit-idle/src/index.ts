@@ -55,7 +55,7 @@ const canv: Canvas = new Canvas({
         menu.click(button);
         if (!audio) {
             audio = true;
-            canv.playAudio('./Between_The_Sleepless_Stars.mp3', true, 0.25);
+            canv.playAudio((document.getElementById('music') as HTMLAudioElement).src, true, 0.25);
         }
     },
     keydown(key) {

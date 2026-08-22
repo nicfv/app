@@ -5,7 +5,7 @@ export const global = {
   /**
    * Application version number
    */
-  version: '1.1',
+  version: '1.2',
   /**
    * Colors for SVG paths (regions)
    */

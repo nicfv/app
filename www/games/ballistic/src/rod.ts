@@ -1,5 +1,5 @@
 import { Drawable } from 'graphico';
-import { translate, clamp } from 'smath';
+import { SMath } from 'smath';
 
 type Control = 'Up' | 'Down' | 'None';
 
@@ -33,7 +33,7 @@ export class Rod implements Drawable {
      * Get the height of the rod at a certain X-position.
      */
     public getY(x: number): number {
-        return translate(x, this.lx, this.rx, this.ly, this.ry);
+        return SMath.translate(x, this.lx, this.rx, this.ly, this.ry);
     }
     /**
      * Move the rod based on user input.
@@ -45,13 +45,13 @@ export class Rod implements Drawable {
         } else if (left === 'Down') {
             this.ly += speed;
         }
-        this.ly = clamp(this.ly, this.width, this.gameHeight - this.width);
+        this.ly = SMath.clamp(this.ly, this.width, this.gameHeight - this.width);
         if (right === 'Up') {
             this.ry -= speed;
         } else if (right === 'Down') {
             this.ry += speed;
         }
-        this.ry = clamp(this.ry, this.width, this.gameHeight - this.width);
+        this.ry = SMath.clamp(this.ry, this.width, this.gameHeight - this.width);
     }
     /**
      * Move the rod to a specified position and return `true` when it has reached it.
@@ -59,14 +59,14 @@ export class Rod implements Drawable {
     public reset(dt: number): boolean {
         const px: number = this.px_per_sec * dt / 1000;
         if (this.ly > this.startLeft) {
-            this.ly = clamp(this.ly - px, this.startLeft, this.ly);
+            this.ly = SMath.clamp(this.ly - px, this.startLeft, this.ly);
         } else if (this.ly < this.startLeft) {
-            this.ly = clamp(this.ly + px, this.ly, this.startLeft);
+            this.ly = SMath.clamp(this.ly + px, this.ly, this.startLeft);
         }
         if (this.ry > this.startRight) {
-            this.ry = clamp(this.ry - px, this.startRight, this.ry);
+            this.ry = SMath.clamp(this.ry - px, this.startRight, this.ry);
         } else if (this.ry < this.startRight) {
-            this.ry = clamp(this.ry + px, this.ry, this.startRight);
+            this.ry = SMath.clamp(this.ry + px, this.ry, this.startRight);
         }
         return this.ly === this.startLeft && this.ry === this.startRight;
     }

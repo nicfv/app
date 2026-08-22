@@ -1,4 +1,4 @@
-import * as SMath from 'smath';
+import { SMath } from 'smath';
 import { Drawable } from 'graphico';
 import { GameMap } from './map';
 import { Player } from './player';
