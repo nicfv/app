@@ -4,6 +4,6 @@
     "start": "../../../cmd/start"
   },
   "dependencies": {
-    "smath": "1.13.3"
+    "smath": "3.1.0"
   }
 }
