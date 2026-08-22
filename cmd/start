@@ -19,5 +19,6 @@ bun x tsc --noEmit && bun x eslint src && bun build "${args[@]}" --compile --tar
 
 # Package for releasing
 if [[ "${2}" == 'zip' ]] ; then
-    zip -r "${name}/release.zip" "${name}/index.html"
+    cd "${name}" || exit 1
+    zip -r "release-$(date +'%Y-%m-%d').zip" index.html
 fi
