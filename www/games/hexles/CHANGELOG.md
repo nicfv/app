@@ -3,6 +3,7 @@
 ## 1.1.5
 
 - Compile into a standalone HTML page
+- Update `graphico` (1.7.0) and `smath` (3.1.0) dependencies
 
 ## 1.1.4
 
