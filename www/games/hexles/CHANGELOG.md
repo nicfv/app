@@ -1,5 +1,9 @@
 # Changes
 
+## 1.1.5
+
+- Compile into a standalone HTML page
+
 ## 1.1.4
 
 - Update `graphico` dependency version (1.2.1)
