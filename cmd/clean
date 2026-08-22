@@ -14,7 +14,7 @@ fi
 
 # Select files to delete
 if [[ "${1}" == 'dev' ]] ; then
-    files=('node_modules' 'dist' 'bun.lock' '*.zip')
+    files=('node_modules' 'site' 'bun.lock' '*.zip')
 elif [[ "${1}" == 'prod' ]] ; then
     files=('node_modules' 'src' 'package.json' '*.md' '*.zip' 'release')
 else
