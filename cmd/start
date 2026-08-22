@@ -10,5 +10,9 @@ else
     exit 1
 fi
 
+# Create project output directory
+name="../../../site/$(basename "${PWD}")"
+mkdir -p "${name}"
+
 # Lint and build project
-bun x tsc --noEmit && bun x eslint src && bun build "${args[@]}" --outfile=dist/main.js src/index.ts
+bun x tsc --noEmit && bun x eslint src && bun build "${args[@]}" --compile --target=browser ./index.html --outfile="${name}/index.html"
