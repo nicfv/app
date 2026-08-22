@@ -1,4 +1,4 @@
-import { clamp, round2 } from 'smath';
+import { SMath } from 'smath';
 import { Range } from './range';
 import { Ring } from './ring';
 
@@ -37,7 +37,7 @@ function calculate(): void {
     /**
      * Curveball modifier
      */
-    const curveMod: number = clamp(curve.getValue(), 1, 1.7);
+    const curveMod: number = SMath.clamp(curve.getValue(), 1, 1.7);
     /**
      * Total bonus modifier not accounted for by `prob0`
      */
@@ -47,6 +47,6 @@ function calculate(): void {
      */
     const prob1: number = 1 - (1 - prob0) ** modifier;
     // Display the final probability
-    output.textContent = round2(prob1 * 100, 0.1).toString();
+    output.textContent = SMath.round2(prob1 * 100, 0.1).toString();
 }
 calculate();
