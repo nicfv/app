@@ -1,7 +1,7 @@
 import { Drawable } from 'graphico';
 import { Rod } from './rod';
 import { Hole } from './hole';
-import { clamp, translate } from 'smath';
+import { SMath } from 'smath';
 
 export class Ball implements Drawable {
     private rolling = false;
@@ -141,8 +141,8 @@ export class Ball implements Drawable {
     public draw(graphics: CanvasRenderingContext2D): void {
         // Save and manipulate
         graphics.save();
-        const yTranslate: number = translate(clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 0, this.r / 2);
-        const scaleFactor: number = translate(clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 1, 0);
+        const yTranslate: number = SMath.translate(SMath.clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 0, this.r / 2);
+        const scaleFactor: number = SMath.translate(SMath.clamp(this.fallDuration, 0, this.fallAnimDurationSec), 0, this.fallAnimDurationSec, 1, 0);
         graphics.translate(this.x, this.y + yTranslate);
         graphics.scale(scaleFactor, scaleFactor);
         graphics.rotate(this.angle);

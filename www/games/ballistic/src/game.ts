@@ -3,7 +3,7 @@ import { Ball } from './ball';
 import { Rod } from './rod';
 import { Hole } from './hole';
 import { Progress } from './progress';
-import { rint } from 'smath';
+import { SMath } from 'smath';
 
 export type Difficulty = 'Easy' | 'Medium' | 'Hard' | 'X-treme';
 
@@ -156,8 +156,8 @@ export class Game implements Drawable {
         this.rod = new Rod(height - vPadding, height - vPadding, width, height, 100, 10);
         const holeR: number = ballR * holeRFac;
         this.holes = [];
-        for (let y = height - vPadding - holeR * 3; y > vPadding; y -= rint(1, holeR)) {
-            const hole = new Hole(rint(holeR * 3, width - holeR * 3), y, holeR, holePadding);
+        for (let y = height - vPadding - holeR * 3; y > vPadding; y -= SMath.rint(1, holeR)) {
+            const hole = new Hole(SMath.rint(holeR * 3, width - holeR * 3), y, holeR, holePadding);
             let intersects = false;
             for (const existingHole of this.holes) {
                 if (hole.intersects(existingHole)) {
